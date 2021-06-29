@@ -13,7 +13,7 @@ export const Input = styled.input`
 
 export const SubmitButton = styled.button`
   width: 100%;
-  height: 28px;
+  height: 30px;
   border-radius: 3px;
   background: linear-gradient(135deg, #ffdd59 0%, #ffa801 100%);
   border: 1px solid #ffa801;
