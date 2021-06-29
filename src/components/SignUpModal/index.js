@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useForm } from "react-hook-form";
+import { TiWarning } from "react-icons/ti";
+import { Input, SubmitButton, Button, Label, Error, Line } from "./styled";
 import Menu from "../Menu";
 
 function SignUpModal() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [showSignUpModal, setShowSignUpModal] = useState(false);
+
+  const onSubmit = (data) => {
+    console.log("data: ", data);
+  };
 
   const onClickSignUpModal = () => {
     setShowSignUpModal((prev) => !prev);

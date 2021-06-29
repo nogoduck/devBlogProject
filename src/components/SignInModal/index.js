@@ -14,19 +14,35 @@ function SignInModal() {
   } = useForm();
 
   const [showSignInModal, setShowSignInModal] = useState(false);
+  const [email, setEmail] = useState("dfd");
+  const [password, setPassword] = useState("");
+
+  const onEmail = (e) => {
+    console.log(e.currentTarget.value);
+    setEmail(e.currentTarget.value);
+  };
+
+  const onPassword = (e) => {
+    setPassword(e.currentTarget.value);
+  };
 
   const onSubmit = (data) => {
     console.log("data: ", data);
   };
+
   const onClickSignInModal = () => {
     setShowSignInModal((prev) => !prev);
     console.log("Login Click: ", showSignInModal);
   };
+
   const onCloseSignInModal = (e) => {
     console.log("Login Close");
     e.stopPropagation();
+    errors.email = false;
+    errors.password = false;
     setShowSignInModal(false);
   };
+
   return (
     <div>
       <span onClick={onClickSignInModal}>
@@ -46,9 +62,12 @@ function SignInModal() {
             }}
           >
             로그인
+            <input type="text" value={email} onChange={onEmail} />
             <form onSubmit={handleSubmit(onSubmit)}>
               <Label>이메일</Label>
               <Input
+                value={email}
+                onChange={onEmail}
                 name="email"
                 type="email"
                 id="email"
