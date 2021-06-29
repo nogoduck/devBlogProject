@@ -11,12 +11,31 @@ export const Input = styled.input`
   }
 `;
 
+export const Label = styled.label`
+  font-size: 14px;
+  font-weight: 800;
+  color: #000;
+  position: relative;
+  top: 7px;
+`;
+
 export const Error = styled.div`
+  margin: 5px 0 0 0;
   font-size: 14px;
   font-weight: 800;
   color: #ff3f34;
 `;
 
+export const ErrorInput = styled.div`
+  & > input {
+    width: 291px;
+    padding: 5px 0px 5px 7px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #ff3f34;
+    box-shadow: 0px 0px 3px 1px #ea8685 inset;
+  }
+`;
 export const SubmitButton = styled.button`
   width: 100%;
   height: 30px;
@@ -33,9 +52,12 @@ export const SubmitButton = styled.button`
 `;
 
 export const Line = styled.fieldset`
+  font-size: 14px;
+  font-weight: 800;
+  color: #000;
   border: 1px solid black;
-
+  border-width: 1px 0px 0px 0px;
   & > legend {
-    text-align: right;
+    text-align: center;
   }
 `;
