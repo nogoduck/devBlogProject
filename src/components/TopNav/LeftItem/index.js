@@ -2,17 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Logo } from "./styled.js";
 import { AiOutlineBug } from "react-icons/ai";
-import createGlobalStyle from "./font/font";
 function LeftItem() {
   return (
     <Container>
-      <createGlobalStyle />
       <Link to="/" style={{ color: "#fff", zIndex: "2025" }}>
         <Logo>
           <div
             style={{
               position: "absolute",
-              top: "12px",
+              top: "0px",
+              left: "-10px",
             }}
           >
             <AiOutlineBug

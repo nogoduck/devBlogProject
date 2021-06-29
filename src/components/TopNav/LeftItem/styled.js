@@ -6,18 +6,24 @@ export const Container = styled.div`
 `;
 
 export const Logo = styled.div`
-  margin: 10px;
-  border: 1px solid #fff;
-  font-size: 32px;
+  position: absolute;
+  margin: 1px 7px;
+  /* margin: 7px; */
+  font-size: 26px;
   letter-spacing: 2px;
-  padding: 1px 7px 4px 7px;
+  padding: 0px 7px 0px 7px;
+
+  &:hover {
+    border: 1px solid #fff;
+    border-radius: 3px;
+  }
 
   & > div {
     display: inline-block;
-    font-size: 44px;
+    font-size: 36px;
   }
 
   & > span {
-    font-size: 24px;
+    font-size: 20px;
   }
 `;
