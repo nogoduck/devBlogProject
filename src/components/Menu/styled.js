@@ -7,6 +7,7 @@ export const Container = styled.div`
   left: 0;
   bottom: 0;
   z-index: 1024;
+  background: rgba(0, 0, 0, 0.3);
   & > div {
     display: inline-block;
     position: absolute;

@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
-import { Input, SubmitButton, Button, Label, Error, Line } from "./styled";
+import {
+  LoginButton,
+  Input,
+  SubmitButton,
+  Button,
+  Label,
+  Error,
+  Line,
+} from "./styled";
 import Menu from "../Menu";
 
 function SignInModal() {
@@ -14,39 +22,29 @@ function SignInModal() {
   } = useForm();
 
   const [showSignInModal, setShowSignInModal] = useState(false);
-  const [email, setEmail] = useState("dfd");
-  const [password, setPassword] = useState("");
-
-  const onEmail = (e) => {
-    console.log(e.currentTarget.value);
-    setEmail(e.currentTarget.value);
-  };
-
-  const onPassword = (e) => {
-    setPassword(e.currentTarget.value);
-  };
+  const [userState, setUserState] = useState("사용자 정보 없음");
 
   const onSubmit = (data) => {
     console.log("data: ", data);
   };
-
   const onClickSignInModal = () => {
     setShowSignInModal((prev) => !prev);
     console.log("Login Click: ", showSignInModal);
   };
-
   const onCloseSignInModal = (e) => {
-    console.log("Login Close");
     e.stopPropagation();
     errors.email = false;
     errors.password = false;
     setShowSignInModal(false);
+    console.log("Login Close");
   };
-
   return (
     <div>
       <span onClick={onClickSignInModal}>
-        <button>Login</button>
+        <LoginButton>
+          <div>로그인</div>
+          <div>{userState}</div>
+        </LoginButton>
         {showSignInModal && (
           <Menu
             showModal={showSignInModal}
@@ -61,13 +59,10 @@ function SignInModal() {
               marginTop: "-200px",
             }}
           >
-            로그인
-            <input type="text" value={email} onChange={onEmail} />
+            <div style={{ fontSize: "24px" }}>로그인</div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Label>이메일</Label>
               <Input
-                value={email}
-                onChange={onEmail}
                 name="email"
                 type="email"
                 id="email"
@@ -105,7 +100,7 @@ function SignInModal() {
             <Line>
               <legend>&nbsp;새로운 계정을 만드시겠습니까?&nbsp;</legend>
             </Line>
-            <Button>계정 생성하기</Button>
+            <Button onClick={}>계정 생성하기</Button>
           </Menu>
         )}
       </span>

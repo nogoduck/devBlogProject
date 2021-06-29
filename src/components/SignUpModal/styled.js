@@ -57,28 +57,29 @@ export const SubmitButton = styled.button`
 `;
 
 export const Line = styled.fieldset`
-  position: absolute;
-  top: 15px;
   font-size: 14px;
   font-weight: 800;
   color: #7f8fa6;
   border: 1px solid #7f8fa6;
   border-width: 1px 0px 0px 0px;
-
+  position: absolute;
+  bottom: 55px;
+  width: 275px;
   & > legend {
     text-align: center;
   }
 `;
 
 export const Button = styled.button`
-  width: 100%;
+  width: 300px;
+
   height: 30px;
   border-radius: 3px;
   background: #dff9fb;
   border: 1px solid #ffa801;
   transition: 0.3s;
   position: absolute;
-  bottom: 10px;
+  bottom: 35px;
   &:hover {
     background: #d2dae2;
     cursor: pointer;
@@ -86,5 +87,21 @@ export const Button = styled.button`
   &:active {
     background: #808e9b;
     box-shadow: 0px 0px 3px 1px #ea8685 inset;
+  }
+`;
+
+export const Footer = styled.div`
+  position: absolute;
+  bottom: 40px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #7f8fa6;
+
+  & > span {
+    color: #4b7bec;
+  }
+  & > span:hover {
+    color: #fa8231;
+    cursor: pointer;
   }
 `;

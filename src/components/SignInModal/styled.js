@@ -1,5 +1,20 @@
 import styled from "styled-components";
 
+export const LoginButton = styled.div`
+  font-size: 12px;
+  height: 60px;
+  width: 200px;
+  background: #eb2f06;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &:hover {
+    cursor: pointer;
+    background: green;
+  }
+`;
+
 export const Input = styled.input`
   width: 291px;
   padding: 5px 0px 5px 7px;
