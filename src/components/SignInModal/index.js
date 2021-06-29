@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
-import { Input, SubmitButton } from "./styled";
+import { TiWarning } from "react-icons/ti";
+import { Input, SubmitButton, Error, Line } from "./styled";
 import Menu from "../Menu";
 
 function SignInModal() {
@@ -56,7 +56,12 @@ function SignInModal() {
                 })}
                 autoFocus
               />
-              {errors.email && <p>이메일 형식이 올바르지 않습니다</p>}
+              {errors.email && (
+                <Error>
+                  <TiWarning />
+                  &nbsp;이메일 형식이 올바르지 않습니다
+                </Error>
+              )}
 
               <Input
                 name="password"
@@ -67,14 +72,15 @@ function SignInModal() {
                 })}
               />
               {errors.password && errors.password.type === "required" && (
-                <p>비밀번호를 입력해주세요</p>
+                <Error>
+                  <TiWarning />
+                  &nbsp;비밀번호를 입력해주세요
+                </Error>
               )}
-              {errors.password && errors.password.type === "minLength" && (
-                <p>비밀번호는 6글자 이상으로 입력가능합니다</p>
-              )}
+
               <SubmitButton>확인</SubmitButton>
             </form>
-            회원가입
+            <Line>회원가입</Line>
           </Menu>
         )}
       </span>

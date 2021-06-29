@@ -11,6 +11,12 @@ export const Input = styled.input`
   }
 `;
 
+export const Error = styled.div`
+  font-size: 14px;
+  font-weight: 800;
+  color: #ff3f34;
+`;
+
 export const SubmitButton = styled.button`
   width: 100%;
   height: 30px;
@@ -23,5 +29,13 @@ export const SubmitButton = styled.button`
   &:active {
     background: #ffa801;
     box-shadow: 0px 0px 5px 1px #ffa801;
+  }
+`;
+
+export const Line = styled.fieldset`
+  border: 1px solid black;
+
+  & > legend {
+    text-align: right;
   }
 `;
