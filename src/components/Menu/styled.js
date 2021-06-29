@@ -11,7 +11,10 @@ export const Container = styled.div`
     display: inline-block;
     position: absolute;
     color: #000;
-    border: 2px solid black;
+    border: 1px solid #808e9b;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 1px #7f8fa6;
   }
 `;
 
@@ -23,5 +26,4 @@ export const CloseButton = styled.button`
   position: absolute;
   top: 2px;
   right: 5px;
-  /* color: yellow; */
 `;
