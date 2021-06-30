@@ -10,7 +10,7 @@ function SideNav() {
           <li>소개</li>
         </Link>
         <Link to="/menu/card">
-          <li>카드</li>
+          <li>카드 - 모달 테스트</li>
         </Link>
         <Link to="/menu/board">
           <li>게시판</li>

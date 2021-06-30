@@ -46,15 +46,12 @@ function SignInModal() {
   };
 
   const onClickSignUp = () => {
-    setShowSignInModal(false);
-
+    setShowSignInModal(true);
     setShowSignUp(true);
-
     console.log("Click State: ", showSignUp);
   };
   return (
     <div>
-      <SignUpModal show={showSignUp} />
       <span onClick={onClickSignInModal}>
         <SignInButton>
           <div>로그인</div>
@@ -119,6 +116,7 @@ function SignInModal() {
           </Menu>
         )}
       </span>
+      <SignUpModal show={showSignUp} />
     </div>
   );
 }

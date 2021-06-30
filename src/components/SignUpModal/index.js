@@ -25,6 +25,7 @@ function SignUpModal({ show }) {
 
   const password = useRef();
 
+  console.log("SIGNU{ :: ", show);
   password.current = watch("password");
 
   const onSubmit = (data) => {

@@ -7,6 +7,17 @@ import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
 
 function RightItem() {
+  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+
+  const onClickSignInModal = () => {
+    setShowSignInModal((prev) => !prev);
+  };
+
+  const onClickSignUpModal = () => {
+    setShowSignUpModal((prev) => !prev);
+  };
+
   return (
     <div style={{ float: "right" }}>
       <SignInModal />
