@@ -24,8 +24,10 @@ function SignInModal() {
   } = useForm();
 
   const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
   const [userState, setUserState] = useState("사용자 정보 없음");
 
+  console.log("DSD ::: ", showSignUp);
   const onSubmit = (data) => {
     console.log("data: ", data);
   };
@@ -43,13 +45,16 @@ function SignInModal() {
     console.log("Login Close");
   };
 
-  const onClickSignUp = (e) => {
-    console.log("100s");
-    return <SignUpModal />;
+  const onClickSignUp = () => {
+    setShowSignInModal(false);
+
+    setShowSignUp(true);
+
+    console.log("Click State: ", showSignUp);
   };
   return (
     <div>
-      <SignUpModal show={true} />
+      <SignUpModal show={showSignUp} />
       <span onClick={onClickSignInModal}>
         <SignInButton>
           <div>로그인</div>
