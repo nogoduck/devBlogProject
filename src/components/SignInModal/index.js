@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import {
-  LoginButton,
+  SignInButton,
   Input,
   SubmitButton,
   Button,
@@ -11,7 +11,9 @@ import {
   Error,
   Line,
 } from "./styled";
+
 import Menu from "../Menu";
+import SignUpModal from "../SignUpModal";
 
 function SignInModal() {
   const {
@@ -27,10 +29,12 @@ function SignInModal() {
   const onSubmit = (data) => {
     console.log("data: ", data);
   };
+
   const onClickSignInModal = () => {
     setShowSignInModal((prev) => !prev);
     console.log("Login Click: ", showSignInModal);
   };
+
   const onCloseSignInModal = (e) => {
     e.stopPropagation();
     errors.email = false;
@@ -38,13 +42,19 @@ function SignInModal() {
     setShowSignInModal(false);
     console.log("Login Close");
   };
+
+  const onClickSignUp = (e) => {
+    console.log("100s");
+    return <SignUpModal />;
+  };
   return (
     <div>
+      <SignUpModal show={true} />
       <span onClick={onClickSignInModal}>
-        <LoginButton>
+        <SignInButton>
           <div>로그인</div>
           <div>{userState}</div>
-        </LoginButton>
+        </SignInButton>
         {showSignInModal && (
           <Menu
             showModal={showSignInModal}
@@ -100,7 +110,7 @@ function SignInModal() {
             <Line>
               <legend>&nbsp;새로운 계정을 만드시겠습니까?&nbsp;</legend>
             </Line>
-            <Button onClick={}>계정 생성하기</Button>
+            <Button onClick={onClickSignUp}>계정 생성하기</Button>
           </Menu>
         )}
       </span>

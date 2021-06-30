@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import {
+  SignUpButton,
   Input,
   SubmitButton,
   Button,
@@ -13,14 +14,14 @@ import {
 } from "./styled";
 import Menu from "../Menu";
 
-function SignUpModal() {
+function SignUpModal({ show }) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(show);
 
   const password = useRef();
 
@@ -34,15 +35,17 @@ function SignUpModal() {
     setShowSignUpModal((prev) => !prev);
     console.log("Register Click: ", showSignUpModal);
   };
+
   const onCloseSignUpModal = (e) => {
     e.stopPropagation();
     setShowSignUpModal(false);
     console.log("Register Close");
   };
+
   return (
     <div>
       <span onClick={onClickSignUpModal}>
-        <button>회원가입</button>
+        <SignUpButton>회원가입</SignUpButton>
         {showSignUpModal && (
           <Menu
             showModal={showSignUpModal}

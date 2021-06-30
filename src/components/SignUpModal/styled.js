@@ -1,5 +1,22 @@
 import styled from "styled-components";
 
+export const SignUpButton = styled.div`
+  font-size: 12px;
+  height: 60px;
+  width: 60px;
+  background: #d35400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 800;
+
+  &:hover {
+    cursor: pointer;
+    background: #2980b9;
+  }
+`;
+
 export const Input = styled.input`
   width: 291px;
   padding: 5px 0px 5px 7px;
@@ -39,6 +56,7 @@ export const ErrorInput = styled.div`
   }
 `;
 export const SubmitButton = styled.button`
+  font-weight: 800;
   margin: 15px 0 40px 0;
   width: 100%;
   height: 30px;

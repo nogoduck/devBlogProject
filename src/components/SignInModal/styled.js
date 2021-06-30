@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
-export const LoginButton = styled.div`
+export const SignInButton = styled.div`
+  position: absolute;
+  right: 60px;
   font-size: 12px;
   height: 60px;
-  width: 200px;
+  width: 140px;
   background: #eb2f06;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-weight: 800;
   &:hover {
     cursor: pointer;
     background: green;
@@ -54,6 +57,7 @@ export const ErrorInput = styled.div`
   }
 `;
 export const SubmitButton = styled.button`
+  font-weight: 800;
   margin: 15px 0 40px 0;
   width: 100%;
   height: 30px;
@@ -87,11 +91,11 @@ export const Line = styled.fieldset`
 
 export const Button = styled.button`
   width: 300px;
-
+  font-weight: 800;
   height: 30px;
   border-radius: 3px;
   background: #dff9fb;
-  border: 1px solid #ffa801;
+  border: 1px solid #7f8fa6;
   transition: 0.3s;
   position: absolute;
   bottom: 35px;
@@ -102,5 +106,6 @@ export const Button = styled.button`
   &:active {
     background: #808e9b;
     box-shadow: 0px 0px 3px 1px #ea8685 inset;
+    color: #fff;
   }
 `;
