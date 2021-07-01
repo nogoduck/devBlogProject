@@ -31,5 +31,6 @@ export const Table = styled.table`
   }
   & td:last-child {
     padding: 15px;
+    text-align: right;
   }
 `;

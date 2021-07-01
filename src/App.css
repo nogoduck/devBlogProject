@@ -14,11 +14,9 @@ ul {
   margin: 0px;
   padding: 0px;
 }
-
 li {
   list-style: none;
 }
-
 a:link {
   text-decoration: none;
 }
@@ -28,10 +26,15 @@ a:visited {
 a:hover {
   text-decoration: none;
 }
-
 button:focus {
+  outline: none;
+}
+button:active {
   outline: none;
 }
 input:focus {
   outline: none;
+}
+#hidden {
+  display: none;
 }
