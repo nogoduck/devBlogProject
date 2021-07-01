@@ -1,6 +1,5 @@
 import { Table } from "./styleds";
 import React from "react";
-import { forEach } from "lodash";
 
 function BoardPage() {
   const post = {
@@ -8,38 +7,39 @@ function BoardPage() {
     1: ["동원참치", 2, 0, "2021-07-02"],
     2: ["마일드참치", 172, 58, "2021-07-02"],
     3: ["야채참치", 9, 1, "2021-07-02"],
+    4: ["야채참치", 9, 1, "2021-07-02"],
+    5: ["야채참치", 9, 1, "2021-07-02"],
+    6: ["야채참치", 9, 1, "2021-07-02"],
+    7: ["야채참치", 9, 1, "2021-07-02"],
+    8: ["야채참치", 9, 1, "2021-07-02"],
+    9: ["야채참치", 9, 1, "2021-07-02"],
+    10: ["야채참치", 9, 1, "2021-07-02"],
+    11: ["야채참치", 9, 1, "2021-07-02"],
+    12: ["야채참치", 9, 1, "2021-07-02"],
+    13: ["야채참치", 9, 1, "2021-07-02"],
+    14: ["사조참치", 99, 99, "2021-07-02"],
   };
   console.log(Object.keys(post).length);
 
-  Object.keys(post).map((postIndex) => {
-    post[postIndex].map((v) => {
-      console.log(v);
-    });
-  });
-
-  // for (let i = 0; i < Object.keys(post).length; i++) {
-  //   console.log(post[i]);
-  //   post[i].map((v) => {
-  //     console.log("v: ", v);
-  //   });
-  // }
   return (
     <div>
-      <Table style={{ border: "1px solid black" }}>
+      게시판
+      <hr />
+      <Table>
         <thead>
-          <tr>
+          {/* <tr>
             <th>제목</th>
             <th>조회수</th>
             <th>좋아요</th>
             <th>작성일</th>
-          </tr>
+          </tr> */}
         </thead>
         <tbody>
           {Object.keys(post).map((postIndex) => {
             return (
               <tr>
                 {post[postIndex].map((v) => {
-                  return <th>{v}</th>;
+                  return <td>{v}</td>;
                 })}
               </tr>
             );
