@@ -11,7 +11,7 @@ function LeftItem() {
             style={{
               position: "absolute",
               top: "0px",
-              left: "-10px",
+              left: "-13px",
             }}
           >
             <AiOutlineBug

@@ -3,6 +3,7 @@ import styled from "styled-components";
 // index.js
 export const Container = styled.div`
   float: left;
+  margin-left: 10px;
 `;
 
 export const Logo = styled.div`

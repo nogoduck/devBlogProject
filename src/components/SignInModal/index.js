@@ -15,7 +15,7 @@ import {
 import Menu from "../Menu";
 import SignUpModal from "../SignUpModal";
 
-function SignInModal() {
+function SignInModal({ show }) {
   const {
     register,
     handleSubmit,
@@ -57,7 +57,7 @@ function SignInModal() {
           <div>로그인</div>
           <div>{userState}</div>
         </SignInButton>
-        {showSignInModal && (
+        {(show || showSignInModal) && (
           <Menu
             showModal={showSignInModal}
             onCloseModal={onCloseSignInModal}
@@ -116,7 +116,6 @@ function SignInModal() {
           </Menu>
         )}
       </span>
-      <SignUpModal show={showSignUp} />
     </div>
   );
 }

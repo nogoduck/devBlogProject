@@ -4,7 +4,7 @@ export const Container = styled.div`
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  width: 220px;
+  width: 240px;
   height: 100vh;
   border-right: 1px solid black;
 
@@ -16,6 +16,7 @@ export const Container = styled.div`
     padding: 3px 24px;
     color: #000;
     font-size: 18px;
+    transition: 0s 0s ease-in-out;
   }
 
   & li:hover {

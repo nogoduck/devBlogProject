@@ -18,10 +18,14 @@ function RightItem() {
     setShowSignUpModal((prev) => !prev);
   };
 
+  const test = () => {
+    setShowSignUpModal((prev) => !prev);
+  };
+
   return (
     <div style={{ float: "right" }}>
-      <SignInModal />
-      <SignUpModal />
+      <SignInModal show={showSignInModal} />
+      <SignUpModal show={true} />
     </div>
   );
 }
