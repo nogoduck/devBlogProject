@@ -1,5 +1,6 @@
 import { Table } from "./styleds";
 import React from "react";
+import { forEach } from "lodash";
 
 function BoardPage() {
   const post = {
@@ -9,12 +10,19 @@ function BoardPage() {
     3: ["야채참치", 9, 1, "2021-07-02"],
   };
   console.log(Object.keys(post).length);
-  for (let i = 0; i < Object.keys(post).length; i++) {
-    console.log(post[i]);
-    post[i].map((v) => {
-      console.log("v: ", v);
+
+  Object.keys(post).map((postIndex) => {
+    post[postIndex].map((v) => {
+      console.log(v);
     });
-  }
+  });
+
+  // for (let i = 0; i < Object.keys(post).length; i++) {
+  //   console.log(post[i]);
+  //   post[i].map((v) => {
+  //     console.log("v: ", v);
+  //   });
+  // }
   return (
     <div>
       <Table style={{ border: "1px solid black" }}>
@@ -27,7 +35,15 @@ function BoardPage() {
           </tr>
         </thead>
         <tbody>
-          <tr></tr>
+          {Object.keys(post).map((postIndex) => {
+            return (
+              <tr>
+                {post[postIndex].map((v) => {
+                  return <th>{v}</th>;
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </div>
