@@ -6,3 +6,12 @@ export const Container = styled.div`
   align-items: center;
   height: 100vh;
 `;
+
+export const Button = styled.button`
+  padding: 16px 32px;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+`;

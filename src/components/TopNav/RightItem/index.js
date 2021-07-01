@@ -135,7 +135,11 @@ function RightItem() {
       </span>
       {/* 회원가입 모달 */}
       <span onClick={onClickSignUpModal}>
-        <SignUpButton>회원가입</SignUpButton>
+        <SignUpButton>
+          회원
+          <br />
+          가입
+        </SignUpButton>
         {showSignUpModal && (
           <Menu
             showModal={showSignUpModal}

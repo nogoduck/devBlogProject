@@ -4,7 +4,7 @@ export const SignUpButton = styled.div`
   font-size: 12px;
   height: 60px;
   width: 60px;
-  background: #d35400;
+  background: #1e272e;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,8 @@ export const SignUpButton = styled.div`
 
   &:hover {
     cursor: pointer;
-    background: #2980b9;
+    box-shadow: 0px 0px 5px 3px #151d22 inset;
+    color: #fff;
   }
 `;
 
@@ -63,7 +64,7 @@ export const SubmitButton = styled.button`
   border-radius: 3px;
   background: linear-gradient(135deg, #ffdd59 0%, #ffa801 100%);
   border: 1px solid #ffa801;
-  transition: 0.3s;
+  /* transition: 0.3s; */
   &:hover {
     background: #ffdd59;
     cursor: pointer;
