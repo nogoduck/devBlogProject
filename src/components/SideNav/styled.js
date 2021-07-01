@@ -14,9 +14,14 @@ export const Container = styled.div`
 
   & li {
     padding: 3px 24px;
-    color: #000;
+    color: #2f3640;
     font-size: 18px;
     transition: 0s 0s ease-in-out;
+  }
+
+  & .active {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000;
   }
 
   & li:hover {
