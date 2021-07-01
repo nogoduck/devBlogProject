@@ -1,3 +1,7 @@
+// ########################################
+//     현재 사용하지 않는 컴포넌트 입니다
+// ########################################
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -15,7 +19,7 @@ import {
 import Menu from "../Menu";
 import SignUpModal from "../SignUpModal";
 
-function SignInModal({ show }) {
+function SignInModal() {
   const {
     register,
     handleSubmit,
@@ -57,7 +61,7 @@ function SignInModal({ show }) {
           <div>로그인</div>
           <div>{userState}</div>
         </SignInButton>
-        {(show || showSignInModal) && (
+        {showSignInModal && (
           <Menu
             showModal={showSignInModal}
             onCloseModal={onCloseSignInModal}

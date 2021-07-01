@@ -1,3 +1,7 @@
+// ########################################
+//     현재 사용하지 않는 컴포넌트 입니다
+// ########################################
+
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
