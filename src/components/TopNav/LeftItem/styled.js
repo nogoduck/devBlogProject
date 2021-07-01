@@ -15,8 +15,6 @@ export const Logo = styled.div`
   padding: 0px 7px 0px 7px;
 
   &:hover {
-    border: 1px solid #fff;
-    border-radius: 3px;
   }
 
   & > div {

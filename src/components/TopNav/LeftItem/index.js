@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Logo } from "./styled.js";
 import { AiOutlineBug } from "react-icons/ai";
+import { useMediaQuery } from "react-responsive";
+
 function LeftItem() {
+  const isMobile = useMediaQuery({ query: "(max-width:767px)" });
+
   return (
-    <Container>
+    <Container id={isMobile && "isMobileTopNav"}>
       <Link to="/" style={{ color: "#fff", zIndex: "2025" }}>
         <Logo>
           <div

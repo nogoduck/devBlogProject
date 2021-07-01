@@ -57,11 +57,11 @@ export const ContainerMobile = styled.div`
 
 export const MenuButton = styled.button`
   position: fixed;
-  padding: 4%;
   color: #d2dae2;
   background-color: #1e272e;
-  border-radius: 50%;
   font-size: 24px;
+  top: 16px;
+  left: 8px;
   border: none;
   &:hover {
     cursor: pointer;

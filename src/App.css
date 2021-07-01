@@ -38,3 +38,6 @@ input:focus {
 #hidden {
   display: none;
 }
+#isMobileTopNav {
+  margin-left: 40px;
+}
