@@ -5,7 +5,6 @@ import { Container } from "./styled";
 function SideNav() {
   const { pathname } = useLocation();
   const activeMenu = pathname.substring(5);
-  console.log(activeMenu);
 
   return (
     <Container>
