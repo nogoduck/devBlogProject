@@ -6,8 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   width: 240px;
   height: 100vh;
-  border-right: 1px solid black;
-
+  border-right: 1px solid #e5e5e5;
   & ul {
     padding: 24px 0 24px 0;
   }

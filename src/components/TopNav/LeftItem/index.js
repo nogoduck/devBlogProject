@@ -5,10 +5,10 @@ import { AiOutlineBug } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
 
 function LeftItem() {
-  const isMobile = useMediaQuery({ query: "(max-width:767px)" });
+  const isDesktop = useMediaQuery({ query: "(min-width:1024px)" });
 
   return (
-    <Container id={isMobile && "isMobileTopNav"}>
+    <Container id={!isDesktop && "isMobileTopNav"}>
       <Link to="/" style={{ color: "#fff", zIndex: "2025" }}>
         <Logo>
           <div

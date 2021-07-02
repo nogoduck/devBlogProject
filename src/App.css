@@ -35,7 +35,7 @@ button:active {
 input:focus {
   outline: none;
 }
-#hidden {
+#hiddenSideNav {
   display: none;
 }
 #isMobileTopNav {

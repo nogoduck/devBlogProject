@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
+import { BiLinkExternal } from "react-icons/bi";
+import { LinkToGitHub } from "./styled";
 import {
   SignInButton,
   Input,
@@ -68,6 +70,11 @@ function RightItem() {
   };
   return (
     <div style={{ float: "right" }}>
+      {/* 깃허브 링크 */}
+      <LinkToGitHub href="https://github.com/nogoduck" target="_blank">
+        GitHub
+        <BiLinkExternal />
+      </LinkToGitHub>
       {/* 로그인  모달 */}
       <span onClick={onClickSignInModal}>
         <SignInButton>
