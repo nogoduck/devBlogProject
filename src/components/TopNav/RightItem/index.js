@@ -18,6 +18,10 @@ function RightItem() {
   const onToggleSignIn = () => {
     setShowSignInModal((prev) => !prev);
   };
+
+  const onToggleSignUp = () => {
+    setShowSignUpModal((prev) => !prev);
+  };
   const onCloseModal = () => {
     setShowSignInModal(false);
     setShowSignUpModal(false);
@@ -53,8 +57,8 @@ function RightItem() {
 
       {/* 회원가입 모달 */}
 
-      <SignUpButton>회원가입</SignUpButton>
-      <SignUpModal show={showSignUpModal}>
+      <SignUpButton onClick={onToggleSignUp}>회원가입</SignUpButton>
+      <SignUpModal show={showSignUpModal} close={onCloseModal}>
         이미 계정이 있습니까?&nbsp;
         <span onClick={onClickSignInButton}>로그인 &raquo; </span>
       </SignUpModal>

@@ -18,7 +18,7 @@ import {
 
 import Menu from "../Menu";
 
-function SignInModal({ children, show, onCloseModal }) {
+function SignInModal({ children, show, close }) {
   const {
     register,
     handleSubmit,
@@ -28,6 +28,7 @@ function SignInModal({ children, show, onCloseModal }) {
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
+  console.log(close);
   const onSubmit = (data) => {
     console.log("data: ", data);
   };
@@ -51,15 +52,18 @@ function SignInModal({ children, show, onCloseModal }) {
     console.log("Click State: ", showSignUp);
   };
 
-  if (!show) {
-    return null;
+  if (show) {
+    errors.email = false;
+    errors.password = false;
+    // setShowSignInModal(false);
   }
+
   return (
     <div>
       <span onClick={onClickSignInModal}>
         <Menu
-          showModal={showSignInModal}
-          onCloseModal={onCloseSignInModal}
+          show={show}
+          close={close}
           style={{
             padding: "30px",
             left: "50%",

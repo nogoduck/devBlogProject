@@ -18,7 +18,7 @@ import {
 } from "./styled";
 import Menu from "../Menu";
 
-function SignUpModal({ children, show }) {
+function SignUpModal({ children, show, close }) {
   const {
     register,
     handleSubmit,
@@ -46,15 +46,12 @@ function SignUpModal({ children, show }) {
     console.log("Register Close");
   };
 
-  if (!show) {
-    return null;
-  }
   return (
     <div>
       <span onClick={onClickSignUpModal}>
         <Menu
-          showModal={showSignUpModal}
-          onCloseModal={onCloseSignUpModal}
+          show={show}
+          close={close}
           style={{
             padding: "30px",
             left: "50%",
