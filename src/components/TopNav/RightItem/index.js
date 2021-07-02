@@ -23,6 +23,7 @@ function RightItem() {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -42,6 +43,8 @@ function RightItem() {
     e.stopPropagation();
     errors.email = false;
     errors.password = false;
+    setValue("email");
+    setValue("password");
     setShowSignInModal(false);
   };
 
@@ -61,6 +64,14 @@ function RightItem() {
 
   const onCloseSignUpModal = (e) => {
     e.stopPropagation();
+    errors.name = false;
+    errors.email = false;
+    errors.password = false;
+    errors.passwordConfirm = false;
+    setValue("name");
+    setValue("email");
+    setValue("password");
+    setValue("passwordConfirm");
     setShowSignUpModal(false);
   };
 
