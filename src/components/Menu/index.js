@@ -9,6 +9,9 @@ function Menu({ children, showModal, onCloseModal, style, useCloseButton }) {
     //HTML에서는 이벤트 버블링(자식의 클릭이벤트가 부모까지 전달이 된다)이 있는데 이걸 부모태그로 버블링이 되지 않게함
   }, []);
 
+  if (!showModal) {
+    return null;
+  }
   return (
     //Container는 화면 전체 영역이다
     <Container onClick={onCloseModal}>

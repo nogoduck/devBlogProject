@@ -32,6 +32,12 @@ function ModalPage() {
 
   return (
     <>
+      <ol>
+        <li style={{ listStyle: "unset" }}>모달간에 전환</li>
+        <li style={{ listStyle: "unset" }}>
+          모달의 자식모달 호출, 자식모달의 자식 호출
+        </li>
+      </ol>
       <Container>
         <Button onClick={onClickModal}>Modal Practice Button</Button>
         <button onClick={onClickParents}>

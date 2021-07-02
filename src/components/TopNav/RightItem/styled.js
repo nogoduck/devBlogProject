@@ -32,3 +32,38 @@ export const Button = styled.button`
     color: #fff;
   }
 `;
+
+export const SignUpButton = styled.div`
+  font-size: 12px;
+  height: 60px;
+  width: 60px;
+  background: #d35400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 800;
+
+  &:hover {
+    cursor: pointer;
+    background: #2980b9;
+  }
+`;
+
+export const SignInButton = styled.div`
+  position: absolute;
+  right: 60px;
+  font-size: 12px;
+  height: 60px;
+  width: 140px;
+  background: #eb2f06;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 800;
+  &:hover {
+    cursor: pointer;
+    background: green;
+  }
+`;
