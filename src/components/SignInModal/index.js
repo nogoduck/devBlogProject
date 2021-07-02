@@ -2,7 +2,7 @@
 //     현재 사용하지 않는 컴포넌트 입니다
 // ########################################
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
@@ -23,6 +23,7 @@ function SignInModal({ children, show, close }) {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm();
   const [showSignInModal, setShowSignInModal] = useState(false);
@@ -52,11 +53,14 @@ function SignInModal({ children, show, close }) {
     console.log("Click State: ", showSignUp);
   };
 
-  if (show) {
-    errors.email = false;
-    errors.password = false;
-    // setShowSignInModal(false);
-  }
+  useEffect(() => {
+    if (!show) {
+      setValue("email");
+      setValue("password");
+      errors.email = false;
+      errors.password = false;
+    }
+  }, [show]);
 
   return (
     <div>
