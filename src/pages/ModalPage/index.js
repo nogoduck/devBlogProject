@@ -26,11 +26,14 @@ function ModalPage() {
     <>
       <Container>
         <Button onClick={onClickModal}>Modal Practice Button</Button>
-        <button onClick={onClickParents}>303</button>
-        <button onClick={onClickChildren}>41-3</button>
-        {showModalParents && <ModalParents />}
-        {showModalChildren && <ModalChildren />}
-
+        <button onClick={onClickParents}>
+          303 <hr /> (Parent)
+        </button>
+        <button onClick={onClickChildren}>
+          41-3 <hr /> (Children)
+        </button>
+        <ModalParents show={showModalParents} />
+        <ModalChildren show={showModalChildren} />
         <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
       </Container>
     </>
