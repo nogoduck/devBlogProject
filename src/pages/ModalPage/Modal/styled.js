@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   height: 100vh;
   width: 300px;
-  border: 5px solid red;
+  border: 5px dashed red;
 `;
 
 export const ModalContainer = styled.div`
@@ -14,9 +14,11 @@ export const ModalContainer = styled.div`
   border-radius: 6px;
   background-color: blue;
   color: #fff;
-  z-index: 1024;
+  /* z-index: 1024; */
   user-select: none;
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
+  display: inline-block;
   width: 200px;
   height: 300px;
 `;

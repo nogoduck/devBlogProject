@@ -1,3 +1,8 @@
+// ########################################
+// 버그 : 모바일 or 태블릿 모드에서 랜딩페이지
+// 로 이동후 메뉴 항목 이동하면 메뉴가 닫힘
+// + 다른 페이지 내에서 메뉴 이동하면 정상 동작
+// ########################################
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";

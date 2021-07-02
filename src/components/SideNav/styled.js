@@ -55,7 +55,7 @@ export const ContainerMobile = styled.div`
 `;
 
 export const MenuButton = styled.button`
-  position: fixed;
+  position: absolute;
   color: #d2dae2;
   background-color: #1e272e;
   font-size: 24px;
