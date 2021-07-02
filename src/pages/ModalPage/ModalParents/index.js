@@ -1,9 +1,7 @@
 import React from "react";
 import { Modal } from "./styled";
 
-function ModalParents({ show }) {
-  const goChildren = () => {};
-
+function ModalParents({ show, children }) {
   if (!show) {
     return null;
   }
@@ -11,7 +9,7 @@ function ModalParents({ show }) {
     <Modal>
       303
       <br />
-      <button onClick={goChildren}>41-3으로 이동</button>
+      {children}💨
     </Modal>
   );
 }

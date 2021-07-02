@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import ModalParents from "../ModalParents";
 import { Modal } from "./styled";
 
-function ModalChildren({ show }) {
+function ModalChildren({ show, children }) {
   const [showModal, setShowModal] = useState(false);
   console.log("show: ", show);
 
-  const goParents = () => {
-    setShowModal(true);
-    show = false;
-  };
   if (!show) {
     return null;
   }
@@ -17,7 +13,7 @@ function ModalChildren({ show }) {
     <>
       <Modal>
         41-3 <br />
-        <button onClick={goParents}>303으로 이동</button>
+        {children}::
         <ModalParents show={showModal}></ModalParents>
       </Modal>
     </>

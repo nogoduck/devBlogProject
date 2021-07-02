@@ -21,6 +21,14 @@ function ModalPage() {
   const onClickChildren = () => {
     setShowModalChildren((prev) => !prev);
   };
+  const goParents = () => {
+    setShowModalChildren(false);
+    setShowModalParents(true);
+  };
+  const goChildren = () => {
+    setShowModalParents(false);
+    setShowModalChildren(true);
+  };
 
   return (
     <>
@@ -32,8 +40,12 @@ function ModalPage() {
         <button onClick={onClickChildren}>
           41-3 <hr /> (Children)
         </button>
-        <ModalParents show={showModalParents} />
-        <ModalChildren show={showModalChildren} />
+        <ModalParents show={showModalParents}>
+          <button onClick={goChildren}>41-3으로 이동합니다</button>
+        </ModalParents>
+        <ModalChildren show={showModalChildren}>
+          <button onClick={goParents}>303으로 이동</button>
+        </ModalChildren>
         <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
       </Container>
     </>
