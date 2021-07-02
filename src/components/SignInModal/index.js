@@ -26,12 +26,12 @@ function SignInModal({ children, closeModal, showModal }) {
     watch,
     formState: { errors },
   } = useForm();
-  console.log("SIGNIN-Show ::: ", showModal);
-  const [showSignInModal, setShowSignInModal] = useState(showModal);
+  const [showSignInModal, setShowSignInModal] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [userState, setUserState] = useState("사용자 정보 없음");
 
-  console.log("DSD ::: ", showSignUp);
+  console.log("SIGNin - showModal and closeModal:: ", showModal, closeModal);
+
   const onSubmit = (data) => {
     console.log("data: ", data);
   };
@@ -65,7 +65,7 @@ function SignInModal({ children, closeModal, showModal }) {
         {showSignInModal && (
           <Menu
             showModal={showSignInModal}
-            onCloseModal={onCloseSignInModal}
+            onCloseModal={closeModal}
             style={{
               padding: "30px",
               left: "50%",

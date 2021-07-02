@@ -16,7 +16,8 @@ function RightItem() {
 
   //로그인 모달의 하단 회원가입 바로가기 버튼
   const onClickSignUpButton = () => {
-    setShowSignInModal(false);
+    setCloseSignInModal(true);
+    setShowSignInModal(true);
     setShowSignUpModal(true);
   };
 
@@ -39,6 +40,7 @@ function RightItem() {
       </SignInModal>
 
       {/* 회원가입 모달 */}
+
       <SignUpModal closeModal={closeSignUpModal} showModal={showSignUpModal}>
         이미 계정이 있습니까?&nbsp;
         <span onClick={onClickSignInButton}>로그인 &raquo; </span>

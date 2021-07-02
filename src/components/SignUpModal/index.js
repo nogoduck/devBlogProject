@@ -31,6 +31,7 @@ function SignUpModal({ children, closeModal, showModal }) {
 
   password.current = watch("password");
 
+  console.log("SIGNUP - showModal and closeModal:: ", showModal, closeModal);
   const onSubmit = (data) => {
     console.log("data: ", data);
   };
