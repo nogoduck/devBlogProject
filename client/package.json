@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "devlog",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,5 +40,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Create a personal development blog using React  \r start : 2021 - 06 - 27  \r 시간 남을때마다 학습 및 직접 운영할 목적으로 개발하는 것이므로 개발 기간은 무기한이 될 수도 있음",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "ad",
+  "license": "MIT"
 }
