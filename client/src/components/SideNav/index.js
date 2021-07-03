@@ -26,14 +26,22 @@ function SideNav() {
   };
 
   //창 크기에 따라 한번만 실행되게 하는 코드들
-  if (onceToggle & !isDesktop) {
-    setHiddenMenu(true);
-    setOnceToggle(false);
-  }
-  if (!onceToggle & isDesktop) {
-    setHiddenMenu(false);
-    setOnceToggle(true);
-  }
+  useEffect(() => {
+    if (!isDesktop) {
+      setHiddenMenu(true);
+    }
+    if (isDesktop) {
+      setHiddenMenu(false);
+    }
+  }, [isDesktop]);
+  // if (onceToggle & !isDesktop) {
+  //   setHiddenMenu(true);
+  //   setOnceToggle(false);
+  // }
+  // if (!onceToggle & isDesktop) {
+  //   setHiddenMenu(false);
+  //   setOnceToggle(true);
+  // }
 
   return (
     <>
