@@ -1,15 +1,32 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 
-// console.log(app);
-const port = 3005;
+const morgan = require("morgan");
+
+app.use(morgan("dev"));
+
+const port = process.env.PORT || 5050;
+
+const mongoURI =
+  "mongodb+srv://ad:1114@table1.wyuia.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+
+mongoose
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => {
+    console.log("MongoDB Connected...");
+  })
+  .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
-  res.send(
-    "<ul><li>3003</li><li>305553</li><li>4563003</li><li>3213003</li></ul>"
-  );
+  res.send("Server Connect Status: Success");
 });
 
 app.listen(port, () => {
-  console.log(`${port}포트에서 대기중`);
+  console.log(`Connected Port: ${port}`);
 });
