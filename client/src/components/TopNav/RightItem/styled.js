@@ -33,23 +33,6 @@ export const Button = styled.button`
   }
 `;
 
-export const SignUpButton = styled.div`
-  font-size: 12px;
-  height: 60px;
-  width: 60px;
-  background: #d35400;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-weight: 800;
-
-  &:hover {
-    cursor: pointer;
-    background: #2980b9;
-  }
-`;
-
 export const SignInButton = styled.div`
   position: absolute;
   right: 60px;
@@ -62,8 +45,28 @@ export const SignInButton = styled.div`
   align-items: center;
   flex-direction: column;
   font-weight: 800;
+  transition: 0.2s;
   &:hover {
     cursor: pointer;
-    background: green;
+    box-shadow: 0px 0px 5px 3px #b32304 inset;
+    color: #fff;
+  }
+`;
+
+export const SignUpButton = styled.div`
+  font-size: 12px;
+  height: 60px;
+  width: 60px;
+  background: #1e272e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 800;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 3px #151d22 inset;
+    color: #fff;
   }
 `;

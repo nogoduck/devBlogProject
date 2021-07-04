@@ -12,9 +12,11 @@ export const SignInButton = styled.div`
   align-items: center;
   flex-direction: column;
   font-weight: 800;
+  transition: 0.2s;
   &:hover {
     cursor: pointer;
-    background: green;
+    box-shadow: 0px 0px 5px 3px #b32304 inset;
+    color: #fff;
   }
 `;
 
@@ -64,7 +66,7 @@ export const SubmitButton = styled.button`
   border-radius: 3px;
   background: linear-gradient(135deg, #ffdd59 0%, #ffa801 100%);
   border: 1px solid #ffa801;
-  transition: 0.3s;
+  /* transition: 0.3s; */
   &:hover {
     background: #ffdd59;
     cursor: pointer;

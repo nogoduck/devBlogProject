@@ -25,23 +25,14 @@ function SideNav() {
     setHiddenMenu((prev) => !prev);
   };
 
-  //창 크기에 따라 한번만 실행되게 하는 코드들
-  useEffect(() => {
-    if (!isDesktop) {
-      setHiddenMenu(true);
-    }
-    if (isDesktop) {
-      setHiddenMenu(false);
-    }
-  }, [isDesktop]);
-  // if (onceToggle & !isDesktop) {
-  //   setHiddenMenu(true);
-  //   setOnceToggle(false);
-  // }
-  // if (!onceToggle & isDesktop) {
-  //   setHiddenMenu(false);
-  //   setOnceToggle(true);
-  // }
+  // useEffect(() => {
+  //   if (!isDesktop) {
+  //     setHiddenMenu(true);
+  //   }
+  //   if (isDesktop) {
+  //     setHiddenMenu(false);
+  //   }
+  // }, [isDesktop]);
 
   return (
     <>
@@ -53,19 +44,39 @@ function SideNav() {
       <Container id={hiddenMenu && "hiddenSideNav"}>
         <ul>
           <Link to="/menu/about">
-            <li className={activePath.includes("about") && "active"}>소개</li>
+            <li className={activePath.includes("about") && "active"}>
+              <b></b>
+              <b></b>
+              소개
+            </li>
           </Link>
           <Link to="/menu/card">
-            <li className={activePath.includes("card") && "active"}>카드</li>
+            <li className={activePath.includes("card") && "active"}>
+              <b></b>
+              <b></b>
+              카드
+            </li>
           </Link>
           <Link to="/menu/board">
-            <li className={activePath.includes("board") && "active"}>게시판</li>
+            <li className={activePath.includes("board") && "active"}>
+              <b></b>
+              <b></b>
+              게시판
+            </li>
           </Link>
           <Link to="/menu/modal">
-            <li className={activePath.includes("modal") && "active"}>모달</li>
+            <li className={activePath.includes("modal") && "active"}>
+              <b></b>
+              <b></b>
+              모달
+            </li>
           </Link>
           <Link to="/menu/video">
-            <li className={activePath.includes("video") && "active"}>영상</li>
+            <li className={activePath.includes("video") && "active"}>
+              <b></b>
+              <b></b>
+              영상
+            </li>
           </Link>
         </ul>
       </Container>
