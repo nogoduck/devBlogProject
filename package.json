@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"cd ../client && npm run start\"",
-    "server": "nodemon index.js"
+    "dev": "concurrently \"npm run server\" \"npm run start --prefix client\"",
+    "server": "nodemon server/index.js"
   },
   "author": "ad",
   "license": "MIT",
