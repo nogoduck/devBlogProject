@@ -21,12 +21,24 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-const DummySchema = new mongoose.Schema({
-  id: Number,
-  title: String,
-  temp: String,
-  like: Number,
-});
+const DummySchema = new mongoose.Schema(
+  {
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+    id: Number,
+    title: String,
+    temp: {
+      type: String,
+      default: "undefined",
+    },
+    like: Number,
+  },
+  {
+    versionKey: false,
+  }
+);
 
 console.log(DummySchema);
 
