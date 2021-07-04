@@ -8,11 +8,9 @@ app.use(morgan("dev"));
 
 const port = process.env.PORT || 5050;
 
-const mongoURI =
-  "mongodb+srv://ad:1114@table1.wyuia.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
+const config = require("./config/key");
 mongoose
-  .connect(mongoURI, {
+  .connect(config.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -22,6 +20,32 @@ mongoose
     console.log("MongoDB Connected...");
   })
   .catch((err) => console.log(err));
+
+const DummySchema = new mongoose.Schema({
+  id: Number,
+  title: String,
+  temp: String,
+  like: Number,
+});
+
+console.log(DummySchema);
+
+const Dummy = mongoose.model("dummyData", DummySchema);
+
+const dummyPost1 = new Dummy({
+  id: 1,
+  title: "처음 등록된 글",
+  like: 32,
+});
+
+dummyPost1
+  .save()
+  .then(() => {
+    console.log("success : ", dummyPost1);
+  })
+  .catch((err) => {
+    console.log("Error : ", err);
+  });
 
 app.get("/", (req, res) => {
   res.send("Server Connect Status: Success");

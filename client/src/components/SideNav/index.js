@@ -25,14 +25,14 @@ function SideNav() {
     setHiddenMenu((prev) => !prev);
   };
 
-  // useEffect(() => {
-  //   if (!isDesktop) {
-  //     setHiddenMenu(true);
-  //   }
-  //   if (isDesktop) {
-  //     setHiddenMenu(false);
-  //   }
-  // }, [isDesktop]);
+  useEffect(() => {
+    if (!isDesktop) {
+      setHiddenMenu(true);
+    }
+    if (isDesktop) {
+      setHiddenMenu(false);
+    }
+  }, [isDesktop]);
 
   return (
     <>
