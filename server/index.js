@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const userRouter = require("./routes/user");
 
 app.use(morgan("dev"));
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Server Connect Status: Success");
