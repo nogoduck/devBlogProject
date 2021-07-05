@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -43,7 +44,6 @@
   },
   "description": "Create a personal development blog using React  \r start : 2021 - 06 - 27  \r 시간 남을때마다 학습 및 직접 운영할 목적으로 개발하는 것이므로 개발 기간은 무기한이 될 수도 있음",
   "main": "index.js",
-  "devDependencies": {},
   "author": "ad",
   "license": "MIT"
 }

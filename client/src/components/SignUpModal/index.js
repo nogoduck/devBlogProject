@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import { Input, SubmitButton, Label, Error, Footer } from "./styled";
 import Menu from "../Menu";
+import axios from "axios";
 
 function SignUpModal({ children, show, close }) {
   const {
@@ -18,8 +19,14 @@ function SignUpModal({ children, show, close }) {
 
   password.current = watch("password");
 
-  const onSubmit = (data) => {
-    console.log("data: ", data);
+  const onSubmit = (user) => {
+    console.log("data: ", user);
+    axios
+      .post("/api/signup", user)
+      .then(() => {})
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const onClickSignUpModal = () => {
@@ -113,6 +120,12 @@ function SignUpModal({ children, show, close }) {
                 &nbsp;비밀번호를 입력해주세요
               </Error>
             )}
+            {errors.password && errors.password.type === "minLength" && (
+              <Error>
+                <TiWarning />
+                &nbsp;비밀번호는 6글자 이상으로 입력해주세요
+              </Error>
+            )}
 
             <Label>비밀번호 확인</Label>
             <Input
@@ -139,7 +152,7 @@ function SignUpModal({ children, show, close }) {
                 </Error>
               )}
 
-            <SubmitButton>계정 생성하기</SubmitButton>
+            <SubmitButton onSubmit={onSubmit}>계정 생성하기</SubmitButton>
           </form>
           <Footer>
             {children}
