@@ -22,7 +22,7 @@ function SignUpModal({ children, show, close }) {
   const onSubmit = (user) => {
     console.log("data: ", user);
     axios
-      .post("/api/signup", user)
+      .post("http://localhost:5050/api/users/signup", user)
       .then(() => {})
       .catch((err) => {
         console.log(err);
