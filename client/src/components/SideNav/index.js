@@ -36,7 +36,7 @@ function SideNav() {
     // setHiddenMenu(isMobile ? true : false);
     // 해당 파일 상단에 적어둔 버그가 있어서 사용하지 않음
   }, [isMobile]);
-  console.log(isDesktop, isTablet, isMobile);
+  // console.log(isDesktop, isTablet, isMobile);
   return (
     <>
       {!isDesktop && (

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Container, Logo } from "./styled.js";
+import { Container, LogoContainer } from "./styled.js";
 import { AiOutlineBug } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
 
@@ -10,7 +10,7 @@ function LeftItem() {
   return (
     <Container id={!isDesktop && "isMobileTopNav"}>
       <Link to="/" style={{ color: "#fff", zIndex: "2025" }}>
-        <Logo>
+        <LogoContainer>
           <div
             style={{
               position: "absolute",
@@ -52,7 +52,7 @@ function LeftItem() {
           ev
           <span style={{ fontSize: "44px", color: "red" }}>.</span>
           <span>Log</span>
-        </Logo>
+        </LogoContainer>
       </Link>
     </Container>
   );

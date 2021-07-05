@@ -1,9 +1,9 @@
 import React from "react";
-import { Container, Logo } from "./styled.js";
+import { LogoContainer } from "./styled.js";
 import { AiOutlineBug } from "react-icons/ai";
 function Logo() {
   return (
-    <Logo>
+    <LogoContainer>
       <AiOutlineBug
         style={{
           color: "#d2dae2",
@@ -37,7 +37,7 @@ function Logo() {
       ev
       <span style={{ fontSize: "32px", color: "#ff3f34" }}>.</span>
       <span>Log</span>
-    </Logo>
+    </LogoContainer>
   );
 }
 

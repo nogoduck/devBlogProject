@@ -4,9 +4,14 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-
+const cors = require("cors");
+const corsOptions = {
+  origin: "http://localhost:3000",
+  Credential: true,
+};
 const userRouter = require("./routes/user");
 
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 
