@@ -7,7 +7,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { Container, MenuButton } from "./styled";
+import { AiFillPicture, AiTwotoneExperiment, AiFillHome } from "react-icons/ai";
 import { BiMenu } from "react-icons/bi";
+import { FaClipboardList, FaPhotoVideo, FaPaperPlane } from "react-icons/fa";
 
 function SideNav() {
   //Desktop or PC"(min-width:1024px)", Tablet"(min-width:768px) and (max-width:1023px)", Mobile"(max-width:767px)"
@@ -47,13 +49,15 @@ function SideNav() {
           <Link to="/">
             <li className={activePath.includes("null") && "active"}>
               <b></b>
-              <b></b>홈
+              <b></b>
+              <AiFillHome />홈
             </li>
           </Link>
           <Link to="/menu/about">
             <li className={activePath.includes("about") && "active"}>
               <b></b>
               <b></b>
+              <FaPaperPlane />
               소개
             </li>
           </Link>
@@ -61,13 +65,15 @@ function SideNav() {
             <li className={activePath.includes("card") && "active"}>
               <b></b>
               <b></b>
-              카드
+              <AiFillPicture />
+              사진
             </li>
           </Link>
           <Link to="/menu/board">
             <li className={activePath.includes("board") && "active"}>
               <b></b>
               <b></b>
+              <FaClipboardList />
               게시판
             </li>
           </Link>
@@ -75,6 +81,7 @@ function SideNav() {
             <li className={activePath.includes("modal") && "active"}>
               <b></b>
               <b></b>
+              <AiTwotoneExperiment />
               모달
             </li>
           </Link>
@@ -82,6 +89,7 @@ function SideNav() {
             <li className={activePath.includes("video") && "active"}>
               <b></b>
               <b></b>
+              <FaPhotoVideo />
               영상
             </li>
           </Link>
