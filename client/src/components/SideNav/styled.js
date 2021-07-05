@@ -9,7 +9,7 @@ export const Container = styled.div`
   height: 100vh;
   border-radius: 10px;
   border: none;
-  background-color: #ecf0f1;
+  background-color: #ced6e0;
   /* border-right: 1px solid #e5e5e5; */
 
   & ul {
@@ -18,9 +18,9 @@ export const Container = styled.div`
 
   & li {
     margin: 8px 0;
-    padding: 3px 12px;
+    padding: 5px 15px;
     color: #2f3640;
-    font-size: 18px;
+    font-size: 16px;
     transition: 0s 0s ease-in-out;
     position: relative;
   }
@@ -56,7 +56,7 @@ export const Container = styled.div`
     border-bottom-right-radius: 12px;
     width: 100%;
     height: 100%;
-    background: #ecf0f1;
+    background: #ced6e0;
   }
 
   & li b:nth-child(2) {
@@ -76,7 +76,7 @@ export const Container = styled.div`
     border-top-right-radius: 12px;
     width: 100%;
     height: 100%;
-    background: #ecf0f1;
+    background: #ced6e0;
   }
 
   /* & li:hover b:nth-child(1), */

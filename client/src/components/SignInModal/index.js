@@ -14,7 +14,6 @@ function SignInModal({ children, show, close }) {
   } = useForm();
   const [showSignInModal, setShowSignInModal] = useState(false);
 
-  console.log(close);
   const onSubmit = (data) => {
     console.log("data: ", data);
   };

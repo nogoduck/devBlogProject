@@ -1,6 +1,15 @@
 import React from "react";
+import { Container, Title } from "./styled";
 function CardPage() {
-  return <>CardPPPage:::</>;
+  return (
+    <Container>
+      <Title>
+        <b></b>
+        <b></b>
+        카드 예시
+      </Title>
+    </Container>
+  );
 }
 
 export default CardPage;
