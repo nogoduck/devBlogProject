@@ -1,6 +1,6 @@
 import React from "react";
 
-import { LandingContainer, Title } from "./styled";
+import { LandingContainer } from "./styled";
 import { AiOutlineBug } from "react-icons/ai";
 
 function LandingContent() {

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { BiLinkExternal } from "react-icons/bi";
 import { LinkToGitHub, Button, SignUpButton, SignInButton } from "./styled";
 
@@ -9,11 +8,9 @@ import SignUpModal from "../../SignUpModal";
 function RightItem() {
   //로그인 모달 변수
   const [showSignInModal, setShowSignInModal] = useState(false);
-  const [closeSignInModal, setCloseSignInModal] = useState(false);
-  const [userState, setUserState] = useState("사용자 정보 없음");
+  const [userState] = useState("사용자 정보 없음");
   //회원가입 모달 변수
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const [closeSignUpModal, setCloseSignUpModal] = useState(false);
 
   const onToggleSignIn = () => {
     setShowSignInModal((prev) => !prev);

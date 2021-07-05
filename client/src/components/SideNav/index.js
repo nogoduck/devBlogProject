@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { Container, ContainerMobile, MenuButton } from "./styled";
+import { Container, MenuButton } from "./styled";
 import { BiMenu } from "react-icons/bi";
 
 function SideNav() {
@@ -15,7 +15,6 @@ function SideNav() {
   const isDesktop = useMediaQuery({ query: "(min-width:1024px)" });
   const isTabletAndMobile = useMediaQuery({ query: "(max-width:1023px" });
   const [hiddenMenu, setHiddenMenu] = useState(false);
-  const [onceToggle, setOnceToggle] = useState(true);
   //현재 페이지 목록 메뉴에 활성화
   const { pathname } = useLocation();
   const activePath = pathname.substring(5);

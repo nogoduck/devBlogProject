@@ -1,17 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
-import {
-  SignUpButton,
-  Input,
-  SubmitButton,
-  Button,
-  Label,
-  Error,
-  Line,
-  Footer,
-} from "./styled";
+import { Input, SubmitButton, Label, Error, Footer } from "./styled";
 import Menu from "../Menu";
 
 function SignUpModal({ children, show, close }) {
@@ -48,7 +38,7 @@ function SignUpModal({ children, show, close }) {
       errors.password = false;
       errors.passwordConfirm = false;
     }
-  }, [show]);
+  }, [errors, setValue, show]);
 
   return (
     <div>

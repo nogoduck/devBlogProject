@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
-import {
-  SignInButton,
-  Input,
-  SubmitButton,
-  Button,
-  Label,
-  Error,
-  Line,
-} from "./styled";
+import { Input, SubmitButton, Label, Error, Line } from "./styled";
 
 import Menu from "../Menu";
 
@@ -18,12 +9,10 @@ function SignInModal({ children, show, close }) {
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors },
   } = useForm();
   const [showSignInModal, setShowSignInModal] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false);
 
   console.log(close);
   const onSubmit = (data) => {
@@ -35,20 +24,6 @@ function SignInModal({ children, show, close }) {
     console.log("Login Click: ", showSignInModal);
   };
 
-  const onCloseSignInModal = (e) => {
-    e.stopPropagation();
-    errors.email = false;
-    errors.password = false;
-    setShowSignInModal(false);
-    console.log("Login Close");
-  };
-
-  const onClickSignUp = () => {
-    setShowSignInModal(true);
-    setShowSignUp(true);
-    console.log("Click State: ", showSignUp);
-  };
-
   useEffect(() => {
     if (!show) {
       setValue("email");
@@ -56,7 +31,7 @@ function SignInModal({ children, show, close }) {
       errors.email = false;
       errors.password = false;
     }
-  }, [show]);
+  }, [errors, setValue, show]);
 
   return (
     <div>
@@ -116,7 +91,6 @@ function SignInModal({ children, show, close }) {
             <legend>&nbsp;새로운 계정을 만드시겠습니까?&nbsp;</legend>
           </Line>
           {children}
-          {/* <Button onClick={onClickSignUp}>계정 생성하기</Button> */}
         </Menu>
       </span>
     </div>

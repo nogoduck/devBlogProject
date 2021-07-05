@@ -3,8 +3,7 @@ import ModalParents from "../ModalParents";
 import { Modal } from "./styled";
 
 function ModalChildren({ show, children }) {
-  const [showModal, setShowModal] = useState(false);
-  console.log("show: ", show);
+  const [showModal] = useState(false);
 
   if (!show) {
     return null;
