@@ -44,3 +44,7 @@ input:focus {
 #isMobileTopNav {
   margin-left: 40px;
 }
+
+#warningInput {
+  border: 3px dashed red;
+}

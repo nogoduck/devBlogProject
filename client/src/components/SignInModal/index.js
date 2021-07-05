@@ -52,9 +52,9 @@ function SignInModal({ children, show, close }) {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Label>이메일</Label>
             <Input
+              id={errors.email && "warningInput"}
               name="email"
               type="email"
-              id="email"
               {...register("email", {
                 required: true,
                 pattern: /^\S+@\S+$/i,
@@ -70,9 +70,9 @@ function SignInModal({ children, show, close }) {
             )}
             <Label>비밀번호</Label>
             <Input
+              id={errors.password && "warningInput"}
               name="password"
               type="password"
-              id="password"
               {...register("password", {
                 required: true,
                 minLength: 6,
