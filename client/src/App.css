@@ -38,6 +38,9 @@ button:active {
 input:focus {
   outline: none;
 }
+#hidden {
+  display: none;
+}
 #hiddenSideNav {
   display: none;
 }

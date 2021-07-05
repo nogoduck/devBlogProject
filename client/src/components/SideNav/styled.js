@@ -12,6 +12,9 @@ export const Container = styled.div`
   background-color: #ced6e0;
   /* border-right: 1px solid #e5e5e5; */
 
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    width: 64px;
+  }
   & ul {
     padding: 24px 0 24px 8px;
   }
@@ -99,3 +102,9 @@ export const MenuButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const MenuIcon = styled.span`
+  padding-right: 8px;
+`;
+
+export const MenuTitle = styled.span``;
