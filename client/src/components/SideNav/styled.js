@@ -13,7 +13,13 @@ export const Container = styled.div`
   /* border-right: 1px solid #e5e5e5; */
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {
+    //tablet
     width: 64px;
+  }
+
+  @media screen and (max-width: 767px) {
+    //mobile
+    /* display: none; */
   }
   & ul {
     padding: 24px 0 24px 8px;
