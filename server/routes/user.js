@@ -8,13 +8,14 @@ router.post("/signup", (req, res) => {
   const user = new User(req.body);
 
   user.save((err, data) => {
-    if (err) return err;
+    if (err) return res.json({ success: false, err });
     console.log("save data: ", data);
     return res.status(200).json({
       success: true,
     });
   });
-  // res.send("SUCCESS REGISTER");
 });
+
+router.post("./signin", (req, res) => {});
 
 module.exports = router;
