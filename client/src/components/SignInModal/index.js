@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
@@ -14,8 +15,13 @@ function SignInModal({ children, show, close }) {
   } = useForm();
   const [showSignInModal, setShowSignInModal] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log("data: ", data);
+  const onSubmit = (user) => {
+    axios
+      .post("http://localhost:5050/api/users/signin", user)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const onClickSignInModal = () => {

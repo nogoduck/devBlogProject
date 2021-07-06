@@ -14,7 +14,7 @@ function SignUpModal({ children, show, close }) {
     formState: { errors },
   } = useForm();
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-
+  const [succeessSignUp, setSucceessSignUp] = useState(false);
   const password = useRef();
 
   password.current = watch("password");
@@ -23,7 +23,9 @@ function SignUpModal({ children, show, close }) {
     console.log("data: ", user);
     axios
       .post("http://localhost:5050/api/users/signup", user)
-      .then(() => {})
+      .then((res) => {
+        setSucceessSignUp(res.data.success);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -47,6 +49,12 @@ function SignUpModal({ children, show, close }) {
     }
   }, [errors, setValue, show]);
 
+  useEffect(() => {
+    if (succeessSignUp) {
+      alert("회원가입 성공");
+    }
+    setSucceessSignUp(false);
+  }, [succeessSignUp]);
   return (
     <div>
       <span onClick={onClickSignUpModal}>

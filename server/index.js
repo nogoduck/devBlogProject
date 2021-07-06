@@ -29,6 +29,12 @@ bcrypt.genSalt(10, (err, salt) => {
   console.log("salt:::", salt);
 });
 
+const { User } = require("./models/User");
+console.log(User);
+User.findOne({ email: "ad@naver.com" }, (err, doc) => {
+  if (err) return err;
+  console.log("doc:", doc);
+});
 //=======================
 
 app.get("/", (req, res) => {

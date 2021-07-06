@@ -42,6 +42,12 @@ UserSchema.pre("save", function (next) {
   }
 });
 
+UserSchema.methods.comparePassword = (plainPassword, cb) => {
+  bcrypt.compare(plainPassword, UserSchema.password, (err, equal) => {
+    if (err) return cb(err);
+  });
+};
+
 const User = mongoose.model("User", UserSchema);
 
 module.exports = { User };
