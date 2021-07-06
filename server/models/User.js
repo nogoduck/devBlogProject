@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
@@ -25,8 +26,6 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre("save", function (next) {
-  const saltRounds = 10;
-
   const user = this;
 
   if (user.isModified("password")) {
@@ -47,29 +46,37 @@ UserSchema.pre("save", function (next) {
   }
 });
 
-UserSchema.methods.comparePassword = (plainPassword, cb) => {
-  bcrypt.compare(plainPassword, UserSchema.password, (err, pass) => {
+UserSchema.methods.comparePassword = function (plainPassword, cb) {
+  const user = this;
+
+  bcrypt.compare(plainPassword, user.password, (err, pass) => {
+    console.log("plaingPassword::", plainPassword);
+
+    if (plainPassword === user.password) {
+      console.log("password true");
+    }
+    console.log("PASS:", pass);
     if (err) return cb(err);
     cb(null, pass);
   });
 };
 
-UserSchema.methods.createToken = (cb) => {
-  const privateKey = 20;
+UserSchema.methods.createToken = function (cb) {
+  const user = this;
+  console.log("token user this ", user);
+  const privateKey = "privateKeys";
 
-  const token = jwt.sign(userSchema.user._id, privateKey);
+  const token = jwt.sign(user._id.toHexString(), privateKey);
+  console.log("token :: ", token);
 
-  userSchema.user.token = token;
-  userSchema.save((err, user) => {
+  user.token = token;
+
+  user.save((err, user) => {
     if (err) return cb(err);
     cb(null, user);
   });
 };
 
-UserSchema.methods.test = (text) => {
-  console.log(text + "TEST32123");
-  return null;
-};
 const User = mongoose.model("User", UserSchema);
 
 module.exports = { User };

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
+const cookieParser = require("cookie-parser");
 
 const { User } = require("../models/User");
 
@@ -12,6 +13,7 @@ router.post("/signup", (req, res) => {
     console.log("save data: ", data);
     return res.status(200).json({
       signUpSuccess: true,
+      message: "회원가입에 성공했습니다.",
     });
   });
 });
@@ -21,30 +23,33 @@ router.post("/signin", (req, res) => {
 
   User.findOne({ email: req.body.email }, (err, user) => {
     console.log("user :: ", user);
+
     if (!user) {
       return res.json({
         signInSuccess: false,
         message: "등록되어 있는 이메일이 존재하지 않습니다.",
       });
     }
-    user.test("Plain TEXT", (data) => {
-      console.log(data);
+
+    user.comparePassword(req.body.password, (err, pass) => {
+      console.log("PASS", pass);
+      if (!pass) {
+        return res.json({
+          signInSuccess: false,
+          message: "비밀번호가 틀렸습니다",
+        });
+      }
+
+      user.createToken((err, user) => {
+        if (err) return res.status(400).send(err);
+        console.log(user);
+
+        res.cookie("user_auth", user).status(200).json({
+          loginSuccess: true,
+          message: "로그인이 성공되었습니다",
+        });
+      });
     });
-
-    // User.comparePassword(req.body.password, (err, pass) => {
-    //   if (!pass) {
-    //     return res.json({
-    //       signInSuccess: false,
-    //       message: "비밀번호가 틀렸습니다",
-    //     });
-    //   }
-    //   res.json({ loginSuccess: true, message: "로그인이 성공되었습니다" });
-
-    //   user.createToken((err, user) => {
-    //     if (err) return res.status(400).send(err);
-
-    //   });
-    // });
   });
 });
 
