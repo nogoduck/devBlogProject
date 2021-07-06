@@ -4,7 +4,6 @@ const router = express.Router();
 
 const { User } = require("../models/UserSchema");
 
-console.log("UU: ", User);
 router.post("/signup", (req, res) => {
   const user = new User({
     name: req.body.name,
@@ -12,16 +11,13 @@ router.post("/signup", (req, res) => {
     password: req.body.password,
   });
 
-  console.log("INFO: ", user);
-
-  user
-    .save()
-    .then(() => {
-      console.log("SUC: ", user);
-    })
-    .catch((err) => {
-      console.log("ERR: ", err);
+  user.save((err, data) => {
+    if (err) return err;
+    console.log("save data: ", data);
+    return res.status(200).json({
+      success: true,
     });
+  });
   res.send("SUCCESS REGISTER");
 });
 

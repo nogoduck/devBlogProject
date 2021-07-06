@@ -15,6 +15,22 @@ app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 
+//=========[TEST]========
+
+const bcrypt = require("bcrypt");
+const password = "3201";
+console.log(password);
+
+const encodedPassword = bcrypt.hashSync(password, 10);
+console.log("enc:::", encodedPassword);
+
+bcrypt.genSalt(10, (err, salt) => {
+  // if (err) return err;
+  console.log("salt:::", salt);
+});
+
+//=======================
+
 app.get("/", (req, res) => {
   res.send("Server Connect Status: Success");
 });
