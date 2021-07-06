@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
-import { Input, SubmitButton, Label, Error, Line } from "./styled";
+import { Input, SubmitButton, Label, Error, Line, Form } from "./styled";
 
 import Menu from "../Menu";
 
@@ -49,7 +49,7 @@ function SignInModal({ children, show, close }) {
           }}
         >
           <div style={{ fontSize: "24px" }}>로그인</div>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Label>이메일</Label>
             <Input
               id={errors.email && "warningInput"}
@@ -85,7 +85,7 @@ function SignInModal({ children, show, close }) {
               </Error>
             )}
             <SubmitButton>확인</SubmitButton>
-          </form>
+          </Form>
           <Line>
             <legend>&nbsp;새로운 계정을 만드시겠습니까?&nbsp;</legend>
           </Line>

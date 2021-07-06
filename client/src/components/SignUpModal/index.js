@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
-import { Input, SubmitButton, Label, Error, Footer } from "./styled";
+import { Input, SubmitButton, Label, Error, Footer, Form } from "./styled";
 import Menu from "../Menu";
 import axios from "axios";
 
@@ -64,7 +64,7 @@ function SignUpModal({ children, show, close }) {
           }}
         >
           <div style={{ fontSize: "24px" }}>회원가입</div>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Label>이름</Label>
             <Input
               id={errors.name && "warningInput"}
@@ -153,7 +153,7 @@ function SignUpModal({ children, show, close }) {
               )}
 
             <SubmitButton onSubmit={onSubmit}>계정 생성하기</SubmitButton>
-          </form>
+          </Form>
           <Footer>
             {children}
             {/* &#10004; */}
