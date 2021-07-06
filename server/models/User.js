@@ -66,6 +66,10 @@ UserSchema.methods.createToken = (cb) => {
   });
 };
 
+UserSchema.methods.test = (text) => {
+  console.log(text + "TEST32123");
+  return null;
+};
 const User = mongoose.model("User", UserSchema);
 
 module.exports = { User };

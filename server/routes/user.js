@@ -17,26 +17,34 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/signin", (req, res) => {
+  console.log(req.body);
+
   User.findOne({ email: req.body.email }, (err, user) => {
+    console.log("user :: ", user);
     if (!user) {
       return res.json({
         signInSuccess: false,
         message: "등록되어 있는 이메일이 존재하지 않습니다.",
       });
     }
-
-    User.comparePassword(req.body.password, (err, pass) => {
-      if (!pass) {
-        return res.json({
-          signInSuccess: false,
-          message: "비밀번호가 틀렸습니다",
-        });
-      }
-
-      user.createToken((err, user) => {
-        if (err) return res.status(400).send(err);
-      });
+    user.test("Plain TEXT", (data) => {
+      console.log(data);
     });
+
+    // User.comparePassword(req.body.password, (err, pass) => {
+    //   if (!pass) {
+    //     return res.json({
+    //       signInSuccess: false,
+    //       message: "비밀번호가 틀렸습니다",
+    //     });
+    //   }
+    //   res.json({ loginSuccess: true, message: "로그인이 성공되었습니다" });
+
+    //   user.createToken((err, user) => {
+    //     if (err) return res.status(400).send(err);
+
+    //   });
+    // });
   });
 });
 
