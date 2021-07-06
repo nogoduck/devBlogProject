@@ -24,7 +24,7 @@ function SignUpModal({ children, show, close }) {
     axios
       .post("http://localhost:5050/api/users/signup", user)
       .then((res) => {
-        setSucceessSignUp(res.data.success);
+        setSucceessSignUp(res.data.signUpSuccess);
       })
       .catch((err) => {
         console.log(err);

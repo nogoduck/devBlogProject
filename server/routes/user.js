@@ -11,7 +11,7 @@ router.post("/signup", (req, res) => {
     if (err) return res.json({ success: false, err });
     console.log("save data: ", data);
     return res.status(200).json({
-      success: true,
+      signUpSuccess: true,
     });
   });
 });
@@ -20,12 +20,23 @@ router.post("/signin", (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (!user) {
       return res.json({
-        loginSuccess: false,
+        signInSuccess: false,
         message: "등록되어 있는 이메일이 존재하지 않습니다.",
       });
     }
 
-    User.comparePassword(req.body.password, (err, equal) => {});
+    User.comparePassword(req.body.password, (err, pass) => {
+      if (!pass) {
+        return res.json({
+          signInSuccess: false,
+          message: "비밀번호가 틀렸습니다",
+        });
+      }
+
+      user.createToken((err, user) => {
+        if (err) return res.status(400).send(err);
+      });
+    });
   });
 });
 
