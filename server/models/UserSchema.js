@@ -27,20 +27,19 @@ UserSchema.pre("save", function (next) {
 
   if (user.isModified("password")) {
     bcrypt.genSalt(saltRounds, (err, salt) => {
-      if (err) return err;
+      if (err) return next(err);
       console.log("salt 생성 성공", salt);
 
       bcrypt.hash(user.password, salt, (err, hash) => {
-        if (err) return err;
+        if (err) return next(err);
         user.password = hash;
         console.log("hash 생성 성공", hash);
 
         next();
       });
     });
-  } else {
-    next();
   }
+  next();
 });
 
 const User = mongoose.model("User", UserSchema);

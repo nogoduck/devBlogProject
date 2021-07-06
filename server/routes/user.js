@@ -5,11 +5,7 @@ const router = express.Router();
 const { User } = require("../models/UserSchema");
 
 router.post("/signup", (req, res) => {
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  });
+  const user = new User(req.body);
 
   user.save((err, data) => {
     if (err) return err;
@@ -18,7 +14,7 @@ router.post("/signup", (req, res) => {
       success: true,
     });
   });
-  res.send("SUCCESS REGISTER");
+  // res.send("SUCCESS REGISTER");
 });
 
 module.exports = router;
