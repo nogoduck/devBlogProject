@@ -1,6 +1,8 @@
 const { User } = require("../models/User");
 
 let auth = (req, res, next) => {
+  let token = req.cookies.user_auth;
+
   User.compareToken(token, (err, user) => {
     console.log("Middleware Token ::", token);
     if (err) throw err;

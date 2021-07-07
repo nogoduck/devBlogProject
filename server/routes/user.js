@@ -75,4 +75,5 @@ router.get("/signout", auth, (req, res) => {
     });
   });
 });
+
 module.exports = router;
