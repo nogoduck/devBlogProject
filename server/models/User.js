@@ -3,27 +3,30 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: true,
+const UserSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    password: {
+      type: String,
+      trim: true,
+      required: true,
+      min: 6,
+    },
+    token: {
+      type: String,
+    },
   },
-  email: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  password: {
-    type: String,
-    trim: true,
-    required: true,
-    min: 6,
-  },
-  token: {
-    type: String,
-  },
-});
+  { versionKey: false }
+);
 
 UserSchema.pre("save", function (next) {
   const user = this;
@@ -74,6 +77,18 @@ UserSchema.methods.createToken = function (cb) {
   user.save((err, user) => {
     if (err) return cb(err);
     cb(null, user);
+  });
+};
+
+UserSchema.statics.compareToken = function (token, cb) {
+  const user = this;
+  const privateKey = "privateKeys";
+
+  jwt.verify(token, privateKey, (err, decodeToken) => {
+    user.findOne({ _id: decodeToken, token: token }, (err, user) => {
+      if (err) return cb(err);
+      cb(null, user);
+    });
   });
 };
 

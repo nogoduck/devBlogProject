@@ -4,6 +4,7 @@ const router = express.Router();
 const cookieParser = require("cookie-parser");
 
 const { User } = require("../models/User");
+const { auth } = require("../middleware/auth");
 
 router.post("/signup", (req, res) => {
   const user = new User(req.body);
@@ -46,10 +47,23 @@ router.post("/signin", (req, res) => {
 
         res.cookie("user_auth", user).status(200).json({
           loginSuccess: true,
+          userId: user._id,
           message: "로그인이 성공되었습니다",
         });
       });
     });
+  });
+});
+
+router.get("/auth", auth, (req, res) => {
+  let token = req.cookies.user_auth;
+  console.log("middle token: ", token);
+
+  res.status(200).json({
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+    isAuth: true,
   });
 });
 
