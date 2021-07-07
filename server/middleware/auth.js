@@ -2,6 +2,7 @@ const { User } = require("../models/User");
 
 let auth = (req, res, next) => {
   User.compareToken(token, (err, user) => {
+    console.log("Middleware Token ::", token);
     if (err) throw err;
     if (!user) {
       return res.json({

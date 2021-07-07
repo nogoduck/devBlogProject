@@ -25,6 +25,7 @@ app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Server Connect Status: Success");
+  res.cookie("isCookie", "IMcooKie");
 });
 
 mongoose

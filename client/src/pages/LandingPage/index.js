@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import { Content } from "./styled";
@@ -12,9 +12,27 @@ import CardPage from "../CardPage";
 import ModalPage from "../ModalPage";
 import VideoPage from "../VideoPage";
 
+import axios from "axios";
+
 function LandingPage() {
+  useEffect(() => {
+    axios.get("/", (req, res) => {
+      console.log("요청");
+      console.log(req.data);
+    });
+  }, []);
+
+  const onSubmit = () => {
+    console.log("object");
+    axios.get("http://localhost:5050").then((res) => {
+      console.log("응답");
+      console.log(res.data.cookie);
+    });
+  };
+
   return (
     <>
+      <button onClick={onSubmit}>dd</button>
       <TopNav />
       <div style={{ display: "flex" }}>
         <SideNav />
