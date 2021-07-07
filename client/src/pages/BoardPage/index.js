@@ -1,5 +1,6 @@
-import { Table } from "./styleds";
+import { Container, Table, WriteButton } from "./styleds";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function BoardPage() {
   const post = {
@@ -21,8 +22,10 @@ function BoardPage() {
   };
   console.log(Object.keys(post).length);
 
+  const goWriter = () => {};
+
   return (
-    <div>
+    <Container>
       게시판
       <hr />
       <Table>
@@ -46,7 +49,10 @@ function BoardPage() {
           })}
         </tbody>
       </Table>
-    </div>
+      <Link to="/menu/board/write">
+        <WriteButton onSubmit={goWriter}>글쓰기</WriteButton>
+      </Link>
+    </Container>
   );
 }
 

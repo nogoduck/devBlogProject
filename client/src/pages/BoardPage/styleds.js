@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Container = styled.table`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
+
 export const Table = styled.table`
   /* border: 1px solid black; */
   border-collapse: collapse;
@@ -33,4 +39,15 @@ export const Table = styled.table`
     padding: 15px;
     text-align: right;
   }
+`;
+
+export const WriteButton = styled.button`
+  color: green;
+  width: 100px;
+  /* position: absolute; */
+  right: 0px;
+  bottom: 0px;
+  align-self: flex-end;
+  width: 120px;
+  height: 40px;
 `;
