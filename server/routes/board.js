@@ -5,25 +5,17 @@ const router = express.Router();
 const { Board } = require("../models/Board");
 
 router.post("/delete", (req, res) => {
-  const board = new Board(req.body);
-  console.log("board :: ", board);
-
-  board.save((err, data) => {
-    if (err) return res.json({ success: false, err });
-    console.log("save data: ", data);
-    return res.status(200).json({
-      signUpSuccess: true,
-      message: "게시물 업로드 성공",
-    });
-  });
+  const target = req.body;
+  console.log("target Id :: ", target);
+  res.send("삭제요청 응답");
 });
 
 router.post("/update", (req, res) => {
   const target = req.body;
-  console.log(target._id);
+  console.log(target);
   console.log("target :: ", target);
-  const filter = { _id: "60e7bd0eb81f35015498a610" };
-  const update = { title: "example" };
+  const filter = { _id: target._id };
+  const update = { title: target.title, description: target.description };
   Board.findOneAndUpdate(filter, update, { new: true }, (err, doc) => {
     console.log("doc:: ", doc);
     if (err)
@@ -32,7 +24,7 @@ router.post("/update", (req, res) => {
       });
     return res.status(200).json({
       success: true,
-      doc,
+      data: doc,
     });
   });
 
