@@ -19,6 +19,11 @@ const BoardSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    createdAt: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
     filePath: {
       type: String,
       trim: true,
