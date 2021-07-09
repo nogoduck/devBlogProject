@@ -23,6 +23,15 @@ function WritePage() {
     };
 
     console.log(data);
+
+    axios
+      .post("http://localhost:5050/api/board/create", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // const

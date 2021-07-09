@@ -1,8 +1,20 @@
 import { Container, Table, WriteButton } from "./styleds";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function BoardPage() {
+  useEffect(() => {
+    axios
+      .get("http://localhost:5050/api/board/getall")
+      .then((res) => {
+        console.log(res.data.board);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const post = {
     0: ["고추참치", 32, 5, "2021-07-02"],
     1: ["동원참치", 2, 0, "2021-07-02"],

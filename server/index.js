@@ -12,6 +12,7 @@ const corsOptions = {
 const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/user");
+const boardRouter = require("./routes/board");
 
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
@@ -43,6 +44,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/users", userRouter);
+app.use("/api/board", boardRouter);
 
 app.listen(port, () => {
   console.log(`Connected Port: ${port}`);
