@@ -20,21 +20,24 @@ router.post("/delete", (req, res) => {
 
 router.post("/update", (req, res) => {
   const target = req.body;
+  console.log(target._id);
   console.log("target :: ", target);
+  const filter = { title: "테스트 글쓰기1" };
+  const update = { title: "example" };
+  Board.findOneAndUpdate(filter, update, { new: true });
 
-  Board.update({ _id: target.id }, { $set: { target } })
-    .then((board) => {
-      console.log("DB에서 게시글 불러오기 성공");
-      return res.status(200).json({
-        board,
-      });
-      res.json({ message: "게시글을 성공적으로 불러왔습니다." });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err,
-      });
-    });
+  // .then(() => {
+  //   console.log(data);
+  //   console.log("게시글 업데이트 완료");
+  //   return res.status(200).json({
+  //     data,
+  //   });
+  // })
+  // .catch((err) => {
+  //   res.status(500).json({
+  //     message: err,
+  //   });
+  // });
 });
 
 router.get("/getall", (req, res) => {
@@ -44,7 +47,6 @@ router.get("/getall", (req, res) => {
       return res.status(200).json({
         board,
       });
-      res.json({ message: "게시글을 성공적으로 불러왔습니다." });
     })
     .catch((err) => {
       res.status(500).json({

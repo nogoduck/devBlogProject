@@ -9,8 +9,6 @@ function BoardDetailPage() {
       .post("http://localhost:5050/api/board/detail", args)
       .then(({ data }) => {
         setDetailPost(data);
-        setTitle(data.title);
-        setDescription(data.description);
         console.log("detail data :: ", data);
       })
       .catch((err) => {
@@ -26,15 +24,30 @@ function BoardDetailPage() {
   };
 
   const [upadteMode, setUpadteMode] = useState(false);
+  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const onClickPostUpdate = () => {
+    setId(detailPost.data._id);
+    setTitle(detailPost.data.title);
+    setDescription(detailPost.data.description);
     setUpadteMode(true);
   };
 
   const onClickPostUpdateComplete = () => {
     setUpadteMode(false);
+    const variable = { title: title, description: description };
+    console.log("post update, variable :: ", variable);
+    axios
+      .post("http://localhost:5050/api/board/update", variable)
+      .then(({ data }) => {
+        setDetailPost(data);
+        console.log("detail data :: ", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const onChangeTitle = (e) => {
@@ -55,6 +68,7 @@ function BoardDetailPage() {
           <br />
           <Link to="/menu/board">뒤로가기</Link>
           <h3>{detailPost.data.title}</h3>
+          <h3>{detailPost.data._id}</h3>
 
           <p>{detailPost.data.description}</p>
         </Container>
@@ -66,16 +80,13 @@ function BoardDetailPage() {
             <button onClick={onClickPostUpdateComplete}>수정완료</button>
           )}
           <br />
-          <Link to="/menu/board">뒤로가기</Link>
-          <h3>{detailPost.data.title}</h3>
-          <input type="text" value={title} onChange={onChangeTitle} />
+          <Link to="/menu/board">뒤로가기</Link> <br />
+          <input type="text" value={title} onChange={onChangeTitle} /> <br />
           <input
             type="text"
             value={description}
             onChange={onChangeDescription}
           />
-
-          <p>{detailPost.data.description}</p>
         </Container>
       );
     }
