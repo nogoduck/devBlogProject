@@ -3,74 +3,68 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function BoardPage() {
-  let posts = [];
+async function BoardPage() {
+  let posts;
 
-  awuseEffect(() => {
-    async function getData() {
-      axios
-        .get("http://localhost:5050/api/board/getall")
-        .then((res) => {
-          console.log(res.data.board);
-          posts = await res.data.board;
-          console.log("POST", posts);
-          console.log(posts.length);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+  useEffect(() => {
+    axios
+      .get("http://localhost:5050/api/board/getall")
+      .then((res) => {
+        console.log(res.data.board);
+        posts = res.data.board;
+        console.log("POST", posts);
+        console.log(posts.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [posts]);
 
-    getData();
-  }, []);
-  posts = [
-    {
-      title: "hi",
-      createdAt: "2021",
-    },
-  ];
-
-  const goWriter = () => {};
-
-  return (
-    <Container>
-      게시판
-      <hr />
-      <Table>
-        <thead>
-          {/* <tr>
+  console.log(posts);
+  if (!posts) {
+    return <div>게시글 불러오는중</div>;
+  } else {
+    return (
+      <Container>
+        게시판
+        <hr />
+        <Table>
+          <thead>
+            {/* <tr>
             <th>제목</th>
             <th>조회수</th>
             <th>좋아요</th>
             <th>작성일</th>
           </tr> */}
-        </thead>
-        <tbody>
-          {posts.map((v) => {
-            return (
-              <tr>
-                <td>{v.title}</td>
-                <td>{v.createdAt}</td>
-              </tr>
-            );
-          })}
+          </thead>
+          <tbody>
+            {posts &&
+              posts.map((v) => {
+                return (
+                  <tr>
+                    <td>{v.title}</td>
+                    <td>{v.createdAt}</td>
+                  </tr>
+                );
+              })}
 
-          {/* {Object.keys(post).map((postIndex) => {
+            {/* {Object.keys(post).map((postIndex) => {
             return (
               <tr>
-                {post[postIndex].map((v) => {
-                  return <td>{v}</td>;
-                })}
+              {post[postIndex].map((v) => {
+                return <td>{v}</td>;
+              })}
               </tr>
-            );
-          })} */}
-        </tbody>
-      </Table>
-      <Link to="/menu/board/write">
-        <WriteButton onSubmit={goWriter}>글쓰기</WriteButton>
-      </Link>
-    </Container>
-  );
+              );
+            })} */}
+          </tbody>
+        </Table>
+        <Link to="/menu/board/write">
+          <WriteButton>글쓰기</WriteButton>
+        </Link>
+      </Container>
+    );
+  }
 }
 
 export default BoardPage;
