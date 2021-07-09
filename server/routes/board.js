@@ -7,7 +7,17 @@ const { Board } = require("../models/Board");
 router.post("/delete", (req, res) => {
   const target = req.body;
   console.log("target Id :: ", target);
-  res.send("삭제요청 응답");
+  Board.findOneAndDelete(target, (err, doc) => {
+    console.log("doc:: ", doc);
+    if (err)
+      return res.status(500).json({
+        message: err,
+      });
+    return res.status(200).json({
+      success: true,
+      data: doc,
+    });
+  });
 });
 
 router.post("/update", (req, res) => {

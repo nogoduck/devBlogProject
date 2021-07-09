@@ -1,5 +1,3 @@
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Container, Lodding } from "./styled";
@@ -35,35 +33,18 @@ function BoardDetailPage() {
     setUpadteMode(true);
   };
   const onClickPostDelete = () => {
-    getDelete();
-    confirmAlert({
-      title: "게시글 삭제",
-      message: "게시글을 삭제하시겠습니까? 삭제후엔 복구할 수 없습니다.",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => {
-            const deleteId = {
-              _id: postId,
-            };
-            console.log(deleteId);
-            axios
-              .post("http://localhost:5050/api/board/delete", deleteId)
-              .then(({ data }) => {
-                console.log("delete result :: ", data);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          },
-        },
-        {
-          label: "No",
-          onClick: () => false,
-        },
-      ],
-    });
-    console.log("Delete");
+    //DB로부터 삭제요청
+    const deleteId = {
+      _id: postId,
+    };
+    axios
+      .post("http://localhost:5050/api/board/delete", deleteId)
+      .then(({ data }) => {
+        console.log("delete result :: ", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const onClickPostUpdateComplete = () => {
     //DB에 업데이트 요청
@@ -75,21 +56,6 @@ function BoardDetailPage() {
       .then(({ data }) => {
         setDetailPost(data);
         console.log("detail data :: ", data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const getDelete = () => {
-    const tId = {
-      _id: "3004121111222",
-    };
-    console.log(tId);
-    axios
-      .post("http://localhost:5050/api/board/delete", tId)
-      .then(({ data }) => {
-        console.log("delete result :: ", data);
       })
       .catch((err) => {
         console.log(err);
