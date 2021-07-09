@@ -22,9 +22,19 @@ router.post("/update", (req, res) => {
   const target = req.body;
   console.log(target._id);
   console.log("target :: ", target);
-  const filter = { title: "테스트 글쓰기1" };
+  const filter = { _id: "60e7bd0eb81f35015498a610" };
   const update = { title: "example" };
-  Board.findOneAndUpdate(filter, update, { new: true });
+  Board.findOneAndUpdate(filter, update, { new: true }, (err, doc) => {
+    console.log("doc:: ", doc);
+    if (err)
+      return res.status(500).json({
+        message: err,
+      });
+    return res.status(200).json({
+      success: true,
+      doc,
+    });
+  });
 
   // .then(() => {
   //   console.log(data);
