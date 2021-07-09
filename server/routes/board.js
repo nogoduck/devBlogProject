@@ -54,6 +54,7 @@ router.post("/update", (req, res) => {
 
 router.get("/getall", (req, res) => {
   Board.find()
+    .sort({ createdAt: "desc" })
     .then((board) => {
       console.log("DB에서 게시글 불러오기 성공");
       return res.status(200).json({
