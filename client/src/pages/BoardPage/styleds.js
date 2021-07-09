@@ -13,7 +13,7 @@ export const Table = styled.table`
   width: 100%;
 
   & tr {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #ced6e0;
   }
   & tr:last-child {
     border: none;
@@ -50,4 +50,12 @@ export const WriteButton = styled.button`
   align-self: flex-end;
   width: 120px;
   height: 40px;
+`;
+
+export const Lodding = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  height: 100%;
 `;

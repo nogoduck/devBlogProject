@@ -21,7 +21,6 @@ router.get("/getall", (req, res) => {
 });
 
 router.post("/create", (req, res) => {
-  console.log(req.body);
   const board = new Board(req.body);
   console.log("board :: ", board);
 
@@ -33,10 +32,23 @@ router.post("/create", (req, res) => {
       message: "게시물 업로드 성공",
     });
   });
+});
 
-  console.log("요청받음");
-  console.log(req.body);
-  console.log(req.body.title);
+router.post("/detail", (req, res) => {
+  Board.findOne(req.body)
+    .then((data) => {
+      console.log("디테일 게시물 불러오기 성공");
+      console.log(data);
+      return res.status(200).json({
+        data,
+      });
+      res.json({ message: "게시글을 성공적으로 불러왔습니다." });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err,
+      });
+    });
 });
 
 module.exports = router;

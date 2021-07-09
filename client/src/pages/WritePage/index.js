@@ -1,5 +1,6 @@
 import { Container } from "./styled";
 import React, { useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function WritePage() {
@@ -40,6 +41,7 @@ function WritePage() {
     <Container>
       {/* <form action=""></form> */}
       <h3>글쓰기</h3>
+      <Link to="/menu/board">뒤로가기</Link>
       <label For="title">제목</label>
       <input type="text" id="title" value={title} onChange={onChangeTitle} />
       <label For="description">내용</label>
