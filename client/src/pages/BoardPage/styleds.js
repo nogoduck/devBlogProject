@@ -41,15 +41,25 @@ export const Table = styled.table`
   }
 `;
 
+export const BoardHeader = styled.div`
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const Title = styled.div`
+  font-size: 20px;
+`;
+
 export const WriteButton = styled.button`
-  color: green;
-  width: 100px;
+  color: #000;
   /* position: absolute; */
-  right: 0px;
-  bottom: 0px;
-  align-self: flex-end;
-  width: 120px;
-  height: 40px;
+  /* right: 0px;
+  bottom: 0px; */
+  /* align-self: flex-end; */
+  width: 84px;
+  height: 32px;
 `;
 
 export const Lodding = styled.div`

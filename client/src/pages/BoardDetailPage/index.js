@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { Container, Lodding } from "./styled";
+import {
+  Container,
+  Lodding,
+  InputTitle,
+  InputDescription,
+  Button,
+  DeleteButton,
+  UpdateButton,
+} from "./styled";
 import axios from "axios";
 
 function BoardDetailPage() {
@@ -76,26 +84,31 @@ function BoardDetailPage() {
     if (!upadteMode) {
       return (
         <Container>
-          {detailPost && <button onClick={onClickPostUpdate}>수정하기</button>}
+          {detailPost && (
+            <UpdateButton onClick={onClickPostUpdate}>수정하기</UpdateButton>
+          )}
           <br />
           <Link to="/menu/board">뒤로가기</Link>
           <h3>{detailPost.data.title}</h3>
-          <h3>{detailPost.data._id}</h3>
 
           <p>{detailPost.data.description}</p>
+          <InputDescription>테스트 1</InputDescription>
         </Container>
       );
     } else {
       return (
         <Container>
           {detailPost && (
-            <button onClick={onClickPostUpdateComplete}>수정완료</button>
+            <UpdateButton onClick={onClickPostUpdateComplete}>
+              수정완료
+            </UpdateButton>
           )}{" "}
           <br />
-          <button onClick={onClickPostDelete}>삭제하기</button>
+          <DeleteButton onClick={onClickPostDelete}>삭제하기</DeleteButton>
           <br />
           <Link to="/menu/board">뒤로가기</Link> <br />
-          <input type="text" value={title} onChange={onChangeTitle} /> <br />
+          <InputTitle type="text" value={title} onChange={onChangeTitle} />
+          <br />
           <input
             type="text"
             value={description}

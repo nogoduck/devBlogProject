@@ -1,4 +1,11 @@
-import { Container, Table, WriteButton, Lodding } from "./styleds";
+import {
+  Container,
+  BoardHeader,
+  Table,
+  WriteButton,
+  Lodding,
+  Title,
+} from "./styleds";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -22,8 +29,13 @@ function BoardPage() {
   } else {
     return (
       <Container>
-        게시판
-        <hr />
+        <BoardHeader>
+          <Title>게시판</Title>
+          <Link to="/menu/board/write">
+            <WriteButton>글작성</WriteButton>
+          </Link>
+        </BoardHeader>
+        {/* <hr /> */}
         <Table>
           <thead>
             {/* <tr>
@@ -45,9 +57,6 @@ function BoardPage() {
               })}
           </tbody>
         </Table>
-        <Link to="/menu/board/write">
-          <WriteButton>글쓰기</WriteButton>
-        </Link>
       </Container>
     );
   }

@@ -1,5 +1,12 @@
-import { Container } from "./styled";
-import React, { useState, useCallback } from "react";
+import {
+  Container,
+  InputTitle,
+  InputDescription,
+  Label,
+  filePath,
+  SubmitButton,
+} from "./styled";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -42,22 +49,27 @@ function WritePage() {
       {/* <form action=""></form> */}
       <h3>글쓰기</h3>
       <Link to="/menu/board">뒤로가기</Link>
-      <label For="title">제목</label>
-      <input type="text" id="title" value={title} onChange={onChangeTitle} />
-      <label For="description">내용</label>
-      <input
+      <Label For="title">제목</Label>
+      <InputTitle
         type="text"
+        id="title"
+        value={title}
+        onChange={onChangeTitle}
+      />
+      <Label For="description">내용</Label>
+      <InputDescription
         id="description"
         value={description}
         onChange={onChangeDescription}
       />
-      <div id="file">
-        <label For="title">첨부파일</label>
-        <input type="text" id="file" />
+      <Label For="title">첨부파일</Label>&nbsp;
+      <filePath>
+        dss
         <button>추가</button>
         <button>삭제</button>
-      </div>
-      <button onClick={onSubmit}>등록</button>
+      </filePath>
+      <SubmitButton onClick={onSubmit}>등록</SubmitButton>
+      <fileContainer>ddsads</fileContainer>
     </Container>
   );
 }
