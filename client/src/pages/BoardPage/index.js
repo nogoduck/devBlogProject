@@ -37,20 +37,19 @@ function BoardPage() {
 
   const onClickCurrentPage = (e) => {
     e.preventDefault();
-    console.log("page: ", e.target.value);
-    setCurrentPage(e.target.value);
 
-    console.log("CPAGE: ", currentPage);
+    setCurrentPage(e.target.value);
+    const currentNum = e.target.value;
+
     let variable = {
-      currentPage: (currentPage - 1) * 10,
+      currentPage: (currentNum - 1) * 10,
     };
 
     axios
       .post("http://localhost:5050/menu/board", variable)
       .then(({ data }) => {
         setPosts(data.board);
-        setBoardCnt(data.boardCount);
-        console.log("effect Data", data);
+        console.log("Click Data", data);
       })
       .catch((err) => {
         console.log(err);
