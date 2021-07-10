@@ -5,6 +5,7 @@ import {
   WriteButton,
   Lodding,
   Title,
+  PagingContainer,
 } from "./styleds";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -63,7 +64,7 @@ function BoardPage() {
       <Container>
         <BoardHeader>
           <Title>게시판</Title>
-          <Link to="http://localhost:5050/menu/board/write">
+          <Link to="/menu/board/write">
             <WriteButton>글쓰기</WriteButton>
           </Link>
         </BoardHeader>
@@ -82,15 +83,20 @@ function BoardPage() {
               })}
           </tbody>
         </Table>
-        <input type="hidden" name="page" value="1" />
-        <div style={{ display: "flex" }}>
+        <PagingContainer>
           {paging &&
             paging.map((v) => {
               return (
-                <input type="button" value={v} onClick={onClickCurrentPage} />
+                <button
+                  onClick={onClickCurrentPage}
+                  value={v}
+                  className={currentPage == v && "active"}
+                >
+                  {v}
+                </button>
               );
             })}
-        </div>
+        </PagingContainer>
       </Container>
     );
   }

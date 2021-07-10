@@ -1,5 +1,5 @@
 export const pagiNation = (total, current) => {
-  const pagingCnt = 3;
+  const pagingCnt = 5;
   const half = Math.floor(pagingCnt / 2);
   const arr = [];
   current = parseInt(current);

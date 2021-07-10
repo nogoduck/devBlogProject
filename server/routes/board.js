@@ -93,7 +93,6 @@ router.post("/detail", (req, res) => {
       return res.status(200).json({
         data,
       });
-      res.json({ message: "게시글을 성공적으로 불러왔습니다." });
     })
     .catch((err) => {
       res.status(500).json({

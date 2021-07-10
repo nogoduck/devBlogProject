@@ -75,3 +75,32 @@ export const Lodding = styled.div`
   font-size: 36px;
   height: 100%;
 `;
+
+export const PagingContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  height: 100%;
+  padding: 0 30%;
+  & Button {
+    border: none;
+    background-color: transparent;
+    border-radius: 3px;
+    color: #000;
+    font-size: 16px;
+    /* padding: 5px; */
+    width: 25px;
+    height: 25px;
+    margin: 0 4px;
+  }
+
+  & button:hover {
+    border: 2px dashed #0984e3;
+    cursor: pointer;
+  }
+  & .active {
+    background-color: #0984e3;
+    color: #fff;
+  }
+`;
