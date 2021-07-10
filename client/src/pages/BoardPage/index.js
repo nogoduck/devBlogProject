@@ -16,12 +16,12 @@ function BoardPage() {
   const [posts, setPosts] = useState("");
   const [boardCnt, setBoardCnt] = useState(0);
   const totalPageCnt = Math.floor(boardCnt / 10) + 1;
-  const [currentPage, setCurrentPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   const paging = pagiNation(totalPageCnt, currentPage);
 
   useEffect(() => {
     let variable = {
-      currentPage: currentPage,
+      currentPage: (currentPage - 1) * 10,
     };
     axios
       .post("http://localhost:5050/menu/board", variable)
@@ -39,8 +39,10 @@ function BoardPage() {
     e.preventDefault();
     console.log("page: ", e.target.value);
     setCurrentPage(e.target.value);
+
+    console.log("CPAGE: ", currentPage);
     let variable = {
-      currentPage: currentPage,
+      currentPage: (currentPage - 1) * 10,
     };
 
     axios
@@ -54,9 +56,6 @@ function BoardPage() {
         console.log(err);
       });
   };
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  // };
 
   if (!posts) {
     return <Lodding>로딩중</Lodding>;
@@ -86,19 +85,12 @@ function BoardPage() {
         </Table>
         <input type="hidden" name="page" value="1" />
         <div style={{ display: "flex" }}>
-          <form method="GET">
-            {paging &&
-              paging.map((v) => {
-                return (
-                  <input
-                    type="submit"
-                    value={v}
-                    name="page"
-                    onClick={onClickCurrentPage}
-                  />
-                );
-              })}
-          </form>
+          {paging &&
+            paging.map((v) => {
+              return (
+                <input type="button" value={v} onClick={onClickCurrentPage} />
+              );
+            })}
         </div>
       </Container>
     );

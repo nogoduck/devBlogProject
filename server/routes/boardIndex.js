@@ -1,3 +1,9 @@
+//===================================================
+//      get요청을 쿼리스트링으로 받기 위해 client url과
+//      동일하게 설계하여 따로 분리했지만 실패해서
+//      post요청으로 받고있다
+//===================================================
+
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
