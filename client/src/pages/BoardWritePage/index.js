@@ -3,14 +3,19 @@ import {
   InputTitle,
   InputDescription,
   Label,
-  filePath,
   SubmitButton,
+  BoardHeader,
+  Title,
+  AddButton,
+  CancelButton,
+  Box,
+  BoxFile,
 } from "./styled";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function WritePage() {
+function BoardWritePage() {
   //글쓰기 함수 처리해줘야함 + 서버로 요청 보내서 db에 삽입하기
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -47,8 +52,11 @@ function WritePage() {
   return (
     <Container>
       {/* <form action=""></form> */}
-      <h3>글쓰기</h3>
       <Link to="/menu/board">뒤로가기</Link>
+      <BoardHeader>
+        <Title>글쓰기</Title>
+        <SubmitButton onClick={onSubmit}>등록</SubmitButton>
+      </BoardHeader>
       <Label For="title">제목</Label>
       <InputTitle
         type="text"
@@ -63,15 +71,13 @@ function WritePage() {
         onChange={onChangeDescription}
       />
       <Label For="title">첨부파일</Label>&nbsp;
-      <filePath>
-        dss
-        <button>추가</button>
-        <button>삭제</button>
-      </filePath>
-      <SubmitButton onClick={onSubmit}>등록</SubmitButton>
-      <fileContainer>ddsads</fileContainer>
+      <Box>
+        <AddButton>추가</AddButton>
+        <CancelButton>삭제</CancelButton>
+        <BoxFile>example.png</BoxFile>
+      </Box>
     </Container>
   );
 }
 
-export default WritePage;
+export default BoardWritePage;

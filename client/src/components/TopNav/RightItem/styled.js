@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const LinkToGitHub = styled.a`
-  color: #d2dae2;
+  /* color: #d2dae2; */
+  color: #fff;
   position: absolute;
   font-size: 16px;
   right: 220px;

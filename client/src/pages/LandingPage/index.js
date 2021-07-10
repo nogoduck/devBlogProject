@@ -11,7 +11,7 @@ import BoardPage from "../BoardPage";
 import CardPage from "../CardPage";
 import ModalPage from "../ModalPage";
 import VideoPage from "../VideoPage";
-import WritePage from "../WritePage";
+import BoardWritePage from "../BoardWritePage";
 import BoardDetailPage from "../BoardDetailPage";
 
 function LandingPage() {
@@ -24,7 +24,7 @@ function LandingPage() {
           <Switch>
             <Route exact path="/" component={LandingContent} />
             <Route path="/menu/about" component={AboutPage} />
-            <Route path="/menu/board/write" component={WritePage} />
+            <Route path="/menu/board/write" component={BoardWritePage} />
             <Route path="/menu/board/:postId" component={BoardDetailPage} />
             <Route path="/menu/board" component={BoardPage} />
             <Route path="/menu/card" component={CardPage} />

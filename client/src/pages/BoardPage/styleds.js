@@ -4,6 +4,14 @@ export const Container = styled.table`
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-right: 24px;
+
+  & a {
+    color: #000;
+  }
+  & a:hover {
+    color: #0984e3;
+  }
 `;
 
 export const Table = styled.table`
@@ -50,14 +58,11 @@ export const BoardHeader = styled.div`
 
 export const Title = styled.div`
   font-size: 20px;
+  margin: 4px 0;
 `;
 
 export const WriteButton = styled.button`
   color: #000;
-  /* position: absolute; */
-  /* right: 0px;
-  bottom: 0px; */
-  /* align-self: flex-end; */
   width: 84px;
   height: 32px;
 `;
