@@ -10,6 +10,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import { pagiNation } from "./pagiNation";
+
 function BoardPage() {
   const [posts, setPosts] = useState("");
   useEffect(() => {
@@ -24,6 +26,13 @@ function BoardPage() {
       });
   }, []);
 
+  const onClickPage = (e) => {
+    // e.preventDefault();
+  };
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  // };
+
   if (!posts) {
     return <Lodding>로딩중</Lodding>;
   } else {
@@ -35,14 +44,7 @@ function BoardPage() {
             <WriteButton>글쓰기</WriteButton>
           </Link>
         </BoardHeader>
-        {/* <hr /> */}
         <Table>
-          <thead>
-            {/* <tr>
-            <th>제목</th>
-            <th>작성일</th>
-          </tr> */}
-          </thead>
           <tbody>
             {posts &&
               posts.map((post) => {
@@ -57,6 +59,15 @@ function BoardPage() {
               })}
           </tbody>
         </Table>
+
+        <div style={{ display: "flex" }}>
+          <form method="GET">
+            <input type="submit" value="1" name="page" onClick={onClickPage} />
+            <input type="submit" value="2" name="page" onClick={onClickPage} />
+            <input type="submit" value="3" name="page" onClick={onClickPage} />
+            <input type="submit" value="4" name="page" onClick={onClickPage} />
+          </form>
+        </div>
       </Container>
     );
   }

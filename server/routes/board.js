@@ -40,11 +40,14 @@ router.post("/update", (req, res) => {
 });
 
 router.get("/getall", (req, res) => {
-  console.log("default::", req.params.);
+  const skipNum = req.query.page;
+
+  const limitNum = 10;
+  console.log(skipNum);
   Board.find()
     .sort({ createdAt: "desc" })
-    .skip(0)
-    .limit(5)
+    .skip(2)
+    .limit(limitNum)
     .then((board) => {
       console.log("DB에서 게시글 불러오기 성공");
       return res.status(200).json({
