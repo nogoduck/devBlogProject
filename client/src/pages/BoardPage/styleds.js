@@ -88,11 +88,12 @@ export const PagingContainer = styled.div`
     background-color: transparent;
     border-radius: 3px;
     color: #000;
-    font-size: 16px;
+    font-size: 14px;
     /* padding: 5px; */
-    width: 25px;
-    height: 25px;
+    width: 32px;
+    height: 32px;
     margin: 0 4px;
+    text-align: center;
   }
 
   & button:hover {
