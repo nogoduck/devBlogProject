@@ -41,9 +41,8 @@ router.post("/update", (req, res) => {
 
 router.get("/getall", (req, res) => {
   const skipNum = req.query.page;
-
   const limitNum = 10;
-  console.log(skipNum);
+  console.log("skipNum::", skipNum);
   Board.find()
     .sort({ createdAt: "desc" })
     .skip(2)

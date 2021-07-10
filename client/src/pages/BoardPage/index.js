@@ -7,14 +7,16 @@ import {
   Title,
 } from "./styleds";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import { pagiNation } from "./pagiNation";
 
 function BoardPage() {
+  const { pathname } = useLocation();
   const [posts, setPosts] = useState("");
   useEffect(() => {
+    console.log(pathname); //qs안뜸
     axios
       .get("http://localhost:5050/api/board/getall")
       .then(({ data }) => {

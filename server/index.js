@@ -17,6 +17,7 @@ const boardRouter = require("./routes/board");
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.urlencoded());
 app.use(cookieParser());
 
 //=============[EXP CODE]==============
