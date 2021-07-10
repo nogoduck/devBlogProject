@@ -32,7 +32,7 @@ function BoardPage() {
         <BoardHeader>
           <Title>게시판</Title>
           <Link to="/menu/board/write">
-            <WriteButton>글작성</WriteButton>
+            <WriteButton>글쓰기</WriteButton>
           </Link>
         </BoardHeader>
         {/* <hr /> */}

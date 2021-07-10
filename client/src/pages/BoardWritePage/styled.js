@@ -14,7 +14,6 @@ export const Container = styled.div`
 `;
 
 export const BoardHeader = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,7 +22,6 @@ export const BoardHeader = styled.div`
 export const WriteButton = styled.button`
   color: green;
   width: 100px;
-  /* position: absolute; */
   right: 0px;
   bottom: 0px;
   align-self: flex-end;

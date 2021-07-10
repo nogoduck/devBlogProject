@@ -1,6 +1,18 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.table`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-right: 24px;
+
+  & a {
+    color: #000;
+  }
+  & a:hover {
+    color: #0984e3;
+  }
+`;
 
 export const Lodding = styled.div`
   display: flex;
@@ -13,26 +25,28 @@ export const Lodding = styled.div`
 export const InputTitle = styled.input`
   font-size: 19px;
   font-weight: 800;
-  border: none;
+  border: 1px dashed #b2bec3;
+  border-radius: 3px;
 `;
 
-export const InputDescription = styled.div`
+export const InputDescription = styled.textarea`
+  resize: none;
   font-size: 16px;
-  color: red;
+  border: 1px dashed #b2bec3;
+  border-radius: 3px;
 `;
 
 export const DeleteButton = styled.button`
-  width: 300px;
   font-weight: 800;
+  margin: 15px 0 40px 0;
+  width: 180px;
   height: 30px;
   border-radius: 3px;
   background: #ff7675;
   border: 1px solid #7f8fa6;
   color: #fff;
   transition: 0.3s;
-  float: right;
-  /* position: absolute; */
-  bottom: 35px;
+  align-self: flex-end;
   &:hover {
     background: #d63031;
     cursor: pointer;
@@ -61,4 +75,17 @@ export const UpdateButton = styled.button`
     background: #ffa801;
     box-shadow: 0px 0px 5px 1px #ffa801;
   }
+`;
+
+export const BoardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+`;
+
+export const Title = styled.div`
+  font-size: 20px;
+  font-weight: 800;
+  margin: 4px 0;
 `;

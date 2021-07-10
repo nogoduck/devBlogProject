@@ -5,9 +5,10 @@ import {
   Lodding,
   InputTitle,
   InputDescription,
-  Button,
   DeleteButton,
   UpdateButton,
+  BoardHeader,
+  Title,
 } from "./styled";
 import axios from "axios";
 
@@ -84,36 +85,34 @@ function BoardDetailPage() {
     if (!upadteMode) {
       return (
         <Container>
-          {detailPost && (
-            <UpdateButton onClick={onClickPostUpdate}>수정하기</UpdateButton>
-          )}
-          <br />
           <Link to="/menu/board">뒤로가기</Link>
-          <h3>{detailPost.data.title}</h3>
-
+          <BoardHeader>
+            <Title>{detailPost.data.title}</Title>
+            {detailPost && (
+              <UpdateButton onClick={onClickPostUpdate}>수정하기</UpdateButton>
+            )}
+          </BoardHeader>
           <p>{detailPost.data.description}</p>
-          <InputDescription>테스트 1</InputDescription>
         </Container>
       );
     } else {
       return (
         <Container>
-          {detailPost && (
-            <UpdateButton onClick={onClickPostUpdateComplete}>
-              수정완료
-            </UpdateButton>
-          )}{" "}
-          <br />
-          <DeleteButton onClick={onClickPostDelete}>삭제하기</DeleteButton>
-          <br />
           <Link to="/menu/board">뒤로가기</Link> <br />
-          <InputTitle type="text" value={title} onChange={onChangeTitle} />
-          <br />
-          <input
+          <BoardHeader>
+            <InputTitle type="text" value={title} onChange={onChangeTitle} />
+            {detailPost && (
+              <UpdateButton onClick={onClickPostUpdateComplete}>
+                수정완료
+              </UpdateButton>
+            )}
+          </BoardHeader>
+          <InputDescription
             type="text"
             value={description}
             onChange={onChangeDescription}
           />
+          <DeleteButton onClick={onClickPostDelete}>삭제하기</DeleteButton>
         </Container>
       );
     }
