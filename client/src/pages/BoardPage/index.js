@@ -7,29 +7,52 @@ import {
   Title,
 } from "./styleds";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { pagiNation } from "./pagiNation";
 
 function BoardPage() {
-  const { pathname } = useLocation();
   const [posts, setPosts] = useState("");
+  const [boardCnt, setBoardCnt] = useState(0);
+  const totalPageCnt = Math.floor(boardCnt / 10) + 1;
+  const [currentPage, setCurrentPage] = useState(5);
+  const paging = pagiNation(totalPageCnt, currentPage);
+
   useEffect(() => {
-    console.log(pathname); //qs안뜸
+    let variable = {
+      currentPage: currentPage,
+    };
     axios
-      .get("http://localhost:5050/api/board/getall")
+      .post("http://localhost:5050/menu/board", variable)
       .then(({ data }) => {
         setPosts(data.board);
-        console.log("POST", posts);
+        setBoardCnt(data.boardCount);
+        console.log("effect Data", data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const onClickPage = (e) => {
-    // e.preventDefault();
+  const onClickCurrentPage = (e) => {
+    e.preventDefault();
+    console.log("page: ", e.target.value);
+    setCurrentPage(e.target.value);
+    let variable = {
+      currentPage: currentPage,
+    };
+
+    axios
+      .post("http://localhost:5050/menu/board", variable)
+      .then(({ data }) => {
+        setPosts(data.board);
+        setBoardCnt(data.boardCount);
+        console.log("effect Data", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   // const onSubmit = (e) => {
   //   e.preventDefault();
@@ -42,7 +65,7 @@ function BoardPage() {
       <Container>
         <BoardHeader>
           <Title>게시판</Title>
-          <Link to="/menu/board/write">
+          <Link to="http://localhost:5050/menu/board/write">
             <WriteButton>글쓰기</WriteButton>
           </Link>
         </BoardHeader>
@@ -61,13 +84,20 @@ function BoardPage() {
               })}
           </tbody>
         </Table>
-
+        <input type="hidden" name="page" value="1" />
         <div style={{ display: "flex" }}>
           <form method="GET">
-            <input type="submit" value="1" name="page" onClick={onClickPage} />
-            <input type="submit" value="2" name="page" onClick={onClickPage} />
-            <input type="submit" value="3" name="page" onClick={onClickPage} />
-            <input type="submit" value="4" name="page" onClick={onClickPage} />
+            {paging &&
+              paging.map((v) => {
+                return (
+                  <input
+                    type="submit"
+                    value={v}
+                    name="page"
+                    onClick={onClickCurrentPage}
+                  />
+                );
+              })}
           </form>
         </div>
       </Container>

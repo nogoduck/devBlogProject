@@ -13,6 +13,7 @@ const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/user");
 const boardRouter = require("./routes/board");
+const boardIndexRouter = require("./routes/boardIndex");
 
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
@@ -46,6 +47,7 @@ mongoose
 
 app.use("/api/users", userRouter);
 app.use("/api/board", boardRouter);
+app.use("/menu/board", boardIndexRouter);
 
 app.listen(port, () => {
   console.log(`Connected Port: ${port}`);

@@ -40,17 +40,28 @@ router.post("/update", (req, res) => {
 });
 
 router.get("/getall", (req, res) => {
-  const skipNum = req.query.page;
+  const skipNum = Number(req.query.page);
   const limitNum = 10;
+  let boardCount = 0;
   console.log("skipNum::", skipNum);
+
+  Board.count((err, count) => {
+    if (err) {
+      console.log(err);
+    }
+    boardCount = count;
+    console.log("Board Count: ", count);
+  });
+
   Board.find()
     .sort({ createdAt: "desc" })
-    .skip(2)
+    .skip(skipNum)
     .limit(limitNum)
     .then((board) => {
       console.log("DB에서 게시글 불러오기 성공");
       return res.status(200).json({
         board,
+        boardCount,
       });
     })
     .catch((err) => {
