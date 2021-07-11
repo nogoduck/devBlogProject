@@ -1,7 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
-import { LinkToGitHub, Button, SignUpButton, SignInButton } from "./styled";
+import {
+  LinkToGitHub,
+  Button,
+  SignUpButton,
+  SignInButton,
+  Profile,
+  LogoutButton,
+} from "./styled";
 import { useSelector } from "react-redux";
 
 import SignInModal from "../../SignInModal";
@@ -53,37 +60,50 @@ function RightItem() {
         console.log(err);
       });
   };
-  return (
-    <div style={{ float: "right" }}>
-      {/* 깃허브 링크 */}
-      <LinkToGitHub href="https://github.com/nogoduck" target="_blank">
-        GitHub
-        <BiLinkExternal />
-      </LinkToGitHub>
 
-      {isLogin ? (
-        <button onClick={onClickSignoutButton}>로그아웃</button>
-      ) : (
-        "로그안해라"
-      )}
-      {/* 로그인  모달 */}
-      <SignInButton onClick={onToggleSignIn}>
-        <div>로그인</div>
-        <div>{userState}</div>
-      </SignInButton>
-      <SignInModal show={showSignInModal} close={onCloseModal}>
-        <Button onClick={onClickSignUpButton}>계정 생성하기</Button>
-      </SignInModal>
+  if (!isLogin) {
+    return (
+      <div style={{ float: "right" }}>
+        {/* 깃허브 링크 */}
+        <LinkToGitHub href="https://github.com/nogoduck" target="_blank">
+          GitHub
+          <BiLinkExternal />
+        </LinkToGitHub>
 
-      {/* 회원가입 모달 */}
+        {/* 로그인  모달 */}
+        <SignInButton onClick={onToggleSignIn}>
+          <div>로그인</div>
+          <div>{userState}</div>
+        </SignInButton>
+        <SignInModal show={showSignInModal} close={onCloseModal}>
+          <Button onClick={onClickSignUpButton}>계정 생성하기</Button>
+        </SignInModal>
 
-      <SignUpButton onClick={onToggleSignUp}>회원가입</SignUpButton>
-      <SignUpModal show={showSignUpModal} close={onCloseModal}>
-        이미 계정이 있습니까?&nbsp;
-        <span onClick={onClickSignInButton}>로그인 &raquo; </span>
-      </SignUpModal>
-    </div>
-  );
+        {/* 회원가입 모달 */}
+
+        <SignUpButton onClick={onToggleSignUp}>회원가입</SignUpButton>
+        <SignUpModal show={showSignUpModal} close={onCloseModal}>
+          이미 계정이 있습니까?&nbsp;
+          <span onClick={onClickSignInButton}>로그인 &raquo; </span>
+        </SignUpModal>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <div style={{ float: "right" }}>
+          {/* 깃허브 링크 */}
+          <LinkToGitHub href="https://github.com/nogoduck" target="_blank">
+            GitHub
+            <BiLinkExternal />
+          </LinkToGitHub>
+
+          <Profile>사용자 프로필</Profile>
+          <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default RightItem;

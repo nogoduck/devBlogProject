@@ -71,3 +71,41 @@ export const SignUpButton = styled.div`
     color: #fff;
   }
 `;
+
+export const Profile = styled.div`
+  position: absolute;
+  right: 60px;
+  font-size: 12px;
+  height: 60px;
+  width: 140px;
+  background: #3498db;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 800;
+  transition: 0.2s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 3px #2980b9 inset;
+    color: #fff;
+  }
+`;
+
+export const LogoutButton = styled.div`
+  font-size: 12px;
+  height: 60px;
+  width: 60px;
+  background: #1e272e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 800;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 3px #151d22 inset;
+    color: #fff;
+  }
+`;
