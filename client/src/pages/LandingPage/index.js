@@ -14,6 +14,8 @@ import VideoPage from "../VideoPage";
 import BoardWritePage from "../BoardWritePage";
 import BoardDetailPage from "../BoardDetailPage";
 
+import Auth from "../../hoc/auth";
+
 function LandingPage() {
   return (
     <>
@@ -22,14 +24,20 @@ function LandingPage() {
         <SideNav />
         <Content>
           <Switch>
-            <Route exact path="/" component={LandingContent} />
-            <Route path="/menu/about" component={AboutPage} />
-            <Route path="/menu/board/write" component={BoardWritePage} />
-            <Route path="/menu/board/:postId" component={BoardDetailPage} />
-            <Route path="/menu/board" component={BoardPage} />
-            <Route path="/menu/card" component={CardPage} />
-            <Route path="/menu/modal" component={ModalPage} />
-            <Route path="/menu/video" component={VideoPage} />
+            <Route exact path="/" component={Auth(LandingContent, null)} />
+            <Route path="/menu/about" component={Auth(AboutPage, null)} />
+            <Route
+              path="/menu/board/write"
+              component={Auth(BoardWritePage, null)}
+            />
+            <Route
+              path="/menu/board/:postId"
+              component={Auth(BoardDetailPage, null)}
+            />
+            <Route path="/menu/board" component={Auth(BoardPage, null)} />
+            <Route path="/menu/card" component={Auth(CardPage, null)} />
+            <Route path="/menu/modal" component={Auth(ModalPage, null)} />
+            <Route path="/menu/video" component={Auth(VideoPage, null)} />
           </Switch>
         </Content>
       </div>
