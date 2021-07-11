@@ -1,12 +1,19 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import { LinkToGitHub, Button, SignUpButton, SignInButton } from "./styled";
+import { useSelector } from "react-redux";
 
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
 
 function RightItem() {
   //로그인 모달 변수
+  const isLogin = useSelector(
+    (state) => state.user.signinSuccess.signinSuccess
+  );
+
+  console.log(isLogin);
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [userState] = useState("사용자 정보 없음");
   //회원가입 모달 변수
@@ -35,6 +42,17 @@ function RightItem() {
     setShowSignUpModal(false);
     setShowSignInModal(true);
   };
+
+  const onClickSignoutButton = () => {
+    axios
+      .get("http://localhost:5050/api/users/signout")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div style={{ float: "right" }}>
       {/* 깃허브 링크 */}
@@ -43,6 +61,11 @@ function RightItem() {
         <BiLinkExternal />
       </LinkToGitHub>
 
+      {isLogin ? (
+        <button onClick={onClickSignoutButton}>로그아웃</button>
+      ) : (
+        "로그안해라"
+      )}
       {/* 로그인  모달 */}
       <SignInButton onClick={onToggleSignIn}>
         <div>로그인</div>

@@ -1,13 +1,13 @@
 import { Input, SubmitButton, Label, Error, Line, Form } from "./styled";
-import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { signInUser } from "../../_actions/user_actions";
 import Menu from "../Menu";
 
-function SignInModal({ props, children, show, close }) {
+function SignInModal({ children, show, close }) {
   const dispatch = useDispatch();
 
   const {
@@ -23,12 +23,18 @@ function SignInModal({ props, children, show, close }) {
       console.log("res::", res);
       console.log("res.payload::", res.payload);
 
-      // if (res.paylaod.signinSuccess) {
-      //   props.history.push("/");
-      // } else {
-      //   alert("SignIn Error");
-      // }
+      if (res.payload.signinSuccess) {
+        console.log("로그인성공 모달닫음");
+        onClickSignInModal();
+        console.log("show :: ", show);
+        setShowSignInModal(false);
+        console.log("setshow :: ", show);
+      } else {
+        setShowSignInModal((prev) => !prev);
+        alert("유효하지 않는 아이디 또는 비밀번호 입니다");
+      }
     });
+    console.log("show Out :: ", show);
   };
 
   const onClickSignInModal = () => {
@@ -36,14 +42,15 @@ function SignInModal({ props, children, show, close }) {
     console.log("Login Click: ", showSignInModal);
   };
 
-  useEffect(() => {
-    if (!show) {
-      setValue("email");
-      setValue("password");
-      errors.email = false;
-      errors.password = false;
-    }
-  }, [errors, setValue, show]);
+  // useEffect(() => {
+  //   console.log("로그인 모달 초기화");
+  //   if (!show) {
+  //     setValue("email");
+  //     setValue("password");
+  //     errors.email = false;
+  //     errors.password = false;
+  //   }
+  // }, [errors, setValue, show]);
 
   return (
     <div>
@@ -109,4 +116,4 @@ function SignInModal({ props, children, show, close }) {
   );
 }
 
-export default SignInModal;
+export default withRouter(SignInModal);

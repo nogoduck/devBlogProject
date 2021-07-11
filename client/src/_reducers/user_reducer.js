@@ -1,7 +1,13 @@
 import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from "../_actions/types.js";
 
+const initialState = {
+  signinSuccess: {
+    signinSuccess: false,
+  },
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function (state = {}, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case SIGNIN_USER:
       return { ...state, signinSuccess: action.payload };
