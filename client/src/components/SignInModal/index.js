@@ -1,12 +1,15 @@
+import { Input, SubmitButton, Label, Error, Line, Form } from "./styled";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
-import { Input, SubmitButton, Label, Error, Line, Form } from "./styled";
-
+import { useDispatch } from "react-redux";
+import { signInUser } from "../../_actions/user_actions";
 import Menu from "../Menu";
 
-function SignInModal({ children, show, close }) {
+function SignInModal({ props, children, show, close }) {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -16,12 +19,16 @@ function SignInModal({ children, show, close }) {
   const [showSignInModal, setShowSignInModal] = useState(false);
 
   const onSubmit = (user) => {
-    axios
-      .post("http://localhost:5050/api/users/signin", user)
-      .then((res) => {})
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(signInUser(user)).then((res) => {
+      console.log("res::", res);
+      console.log("res.payload::", res.payload);
+
+      // if (res.paylaod.signinSuccess) {
+      //   props.history.push("/");
+      // } else {
+      //   alert("SignIn Error");
+      // }
+    });
   };
 
   const onClickSignInModal = () => {

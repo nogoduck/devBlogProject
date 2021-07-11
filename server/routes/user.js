@@ -13,7 +13,7 @@ router.post("/signup", (req, res) => {
     if (err) return res.json({ success: false, err });
     console.log("save data: ", data);
     return res.status(200).json({
-      signUpSuccess: true,
+      signupSuccess: true,
       message: "회원가입에 성공했습니다.",
     });
   });
@@ -27,7 +27,7 @@ router.post("/signin", (req, res) => {
 
     if (!user) {
       return res.json({
-        signInSuccess: false,
+        signinSuccess: false,
         message: "등록되어 있는 이메일이 존재하지 않습니다.",
       });
     }
@@ -36,7 +36,7 @@ router.post("/signin", (req, res) => {
       console.log("PASS", pass);
       if (!pass) {
         return res.json({
-          signInSuccess: false,
+          signinSuccess: false,
           message: "비밀번호가 틀렸습니다",
         });
       }
@@ -45,8 +45,8 @@ router.post("/signin", (req, res) => {
         if (err) return res.status(400).send(err);
         console.log(user);
 
-        res.cookie("user_auth", user).status(200).json({
-          loginSuccess: true,
+        res.cookie("user_auth", user.token).status(200).json({
+          signinSuccess: true,
           userId: user._id,
           message: "로그인이 성공되었습니다",
         });
