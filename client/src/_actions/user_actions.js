@@ -3,7 +3,7 @@ import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from "./types";
 
 export function signInUser(onSubmitData) {
   const request = axios
-    .post("http://localhost:5050/api/users/signin", onSubmitData)
+    .post("/api/users/signin", onSubmitData)
     .then((res) => res.data);
 
   return {
