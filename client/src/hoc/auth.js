@@ -11,9 +11,11 @@ export default function (component, option, admin = null) {
 
     useEffect(() => {
       dispatch(auth()).then((res) => {
-        console.log(res);
+        console.log("auth::: ", res);
       });
     }, []);
+
+    return <component />;
   }
 
   return AuthenticationCheck;
