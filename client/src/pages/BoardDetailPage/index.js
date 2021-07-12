@@ -1,3 +1,5 @@
+import { withRouter } from "react-router-dom";
+
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import {
@@ -119,4 +121,4 @@ function BoardDetailPage() {
   }
 }
 
-export default BoardDetailPage;
+export default withRouter(BoardDetailPage);

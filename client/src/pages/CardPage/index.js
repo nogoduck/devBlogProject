@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import React from "react";
 import { Container, Title } from "./styled";
 function CardPage() {
@@ -12,4 +13,4 @@ function CardPage() {
   );
 }
 
-export default CardPage;
+export default withRouter(CardPage);

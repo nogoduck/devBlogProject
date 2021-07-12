@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import React, { useState } from "react";
 import { Container, Button } from "./styled";
 
@@ -58,4 +59,4 @@ function ModalPage() {
   );
 }
 
-export default ModalPage;
+export default withRouter(ModalPage);

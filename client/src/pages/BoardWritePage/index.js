@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import {
   Container,
   InputTitle,
@@ -80,4 +81,4 @@ function BoardWritePage() {
   );
 }
 
-export default BoardWritePage;
+export default withRouter(BoardWritePage);

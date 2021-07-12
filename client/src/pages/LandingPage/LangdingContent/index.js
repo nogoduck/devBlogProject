@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import React from "react";
 
 import { LandingContainer } from "./styled";
@@ -36,4 +37,4 @@ function LandingContent() {
   );
 }
 
-export default LandingContent;
+export default withRouter(LandingContent);

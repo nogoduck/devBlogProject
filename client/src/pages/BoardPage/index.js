@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import {
   Container,
   BoardHeader,
@@ -102,4 +103,4 @@ function BoardPage() {
   }
 }
 
-export default BoardPage;
+export default withRouter(BoardPage);
