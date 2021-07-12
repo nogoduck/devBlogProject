@@ -11,15 +11,20 @@ export default function (ArgsComponent, option, admin = null) {
 
     useEffect(() => {
       dispatch(auth()).then((res) => {
+        if (option) {
+          console.log("option === true");
+        } else {
+          console.log("option === false");
+        }
         console.log("hoc - auth: ", res);
-
+        console.log("auth - option : ", option);
         if (res.payload.isAuth) {
           console.log("Login State => Succeed");
           //로그인이 된 상황
           if (option) {
             //optione === true
             //로그인이 된 상태에서 출입 불가능한 페이지
-            history.push("/");
+            // history.push("/");
           } else {
             //optione === false
             // history.push("/");
@@ -30,7 +35,7 @@ export default function (ArgsComponent, option, admin = null) {
           if (option) {
             //optione === true
             //로그인이 안된 상태에서 출입 불가능한 페이지
-            // history.push("/");
+            history.push("/");
           } else {
             //optione === false
             // history.push("/");

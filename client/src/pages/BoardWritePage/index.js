@@ -16,7 +16,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function BoardWritePage() {
+function BoardWritePage({ history }) {
   //글쓰기 함수 처리해줘야함 + 서버로 요청 보내서 db에 삽입하기
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -39,9 +39,11 @@ function BoardWritePage() {
     console.log(data);
 
     axios
-      .post("http://localhost:5050/api/board/create", data)
+      .post("/api/board/create", data)
       .then((res) => {
         console.log(res);
+        alert("게시글이 성공적으로 등록되었습니다");
+        history.push("/menu/board");
       })
       .catch((err) => {
         console.log(err);

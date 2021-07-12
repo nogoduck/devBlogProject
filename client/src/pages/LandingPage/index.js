@@ -34,18 +34,19 @@ function LandingPage() {
         <Content>
           <Switch>
             <Route exact path="/" component={Auth(LandingContent, null)} />
-            <Route path="/menu/about" component={Auth(AboutPage, null)} />
+            <Route path="/menu/about" component={Auth(AboutPage, false)} />
             <Route
+              true
               path="/menu/board/write"
-              component={Auth(BoardWritePage, false)}
+              component={Auth(BoardWritePage, true)}
             />
             <Route
               path="/menu/board/:postId"
               component={Auth(BoardDetailPage, null)}
             />
             <Route path="/menu/board" component={Auth(BoardPage, null)} />
-            <Route path="/menu/card" component={Auth(CardPage, false)} />
-            <Route path="/menu/modal" component={Auth(ModalPage, true)} />
+            <Route path="/menu/card" component={Auth(CardPage, null)} />
+            <Route path="/menu/modal" component={Auth(ModalPage, null)} />
             <Route path="/menu/video" component={Auth(VideoPage, null)} />
           </Switch>
         </Content>
