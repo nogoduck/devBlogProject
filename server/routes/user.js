@@ -60,6 +60,7 @@ router.get("/auth", auth, (req, res) => {
   console.log("middle token: ", token);
 
   res.status(200).json({
+    isAuth: true,
     _id: req.user._id,
     name: req.user.name,
     email: req.user.email,

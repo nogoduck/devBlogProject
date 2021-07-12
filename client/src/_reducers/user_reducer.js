@@ -1,8 +1,8 @@
 import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from "../_actions/types.js";
 
 const initialState = {
-  signinSuccess: {
-    signinSuccess: false,
+  authStatus: {
+    isAuth: false,
   },
 };
 
@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
     case SIGNUP_USER:
       return { ...state, signupSuccess: action.payload };
     case AUTH_USER:
-      return { ...state, userConnect: action.payload };
+      return { ...state, authStatus: action.payload };
     default:
       return state;
   }

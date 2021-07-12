@@ -17,9 +17,7 @@ import SignUpModal from "../../SignUpModal";
 
 function RightItem({ history }) {
   //로그인 모달 변수
-  const isLogin = useSelector(
-    (state) => state.user.signinSuccess.signinSuccess
-  );
+  const isLogin = useSelector((state) => state.user);
 
   console.log("isLogin => ", isLogin);
   const [showSignInModal, setShowSignInModal] = useState(false);
@@ -66,7 +64,9 @@ function RightItem({ history }) {
       });
   };
 
-  if (!isLogin) {
+  console.log("isLogin.authStatus : ", isLogin.authStatus);
+  // console.log("isLogin.userConnect.isAuth : ", isLogin.userConnect.isAuth);
+  if (isLogin.authStatus && !isLogin.authStatus.isAuth) {
     return (
       <div style={{ float: "right" }}>
         {/* 깃허브 링크 */}
