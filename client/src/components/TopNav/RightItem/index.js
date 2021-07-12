@@ -52,7 +52,7 @@ function RightItem() {
 
   const onClickSignoutButton = () => {
     axios
-      .get("http://localhost:5050/api/users/signout")
+      .get("/api/users/signout")
       .then((res) => {
         console.log(res);
       })

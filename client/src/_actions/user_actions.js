@@ -13,7 +13,7 @@ export function signInUser(onSubmitData) {
 }
 export function signUpUser(onSubmitData) {
   const request = axios
-    .post("http://localhost:5050/api/users/signup", onSubmitData)
+    .post("/api/users/signup", onSubmitData)
     .then((res) => res.data);
 
   return {
@@ -23,9 +23,7 @@ export function signUpUser(onSubmitData) {
 }
 
 export function auth() {
-  const request = axios
-    .get("http://localhost:5050/api/users/auth")
-    .then((res) => res.data);
+  const request = axios.get("/api/users/auth").then((res) => res.data);
 
   return {
     type: AUTH_USER,
