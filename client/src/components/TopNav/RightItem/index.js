@@ -21,7 +21,7 @@ function RightItem({ history }) {
     (state) => state.user.signinSuccess.signinSuccess
   );
 
-  console.log(isLogin);
+  console.log("isLogin => ", isLogin);
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [userState] = useState("사용자 정보 없음");
   //회원가입 모달 변수

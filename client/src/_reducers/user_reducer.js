@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
     case SIGNUP_USER:
       return { ...state, signupSuccess: action.payload };
     case AUTH_USER:
-      return { ...state, user: action.payload };
+      return { ...state, userConnect: action.payload };
     default:
       return state;
   }
