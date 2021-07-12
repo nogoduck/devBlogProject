@@ -17,7 +17,7 @@ import axios from "axios";
 function BoardDetailPage() {
   useEffect(() => {
     axios
-      .post("http://localhost:5050/api/board/detail", args)
+      .post("/api/board/detail", args)
       .then(({ data }) => {
         setDetailPost(data);
         console.log("detail data :: ", data);
@@ -49,7 +49,7 @@ function BoardDetailPage() {
       _id: postId,
     };
     axios
-      .post("http://localhost:5050/api/board/delete", deleteId)
+      .post("/api/board/delete", deleteId)
       .then(({ data }) => {
         console.log("delete result :: ", data);
       })
@@ -63,7 +63,7 @@ function BoardDetailPage() {
     const variable = { _id: postId, title: title, description: description };
     console.log("post update, variable :: ", variable);
     axios
-      .post("http://localhost:5050/api/board/update", variable)
+      .post("/api/board/update", variable)
       .then(({ data }) => {
         setDetailPost(data);
         console.log("detail data :: ", data);

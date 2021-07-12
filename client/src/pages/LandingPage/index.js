@@ -37,7 +37,7 @@ function LandingPage() {
             <Route path="/menu/about" component={Auth(AboutPage, null)} />
             <Route
               path="/menu/board/write"
-              component={Auth(BoardWritePage, true)}
+              component={Auth(BoardWritePage, false)}
             />
             <Route
               path="/menu/board/:postId"

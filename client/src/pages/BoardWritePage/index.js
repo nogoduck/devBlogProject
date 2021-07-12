@@ -52,7 +52,6 @@ function BoardWritePage() {
 
   return (
     <Container>
-      {/* <form action=""></form> */}
       <Link to="/menu/board">뒤로가기</Link>
       <BoardHeader>
         <Title>글쓰기</Title>
