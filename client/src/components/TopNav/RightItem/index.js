@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
@@ -14,7 +15,7 @@ import { useSelector } from "react-redux";
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
 
-function RightItem() {
+function RightItem({ history }) {
   //로그인 모달 변수
   const isLogin = useSelector(
     (state) => state.user.signinSuccess.signinSuccess
@@ -54,10 +55,14 @@ function RightItem() {
     axios
       .get("/api/users/signout")
       .then((res) => {
-        console.log(res);
+        console.log("로그아웃 결과 : ", res);
+
+        if (res.data.success) {
+          history.push("/");
+        }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("로그아웃 실패 : ", err);
       });
   };
 
@@ -106,4 +111,4 @@ function RightItem() {
   }
 }
 
-export default RightItem;
+export default withRouter(RightItem);
