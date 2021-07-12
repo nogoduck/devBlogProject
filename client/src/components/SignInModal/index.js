@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import { useDispatch } from "react-redux";
-import { signInUser } from "../../_actions/user_actions";
+import { signInUser, auth } from "../../_actions/user_actions";
 import Menu from "../Menu";
 
 function SignInModal({ children, show, close }) {
@@ -29,6 +29,10 @@ function SignInModal({ children, show, close }) {
         console.log("show :: ", show);
         setShowSignInModal(false);
         console.log("setshow :: ", show);
+
+        dispatch(auth()).then((res) => {
+          console.log("Login Auth Status : ", res);
+        });
       } else {
         setShowSignInModal((prev) => !prev);
         alert("유효하지 않는 아이디 또는 비밀번호 입니다");
