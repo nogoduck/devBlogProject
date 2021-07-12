@@ -58,6 +58,18 @@ function BoardPage() {
       });
   };
 
+  const editDate = (date) => {
+    console.log(date);
+    console.log(Date.now);
+    console.log(typeof date);
+    console.log(typeof Date.now());
+    console.log(date - Date.now());
+    const now = new Date();
+    console.log(now);
+
+    return date;
+  };
+
   if (!posts) {
     return <Lodding>로딩중</Lodding>;
   } else {
@@ -78,7 +90,7 @@ function BoardPage() {
                     <td>
                       <Link to={`/menu/board/${post._id}`}>{post.title}</Link>
                     </td>
-                    <td>{post.createdAt}</td>
+                    <td>{editDate(post.createdAt)}</td>
                   </tr>
                 );
               })}

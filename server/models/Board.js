@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
 
+const { getDate } = require("./_utils");
+
 autoIncrement.initialize(mongoose.connection);
 
 const BoardSchema = new mongoose.Schema(
@@ -22,7 +24,7 @@ const BoardSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       required: true,
-      default: Date.now,
+      default: getDate(),
     },
     filePath: {
       type: String,
