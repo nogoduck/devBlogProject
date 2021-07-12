@@ -26,7 +26,7 @@ function BoardPage() {
       currentPage: (currentPage - 1) * 10,
     };
     axios
-      .post("http://localhost:5050/menu/board", variable)
+      .post("/api/board", variable)
       .then(({ data }) => {
         setPosts(data.board);
         setBoardCnt(data.boardCount);
@@ -48,7 +48,7 @@ function BoardPage() {
     };
 
     axios
-      .post("http://localhost:5050/menu/board", variable)
+      .post("/api/board", variable)
       .then(({ data }) => {
         setPosts(data.board);
         console.log("Click Data", data);

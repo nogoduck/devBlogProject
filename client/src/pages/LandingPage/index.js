@@ -35,9 +35,9 @@ function LandingPage() {
               path="/menu/board/:postId"
               component={Auth(BoardDetailPage, null)}
             />
-            <Route path="/menu/board" component={Auth(BoardPage, true)} />
-            <Route path="/menu/card" component={Auth(CardPage, false)} />
-            <Route path="/menu/modal" component={Auth(ModalPage, false)} />
+            <Route path="/menu/board" component={Auth(BoardPage, false)} />
+            <Route path="/menu/card" component={Auth(CardPage, true)} />
+            <Route path="/menu/modal" component={Auth(ModalPage, true)} />
             <Route path="/menu/video" component={Auth(VideoPage, null)} />
           </Switch>
         </Content>

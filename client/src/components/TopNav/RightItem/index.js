@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
+import { auth } from "../../../_actions/user_actions";
 
 function RightItem({ history }) {
   //로그인 모달 변수
@@ -103,7 +104,7 @@ function RightItem({ history }) {
             <BiLinkExternal />
           </LinkToGitHub>
 
-          <Profile>사용자 프로필</Profile>
+          <Profile>{isLogin.authStatus.name}</Profile>
           <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
         </div>
       </div>
