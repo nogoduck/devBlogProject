@@ -38,21 +38,22 @@ router.post("/update", (req, res) => {
     });
   });
 });
+router.post("/totalcount", (req, res) => {
+  Board.count((err, count) => {
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).json({
+      total: count,
+    });
+  });
+});
 
 router.post("/", (req, res) => {
   console.log("요청");
   const skipNum = req.body.currentPage;
   const limitNum = 10;
-  let boardCount = 0;
   console.log("boardIndex, skipNum::", skipNum);
-
-  Board.count((err, count) => {
-    if (err) {
-      console.log(err);
-    }
-    boardCount = count;
-    console.log("Board Count: ", count);
-  });
 
   Board.find()
     .sort({ createdAt: "desc" })
@@ -63,7 +64,6 @@ router.post("/", (req, res) => {
       // console.log(board);
       return res.status(200).json({
         board,
-        boardCount,
       });
     })
     .catch((err) => {

@@ -28,12 +28,22 @@ function BoardPage({ history }) {
     let variable = {
       currentPage: (currentPage - 1) * 10,
     };
+    //게시물 가져오는 요청
     axios
       .post("/api/board", variable)
       .then(({ data }) => {
         setPosts(data.board);
-        setBoardCnt(data.boardCount);
-        console.log("effect Data", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //총 게시물 갯수를 가져오는 요청
+    axios
+      .post("/api/board/totalcount")
+      .then(({ data }) => {
+        console.log("TOTAL >>> ", data.total);
+        setBoardCnt(data.total);
       })
       .catch((err) => {
         console.log(err);

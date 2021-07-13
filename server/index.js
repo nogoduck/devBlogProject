@@ -13,7 +13,6 @@ const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/user");
 const boardRouter = require("./routes/board");
-const boardIndexRouter = require("./routes/boardIndex");
 
 // app.use(cors(corsOptions));
 app.use(morgan("dev"));
@@ -25,13 +24,6 @@ app.use(cookieParser());
 // 사용법이 미숙한 코드나 문법을 테스트
 
 //=====================================
-console.log(cookieParser);
-
-app.get("/", (req, res) => {
-  res.send("Server Connect Status: Success");
-  res.cookie("isCookie", "IMcooKie");
-  console.log("isCookie 생성완료");
-});
 
 mongoose
   .connect(config.mongoURI, {
@@ -47,7 +39,6 @@ mongoose
 
 app.use("/api/users", userRouter);
 app.use("/api/board", boardRouter);
-app.use("/menu/board", boardIndexRouter);
 
 app.listen(port, () => {
   console.log(`Connected Port: ${port}`);
