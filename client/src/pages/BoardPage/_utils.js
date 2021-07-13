@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function changeTime(getDate) {
   // ====================================================
   // 게시물을 1달 전까진 오늘을 기준으로 시각을 출력하기 위한  함수입니다
@@ -18,9 +20,10 @@ export function changeTime(getDate) {
   const secondsDiff = millisecondsDiff / 1000;
   const minutesDiff = secondsDiff / 60;
   const hoursDiff = minutesDiff / 60;
-  const daysDiff = minutesDiff / 60;
+  const daysDiff = hoursDiff / 24;
 
   console.log("----- [ 현재시간 - 데이터 입력시간 ] -----");
+  console.log("원본 시간 > ", getDate);
   console.log("밀리초 > ", millisecondsDiff);
   console.log("초 > ", secondsDiff);
   console.log("분 > ", minutesDiff);
@@ -29,38 +32,25 @@ export function changeTime(getDate) {
 
   //1.5일 같은 날이 나오면 2일전으로 표기하기 위해 반드시 올림을 해서 반환한다
   //30일 초과105958904
-  if (millisecondsDiff < 25_9200_0000) {
-    console.log("원본 시간 출력");
+  if (millisecondsDiff > 25_9200_0000) {
     return getDate.replace("T", " ").substring(0, 19);
 
     //1일 초과
   } else if (millisecondsDiff > 8640_0000) {
-    console.log("일 출력");
     return Math.ceil(daysDiff) + "일 전";
 
     //1시간 초과
   } else if (millisecondsDiff > 360_0000) {
-    console.log("시간 출력");
     return Math.ceil(hoursDiff) + "시간 전";
-  }
-  // (1)
-  // ---------------------------
-  //1분 초과
-  else {
-    console.log("분 출력");
+
+    //1분 초과
+  } else if (millisecondsDiff > 6_0000) {
+    return Math.ceil(minutesDiff) + "분 전";
+
+    //1분 미만, 초 단위는 오차가 조금 있어서 분으로 대체
+  } else {
     return Math.ceil(minutesDiff) + "분 전";
   }
-  // ---------------------------
-
-  // 초 단위까지는 정확하지 않아서 사용하지 않습니다
-  // 사용을 희망한다면 "---" 안의 코드를 제거하고 (1)의 위치에 아래의 코드로 교체해주세요.
-  // ↓ ↓
-  // else if (millisecondsDiff > 6_0000) {
-  //   return Math.ceil(minutesDiff) + "분 전";
-  // } else {
-  //   return Math.ceil(secondsDiff) + "초 전";
-  // }
-  // ↑ ↑
 
   // 조건부의 숫자는 밀리초를 쪼개서 결과를 반환했습니다.
   // ==============================
@@ -80,4 +70,23 @@ export function changeTime(getDate) {
   // 1000 * 60 =
   // 6_0000
   // ==============================
+}
+
+export function postMacro(frequency) {
+  for (let i = 1; i <= frequency; i++) {
+    const data = {
+      writer: `writer${i}`,
+      title: `${i}번째 게시물 입니다`,
+      description: `dummyData__${i}__`,
+    };
+
+    axios
+      .post("/api/board/create", data)
+      .then((res) => {
+        console.log("Post State : success");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
