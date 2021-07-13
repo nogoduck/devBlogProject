@@ -13,14 +13,16 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import { pagiNation } from "./pagiNation";
+import { pagiNation, pagiTotalCalc2 } from "./pageutils";
 
 function BoardPage({ history }) {
   const isLogin = useSelector((state) => state.user);
 
   const [posts, setPosts] = useState("");
   const [boardCnt, setBoardCnt] = useState(0);
-  const totalPageCnt = Math.floor(boardCnt / 10) + 1;
+  console.log(boardCnt);
+  const totalPageCnt = pagiTotalCalc2(boardCnt);
+  console.log(totalPageCnt);
   const [currentPage, setCurrentPage] = useState(1);
   const paging = pagiNation(totalPageCnt, currentPage);
 
@@ -80,13 +82,13 @@ function BoardPage({ history }) {
   };
 
   const editDate = (date) => {
-    console.log(date);
-    console.log(Date.now);
-    console.log(typeof date);
-    console.log(typeof Date.now());
-    console.log(date - Date.now());
+    // console.log(date);
+    // console.log(Date.now);
+    // console.log(typeof date);
+    // console.log(typeof Date.now());
+    // console.log(date - Date.now());
     const now = new Date();
-    console.log(now);
+    // console.log(now);
 
     return date;
   };
