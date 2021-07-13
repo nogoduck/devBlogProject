@@ -8,7 +8,7 @@ router.post("/delete", (req, res) => {
   const target = req.body;
   console.log("target Id :: ", target);
   Board.findOneAndDelete(target, (err, doc) => {
-    console.log("doc:: ", doc);
+    console.log("삭제 결과: ", doc);
     if (err)
       return res.status(500).json({
         message: err,
@@ -51,17 +51,14 @@ router.post("/totalcount", (req, res) => {
 
 router.post("/", (req, res) => {
   console.log("요청");
-  const skipNum = req.body.currentPage;
-  const limitNum = 10;
-  console.log("boardIndex, skipNum::", skipNum);
+  const skipCount = req.body.currentPage;
+  const limitCount = 10;
 
   Board.find()
     .sort({ createdAt: "desc" })
-    .skip(skipNum)
-    .limit(limitNum)
+    .skip(skipCount)
+    .limit(limitCount)
     .then((board) => {
-      console.log("DB에서 게시글 불러오기 성공");
-      // console.log(board);
       return res.status(200).json({
         board,
       });
@@ -90,7 +87,7 @@ router.post("/create", (req, res) => {
 router.post("/detail", (req, res) => {
   Board.findOne(req.body)
     .then((data) => {
-      console.log("디테일 게시물 불러오기 성공");
+      console.log("게시물 상세페이지 불러오기 성공");
       console.log(data);
       return res.status(200).json({
         data,
