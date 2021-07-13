@@ -12,12 +12,11 @@ import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import { useDispatch } from "react-redux";
-import { signInUser, auth } from "../../_actions/user_actions";
+import { signinUser, auth } from "../../_actions/user_actions";
 import Menu from "../Menu";
 
 function SignInModal({ children, show, close }) {
   const dispatch = useDispatch();
-
   const {
     register,
     handleSubmit,
@@ -29,10 +28,10 @@ function SignInModal({ children, show, close }) {
 
   const onSubmit = (user) => {
     //리덕스로 로그인 요청 결과를 받는다
-    dispatch(signInUser(user)).then((res) => {
+    dispatch(signinUser(user)).then((res) => {
       if (res.payload.signinSuccess) {
-        //로그인 성공시 로그인 모달 닫기
-        setShowSignInModal(false);
+        //로그인 성공시 로그인 모달 닫는 코드를 입력해야 하는데 안해도 잘 닫힌다
+        // setShowSignInModal(false);
 
         //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
         dispatch(auth()).then((res) => {
@@ -41,13 +40,15 @@ function SignInModal({ children, show, close }) {
       } else {
         //아이디 또는 비밀번호가 일치하지 않을 때
         setLoginError(true);
+        setTimeout(() => {
+          setLoginError(false);
+        }, 5000);
       }
     });
   };
 
   const onClickSignInModal = () => {
     setShowSignInModal((prev) => !prev);
-    console.log("Login Click: ", showSignInModal);
   };
 
   useEffect(() => {
@@ -73,8 +74,8 @@ function SignInModal({ children, show, close }) {
             width: "300px",
             marginLeft: "-180px",
             top: "50%",
-            height: "400px",
-            marginTop: "-200px",
+            height: "450px",
+            marginTop: "-225px",
           }}
         >
           <div style={{ fontSize: "24px" }}>로그인</div>

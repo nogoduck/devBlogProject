@@ -53,19 +53,20 @@ function RightItem({ history }) {
     axios
       .get("/api/users/signout")
       .then((res) => {
-        console.log("로그아웃 결과 : ", res);
+        //로그아웃 성공
 
         if (res.data.success) {
           history.push("/");
         }
       })
       .catch((err) => {
-        console.log("로그아웃 실패 : ", err);
+        alert("로그아웃에 실패했습니다.");
       });
   };
 
   console.log("isLogin.authStatus : ", isLogin.authStatus);
-  // console.log("isLogin.userConnect.isAuth : ", isLogin.userConnect.isAuth);
+
+  //리덕스에 있는 로그인 상태에 따라 상단바를 변경함
   if (isLogin.authStatus && !isLogin.authStatus.isAuth) {
     return (
       <div style={{ float: "right" }}>
@@ -85,6 +86,10 @@ function RightItem({ history }) {
         </SignInModal>
 
         {/* 회원가입 모달 */}
+
+        {isLogin.signupSuccess && isLogin.signupSuccess.signupSuccess && (
+          <div>성공</div>
+        )}
 
         <SignUpButton onClick={onToggleSignUp}>회원가입</SignUpButton>
         <SignUpModal show={showSignUpModal} close={onCloseModal}>

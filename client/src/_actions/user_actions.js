@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from "./types";
 
-export function signInUser(onSubmitData) {
+export function signinUser(onSubmitData) {
   const request = axios
     .post("/api/users/signin", onSubmitData)
     .then((res) => res.data);
@@ -11,7 +11,7 @@ export function signInUser(onSubmitData) {
     payload: request,
   };
 }
-export function signUpUser(onSubmitData) {
+export function signupUser(onSubmitData) {
   const request = axios
     .post("/api/users/signup", onSubmitData)
     .then((res) => res.data);

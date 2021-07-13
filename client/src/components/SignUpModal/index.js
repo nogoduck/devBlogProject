@@ -2,10 +2,12 @@ import React, { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import { Input, SubmitButton, Label, Error, Footer, Form } from "./styled";
+import { useDispatch } from "react-redux";
+import { signupUser, auth } from "../../_actions/user_actions";
 import Menu from "../Menu";
-import axios from "axios";
 
 function SignUpModal({ children, show, close }) {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -20,23 +22,27 @@ function SignUpModal({ children, show, close }) {
   password.current = watch("password");
 
   const onSubmit = (user) => {
-    console.log("data: ", user);
-    axios
-      .post("/api/users/signup", user)
-      .then((res) => {
-        setSucceessSignUp(res.data.signUpSuccess);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(signupUser(user)).then((res) => {
+      if (res.payload.signupSuccess) {
+        //회원가입 성공
+        setShowSignUpModal(false);
+
+        //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
+        dispatch(auth()).then((res) => {
+          console.log("Login Auth Status : ", res);
+        });
+      } else {
+        alert("회원가입에 실패했습니다. 잠시후에 다시 시도해주세요");
+      }
+    });
   };
 
   const onClickSignUpModal = () => {
     setShowSignUpModal((prev) => !prev);
-    console.log("Register Click: ", showSignUpModal);
   };
 
   useEffect(() => {
+    //회원가입 모달 창을 닫을 때 입력된 내용이나 에러 초기화
     if (!show) {
       setValue("name");
       setValue("email");
@@ -76,12 +82,14 @@ function SignUpModal({ children, show, close }) {
             <Label>이름</Label>
             <Input
               id={errors.name && "warningInput"}
+              spellCheck="false"
               name="name"
               {...register("name", {
                 required: true,
                 maxLength: 10,
               })}
               autoFocus
+              placeholder="canyou"
             />
             {errors.name && errors.name.type === "required" && (
               <Error>
@@ -98,8 +106,10 @@ function SignUpModal({ children, show, close }) {
             <Label>이메일</Label>
             <Input
               id={errors.email && "warningInput"}
+              spellCheck="false"
               name="email"
               type="email"
+              placeholder="canyon@example.com"
               {...register("email", {
                 required: true,
                 pattern: /^\S+@\S+$/i,
@@ -115,8 +125,10 @@ function SignUpModal({ children, show, close }) {
             <Label>비밀번호</Label>
             <Input
               id={errors.password && "warningInput"}
+              spellCheck="false"
               name="password"
               type="password"
+              placeholder="iWillBuyACanyonCF7"
               {...register("password", {
                 required: true,
                 minLength: 6,
@@ -138,8 +150,10 @@ function SignUpModal({ children, show, close }) {
             <Label>비밀번호 확인</Label>
             <Input
               id={errors.passwordConfirm && "warningInput"}
+              spellCheck="false"
               name="confirm"
               type="password"
+              placeholder="iWillBuyACanyonCF7"
               {...register("passwordConfirm", {
                 required: true,
                 validate: (value) => value === password.current,
