@@ -13,8 +13,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import { pagiNation, pagiTotalCalc2 } from "./pageutils";
-import { changeTime, postMacro } from "./_utils";
+import { changeTime, pagiNation, pagiTotalCalc2, postMacro } from "./_utils";
 function BoardPage({ history }) {
   const isLogin = useSelector((state) => state.user);
 
@@ -82,16 +81,16 @@ function BoardPage({ history }) {
   };
 
   // 테스트 게시글 작성하는 매크로, 인자로 반복 횟수가 들어간다
-  const onClickMacro = () => {
-    postMacro(20);
-  };
+  // const onClickMacro = () => {
+  //   postMacro(20);
+  // };
 
   if (!posts) {
     return <Lodding>로딩중</Lodding>;
   } else {
     return (
       <Container>
-        <button onClick={onClickMacro}>게시글 자동 생성</button>
+        {/* <button onClick={onClickMacro}>게시글 자동 생성</button> */}
         <BoardHeader>
           <Title>게시판</Title>
           <WriteButton onClick={onClickWrite}>글쓰기</WriteButton>

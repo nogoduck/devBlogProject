@@ -13,6 +13,7 @@ import {
   Title,
 } from "./styled";
 import axios from "axios";
+import { timeFormat } from "../BoardPage/_utils";
 
 function BoardDetailPage() {
   useEffect(() => {
@@ -89,6 +90,8 @@ function BoardDetailPage() {
         <Container>
           <Link to="/menu/board">뒤로가기</Link>
           <BoardHeader>
+            <Title>{timeFormat(detailPost.data.createdAt)}</Title>
+            <Title>{detailPost.data.writer}</Title>
             <Title>{detailPost.data.title}</Title>
             {detailPost && (
               <UpdateButton onClick={onClickPostUpdate}>수정하기</UpdateButton>
