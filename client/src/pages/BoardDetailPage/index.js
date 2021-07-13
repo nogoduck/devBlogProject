@@ -11,8 +11,12 @@ import {
   UpdateButton,
   BoardHeader,
   Title,
+  BoardInfo,
+  Profile,
 } from "./styled";
 import axios from "axios";
+import Gravatar from "react-gravatar";
+
 import { timeFormat } from "../BoardPage/_utils";
 
 function BoardDetailPage() {
@@ -90,13 +94,40 @@ function BoardDetailPage() {
         <Container>
           <Link to="/menu/board">뒤로가기</Link>
           <BoardHeader>
-            <Title>{timeFormat(detailPost.data.createdAt)}</Title>
-            <Title>{detailPost.data.writer}</Title>
             <Title>{detailPost.data.title}</Title>
             {detailPost && (
               <UpdateButton onClick={onClickPostUpdate}>수정하기</UpdateButton>
             )}
           </BoardHeader>
+          <BoardInfo>
+            <tr>
+              <td>
+                <Profile style={{ fontSize: "15px" }}>
+                  <Gravatar
+                    email={detailPost.data.email}
+                    size={30}
+                    default="wavatar"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      marginRight: "5px",
+                      borderRadius: "25%",
+                    }}
+                  />
+                  {detailPost.data.writer}
+                </Profile>
+              </td>
+              <td>
+                작성일&nbsp;≫&nbsp;{timeFormat(detailPost.data.createdAt)}
+              </td>
+              <td>
+                최근 수정일&nbsp;≫&nbsp;
+                {detailPost.data.updatedAt
+                  ? timeFormat(detailPost.data.updatedAt)
+                  : "수정 안함"}
+              </td>
+            </tr>
+          </BoardInfo>
           <p>{detailPost.data.description}</p>
         </Container>
       );

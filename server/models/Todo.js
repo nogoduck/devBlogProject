@@ -1,21 +1,15 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
 
-const { getDate } = require("./_utils");
-
 autoIncrement.initialize(mongoose.connection);
 
-const BoardSchema = new mongoose.Schema(
+const TodoSchema = new mongoose.Schema(
   {
     seq: {
       type: Number,
       default: 0,
     },
     writer: {
-      type: String,
-      required: true,
-    },
-    email: {
       type: String,
       required: true,
     },
@@ -36,22 +30,19 @@ const BoardSchema = new mongoose.Schema(
     },
     updatedAt: {
       type: Date,
-    },
-    filePath: {
-      type: String,
-      trim: true,
+      default: null,
     },
   },
   { versionKey: false }
 );
 
-BoardSchema.plugin(autoIncrement.plugin, {
-  model: "Board",
+TodoSchema.plugin(autoIncrement.plugin, {
+  model: "Todo",
   field: "seq",
   startAt: 1,
   increment: 1,
 });
 
-const Board = mongoose.model("Board", BoardSchema);
+const Todo = mongoose.model("Todo", TodoSchema);
 
-module.exports = { Board };
+module.exports = { Todo };

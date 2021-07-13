@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const { Board } = require("../models/Board");
+const { getDate } = require("../models/_utils");
 
 router.post("/delete", (req, res) => {
   const target = req.body;
@@ -22,10 +23,15 @@ router.post("/delete", (req, res) => {
 
 router.post("/update", (req, res) => {
   const target = req.body;
-  console.log(target);
+
   console.log("target :: ", target);
+
   const filter = { _id: target._id };
-  const update = { title: target.title, description: target.description };
+  const update = {
+    title: target.title,
+    description: target.description,
+    updatedAt: getDate(),
+  };
   Board.findOneAndUpdate(filter, update, { new: true }, (err, doc) => {
     console.log("doc:: ", doc);
     if (err)

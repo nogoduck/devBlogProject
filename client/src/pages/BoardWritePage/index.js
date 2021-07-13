@@ -34,9 +34,11 @@ function BoardWritePage({ history }) {
     setDescription(e.target.value);
   };
 
+  console.log("email : ", user.authStatus.email);
   const onSubmit = () => {
     const data = {
       writer: user.authStatus.name,
+      email: user.authStatus.email,
       title: title,
       description: description,
     };

@@ -82,10 +82,38 @@ export const BoardHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  flex-direction: row;
 `;
 
 export const Title = styled.div`
   font-size: 20px;
   font-weight: 800;
   margin: 4px 0;
+`;
+
+export const Profile = styled.div`
+  /* font-size: 8px; */
+  display: flex;
+  align-items: center;
+`;
+
+export const BoardInfo = styled.table`
+  position: absolute;
+  top: 90px;
+  font-size: 15px;
+  border-collapse: collapse;
+  /* border: 1px solid black; */
+
+  & td {
+    border-right: 1px solid black;
+    padding: 0 10px;
+  }
+
+  & td:first-child {
+    padding-left: 0;
+  }
+
+  & td:last-child {
+    border: none;
+  }
 `;

@@ -26,13 +26,13 @@ export function changeTime(getDate) {
   const hoursDiff = minutesDiff / 60;
   const daysDiff = hoursDiff / 24;
 
-  console.log("----- [ 현재시간 - 데이터 입력시간 ] -----");
-  console.log("원본 시간 > ", getDate);
-  console.log("밀리초 > ", millisecondsDiff);
-  console.log("초 > ", secondsDiff);
-  console.log("분 > ", minutesDiff);
-  console.log("시간 > ", hoursDiff);
-  console.log("일 > ", daysDiff);
+  // console.log("----- [ 현재시간 - 데이터 입력시간 ] -----");
+  // console.log("원본 시간 > ", getDate);
+  // console.log("밀리초 > ", millisecondsDiff);
+  // console.log("초 > ", secondsDiff);
+  // console.log("분 > ", minutesDiff);
+  // console.log("시간 > ", hoursDiff);
+  // console.log("일 > ", daysDiff);
 
   //1.5일 같은 날이 나오면 2일전으로 표기하기 위해 반드시 올림을 해서 반환한다
   //30일 초과105958904
@@ -87,7 +87,7 @@ export function postMacro(frequency) {
     axios
       .post("/api/board/create", data)
       .then((res) => {
-        console.log("Post State : success");
+        console.log(`${i}Post State : success`);
       })
       .catch((err) => {
         console.log(err);
