@@ -11,6 +11,7 @@ import {
   LogoutButton,
 } from "./styled";
 import { useSelector } from "react-redux";
+import Gravatar from "react-gravatar";
 
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
@@ -104,7 +105,20 @@ function RightItem({ history }) {
             <BiLinkExternal />
           </LinkToGitHub>
 
-          <Profile>{isLogin.authStatus.name}</Profile>
+          <Profile style={{ fontSize: "16px" }}>
+            <Gravatar
+              email={isLogin.authStatus.email}
+              size={30}
+              default="wavatar"
+              style={{
+                width: "30px",
+                height: "30px",
+                marginRight: "5px",
+                borderRadius: "25%",
+              }}
+            />
+            {isLogin.authStatus.name}
+          </Profile>
           <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
         </div>
       </div>

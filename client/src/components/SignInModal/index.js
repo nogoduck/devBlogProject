@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { signinUser, auth } from "../../_actions/user_actions";
-import Menu from "../Menu";
+import Menu from "../Modal";
 
 function SignInModal({ children, show, close }) {
   const dispatch = useDispatch();

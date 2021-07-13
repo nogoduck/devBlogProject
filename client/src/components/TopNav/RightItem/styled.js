@@ -82,7 +82,7 @@ export const Profile = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   font-weight: 800;
   transition: 0.2s;
   &:hover {

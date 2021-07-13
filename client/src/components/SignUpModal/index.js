@@ -4,7 +4,7 @@ import { TiWarning } from "react-icons/ti";
 import { Input, SubmitButton, Label, Error, Footer, Form } from "./styled";
 import { useDispatch } from "react-redux";
 import { signupUser, auth } from "../../_actions/user_actions";
-import Menu from "../Menu";
+import Menu from "../Modal";
 
 function SignUpModal({ children, show, close }) {
   const dispatch = useDispatch();
