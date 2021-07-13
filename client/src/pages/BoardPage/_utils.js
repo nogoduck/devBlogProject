@@ -42,23 +42,28 @@ export function changeTime(getDate) {
 
   //1달 (30days)일을 초과하면 원래 게시된 시간을 반환한다
   if (daysDiff > 30) {
+    console.log(typeof getDate);
+
+    getDate = getDate.replace("T", " ").substring(0, 19);
+
+    console.log(getDate);
     return getDate;
 
     //1일 보다 적으면 아래 결과 반환
   } else if (daysDiff < 1) {
     //1시간 보다 많을 때
     if (hoursDiff > 1) {
-      return hoursDiff + "시간 전";
+      return Math.ceil(hoursDiff) + "시간 전";
     } else {
       //60초보다 많을 때
       if (minutesDiff > 60) {
-        return minutesDiff + "분 전";
+        return Math.ceil(secondsDiff) + "초 전";
       } else {
         //60초 미만
-        return secondsDiff + "초 전";
+        return Math.ceil(minutesDiff) + "분 전";
       }
     }
   } else {
-    return daysDiff + "일 전";
+    return Math.ceil(daysDiff) + "일 전";
   }
 }
