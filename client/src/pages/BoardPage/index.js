@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 import { pagiNation, pagiTotalCalc2 } from "./pageutils";
-
+import { changeTime } from "./_utils";
 function BoardPage({ history }) {
   const isLogin = useSelector((state) => state.user);
 
@@ -80,38 +80,7 @@ function BoardPage({ history }) {
       history.push("/menu/board/write");
     }
   };
-
-  const editDate = (date) => {
-    console.log("원본 데이터 : ", date);
-    const getDate = new Date(date);
-
-    console.log("등록시간 > ", getDate);
-    // console.log(date);
-    // console.log(Date.now);
-    // console.log(typeof date);
-    // console.log(typeof Date.now());
-    // console.log(date - Date.now());
-    const now = new Date();
-    console.log("현재시간 > ", now);
-    const timeDiff = now - getDate;
-    console.log("현재시간 - 등록시간 >> ", timeDiff);
-
-    const milliSecondTimeDiff = new Date(timeDiff);
-    console.log("____ 시간차 ms>> ", milliSecondTimeDiff);
-
-    const secondTimeDiff = milliSecondTimeDiff / 1000;
-    console.log("____ 시간차 (s)>> ", secondTimeDiff);
-
-    const minuteTimeDiff = secondTimeDiff / 60;
-    console.log("____ 시간차 (m)>> ", minuteTimeDiff);
-
-    const hourTimeDiff = minuteTimeDiff / 60;
-    console.log("____ 시간차 (h)>> ", hourTimeDiff);
-
-    // console.log(now);
-
-    return date;
-  };
+  console.log("#######################################");
 
   if (!posts) {
     return <Lodding>로딩중</Lodding>;
@@ -131,7 +100,7 @@ function BoardPage({ history }) {
                     <td>
                       <Link to={`/menu/board/${post._id}`}>{post.title}</Link>
                     </td>
-                    <td>{editDate(post.createdAt)}</td>
+                    <td>{changeTime(post.createdAt)}</td>
                   </tr>
                 );
               })}
