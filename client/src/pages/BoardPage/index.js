@@ -80,7 +80,6 @@ function BoardPage({ history }) {
       history.push("/menu/board/write");
     }
   };
-  console.log("#######################################");
 
   if (!posts) {
     return <Lodding>로딩중</Lodding>;

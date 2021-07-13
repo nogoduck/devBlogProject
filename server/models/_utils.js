@@ -7,9 +7,7 @@ exports.getDate = function () {
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
   const milliseconds = date.getMilliseconds();
-  return new Date(
-    Date.UTC(year, month, today, hours, minutes, seconds, milliseconds)
-  );
+  return new Date(Date.UTC(2021, 5, 21, hours, minutes, seconds, milliseconds));
 };
 
 // console.log(getDate());

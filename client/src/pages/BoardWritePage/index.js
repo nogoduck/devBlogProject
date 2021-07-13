@@ -15,8 +15,12 @@ import {
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function BoardWritePage({ history }) {
+  const user = useSelector((state) => state.user);
+  console.log("user > ", user);
+
   //글쓰기 함수 처리해줘야함 + 서버로 요청 보내서 db에 삽입하기
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -32,6 +36,7 @@ function BoardWritePage({ history }) {
 
   const onSubmit = () => {
     const data = {
+      writer: user.authStatus.name,
       title: title,
       description: description,
     };

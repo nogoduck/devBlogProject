@@ -11,6 +11,10 @@ const BoardSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    writer: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       trim: true,
@@ -25,6 +29,9 @@ const BoardSchema = new mongoose.Schema(
       type: Date,
       required: true,
       default: getDate(),
+    },
+    updatedAt: {
+      type: Date,
     },
     filePath: {
       type: String,
