@@ -14,7 +14,6 @@ import { useSelector } from "react-redux";
 
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
-import { auth } from "../../../_actions/user_actions";
 
 function RightItem({ history }) {
   //로그인 모달 변수

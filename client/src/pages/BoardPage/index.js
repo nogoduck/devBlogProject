@@ -10,11 +10,14 @@ import {
 } from "./styleds";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 import { pagiNation } from "./pagiNation";
 
-function BoardPage() {
+function BoardPage({ history }) {
+  const isLogin = useSelector((state) => state.user);
+
   const [posts, setPosts] = useState("");
   const [boardCnt, setBoardCnt] = useState(0);
   const totalPageCnt = Math.floor(boardCnt / 10) + 1;
@@ -58,6 +61,14 @@ function BoardPage() {
       });
   };
 
+  const onClickWrite = () => {
+    if (!isLogin.authStatus.isAuth) {
+      alert("로그인 한 유저만 게시글을 작성할 수 있습니다.");
+    } else {
+      history.push("/menu/board/write");
+    }
+  };
+
   const editDate = (date) => {
     console.log(date);
     console.log(Date.now);
@@ -77,9 +88,7 @@ function BoardPage() {
       <Container>
         <BoardHeader>
           <Title>게시판</Title>
-          <Link to="/menu/board/write">
-            <WriteButton>글쓰기</WriteButton>
-          </Link>
+          <WriteButton onClick={onClickWrite}>글쓰기</WriteButton>
         </BoardHeader>
         <Table>
           <tbody>

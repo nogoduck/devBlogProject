@@ -118,3 +118,11 @@ export const Button = styled.button`
     color: #fff;
   }
 `;
+
+export const ErrorBox = styled.div`
+  width: 291px;
+  padding: 5px 0px 5px 7px;
+  border-radius: 3px;
+  border: 1px solid red;
+  transition: 0.3s;
+`;

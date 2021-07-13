@@ -1,4 +1,12 @@
-import { Input, SubmitButton, Label, Error, Line, Form } from "./styled";
+import {
+  Input,
+  SubmitButton,
+  Label,
+  Error,
+  ErrorBox,
+  Line,
+  Form,
+} from "./styled";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -17,28 +25,24 @@ function SignInModal({ children, show, close }) {
     formState: { errors },
   } = useForm();
   const [showSignInModal, setShowSignInModal] = useState(false);
+  const [loginError, setLoginError] = useState(false);
 
   const onSubmit = (user) => {
+    //리덕스로 로그인 요청 결과를 받는다
     dispatch(signInUser(user)).then((res) => {
-      console.log("res::", res);
-      console.log("res.payload::", res.payload);
-
       if (res.payload.signinSuccess) {
-        console.log("로그인성공 모달닫음");
-        onClickSignInModal();
-        console.log("show :: ", show);
+        //로그인 성공시 로그인 모달 닫기
         setShowSignInModal(false);
-        console.log("setshow :: ", show);
 
+        //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
         dispatch(auth()).then((res) => {
           console.log("Login Auth Status : ", res);
         });
       } else {
-        setShowSignInModal((prev) => !prev);
-        alert("유효하지 않는 아이디 또는 비밀번호 입니다");
+        //아이디 또는 비밀번호가 일치하지 않을 때
+        setLoginError(true);
       }
     });
-    console.log("show Out :: ", show);
   };
 
   const onClickSignInModal = () => {
@@ -46,15 +50,16 @@ function SignInModal({ children, show, close }) {
     console.log("Login Click: ", showSignInModal);
   };
 
-  // useEffect(() => {
-  //   console.log("로그인 모달 초기화");
-  //   if (!show) {
-  //     setValue("email");
-  //     setValue("password");
-  //     errors.email = false;
-  //     errors.password = false;
-  //   }
-  // }, [errors, setValue, show]);
+  useEffect(() => {
+    //모달을 닫을때마다 입력내용, 유효성오류 초기화
+    if (!show) {
+      setValue("email");
+      setValue("password");
+      errors.email = false;
+      errors.password = false;
+      setLoginError(false);
+    }
+  }, [errors, setValue, show]);
 
   return (
     <div>
@@ -79,6 +84,7 @@ function SignInModal({ children, show, close }) {
               id={errors.email && "warningInput"}
               name="email"
               type="email"
+              spellCheck="false"
               {...register("email", {
                 required: true,
                 pattern: /^\S+@\S+$/i,
@@ -97,9 +103,9 @@ function SignInModal({ children, show, close }) {
               id={errors.password && "warningInput"}
               name="password"
               type="password"
+              spellCheck="false"
               {...register("password", {
                 required: true,
-                minLength: 6,
               })}
             />
             {errors.password && errors.password.type === "required" && (
@@ -110,6 +116,16 @@ function SignInModal({ children, show, close }) {
             )}
             <SubmitButton>확인</SubmitButton>
           </Form>
+          {loginError && (
+            <ErrorBox>
+              <Error>
+                <TiWarning />
+                &nbsp; 유효하지 않는 아이디 또는 비밀번호 입니다 <br />
+                비밀번호 변경 또는 이메일을 찾는 기능은 현재 재공하고 있지
+                않습니다
+              </Error>
+            </ErrorBox>
+          )}
           <Line>
             <legend>&nbsp;새로운 계정을 만드시겠습니까?&nbsp;</legend>
           </Line>
