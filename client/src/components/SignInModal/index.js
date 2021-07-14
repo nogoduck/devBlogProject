@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { signinUser, auth } from "../../_actions/user_actions";
-import Menu from "../Modal";
+import Modal from "../Modal";
 
 function SignInModal({ children, show, close }) {
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ function SignInModal({ children, show, close }) {
     dispatch(signinUser(user)).then((res) => {
       if (res.payload.signinSuccess) {
         //로그인 성공시 로그인 모달 닫는 코드를 입력해야 하는데 안해도 잘 닫힌다
+        //부모 컴포넌트에서 조작을 해야한다 => TopNav
         // setShowSignInModal(false);
 
         //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
@@ -65,17 +66,13 @@ function SignInModal({ children, show, close }) {
   return (
     <div>
       <span onClick={onClickSignInModal}>
-        <Menu
+        <Modal
           show={show}
           close={close}
           style={{
             padding: "30px",
-            left: "50%",
             width: "300px",
-            marginLeft: "-180px",
-            top: "50%",
             height: "450px",
-            marginTop: "-225px",
           }}
         >
           <div style={{ fontSize: "24px" }}>로그인</div>
@@ -131,7 +128,7 @@ function SignInModal({ children, show, close }) {
             <legend>&nbsp;새로운 계정을 만드시겠습니까?&nbsp;</legend>
           </Line>
           {children}
-        </Menu>
+        </Modal>
       </span>
     </div>
   );

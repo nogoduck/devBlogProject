@@ -4,7 +4,7 @@ import { TiWarning } from "react-icons/ti";
 import { Input, SubmitButton, Label, Error, Footer, Form } from "./styled";
 import { useDispatch } from "react-redux";
 import { signupUser, auth } from "../../_actions/user_actions";
-import Menu from "../Modal";
+import Modal from "../Modal";
 
 function SignUpModal({ children, show, close }) {
   const dispatch = useDispatch();
@@ -64,17 +64,13 @@ function SignUpModal({ children, show, close }) {
   return (
     <div>
       <span onClick={onClickSignUpModal}>
-        <Menu
+        <Modal
           show={show}
           close={close}
           style={{
             padding: "30px",
-            left: "50%",
             width: "300px",
-            marginLeft: "-180px",
-            top: "50%",
             height: "550px",
-            marginTop: "-305px",
           }}
         >
           <div style={{ fontSize: "24px" }}>회원가입</div>
@@ -180,7 +176,7 @@ function SignUpModal({ children, show, close }) {
             {children}
             {/* &#10004; */}
           </Footer>
-        </Menu>
+        </Modal>
       </span>
     </div>
   );

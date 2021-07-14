@@ -9,7 +9,7 @@ const listSchema = new Schema({
     type: String,
     default: "test",
   },
-  list: {
+  item: {
     type: String,
     default: "할 일을 입력해주세요",
   },
@@ -26,8 +26,11 @@ const listSchema = new Schema({
 
 const TodoSchema = new Schema(
   {
-    category: listSchema,
-
+    title: {
+      type: String,
+      default: "제목 없음",
+    },
+    list: listSchema,
     testboolean: {
       type: Boolean,
       default: false,
