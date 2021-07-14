@@ -32,7 +32,8 @@ const BoardSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       required: true,
-      default: getDate(),
+      default: Date.now,
+      // default: getDate(),
     },
     updatedAt: {
       type: Date,

@@ -12,9 +12,10 @@ export function changeTime(getDate) {
   // ex) 2041-03-04 05:43
   // ====================================================
 
-  // MongoDB는 기본적으로 시간이 ISO 타입으로 저장된다고 하는데 이걸 다시 날짜객체로 만들어주면 내 위치가 한국이라 9시간이 더해지는 것 같다 그래서 다시 9시간을 빼준다.
+  // server측에서 Date.now로 값을 바로 넣으니 오차없이 가져와졌다
   const staticDate = new Date(getDate);
-  staticDate.setHours(staticDate.getHours() - 9);
+  // (사용안함) MongoDB는 기본적으로 시간이 ISO 타입으로 저장된다고 하는데 이걸 다시 날짜객체로 만들어주면 내 위치가 한국이라 9시간이 더해지는 것 같다 그래서 다시 9시간을 빼준다.
+  // staticDate.setHours(staticDate.getHours() - 9);
 
   //현재 시간을 불러온다
   const now = new Date();
@@ -53,7 +54,7 @@ export function changeTime(getDate) {
 
     //1분 미만, 초 단위는 오차가 조금 있어서 분으로 대체
   } else {
-    return Math.ceil(minutesDiff) + "분 전";
+    return Math.ceil(secondsDiff) + "분 전";
   }
 
   // 조건부의 숫자는 밀리초를 쪼개서 결과를 반환했습니다.

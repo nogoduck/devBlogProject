@@ -19,9 +19,7 @@ function BoardPage({ history }) {
 
   const [posts, setPosts] = useState("");
   const [boardCnt, setBoardCnt] = useState(0);
-  console.log(boardCnt);
   const totalPageCnt = pagiTotalCalc2(boardCnt);
-  console.log(totalPageCnt);
   const [currentPage, setCurrentPage] = useState(1);
   const paging = pagiNation(totalPageCnt, currentPage);
 
@@ -43,7 +41,6 @@ function BoardPage({ history }) {
     axios
       .post("/api/board/totalcount")
       .then(({ data }) => {
-        console.log("TOTAL >>> ", data.total);
         setBoardCnt(data.total);
       })
       .catch((err) => {
@@ -52,6 +49,7 @@ function BoardPage({ history }) {
   }, []);
 
   const onClickCurrentPage = (e) => {
+    //게시판 페이지 넘기는 요청
     e.preventDefault();
 
     setCurrentPage(e.target.value);
@@ -65,7 +63,6 @@ function BoardPage({ history }) {
       .post("/api/board", variable)
       .then(({ data }) => {
         setPosts(data.board);
-        console.log("Click Data", data);
       })
       .catch((err) => {
         console.log(err);
