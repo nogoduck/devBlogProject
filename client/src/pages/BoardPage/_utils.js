@@ -27,7 +27,7 @@ export function changeTime(getDate) {
   const daysDiff = hoursDiff / 24;
 
   // console.log("----- [ 현재시간 - 데이터 입력시간 ] -----");
-  // console.log("원본 시간 > ", getDate);
+  console.log("원본 시간 > ", getDate);
   // console.log("밀리초 > ", millisecondsDiff);
   // console.log("초 > ", secondsDiff);
   // console.log("분 > ", minutesDiff);
