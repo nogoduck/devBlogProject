@@ -5,10 +5,10 @@ const router = express.Router();
 const { Todo } = require("../models/Todo");
 
 router.post("/list/create", (req, res) => {
-  const data = new Todo(req.body);
-  console.log("todo data > ", data);
+  const variable = new Todo(req.body);
+  console.log("todo variable > ", variable);
 
-  data.save((err, data) => {
+  variable.save((err, data) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({
       success: true,

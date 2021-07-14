@@ -1,20 +1,46 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const TodoSchema = new mongoose.Schema(
+const listSchema = new Schema({
+  value: {
+    type: Number,
+  },
+  valuestring: {
+    type: String,
+    default: "test",
+  },
+  list: {
+    type: String,
+    default: "할 일을 입력해주세요",
+  },
+  success: {
+    type: Boolean,
+    default: false,
+  },
+  createdAndUpdatedAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
+});
+
+const TodoSchema = new Schema(
   {
-    item: [
-      {
-        list: String,
-        success: Boolean,
-      },
-    ],
+    category: listSchema,
 
-    box: {
-      title: String,
-      success: Boolean,
+    testboolean: {
+      type: Boolean,
+      default: false,
     },
-
-    createdAt: {
+    testboolean2: {
+      type: Boolean,
+      default: true,
+    },
+    teststring: {
+      type: String,
+      default: "String doc",
+    },
+    createdAndUpdatedAt: {
       type: Date,
       required: true,
       default: Date.now,
