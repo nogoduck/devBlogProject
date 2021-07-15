@@ -112,6 +112,12 @@ function AboutPage({ history }) {
     }
   }, [showCreateCategoryModal, showCreateListModal]);
 
+  console.log("todo >> ", todo);
+  // todo.map((v) => {
+  //   console.log(v);
+  // });
+  // console.log("todo list >> ", todo.category);
+
   //---------------------------[ 수정 예정 사항 ]---------------------
   //input을 사용할 시 랜더링이 자주 일어나기 떄문에 따로 뺴줄 예정
   // console.log("todo > ", todo);
@@ -131,14 +137,12 @@ function AboutPage({ history }) {
                   ＋
                 </ListButton>
 
+                {/* <h3>{v.list}</h3> */}
                 <ul>
-                  <li>working list1</li>
-                  <li>working list2</li>
-                  <li>working list3</li>
-                  <li>working list4</li>
-                  <li>working list5</li>
-                  <li>working list6</li>
-                  <li>working list7</li>
+                  {v.list &&
+                    v.list.map((k) => {
+                      <h3>{k}</h3>;
+                    })}
                 </ul>
               </Category>
             );

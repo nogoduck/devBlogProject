@@ -95,12 +95,17 @@ export const Category = styled.div`
     /* border: 1px solid black; */
     border-radius: 4px;
     padding: 8px 32px 4px 32px;
+    margin: 0px;
+    padding: 0px;
   }
 
   & li {
     /* list-style: decimal; //숫자 */
-    list-style: inside; //둥근원
+    /* list-style: inside; //둥근원 */
+    list-style: none; //제거
     margin-bottom: 4px;
+    margin: 0px;
+    padding: 0px;
   }
 `;
 
