@@ -118,14 +118,11 @@ export const Right = styled.div`
 `;
 
 export const ProfileMenu = styled.div`
-  //hover시 나타나는 효과가 적용되어 있기에 너비또는 높이 변경시 반드시
-  //App.css의 #showProfileMenu 의 높이도 알맞게 수정해주어야함, 너비는 수정이 불가능에 가까움
   position: absolute;
   width: 138px;
-  height: 150px;
   border-radius: 0 0 10px 10px;
   background-color: #3498db;
-  top: 0;
+  top: 60px;
   right: 60px;
   border: 1px solid #3498db;
   border-width: 0 1px 1px 1px;
@@ -136,21 +133,28 @@ export const ProfileMenu = styled.div`
   z-index: 10;
 
   & ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
   & li {
     padding: 6px 0;
     cursor: pointer;
-  }
-  & hr {
     width: 100%;
-    margin: 0px;
-    padding: 0px;
-    border: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    text-align: center;
+    transition: 0.2s;
+    color: #d2dae2;
+  }
+  & li:last-child {
+    border: none;
+  }
+  & li:last-child:hover {
+    border: none;
+    border-radius: 0 0 10px 10px;
+    color: #fff;
+  }
+  & li:hover {
+    box-shadow: 0px 0px 5px 3px #2980b9 inset;
+    color: #fff;
   }
 `;
 

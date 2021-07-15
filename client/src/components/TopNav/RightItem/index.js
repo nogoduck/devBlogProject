@@ -1,4 +1,4 @@
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
@@ -70,12 +70,12 @@ function RightItem({ history }) {
       });
   };
 
-  const inMouse = () => {
-    setShowProfileMenu(true);
+  const onClickProfileMenu = () => {
+    setShowProfileMenu(false);
   };
 
-  const outMouse = () => {
-    setShowProfileMenu(false);
+  const onToggleProfileMenu = () => {
+    setShowProfileMenu((prev) => !prev);
   };
 
   //리덕스에 있는 로그인 상태에 따라 상단바를 변경함
@@ -119,7 +119,7 @@ function RightItem({ history }) {
 
         <Profile
           style={{ fontSize: "16px" }}
-          onMouseOver={inMouse}
+          onClick={onToggleProfileMenu}
           id={showProfileMenu ? "showProfileMenu" : ""}
         >
           <Gravatar
@@ -137,12 +137,14 @@ function RightItem({ history }) {
         </Profile>
         <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
         {showProfileMenu && (
-          <ProfileMenu onMouseOut={outMouse}>
-            <__space__ />
+          <ProfileMenu>
             <ul>
-              <li>계정관리</li>
-              {/* <hr /> */}
-              <li>현재시간</li>
+              <Link to="/profile">
+                <li>계정관리</li>
+              </Link>
+              <Link to="/clock">
+                <li>현재시간</li>
+              </Link>
             </ul>
           </ProfileMenu>
         )}
