@@ -51,14 +51,13 @@ export const SubmitButton = styled.button`
   border-radius: 3px;
   background: #cce6ff;
   border: 1px solid #c3cfe0;
-  transition: 0.2s;
+  transition: 0.1s;
   &:hover {
     cursor: pointer;
     box-shadow: 0px 0px 10px 1px #1e90ff inset;
   }
   &:active {
-    background: #808e9b;
-    box-shadow: 0px 0px 3px 1px #ea8685 inset;
+    background: #1e90ff;
     color: #fff;
   }
 `;
@@ -71,15 +70,14 @@ export const CancelButton = styled.button`
   border-radius: 3px;
   background: #ffe3de;
   border: 1px solid #c3cfe0;
-  transition: 0.2s;
+  transition: 0.1s;
   margin-right: 10px;
   &:hover {
     cursor: pointer;
     box-shadow: 0px 0px 10px 1px #ff6348 inset;
   }
   &:active {
-    background: #808e9b;
-    box-shadow: 0px 0px 3px 1px #ea8685 inset;
+    background: #ff6348;
     color: #fff;
   }
 `;
