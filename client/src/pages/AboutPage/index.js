@@ -9,8 +9,9 @@ import { Container, Input, Label, SubmitButton, CancelButton } from "./styled";
 
 function AboutPage() {
   const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false);
-
+  const [showCreateListModal, setShowCreateListModal] = useState(false);
   const [category, setCategory, onChangeCategory] = useInput();
+  const [list, setList, onChangeList] = useInput();
   const [todo, setTodo] = useState();
 
   const onSubmitCategory = () => {
@@ -34,12 +35,42 @@ function AboutPage() {
         });
     }
   };
+  const onSubmitList = () => {
+    if (list === "") {
+      alert("내용을 입력해주세요");
+    } else {
+      const args = {
+        title: list,
+      };
+      axios
+        .post("/api/todo/list/create", args)
+        .then((res) => {
+          console.log(res);
+          //응답이 오면 내용 초기화 후 모달 닫기
+          setList("");
+          onCloseCreateListModal();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
+  //카테고리 추가 모달 토글
   const onClickCreateCategoryModal = () => {
     setShowCreateCategoryModal((prev) => !prev);
   };
+  //카테고리 추가 모달 닫기
   const onCloseCreateCategoryModal = () => {
     setShowCreateCategoryModal(false);
+  };
+  //리스트 추가 모달 토글
+  const onClickCreateListModal = () => {
+    setShowCreateListModal((prev) => !prev);
+  };
+  //리스트 추가 모달 닫기
+  const onCloseCreateListModal = () => {
+    setShowCreateListModal(false);
   };
 
   useEffect(() => {
@@ -59,14 +90,26 @@ function AboutPage() {
     if (!showCreateCategoryModal) {
       setCategory("");
     }
-  });
+    if (!showCreateListModal) {
+      setList("");
+    }
+  }, [showCreateCategoryModal, showCreateListModal]);
 
-  console.log("todo > ", todo);
+  //---------------------------[ 수정 예정 사항 ]---------------------
+  //input을 사용할 시 랜더링이 자주 일어나기 떄문에 따로 뺴줄 예정
+  // console.log("todo > ", todo);
+  //-----------------------------------------------------------
   return (
     <Container>
       <button onClick={onClickCreateCategoryModal}>카테고리 추가+</button>
+      <button onClick={onClickCreateListModal}>리스트 추가+</button>
 
-      {/* <Modal show={showCreateCategoryModal}>ddd</Modal> */}
+      <hr />
+      {todo &&
+        todo.category.map((v) => {
+          return <div>{v.title}</div>;
+        })}
+
       {showCreateCategoryModal && (
         <Modal
           useCloseButton={false}
@@ -86,13 +129,26 @@ function AboutPage() {
           ></Input>
         </Modal>
       )}
-      <button>리스트 추가+</button>
 
-      <hr />
-      {todo &&
-        todo.category.map((v) => {
-          return <div>{v.title}</div>;
-        })}
+      {showCreateListModal && (
+        <Modal
+          useCloseButton={false}
+          show={showCreateListModal}
+          close={onClickCreateListModal}
+          style={{ padding: "0px 20px 20px 20px", width: "400px" }}
+        >
+          <br />
+          <SubmitButton onClick={onSubmitList}>확인</SubmitButton>
+          <CancelButton onClick={onCloseCreateListModal}>취소</CancelButton>
+          <Label for="add_list">메모 추가</Label>
+          <Input
+            type="text"
+            id="add_list"
+            value={list}
+            onChange={onChangeList}
+          ></Input>
+        </Modal>
+      )}
     </Container>
   );
 }
