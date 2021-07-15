@@ -25,7 +25,7 @@ export const Input = styled.input`
   padding: 5px 0px 5px 7px;
   font-size: 20px;
   border-radius: 3px;
-  border: 1px solid #7f8fa6;
+  border: 1px solid #c3cfe0;
   transition: 0.3s;
   /* margin-top: 4px; */
   &:focus {
@@ -49,12 +49,12 @@ export const SubmitButton = styled.button`
   width: 80px;
   height: 30px;
   border-radius: 3px;
-  background: #dff9fb;
-  border: 1px solid #7f8fa6;
-  transition: 0.3s;
+  background: #cce6ff;
+  border: 1px solid #c3cfe0;
+  transition: 0.2s;
   &:hover {
-    background: #d2dae2;
     cursor: pointer;
+    box-shadow: 0px 0px 10px 1px #1e90ff inset;
   }
   &:active {
     background: #808e9b;
@@ -69,13 +69,13 @@ export const CancelButton = styled.button`
   width: 80px;
   height: 30px;
   border-radius: 3px;
-  background: #dff9fb;
-  border: 1px solid #7f8fa6;
-  transition: 0.3s;
+  background: #ffe3de;
+  border: 1px solid #c3cfe0;
+  transition: 0.2s;
   margin-right: 10px;
   &:hover {
-    background: #d2dae2;
     cursor: pointer;
+    box-shadow: 0px 0px 10px 1px #ff6348 inset;
   }
   &:active {
     background: #808e9b;
