@@ -11,6 +11,7 @@ import {
   LogoutButton,
   ProfileMenu,
   Right,
+  __space__,
 } from "./styled";
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
@@ -119,7 +120,7 @@ function RightItem({ history }) {
         <Profile
           style={{ fontSize: "16px" }}
           onMouseOver={inMouse}
-          // onMouseOut={outMouse}
+          id={showProfileMenu ? "showProfileMenu" : ""}
         >
           <Gravatar
             email={isLogin.authStatus.email}
@@ -136,8 +137,13 @@ function RightItem({ history }) {
         </Profile>
         <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
         {showProfileMenu && (
-          <ProfileMenu onMouseOver={inMouse} onMouseOut={outMouse}>
-            계정 관리
+          <ProfileMenu onMouseOut={outMouse}>
+            <__space__ />
+            <ul>
+              <li>계정관리</li>
+              {/* <hr /> */}
+              <li>현재시간</li>
+            </ul>
           </ProfileMenu>
         )}
       </Right>
