@@ -4,6 +4,20 @@ const router = express.Router();
 
 const { Todo } = require("../models/Todo");
 
+router.get("/", (req, res) => {
+  Todo.find()
+    .then((category) => {
+      return res.status(200).json({
+        category,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err,
+      });
+    });
+});
+
 router.post("/list/check", (req, res) => {
   const variable = req.body;
   console.log("todo variable > ", variable);

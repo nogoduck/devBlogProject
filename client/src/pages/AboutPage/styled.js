@@ -54,10 +54,10 @@ export const SubmitButton = styled.button`
   transition: 0.1s;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 10px 1px #1e90ff inset;
+    box-shadow: 0px 0px 5px 1px #73b7fa inset;
   }
   &:active {
-    background: #1e90ff;
+    background: #73b7fa;
     color: #fff;
   }
 `;
@@ -74,10 +74,10 @@ export const CancelButton = styled.button`
   margin-right: 10px;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 10px 1px #ff6348 inset;
+    box-shadow: 0px 0px 5px 1px #ff9785 inset;
   }
   &:active {
-    background: #ff6348;
+    background: #ff9785;
     color: #fff;
   }
 `;
