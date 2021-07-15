@@ -109,6 +109,19 @@ router.delete("/category/delete", (req, res) => {
   });
 });
 
+router.post("/list/create", (req, res) => {
+  const variable = new List(req.body);
+  console.log("List variable > ", variable);
+
+  variable.save((err, data) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({
+      success: true,
+      message: "List 저장 완료",
+    });
+  });
+});
+
 router.post("/category/create", (req, res) => {
   const variable = new Todo(req.body);
   console.log("todo variable > ", variable);

@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ListSchema = new Schema({
+  refId: {
+    type: String,
+    required: true,
+    default: "null",
+  },
   memo: {
     type: String,
     required: true,
@@ -25,7 +30,7 @@ const TodoSchema = new Schema(
       type: String,
       default: "제목 없음",
     },
-    list: [ListSchema],
+    list: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
     createdAt: {
       type: Date,
       required: true,

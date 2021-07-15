@@ -54,7 +54,7 @@ export function changeTime(getDate) {
 
     //1분 미만, 초 단위는 오차가 조금 있어서 분으로 대체
   } else {
-    return Math.ceil(secondsDiff) + "분 전";
+    return Math.ceil(secondsDiff) + "초 전";
   }
 
   // 조건부의 숫자는 밀리초를 쪼개서 결과를 반환했습니다.

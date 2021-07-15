@@ -131,8 +131,8 @@ export const ProfileMenu = styled.div`
   font-weight: 12px;
   color: #fff;
   z-index: 10;
-
-  & ul {
+  & a {
+    color: #fff;
   }
 
   & li {
@@ -142,7 +142,7 @@ export const ProfileMenu = styled.div`
     border-bottom: 1px solid #fff;
     text-align: center;
     transition: 0.2s;
-    color: #d2dae2;
+    color: #fff;
   }
   & li:last-child {
     border: none;
