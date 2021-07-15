@@ -1,6 +1,6 @@
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import {
   Right,
@@ -80,6 +80,12 @@ function RightItem({ history }) {
     console.log("토글해야  한다");
     setShowProfileMenu((prev) => !prev);
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {
+      setShowProfileMenu(false);
+    });
+  }, []);
 
   //리덕스에 있는 로그인 상태에 따라 상단바를 변경함
   if (isLogin.authStatus && !isLogin.authStatus.isAuth) {
