@@ -22,10 +22,10 @@ const listSchema = new Schema({
 const TodoSchema = new Schema(
   {
     title: {
-      type: [String],
+      type: String,
       default: "제목 없음",
     },
-    list: listSchema,
+    list: [listSchema],
     createdAt: {
       type: Date,
       required: true,
