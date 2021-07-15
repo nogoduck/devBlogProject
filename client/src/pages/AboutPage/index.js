@@ -127,7 +127,9 @@ function AboutPage({ history }) {
   //-----------------------------------------------------------
   return (
     <Container>
-      <button onClick={onClickCreateCategoryModal}>카테고리 추가+</button>
+      <CategoryButton onClick={onClickCreateCategoryModal}>
+        카테고리 추가
+      </CategoryButton>
 
       <hr />
       <CategoryContainer>

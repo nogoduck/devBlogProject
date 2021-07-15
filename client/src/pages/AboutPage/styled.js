@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position:relative;
   & hr {
     width: 100%;
     padding:0px;
@@ -110,7 +111,17 @@ export const CategoryId = styled.div`
 `;
 
 export const CategoryButton = styled.button`
-  width: 300px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 128px;
+  height: 64px;
+  font-size: 20px;
+  font-weight: 800;
+  /* background: transparent; */
+  /* border: none; */
+  /* display: flex; */
+  /* width: 300px;
   font-weight: 800;
   height: 30px;
   border-radius: 3px;
@@ -127,7 +138,7 @@ export const CategoryButton = styled.button`
     background: #808e9b;
     box-shadow: 0px 0px 3px 1px #ea8685 inset;
     color: #fff;
-  }
+  } */
 `;
 
 export const ListButton = styled.button`

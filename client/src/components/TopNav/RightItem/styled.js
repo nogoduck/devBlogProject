@@ -5,8 +5,9 @@ export const LinkToGitHub = styled.a`
   color: #fff;
   position: absolute;
   font-size: 16px;
-  right: 220px;
+  right: 230px;
   top: 20px;
+  width: 70px;
   transition: 0.2s 0s ease-in-out;
   &:hover {
     color: #fff;
@@ -108,4 +109,23 @@ export const LogoutButton = styled.div`
     box-shadow: 0px 0px 5px 3px #151d22 inset;
     color: #fff;
   }
+`;
+
+export const Right = styled.div`
+  float: right;
+  position: relative;
+`;
+
+export const ProfileMenu = styled.div`
+  color: green;
+  position: absolute;
+  width: 138px;
+  height: 200px;
+  border-radius: 0 0 10px 10px;
+  background-color: #3498db;
+  top: 60px;
+  right: 60px;
+  border: 1px solid #3498db;
+  border-width: 0 1px 1px 1px;
+  transition: 0.2s 0s ease-in-out;
 `;

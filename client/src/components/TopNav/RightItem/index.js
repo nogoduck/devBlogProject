@@ -9,6 +9,8 @@ import {
   SignInButton,
   Profile,
   LogoutButton,
+  ProfileMenu,
+  Right,
 } from "./styled";
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
@@ -20,11 +22,13 @@ function RightItem({ history }) {
   //로그인 모달 변수
   const isLogin = useSelector((state) => state.user);
 
-  console.log("isLogin => ", isLogin);
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [userState] = useState("사용자 정보 없음");
   //회원가입 모달 변수
   const [showSignUpModal, setShowSignUpModal] = useState(false);
+
+  //프로필 메뉴 모달 변수
+  const [showProfileMenu, setShowProfileMenu] = useState(true);
 
   const onToggleSignIn = () => {
     setShowSignInModal((prev) => !prev);
@@ -65,12 +69,18 @@ function RightItem({ history }) {
       });
   };
 
-  console.log("isLogin.authStatus : ", isLogin.authStatus);
+  const inMouse = () => {
+    setShowProfileMenu(true);
+  };
+
+  const outMouse = () => {
+    setShowProfileMenu(false);
+  };
 
   //리덕스에 있는 로그인 상태에 따라 상단바를 변경함
   if (isLogin.authStatus && !isLogin.authStatus.isAuth) {
     return (
-      <div style={{ float: "right" }}>
+      <Right>
         {/* 깃허브 링크 */}
         <LinkToGitHub href="https://github.com/nogoduck" target="_blank">
           GitHub
@@ -93,35 +103,44 @@ function RightItem({ history }) {
           이미 계정이 있습니까?&nbsp;
           <span onClick={onClickSignInButton}>로그인 &raquo; </span>
         </SignUpModal>
-      </div>
+      </Right>
     );
   } else {
     return (
-      <div>
-        <div style={{ float: "right" }}>
-          {/* 깃허브 링크 */}
-          <LinkToGitHub href="https://github.com/nogoduck" target="_blank">
-            GitHub
-            <BiLinkExternal />
-          </LinkToGitHub>
+      <Right>
+        {/* 깃허브 링크 */}
+        <LinkToGitHub href="https://github.com/nogoduck" target="_blank">
+          GitHub
+          <BiLinkExternal
+            style={{ fontSize: "16px", display: "inline-block" }}
+          />
+        </LinkToGitHub>
 
-          <Profile style={{ fontSize: "16px" }}>
-            <Gravatar
-              email={isLogin.authStatus.email}
-              size={30}
-              default="wavatar"
-              style={{
-                width: "30px",
-                height: "30px",
-                marginRight: "5px",
-                borderRadius: "25%",
-              }}
-            />
-            {isLogin.authStatus.name}
-          </Profile>
-          <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
-        </div>
-      </div>
+        <Profile
+          style={{ fontSize: "16px" }}
+          onMouseOver={inMouse}
+          // onMouseOut={outMouse}
+        >
+          <Gravatar
+            email={isLogin.authStatus.email}
+            size={30}
+            default="wavatar"
+            style={{
+              width: "30px",
+              height: "30px",
+              marginRight: "5px",
+              borderRadius: "25%",
+            }}
+          />
+          {isLogin.authStatus.name}
+        </Profile>
+        <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
+        {showProfileMenu && (
+          <ProfileMenu onMouseOver={inMouse} onMouseOut={outMouse}>
+            계정 관리
+          </ProfileMenu>
+        )}
+      </Right>
     );
   }
 }
