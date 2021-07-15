@@ -3,19 +3,20 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import {
+  Right,
   LinkToGitHub,
   Button,
   SignUpButton,
   SignInButton,
   Profile,
   LogoutButton,
+  ProfileMenuContainer,
   ProfileMenu,
-  Right,
-  __space__,
 } from "./styled";
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
 
+import Clock from "../../Clock";
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
 
@@ -70,11 +71,13 @@ function RightItem({ history }) {
       });
   };
 
-  const onClickProfileMenu = () => {
+  const onCloseProfileMenu = () => {
+    console.log("닫아야 한다");
     setShowProfileMenu(false);
   };
 
   const onToggleProfileMenu = () => {
+    console.log("토글해야  한다");
     setShowProfileMenu((prev) => !prev);
   };
 
@@ -137,16 +140,18 @@ function RightItem({ history }) {
         </Profile>
         <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
         {showProfileMenu && (
-          <ProfileMenu>
-            <ul>
-              <Link to="/profile">
-                <li>계정관리</li>
-              </Link>
-              <Link to="/clock">
-                <li>현재시간</li>
-              </Link>
-            </ul>
-          </ProfileMenu>
+          <ProfileMenuContainer onClick={onCloseProfileMenu}>
+            <ProfileMenu>
+              <ul>
+                <Link to="/profile">
+                  <li>계정관리</li>
+                </Link>
+                <li>
+                  <Clock />
+                </li>
+              </ul>
+            </ProfileMenu>
+          </ProfileMenuContainer>
         )}
       </Right>
     );

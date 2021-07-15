@@ -158,8 +158,11 @@ export const ProfileMenu = styled.div`
   }
 `;
 
-export const __space__ = styled.div`
-  height: 60px;
-  border: 1px solid black;
-  /* width: 100%;s */
+export const ProfileMenuContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1024;
 `;
