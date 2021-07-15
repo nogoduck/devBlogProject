@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const listSchema = new Schema({
+const ListSchema = new Schema({
   memo: {
     type: String,
     required: true,
@@ -25,8 +25,7 @@ const TodoSchema = new Schema(
       type: String,
       default: "제목 없음",
     },
-    list: [listSchema],
-    dump: Number,
+    list: [ListSchema],
     createdAt: {
       type: Date,
       required: true,
@@ -37,5 +36,6 @@ const TodoSchema = new Schema(
 );
 
 const Todo = mongoose.model("Todo", TodoSchema);
+const List = mongoose.model("List", ListSchema);
 
-module.exports = { Todo };
+module.exports = { Todo, List };

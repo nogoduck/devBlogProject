@@ -140,9 +140,9 @@ function AboutPage({ history }) {
                   ＋
                 </ListButton>
 
-                <hr />
+                {v.list.length > 0 && <hr />}
                 <ListContainer>
-                  {v.list &&
+                  {v.list.length > 0 &&
                     v.list.map((k) => {
                       return <List>{k.memo && k.memo}</List>;
                     })}
