@@ -54,40 +54,23 @@ router.post("/list/create", (req, res) => {
     list: { memo: variable.memo },
   };
 
-  // -------------------------------------
-
-  const Category = Todo.findOne({ _id: variable._id })
-    .then((res) => {
-      console.log("success");
-      console.log(res);
-      console.log("memo >> ", Category.memo);
-    })
-    .catch((err) => {
-      console.log("failed");
-      console.log(err);
-    });
-  console.log("find >> ", Category);
-
-  Category.list = {
-    memo: "당근사기",
-  };
-
-  Category.save((err, data) => {
-    if (err) throw err;
-    console.log("data >> ", data);
-  });
-
-  // Todo.findOneAndUpdate(filter, update, { new: true }, (err, doc) => {
-  //   console.log("doc:: ", doc);
-  //   if (err)
-  //     return res.status(500).json({
-  //       message: err,
-  //     });
-  //   return res.status(200).json({
-  //     success: true,
-  //     data: doc,
-  //   });
-  // });
+  Todo.findOneAndUpdate(
+    filter,
+    { $set: { "list.$.memo": "족발삶기" } },
+    { new: true },
+    (err, doc) => {
+      console.log("doc:: ", doc);
+      if (err) {
+        return res.status(500).json({
+          message: err,
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        data: doc,
+      });
+    }
+  );
 });
 
 router.delete("/category/delete", (req, res) => {

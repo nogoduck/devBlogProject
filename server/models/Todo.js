@@ -26,6 +26,7 @@ const TodoSchema = new Schema(
       default: "제목 없음",
     },
     list: [listSchema],
+    dump: Number,
     createdAt: {
       type: Date,
       required: true,
