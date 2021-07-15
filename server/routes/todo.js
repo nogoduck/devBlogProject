@@ -47,16 +47,26 @@ router.delete("/list/delete", (req, res) => {
 router.post("/list/create", (req, res) => {
   //하위 문서에 저장한다
   const variable = req.body;
-  console.log("todo variable > ", variable);
+  console.log("variable >> ", variable);
 
   const filter = { _id: variable._id };
   const update = {
-    list: { memo: variable.memo },
+    list: { memo: variable.list },
   };
 
+  console.log("filter >> ", filter);
+  console.log("update >> ", update);
+
+  //변수로 넣으면 값이 들어가지 않지만 직접 작성하면 하위 문서에도 문제없이 삽입된다
   Todo.findOneAndUpdate(
     filter,
-    { $set: { "list.$.memo": "족발삶기" } },
+    {
+      list: [
+        { memo: "들어가라 데이터1" },
+        { memo: "들어가라 데이터2" },
+        { memo: "들어가라 데이터3" },
+      ],
+    },
     { new: true },
     (err, doc) => {
       console.log("doc:: ", doc);
