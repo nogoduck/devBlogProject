@@ -31,6 +31,57 @@ router.post("/list/check", (req, res) => {
   });
 });
 
+router.patch("/list/edit", (req, res) => {
+  const { _id, memo } = req.body;
+
+  const filter = { _id: _id };
+  const update = { memo: memo };
+
+  console.log("filter >> ", filter);
+  console.log("update >> ", update);
+
+  // const todo = new Todo();
+  // todo.list.push({ memo: memo });
+
+  const findUser = Todo.findById(_id)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  findUser.list.push({ memo: memo });
+
+  todo.save((err, doc) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(doc);
+  });
+  //   Todo.findById(_id)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+});
+
+// Todo.findOneAndUpdate(filter, {}, { new: false }, (err, doc) => {
+//   console.log("doc:: ", doc);
+//   if (err) {
+//     return res.status(500).json({
+//       message: err,
+//     });
+//   }
+//   return res.status(200).json({
+//     success: true,
+//     data: doc,
+//   });
+// });
+// });
+
 router.delete("/list/delete", (req, res) => {
   const variable = req.body;
   console.log("todo variable > ", variable);
@@ -70,7 +121,8 @@ router.post("/category/create", (req, res) => {
   });
 });
 
-router.post("/list/createall", (req, res) => {
+//기존에 todo리스트도 모두 그대로 저장하기 때문에 all키워드를 붙였다
+router.post("/list/createall ", (req, res) => {
   //하위 문서에 저장한다
   const variable = req.body;
   console.log("variable >> ", variable);

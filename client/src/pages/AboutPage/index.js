@@ -16,6 +16,9 @@ import {
   CategoryContainer,
   CategoryButton,
   ListButton,
+  ListContainer,
+  List,
+  Title,
 } from "./styled";
 
 function AboutPage({ history }) {
@@ -132,21 +135,22 @@ function AboutPage({ history }) {
           todo.category.map((v) => {
             return (
               <Category>
-                {v.title}
+                <Title>{v.title}</Title>
                 <ListButton onClick={onClickCreateListModal} value={v._id}>
                   ＋
                 </ListButton>
 
-                {/* <h3>{v.list}</h3> */}
-                <ul>
+                <hr />
+                <ListContainer>
                   {v.list &&
                     v.list.map((k) => {
-                      <h3>{k}</h3>;
+                      return <List>{k.memo && k.memo}</List>;
                     })}
-                </ul>
+                </ListContainer>
               </Category>
             );
           })}
+        <Category>sdafafsd</Category>
       </CategoryContainer>
 
       {showCreateCategoryModal && (

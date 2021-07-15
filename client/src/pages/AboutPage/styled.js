@@ -7,6 +7,8 @@ export const Container = styled.div`
   align-items: center;
   & hr {
     width: 100%;
+    padding:0px;
+    margin:0px;
   }
 
   }
@@ -87,28 +89,21 @@ export const Category = styled.div`
   border-radius: 5px;
   background-color: transparent;
   box-shadow: 0px 0px 5px 1px #7f8fa6;
-  padding: 6px;
   margin: 8px;
   position: relative;
+  min-width: 200px;
+  max-width: 300px;
 
-  & ul {
-    /* border: 1px solid black; */
-    border-radius: 4px;
-    padding: 8px 32px 4px 32px;
-    margin: 0px;
-    padding: 0px;
-  }
-
-  & li {
-    /* list-style: decimal; //숫자 */
-    /* list-style: inside; //둥근원 */
-    list-style: none; //제거
-    margin-bottom: 4px;
-    margin: 0px;
-    padding: 0px;
   }
 `;
 
+export const ListContainer = styled.div`
+  margin: 4px 8px;
+`;
+
+export const List = styled.div`
+  margin: 4px 0;
+`;
 export const CategoryId = styled.div`
   display: none;
   color: green;
@@ -139,7 +134,7 @@ export const ListButton = styled.button`
   color: #747d8c;
   position: absolute;
   right: 8px;
-  top: 0px;
+  top: -2px;
   width: 30px;
   height: 30px;
   font-size: 24px;
@@ -151,4 +146,13 @@ export const ListButton = styled.button`
     color: #000;
     cursor: pointer;
   }
+`;
+
+export const Title = styled.div`
+  color: red;
+  /* border: 1px solid black; */
+  margin: 6px 27px 6px 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
