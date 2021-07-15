@@ -5,6 +5,8 @@ import axios from "axios";
 import useInput from "../../hooks/useInput";
 import Modal from "../../components/Modal";
 
+import { MdLibraryAdd } from "react-icons/md";
+
 import {
   Container,
   Input,
@@ -12,9 +14,9 @@ import {
   SubmitButton,
   CancelButton,
   Category,
-  CategoryId,
+  CategoryCreate,
   CategoryContainer,
-  CategoryButton,
+  CategoryAdd,
   ListButton,
   ListContainer,
   List,
@@ -44,7 +46,7 @@ function AboutPage({ history }) {
           //응답이 오면 내용 초기화 후 모달 닫기
           setCategory("");
           onCloseCreateCategoryModal();
-          history.push("/menu/about");
+          initialRequest();
         })
         .catch((err) => {
           console.log(err);
@@ -74,6 +76,18 @@ function AboutPage({ history }) {
     }
   };
 
+  const initialRequest = () => {
+    axios
+      .get("/api/todo")
+      .then(({ data }) => {
+        console.log("data > ", data);
+        setTodo(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   //카테고리 추가 모달 토글
   const onClickCreateCategoryModal = () => {
     setShowCreateCategoryModal((prev) => !prev);
@@ -94,15 +108,7 @@ function AboutPage({ history }) {
   };
 
   useEffect(() => {
-    axios
-      .get("/api/todo")
-      .then(({ data }) => {
-        console.log(data);
-        setTodo(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    initialRequest();
   }, []);
 
   useEffect(() => {
@@ -127,10 +133,6 @@ function AboutPage({ history }) {
   //-----------------------------------------------------------
   return (
     <Container>
-      <CategoryButton onClick={onClickCreateCategoryModal}>
-        카테고리 추가
-      </CategoryButton>
-
       <hr />
       <CategoryContainer>
         {todo &&
@@ -139,7 +141,7 @@ function AboutPage({ history }) {
               <Category>
                 <Title>{v.title}</Title>
                 <ListButton onClick={onClickCreateListModal} value={v._id}>
-                  ＋
+                  +
                 </ListButton>
 
                 {v.list.length > 0 && <hr />}
@@ -152,7 +154,10 @@ function AboutPage({ history }) {
               </Category>
             );
           })}
-        <Category>sdafafsd</Category>
+        <CategoryCreate onClick={onClickCreateCategoryModal}>
+          <CategoryAdd>카테고리 추가</CategoryAdd>
+          <MdLibraryAdd style={{ fontSize: "48px", marginTop: "4px" }} />
+        </CategoryCreate>
       </CategoryContainer>
 
       {showCreateCategoryModal && (

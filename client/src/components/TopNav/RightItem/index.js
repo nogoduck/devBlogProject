@@ -30,7 +30,7 @@ function RightItem({ history }) {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
 
   //프로필 메뉴 모달 변수
-  const [showProfileMenu, setShowProfileMenu] = useState(true);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const onToggleSignIn = () => {
     setShowSignInModal((prev) => !prev);
