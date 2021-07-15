@@ -8,15 +8,7 @@ export const Container = styled.div`
   & hr {
     width: 100%;
   }
-  & ul {
-    border: 1px solid black;
-    border-radius: 4px;
-    padding: 8px 32px 4px 32px;
-  }
 
-  & li {
-    list-style: decimal;
-    margin-bottom: 4px;
   }
 `;
 
@@ -79,5 +71,79 @@ export const CancelButton = styled.button`
   &:active {
     background: #ff9785;
     color: #fff;
+  }
+`;
+
+export const CategoryContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+export const Category = styled.div`
+  border: 1px solid #808e9b;
+  display: inline-block;
+  color: #000;
+  border-radius: 5px;
+  background-color: transparent;
+  box-shadow: 0px 0px 5px 1px #7f8fa6;
+  padding: 6px;
+  margin: 8px;
+  position: relative;
+
+  & ul {
+    /* border: 1px solid black; */
+    border-radius: 4px;
+    padding: 8px 32px 4px 32px;
+  }
+
+  & li {
+    /* list-style: decimal; //숫자 */
+    list-style: inside; //둥근원
+    margin-bottom: 4px;
+  }
+`;
+
+export const CategoryId = styled.div`
+  display: none;
+  color: green;
+`;
+
+export const CategoryButton = styled.button`
+  width: 300px;
+  font-weight: 800;
+  height: 30px;
+  border-radius: 3px;
+  background: #dff9fb;
+  border: 1px solid #7f8fa6;
+  transition: 0.3s;
+  position: absolute;
+  bottom: 35px;
+  &:hover {
+    background: #d2dae2;
+    cursor: pointer;
+  }
+  &:active {
+    background: #808e9b;
+    box-shadow: 0px 0px 3px 1px #ea8685 inset;
+    color: #fff;
+  }
+`;
+
+export const ListButton = styled.button`
+  color: #747d8c;
+  position: absolute;
+  right: 8px;
+  top: 0px;
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  font-weight: 800;
+  border: none;
+  background-color: transparent;
+  transition: 0.1s;
+  &:hover {
+    color: #000;
+    cursor: pointer;
   }
 `;

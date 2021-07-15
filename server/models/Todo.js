@@ -2,22 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const listSchema = new Schema({
-  value: {
-    type: Number,
-  },
-  valuestring: {
+  memo: {
     type: String,
-    default: "test",
-  },
-  item: {
-    type: String,
+    required: true,
     default: "할 일을 입력해주세요",
   },
-  success: {
+  succeed: {
     type: Boolean,
+    required: true,
     default: false,
   },
-  createdAndUpdatedAt: {
+  createdAt: {
     type: Date,
     required: true,
     default: Date.now,
@@ -31,19 +26,7 @@ const TodoSchema = new Schema(
       default: "제목 없음",
     },
     list: listSchema,
-    testboolean: {
-      type: Boolean,
-      default: false,
-    },
-    testboolean2: {
-      type: Boolean,
-      default: true,
-    },
-    teststring: {
-      type: String,
-      default: "String doc",
-    },
-    createdAndUpdatedAt: {
+    createdAt: {
       type: Date,
       required: true,
       default: Date.now,

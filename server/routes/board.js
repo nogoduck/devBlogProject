@@ -44,6 +44,7 @@ router.post("/update", (req, res) => {
     });
   });
 });
+
 router.post("/totalcount", (req, res) => {
   Board.count((err, count) => {
     if (err) {

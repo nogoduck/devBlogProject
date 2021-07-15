@@ -5,14 +5,26 @@ import axios from "axios";
 import useInput from "../../hooks/useInput";
 import Modal from "../../components/Modal";
 
-import { Container, Input, Label, SubmitButton, CancelButton } from "./styled";
+import {
+  Container,
+  Input,
+  Label,
+  SubmitButton,
+  CancelButton,
+  Category,
+  CategoryId,
+  CategoryContainer,
+  CategoryButton,
+  ListButton,
+} from "./styled";
 
-function AboutPage() {
+function AboutPage({ history }) {
   const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false);
   const [showCreateListModal, setShowCreateListModal] = useState(false);
   const [category, setCategory, onChangeCategory] = useInput();
   const [list, setList, onChangeList] = useInput();
   const [todo, setTodo] = useState();
+  const [clickCategoryId, setClickCategoryId] = useState("");
 
   const onSubmitCategory = () => {
     if (category === "") {
@@ -29,6 +41,7 @@ function AboutPage() {
           //응답이 오면 내용 초기화 후 모달 닫기
           setCategory("");
           onCloseCreateCategoryModal();
+          history.push("/menu/about");
         })
         .catch((err) => {
           console.log(err);
@@ -40,7 +53,8 @@ function AboutPage() {
       alert("내용을 입력해주세요");
     } else {
       const args = {
-        title: list,
+        _id: clickCategoryId,
+        memo: list,
       };
       axios
         .post("/api/todo/list/create", args)
@@ -49,6 +63,7 @@ function AboutPage() {
           //응답이 오면 내용 초기화 후 모달 닫기
           setList("");
           onCloseCreateListModal();
+          history.push("/menu/about");
         })
         .catch((err) => {
           console.log(err);
@@ -65,7 +80,9 @@ function AboutPage() {
     setShowCreateCategoryModal(false);
   };
   //리스트 추가 모달 토글
-  const onClickCreateListModal = () => {
+  const onClickCreateListModal = (e) => {
+    //현재 클릭된 카테고리를 넣어준다
+    setClickCategoryId(e.target.value);
     setShowCreateListModal((prev) => !prev);
   };
   //리스트 추가 모달 닫기
@@ -102,13 +119,31 @@ function AboutPage() {
   return (
     <Container>
       <button onClick={onClickCreateCategoryModal}>카테고리 추가+</button>
-      <button onClick={onClickCreateListModal}>리스트 추가+</button>
 
       <hr />
-      {todo &&
-        todo.category.map((v) => {
-          return <div>{v.title}</div>;
-        })}
+      <CategoryContainer>
+        {todo &&
+          todo.category.map((v) => {
+            return (
+              <Category>
+                {v.title}
+                <ListButton onClick={onClickCreateListModal} value={v._id}>
+                  ＋
+                </ListButton>
+
+                <ul>
+                  <li>working list1</li>
+                  <li>working list2</li>
+                  <li>working list3</li>
+                  <li>working list4</li>
+                  <li>working list5</li>
+                  <li>working list6</li>
+                  <li>working list7</li>
+                </ul>
+              </Category>
+            );
+          })}
+      </CategoryContainer>
 
       {showCreateCategoryModal && (
         <Modal

@@ -48,11 +48,20 @@ router.post("/list/create", (req, res) => {
   const variable = req.body;
   console.log("todo variable > ", variable);
 
-  variable.save((err, data) => {
-    if (err) return res.json({ success: false, err });
+  const filter = { _id: variable._id };
+  const update = {
+    list: { memo: variable.memo },
+  };
+
+  Todo.findOneAndUpdate(filter, update, { new: true }, (err, doc) => {
+    console.log("doc:: ", doc);
+    if (err)
+      return res.status(500).json({
+        message: err,
+      });
     return res.status(200).json({
       success: true,
-      message: "todo 항목 저장 완료",
+      data: doc,
     });
   });
 });
