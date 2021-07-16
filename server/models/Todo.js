@@ -31,6 +31,12 @@ const TodoSchema = new Schema(
       default: "제목 없음",
     },
     list: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
+    // list2: [
+    //   {
+    //     Type: String,
+    //     default: "null",
+    //   },
+    // ],
     createdAt: {
       type: Date,
       required: true,

@@ -5,9 +5,25 @@ const router = express.Router();
 const { Todo, List } = require("../models/Todo");
 
 router.get("/", (req, res) => {
+  const listArr = [];
+  listArr.push({ value: "hi" });
+  console.log(listArr);
   Todo.find()
     .then((category) => {
-      console.log("find >> ", category);
+      // console.log("find >> ", category);
+      category.map((v) => {
+        console.log("Map origin > ", v);
+        console.log("Map > ", v._id);
+        List.find({ refId: v._id })
+          .sort({ createdAt: 1 })
+          .then((res) => {
+            v.list2.push(res);
+            console.log("arr > ", v);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
       return res.status(200).json({
         category,
       });
@@ -60,43 +76,9 @@ router.post("/list/edit", (req, res) => {
     }
     console.log(doc);
   });
-  //   Todo.findById(_id)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
 });
-
-// Todo.findOneAndUpdate(filter, {}, { new: false }, (err, doc) => {
-//   console.log("doc:: ", doc);
-//   if (err) {
-//     return res.status(500).json({
-//       message: err,
-//     });
-//   }
-//   return res.status(200).json({
-//     success: true,
-//     data: doc,
-//   });
-// });
-// });
 
 router.delete("/list/delete", (req, res) => {
-  const variable = req.body;
-  console.log("todo variable > ", variable);
-
-  variable.save((err, data) => {
-    if (err) return res.json({ success: false, err });
-    return res.status(200).json({
-      success: true,
-      message: "todo 항목 저장 완료",
-    });
-  });
-});
-
-router.delete("/category/delete", (req, res) => {
   const variable = req.body;
   console.log("todo variable > ", variable);
 
@@ -122,6 +104,35 @@ router.post("/list/create", (req, res) => {
   });
 });
 
+router.delete("/category/delete", (req, res) => {
+  const { _id } = req.body;
+  console.log("target Id :: ", target);
+  Board.findOneAndDelete(target, (err, doc) => {
+    console.log("삭제 결과: ", doc);
+    if (err)
+      return res.status(500).json({
+        message: err,
+      });
+    return res.status(200).json({
+      success: true,
+      data: doc,
+    });
+  });
+});
+
+router.patch("/category/update", (req, res) => {
+  const variable = req.body;
+  console.log("todo variable > ", variable);
+
+  variable.save((err, data) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({
+      success: true,
+      message: "todo 항목 저장 완료",
+    });
+  });
+});
+
 router.post("/category/create", (req, res) => {
   const variable = new Todo(req.body);
   console.log("todo variable > ", variable);
@@ -134,7 +145,5 @@ router.post("/category/create", (req, res) => {
     });
   });
 });
-
-//기존에 todo리스트도 모두 그대로 저장하기 때문에 all키워드를 붙였다
 
 module.exports = router;
