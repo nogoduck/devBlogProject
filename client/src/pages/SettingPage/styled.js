@@ -18,6 +18,7 @@ export const Menu = styled.div`
   margin: 16px 8px;
   & div {
     padding: 6px 16px;
+    color: #000;
   }
   & ul {
     border: 1px solid #fff;
@@ -50,6 +51,13 @@ export const Menu = styled.div`
   }
   & li:last-child {
     border: none;
+  }
+  & .active {
+    background-color: #ecf0f1;
+  }
+  & .active-last {
+    border-radius: 0 0 6px 6px;
+    background-color: #ecf0f1;
   }
 `;
 

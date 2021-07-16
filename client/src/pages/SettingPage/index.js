@@ -1,4 +1,4 @@
-import { Route, Switch, withRouter, Link } from "react-router-dom";
+import { Route, Switch, withRouter, Link, useLocation } from "react-router-dom";
 
 import React, { useEffect } from "react";
 import { Container, Profile, Menu, Content } from "./styled";
@@ -13,6 +13,16 @@ function SettingPage({ history }) {
   console.log(user);
 
   console.log("SettingPage Landering");
+
+  const { pathname } = useLocation();
+  let activePath = pathname.substring(9);
+  console.log(activePath);
+  console.log(typeof activePath);
+
+  if (activePath === "") {
+    activePath = null;
+  }
+  console.log("if > ", activePath);
 
   useEffect(() => {
     if (!user.authStatus.isAuth) {
@@ -41,12 +51,12 @@ function SettingPage({ history }) {
           <li>
             <div id="title">설정</div>
           </li>
-          <li>
+          <li className={activePath === "profile" ? "active" : ""}>
             <Link to="/setting/profile">
               <div>프로필</div>
             </Link>
           </li>
-          <li>
+          <li className={activePath === "account" ? "active-last" : ""}>
             <Link to="/setting/account">
               <div>계정</div>
             </Link>
