@@ -100,7 +100,23 @@ export const ListContainer = styled.div`
 `;
 
 export const List = styled.div`
+  //체크시 해당 리스트 회색으로 처리하고 중앙선 그을 예정 + success:true
+
   margin: 4px 0;
+
+  & > input {
+    position: absolute;
+    right: 12px;
+  }
+  & > input[id="list-checkbox"] {
+    height: 18px;
+    width: 18px;
+  }
+  & > input[id="list-checkbox"]:checked {
+    height: 18px;
+    width: 18px;
+    color: #009432;
+  }
 `;
 
 export const CategoryCreate = styled.div`
@@ -136,16 +152,19 @@ export const CategoryAdd = styled.button`
 
 export const ListButton = styled.button`
   color: #747d8c;
-  position: absolute;
   right: 4px;
   top: -2px;
-  width: 30px;
+  width: 100%;
   height: 30px;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 800;
   border: none;
   background-color: transparent;
   transition: 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border:1px solid black; */
   &:hover {
     color: #000;
     cursor: pointer;
@@ -153,10 +172,70 @@ export const ListButton = styled.button`
 `;
 
 export const Title = styled.div`
-  color: red;
+  color: #000;
   /* border: 1px solid black; */
-  margin: 6px 36px 6px 8px;
+  margin: 12px 64px 12px 14px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  position: relative;
+`;
+
+export const CategoryETCButtonContainer = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  & > button {
+    position: absolute;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+  }
+  & > button:nth-child(1) {
+    top: 12px;
+    right: 32px;
+  }
+  & > button:nth-child(2) {
+    top: 12px;
+    right: 8px;
+  }
+  & > button:hover {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: #3498db;
+  }
+`;
+export const ListETCButtonContainer = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  position: absolute;
+
+  & > button {
+    position: absolute;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+  }
+  & > button:nth-child(1) {
+    top: 12px;
+    right: 32px;
+  }
+  & > button:nth-child(2) {
+    top: 12px;
+    right: 8px;
+  }
+  & > button:hover {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: #3498db;
+  }
 `;
