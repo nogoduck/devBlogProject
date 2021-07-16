@@ -1,4 +1,4 @@
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import React from "react";
 import { Container, Profile, Menu } from "./styled";
 import { useSelector } from "react-redux";
@@ -26,10 +26,14 @@ function SettingPage() {
       <Menu>
         <ul>
           <li>
-            <span>프로필</span>
+            <Link to="/setting/profile">
+              <span>프로필</span>
+            </Link>
           </li>
           <li>
-            <span>계정</span>
+            <Link to="/setting/account">
+              <span>계정</span>
+            </Link>
           </li>
         </ul>
       </Menu>
