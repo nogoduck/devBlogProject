@@ -106,13 +106,10 @@ router.post("/list/create", (req, res) => {
 
 router.delete("/category/delete", (req, res) => {
   const { _id } = req.body;
-  console.log("target Id :: ", target);
-  Board.findOneAndDelete(target, (err, doc) => {
-    console.log("삭제 결과: ", doc);
-    if (err)
-      return res.status(500).json({
-        message: err,
-      });
+  console.log("[delete] _Id >> ", _id);
+  Todo.findByIdAndDelete(_id, (err, doc) => {
+    console.log("[result] doc >> ", doc);
+    if (err) return res.status(500).json({ message: err });
     return res.status(200).json({
       success: true,
       data: doc,
@@ -121,14 +118,14 @@ router.delete("/category/delete", (req, res) => {
 });
 
 router.patch("/category/update", (req, res) => {
-  const variable = req.body;
-  console.log("todo variable > ", variable);
+  const { _id, title } = req.body;
+  console.log("[update] _Id, title >> ", _id, title);
 
-  variable.save((err, data) => {
+  Todo.findByIdAndUpdate(_id, { title: title }, (err, data) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({
       success: true,
-      message: "todo 항목 저장 완료",
+      message: "Category 수정 완료",
     });
   });
 });
@@ -141,7 +138,7 @@ router.post("/category/create", (req, res) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({
       success: true,
-      message: "todo 항목 저장 완료",
+      message: "Category 생성 완료",
     });
   });
 });

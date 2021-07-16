@@ -18,7 +18,7 @@ const todoRouter = require("./routes/todo");
 // app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //=============[EXP CODE]==============
