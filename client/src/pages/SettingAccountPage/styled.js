@@ -44,3 +44,23 @@ export const Menu = styled.div`
     margin: 10px 0;
   }
 `;
+
+export const DeleteAccountButton = styled.button`
+  width: 120px;
+  height: 32px;
+  color: #e74c3c;
+  background-color: #ecf0f1;
+  border: none;
+  border-radius: 5px;
+  font-weight: 800;
+  transition: 0.1s;
+
+  &:hover {
+    color: #ecf0f1;
+    background-color: #e74c3c;
+    cursor: pointer;
+  }
+  &:active {
+    background-color: #ff7061;
+  }
+`;
