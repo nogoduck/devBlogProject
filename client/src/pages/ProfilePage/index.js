@@ -1,16 +1,40 @@
 import { withRouter } from "react-router-dom";
 import React from "react";
+import { Container, Profile, Menu } from "./styled";
+import { useSelector } from "react-redux";
+import Gravatar from "react-gravatar";
 
-function Profile() {
+function ProfilePage() {
+  const user = useSelector((state) => state.user);
+  console.log(user);
   return (
-    <div>
-      <h3>내 이름</h3>
-      <h2>내 프로필 번경</h2>
-      <h2>내 닉네임 변경ㅇ</h2>
-      <h2>비밀번호 변경</h2>
-      <h2>회원탈퇴</h2>
-    </div>
+    <Container>
+      <Profile>
+        <Gravatar
+          email={user.authStatus.email}
+          size={50}
+          default="wavatar"
+          style={{
+            width: "50px",
+            height: "50px",
+            marginRight: "5px",
+            borderRadius: "25%",
+          }}
+        />
+        {user.authStatus.name}
+      </Profile>
+      <Menu>
+        <ul>
+          <li>
+            <span>프로필</span>
+          </li>
+          <li>
+            <span>계정</span>
+          </li>
+        </ul>
+      </Menu>
+    </Container>
   );
 }
 
-export default withRouter(Profile);
+export default withRouter(ProfilePage);

@@ -102,7 +102,7 @@ export const ListContainer = styled.div`
 export const List = styled.div`
   //체크시 해당 리스트 회색으로 처리하고 중앙선 그을 예정 + success:true
 
-  margin: 4px 0;
+  margin: 5px 10px;
 
   & > input {
     position: absolute;

@@ -231,81 +231,6 @@ function AboutPage({ history }) {
                   )}
                   {/* {vList.memo && vList.memo} */}
                 </List>
-                <List onMouseOver={inListMouse} onMouseOut={outListMouse}>
-                  1번 고기
-                  <input type="checkbox" name="" id="list-checkbox" />
-                  {hoverList && (
-                    <ListETCButtonContainer>
-                      <button>
-                        <FaEdit />
-                      </button>
-                      <button>
-                        <IoMdRemoveCircle />
-                      </button>
-                    </ListETCButtonContainer>
-                  )}
-                  {/* {vList.memo && vList.memo} */}
-                </List>
-                <List onMouseOver={inListMouse} onMouseOut={outListMouse}>
-                  1번 고기
-                  <input type="checkbox" name="" id="list-checkbox" />
-                  {hoverList && (
-                    <ListETCButtonContainer>
-                      <button>
-                        <FaEdit />
-                      </button>
-                      <button>
-                        <IoMdRemoveCircle />
-                      </button>
-                    </ListETCButtonContainer>
-                  )}
-                  {/* {vList.memo && vList.memo} */}
-                </List>
-                <List onMouseOver={inListMouse} onMouseOut={outListMouse}>
-                  1번 고기
-                  <input type="checkbox" name="" id="list-checkbox" />
-                  {hoverList && (
-                    <ListETCButtonContainer>
-                      <button>
-                        <FaEdit />
-                      </button>
-                      <button>
-                        <IoMdRemoveCircle />
-                      </button>
-                    </ListETCButtonContainer>
-                  )}
-                  {/* {vList.memo && vList.memo} */}
-                </List>
-                <List onMouseOver={inListMouse} onMouseOut={outListMouse}>
-                  1번 고기
-                  <input type="checkbox" name="" id="list-checkbox" />
-                  {hoverList && (
-                    <ListETCButtonContainer>
-                      <button>
-                        <FaEdit />
-                      </button>
-                      <button>
-                        <IoMdRemoveCircle />
-                      </button>
-                    </ListETCButtonContainer>
-                  )}
-                  {/* {vList.memo && vList.memo} */}
-                </List>
-                <List onMouseOver={inListMouse} onMouseOut={outListMouse}>
-                  1번 고기
-                  <input type="checkbox" name="" id="list-checkbox" />
-                  {hoverList && (
-                    <ListETCButtonContainer>
-                      <button>
-                        <FaEdit />
-                      </button>
-                      <button>
-                        <IoMdRemoveCircle />
-                      </button>
-                    </ListETCButtonContainer>
-                  )}
-                  {/* {vList.memo && vList.memo} */}
-                </List>
 
                 {/* dummpy End  */}
                 {vCategory.list.length > 0 && <hr />}
@@ -345,7 +270,7 @@ function AboutPage({ history }) {
             );
           })}
         <CategoryCreate onClick={onClickCreateCategoryModal}>
-          <CategoryAdd></CategoryAdd>
+          <CategoryAdd>카테고리 추가</CategoryAdd>
           <MdLibraryAdd style={{ fontSize: "48px", marginTop: "4px" }} />
         </CategoryCreate>
       </CategoryContainer>
