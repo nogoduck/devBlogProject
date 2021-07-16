@@ -4,7 +4,7 @@ import { Container, Profile, Menu } from "./styled";
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
 
-function ProfilePage() {
+function SettingPage() {
   const user = useSelector((state) => state.user);
   console.log(user);
   return (
@@ -37,4 +37,4 @@ function ProfilePage() {
   );
 }
 
-export default withRouter(ProfilePage);
+export default withRouter(SettingPage);

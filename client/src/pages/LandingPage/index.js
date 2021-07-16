@@ -14,7 +14,7 @@ import ModalPage from "../ModalPage";
 import VideoPage from "../VideoPage";
 import BoardWritePage from "../BoardWritePage";
 import BoardDetailPage from "../BoardDetailPage";
-import ProfilePage from "../ProfilePage";
+import SettingPage from "../SettingPage";
 
 import Auth from "../../hoc/auth";
 
@@ -49,7 +49,8 @@ function LandingPage() {
             <Route path="/menu/card" component={Auth(CardPage, null)} />
             <Route path="/menu/modal" component={Auth(ModalPage, null)} />
             <Route path="/menu/video" component={Auth(VideoPage, null)} />
-            <Route path="/profile" component={Auth(ProfilePage, false)} />
+            <Route path="/setting" component={Auth(SettingPage, true)} />
+            {/* <Route path="/profile" component={Auth(ProfilePage, false)} /> */}
           </Switch>
         </Content>
       </div>

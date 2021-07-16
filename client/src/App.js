@@ -9,7 +9,7 @@ function App() {
     <>
       <Router>
         <Route path="/" exact component={LandingPage} />
-        <Route path="/profile" component={Auth(LandingPage, false)} />
+        <Route path="/setting" component={Auth(LandingPage, false)} />
         <Route path="/menu/:menu" component={LandingPage} />
       </Router>
     </>

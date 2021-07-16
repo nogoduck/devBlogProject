@@ -150,7 +150,7 @@ function RightItem({ history }) {
             <ProfileMenu>
               <ul>
                 <li>
-                  <Link to="/profile">계정관리</Link>
+                  <Link to="/setting">계정관리</Link>
                 </li>
                 <li>
                   <Clock />
