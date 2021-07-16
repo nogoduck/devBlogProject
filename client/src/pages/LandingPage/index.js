@@ -1,6 +1,5 @@
-import { withRouter } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import React from "react";
-import { Route, Switch } from "react-router-dom";
 
 import { Content } from "./styled";
 import TopNav from "../../components/TopNav";
@@ -15,8 +14,6 @@ import VideoPage from "../VideoPage";
 import BoardWritePage from "../BoardWritePage";
 import BoardDetailPage from "../BoardDetailPage";
 import SettingPage from "../SettingPage";
-import SettingProfilePage from "../SettingProfilePage";
-import SettingAccountPage from "../SettingAccountPage";
 
 import Auth from "../../hoc/auth";
 
@@ -51,15 +48,7 @@ function LandingPage() {
             <Route path="/menu/card" component={Auth(CardPage, null)} />
             <Route path="/menu/modal" component={Auth(ModalPage, null)} />
             <Route path="/menu/video" component={Auth(VideoPage, null)} />
-            <Route
-              path="/setting/profile"
-              component={Auth(SettingProfilePage, true)}
-            />
-            <Route
-              path="/setting/account"
-              component={Auth(SettingAccountPage, true)}
-            />
-            <Route exact path="/setting" component={Auth(SettingPage, true)} />
+            <Route path="/setting" component={Auth(SettingPage, null)} />
           </Switch>
         </Content>
       </div>

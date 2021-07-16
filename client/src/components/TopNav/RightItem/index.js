@@ -149,9 +149,9 @@ function RightItem({ history }) {
           <ProfileMenuContainer onClick={onCloseProfileMenu}>
             <ProfileMenu>
               <ul>
-                <li>
-                  <Link to="/setting">계정관리</Link>
-                </li>
+                <Link to="/setting">
+                  <li>설정</li>
+                </Link>
                 <li>
                   <Clock />
                 </li>

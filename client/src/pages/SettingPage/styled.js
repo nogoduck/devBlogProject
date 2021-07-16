@@ -1,28 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  & li {
-    border-bottom: 1px solid black;
-    padding: 4px 0;
-  }
-
-  & li:last-child {
-    border: none;
-  }
-
-  & span:hover {
-    border-bottom: 4px solid blue;
-    color: blue;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  & > h3:hover {
-    color: red;
-    /* text-decoration: underline; */
-    /* text-decoration: line-through; */
-  }
-`;
+export const Container = styled.div``;
 
 export const Profile = styled.div`
   /* border: 1px dashed red; */
@@ -36,11 +14,45 @@ export const Profile = styled.div`
 `;
 
 export const Menu = styled.div`
-  /* border: 1px dashed red; */
-  font-size: 20px;
-  margin: 8px 0 0 8px;
-  & > span {
-    color: green;
-    margin: 10px 0;
+  font-size: 16px;
+  margin: 16px 8px;
+  & div {
+    padding: 6px 16px;
   }
+  & ul {
+    border: 1px solid #fff;
+    border-radius: 6px;
+  }
+  & li #title {
+    font-weight: 800;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 6px 6px 0 0;
+  }
+  & li {
+    border-bottom: 1px solid #bdc3c7;
+  }
+  & li:hover {
+    cursor: pointer;
+    background-color: #ecf0f1;
+  }
+  & li:first-child {
+    cursor: default;
+    background-color: transparent;
+  }
+  & li:first-child:hover {
+    border: none;
+  }
+  & li:last-child:hover {
+    cursor: pointer;
+    border-radius: 0 0 6px 6px;
+    background-color: #ecf0f1;
+  }
+  & li:last-child {
+    border: none;
+  }
+`;
+
+export const Content = styled.div`
+  margin: 0 8px;
 `;

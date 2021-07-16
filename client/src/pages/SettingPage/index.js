@@ -1,12 +1,25 @@
-import { withRouter, Link } from "react-router-dom";
-import React from "react";
-import { Container, Profile, Menu } from "./styled";
+import { Route, Switch, withRouter, Link } from "react-router-dom";
+
+import React, { useEffect } from "react";
+import { Container, Profile, Menu, Content } from "./styled";
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
 
-function SettingPage() {
+import SettingProfilePage from "../SettingProfilePage";
+import SettingAccountPage from "../SettingAccountPage";
+
+function SettingPage({ history }) {
   const user = useSelector((state) => state.user);
   console.log(user);
+
+  console.log("SettingPage Landering");
+
+  useEffect(() => {
+    if (!user.authStatus.isAuth) {
+      history.push("/");
+    }
+  });
+
   return (
     <Container>
       <Profile>
@@ -26,17 +39,26 @@ function SettingPage() {
       <Menu>
         <ul>
           <li>
+            <div id="title">설정</div>
+          </li>
+          <li>
             <Link to="/setting/profile">
-              <span>프로필</span>
+              <div>프로필</div>
             </Link>
           </li>
           <li>
             <Link to="/setting/account">
-              <span>계정</span>
+              <div>계정</div>
             </Link>
           </li>
         </ul>
       </Menu>
+      <Content>
+        <Switch>
+          <Route path="/setting/profile" component={SettingProfilePage} />
+          <Route path="/setting/account" component={SettingAccountPage} />
+        </Switch>
+      </Content>
     </Container>
   );
 }
