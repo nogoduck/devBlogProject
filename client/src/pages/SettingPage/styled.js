@@ -42,7 +42,8 @@ export const Menu = styled.div`
     background-color: transparent;
   }
   & li:first-child:hover {
-    border: none;
+    /* border: none; */
+    /* outline: none; */
   }
   & li:last-child:hover {
     cursor: pointer;
