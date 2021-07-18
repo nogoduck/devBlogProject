@@ -149,8 +149,11 @@ export const ProfileMenu = styled.div`
   }
   & li:last-child:hover {
     border: none;
-    border-radius: 0 0 10px 10px;
     color: #fff;
+  }
+
+  & #clock:hover {
+    border-radius: 0 0 10px 10px;
   }
   & li:hover {
     box-shadow: 0px 0px 5px 3px #2980b9 inset;

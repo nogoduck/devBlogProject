@@ -19,6 +19,7 @@ import Gravatar from "react-gravatar";
 import Clock from "../../Clock";
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
+import SignOutModal from "../../SignOutModal";
 
 function RightItem({ history }) {
   //로그인 모달 변수
@@ -31,6 +32,9 @@ function RightItem({ history }) {
 
   //프로필 메뉴 모달 변수
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  //로그아웃 모달 변수
+  const [showSignOutModal, setShowSignOutModal] = useState(false);
 
   const onToggleSignIn = () => {
     setShowSignInModal((prev) => !prev);
@@ -57,18 +61,7 @@ function RightItem({ history }) {
   };
 
   const onClickSignoutButton = () => {
-    axios
-      .get("/api/users/signout")
-      .then((res) => {
-        //로그아웃 성공
-
-        if (res.data.success) {
-          history.push("/");
-        }
-      })
-      .catch((err) => {
-        alert("로그아웃에 실패했습니다.");
-      });
+    setShowSignOutModal((prev) => !prev);
   };
 
   const onCloseProfileMenu = () => {
@@ -79,6 +72,24 @@ function RightItem({ history }) {
   const onToggleProfileMenu = () => {
     console.log("토글해야  한다");
     setShowProfileMenu((prev) => !prev);
+  };
+
+  const notModal = () => {
+    axios
+      .get("/api/users/signout")
+      .then((res) => {
+        console.log("로그아웃 성공");
+        //로그아웃 성공
+
+        if (res.data.success) {
+          console.log("로그아웃 - 집으로");
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("로그아웃 실패");
+        // alert("로그아웃에 실패했습니다.");
+      });
   };
 
   useEffect(() => {
@@ -144,7 +155,12 @@ function RightItem({ history }) {
           />
           {isLogin.authStatus.name}
         </Profile>
+        <button onClick={notModal}>모달 없는 로그아웃</button>
         <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
+        <SignOutModal
+          show={showSignOutModal}
+          close={onClickSignoutButton}
+        ></SignOutModal>
         {showProfileMenu && (
           <ProfileMenuContainer onClick={onCloseProfileMenu}>
             <ProfileMenu>
@@ -152,7 +168,7 @@ function RightItem({ history }) {
                 <Link to="/setting">
                   <li>설정</li>
                 </Link>
-                <li>
+                <li id="clock">
                   <Clock />
                 </li>
               </ul>

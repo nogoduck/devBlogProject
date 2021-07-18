@@ -18,6 +18,7 @@ import axios from "axios";
 import Gravatar from "react-gravatar";
 
 import { timeFormat } from "../BoardPage/_utils";
+import ConfirmModal from "../../components/ConfirmModal";
 
 function BoardDetailPage() {
   useEffect(() => {
@@ -43,6 +44,8 @@ function BoardDetailPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  //확인, 취소 모달
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const onClickPostUpdate = () => {
     setTitle(detailPost.data.title);
     setDescription(detailPost.data.description);
@@ -84,6 +87,14 @@ function BoardDetailPage() {
 
   const onChangeDescription = (e) => {
     setDescription(e.target.value);
+  };
+
+  const onClickConfirmModal = () => {
+    setShowConfirmModal(true);
+  };
+
+  const onCloseConfirmModal = () => {
+    setShowConfirmModal(false);
   };
 
   if (!detailPost) {
@@ -148,7 +159,11 @@ function BoardDetailPage() {
             value={description}
             onChange={onChangeDescription}
           />
-          <DeleteButton onClick={onClickPostDelete}>삭제하기</DeleteButton>
+          <button onClick={onClickConfirmModal}>삭제</button>
+          <ConfirmModal show={showConfirmModal} close={onCloseConfirmModal}>
+            게시글을 삭제하면 복구가 불가능합니다
+          </ConfirmModal>
+          {/* <DeleteButton onClick={onClickPostDelete}>삭제하기</DeleteButton> */}
         </Container>
       );
     }
