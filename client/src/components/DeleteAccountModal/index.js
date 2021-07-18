@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Warning } from "./styled";
 import Modal from "../Modal";
-function DeleteAccountModal() {
+function DeleteAccountModal({ show, close }) {
   return (
     <Modal
-      show={false}
-      close={true}
+      show={show}
+      close={close}
       style={{ width: "200px", height: "300px" }}
     >
       <h5>정말로 진행하시겠습니까?</h5>
