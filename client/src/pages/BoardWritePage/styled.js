@@ -155,3 +155,17 @@ export const BoxFile = styled.div`
   margin: 0 8px;
   font-size: 14px;
 `;
+
+export const EditorContainer = styled.div`
+  width: 100%;
+  padding: 5px 0px 5px 7px;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 1px solid #7f8fa6;
+  transition: 0.3s;
+  margin-top: 4px;
+  min-height: 200px;
+  &:focus {
+    box-shadow: 0px 0px 5px 1px #7f8fa6;
+  }
+`;

@@ -11,11 +11,16 @@ import {
   CancelButton,
   Box,
   BoxFile,
+  EditorContainer,
 } from "./styled";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import DocumentEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 
 function BoardWritePage({ history }) {
   const user = useSelector((state) => state.user);
@@ -30,8 +35,9 @@ function BoardWritePage({ history }) {
     setTitle(e.target.value);
   };
 
-  const onChangeDescription = (e) => {
-    setDescription(e.target.value);
+  const onChangeDescription = (editorState) => {
+    console.log(editorState);
+    setDescription(editorState);
   };
 
   console.log("email : ", user.authStatus.email);
@@ -42,8 +48,6 @@ function BoardWritePage({ history }) {
       title: title,
       description: description,
     };
-
-    console.log(data);
 
     axios
       .post("/api/board/create", data)
@@ -57,7 +61,7 @@ function BoardWritePage({ history }) {
       });
   };
 
-  // const
+  console.log("desc > ", description);
 
   return (
     <Container>
@@ -74,10 +78,50 @@ function BoardWritePage({ history }) {
         onChange={onChangeTitle}
       />
       <Label For="description">내용</Label>
+      <EditorContainer>
+        {/* <CKEditor
+          editor={DocumentEditor}
+          data="<p>Hello from CKEditor 5!</p>"
+          onReady={(editor) => {
+            // You can store the "editor" and use when it is needed.
+            console.log("Editor is ready to use!", editor);
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            console.log({ event, editor, data });
+          }}
+          onBlur={(event, editor) => {
+            console.log("Blur.", editor);
+          }}
+          onFocus={(event, editor) => {
+            console.log("Focus.", editor);
+          }}
+        /> */}
+        <CKEditor
+          editor={ClassicEditor}
+          data="<p>Hello from CKEditor 5!</p>"
+          onReady={(editor) => {
+            // You can store the "editor" and use when it is needed.
+            console.log("Editor is ready to use!", editor);
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            console.log({ event, editor, data });
+          }}
+          onBlur={(event, editor) => {
+            console.log("Blur.", editor);
+          }}
+          onFocus={(event, editor) => {
+            console.log("Focus.", editor);
+          }}
+        />
+      </EditorContainer>
+      {description}
+      <br />
       <InputDescription
         id="description"
-        value={description}
-        onChange={onChangeDescription}
+        // value={description}
+        // onChange={onChangeDescription}
       />
       <Label For="title">첨부파일</Label>&nbsp;
       <Box>
