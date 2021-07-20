@@ -13,7 +13,13 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import { changeTime, pagiNation, pagiTotalCalc2, postMacro } from "./_utils";
+import {
+  changeTime,
+  pagiNation,
+  pagiTotalCalc2,
+  // postMacro
+} from "./_utils";
+
 function BoardPage({ history }) {
   const isLogin = useSelector((state) => state.user);
 

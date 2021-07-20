@@ -65,21 +65,6 @@ export const InputTitle = styled.input`
   }
 `;
 
-export const InputDescription = styled.textarea`
-  resize: none;
-  height: 400px;
-  width: 100%;
-  padding: 5px 0px 5px 7px;
-  font-size: 16px;
-  border-radius: 3px;
-  border: 1px solid #7f8fa6;
-  transition: 0.3s;
-  margin-top: 4px;
-  &:focus {
-    box-shadow: 0px 0px 5px 1px #7f8fa6;
-  }
-`;
-
 export const AddButton = styled.button`
   margin: 2px;
   padding: 2px 8px;
@@ -156,25 +141,11 @@ export const BoxFile = styled.div`
   font-size: 14px;
 `;
 
-export const EditorContainer = styled.div`
-  /* width: 100%;
-  padding: 5px 0px 5px 7px;
-  font-size: 16px;
-  border-radius: 3px;
-  border: 1px solid #7f8fa6;
-  transition: 0.3s;
-  margin-top: 4px;
-  min-height: 200px;
-  &:focus {
-    box-shadow: 0px 0px 5px 1px #7f8fa6;
-  } */
-`;
-
 export const UpdateButton = styled.button`
   font-weight: 800;
-  margin: 15px 0 40px 0;
-  width: 180px;
-  height: 30px;
+  width: 84px;
+  margin: 4px;
+  height: 32px;
   border-radius: 3px;
   background: linear-gradient(135deg, #ffdd59 0%, #ffa801 100%);
   border: 1px solid #ffa801;
@@ -230,9 +201,9 @@ export const DeleteModalCancelButton = styled.button`
 
 export const DeleteButton = styled.button`
   font-weight: 800;
-  margin: 15px 0 40px 0;
-  width: 180px;
-  height: 30px;
+  margin: 4px;
+  width: 84px;
+  height: 32px;
   border-radius: 3px;
   background: #ff7675;
   border: 1px solid #7f8fa6;
@@ -268,4 +239,9 @@ export const AlertSubmitButton = styled.button`
     background: #73b7fa;
     color: #fff;
   }
+`;
+
+export const UpdateButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;

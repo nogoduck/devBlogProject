@@ -14,6 +14,7 @@ import {
   DeleteModalCancelButton,
   DeleteButton,
   AlertSubmitButton,
+  UpdateButtonContainer,
 } from "./styled";
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
@@ -21,10 +22,6 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { GiCheckMark } from "react-icons/gi";
-import { RiAlarmWarningLine } from "react-icons/ri";
-
-import ConfirmModal from "../../components/ConfirmModal";
 import AlertModal from "../../components/AlertModal";
 
 //postId가 존재하면 글을 수정하는 페이지로 전환된다
@@ -34,7 +31,8 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
   const [title, setTitle] = useState(changeTitle);
   const [description, setDescription] = useState(changeDescription);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [showSuccessCreatePostModal, setShowSuccessCreatePostModal] =
+    useState(false);
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -53,7 +51,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       .post("/api/board/create", paylaod)
       .then(({ data }) => {
         console.log("Create Post data >> ", data);
-        setShowAlertModal(true);
+        setShowSuccessCreatePostModal(true);
         // history.push("/menu/board");
       })
       .catch((err) => {
@@ -100,59 +98,48 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
     setShowConfirmModal((prev) => !prev);
   };
 
-  const onSubmitAlert = () => {
+  const onSubmitCreatePostModal = () => {
     history.push("/menu/board");
   };
 
   return (
     <Container>
       <Link to="/menu/board">뒤로가기</Link>
-      <ConfirmModal
-        show={false}
-        content="hi"
-        style={{ backgroundColor: "transparent", padding: "300px" }}
-      >
-        <GiCheckMark style={{ color: "green" }} />
-        게시글이 등록되었습니다
-      </ConfirmModal>
       <AlertModal
-        show={true}
-        // show={showAlertModal}
-        close={onSubmitAlert}
+        show={showSuccessCreatePostModal}
+        close={onSubmitCreatePostModal}
         modalHeader="성공"
         title="게시물 등록이 성공되었습니다"
         content="게시판으로 이동합니다"
-        option="danger"
-      >
-        <AlertSubmitButton onClick={onSubmitAlert}>확인</AlertSubmitButton>
-      </AlertModal>
+        option="success"
+        useCancelButton={false}
+        confirm={onSubmitCreatePostModal}
+      ></AlertModal>
       <BoardHeader>
         <Title>{postId ? "글수정하기" : "글쓰기"}</Title>
-        {postId && (
-          <DeleteButton onClick={onClickDeleteConfirmModal}>삭제</DeleteButton>
-        )}
-        {postId && (
-          <ConfirmModal
-            style={{ padding: "30px", backgroundColor: "yellow" }}
-            show={showConfirmModal}
-            close={onCloseDeleteConfirmModal}
-            content="게시글을 삭제하면 복구가 불가능합니다"
-          >
-            <RiAlarmWarningLine style={{ color: "red" }} />
-            <DeleteModalCancelButton onClick={onCloseDeleteConfirmModal}>
-              취소
-            </DeleteModalCancelButton>
-            <DeleteModalSubmitButton onClick={onSubmitDeletePost}>
-              확인
-            </DeleteModalSubmitButton>
-          </ConfirmModal>
-        )}
 
-        {postId ? (
-          <UpdateButton onClick={onSubmitUpdatePost}>수정완료</UpdateButton>
-        ) : (
-          <SubmitButton onClick={onSubmitCreatePost}>등록</SubmitButton>
-        )}
+        <AlertModal
+          show={showConfirmModal}
+          close={onCloseDeleteConfirmModal}
+          notice="게시물을 삭제하면 복구가 불가능합니다"
+          modalHeader="게시글 삭제 주의사항"
+          title="해당 게시글을 삭제하겠습니까?"
+          option="warning"
+          confirm={onSubmitDeletePost}
+        ></AlertModal>
+
+        <UpdateButtonContainer>
+          {postId ? (
+            <UpdateButton onClick={onSubmitUpdatePost}>수정완료</UpdateButton>
+          ) : (
+            <SubmitButton onClick={onSubmitCreatePost}>등록</SubmitButton>
+          )}
+          {postId && (
+            <DeleteButton onClick={onClickDeleteConfirmModal}>
+              삭제
+            </DeleteButton>
+          )}
+        </UpdateButtonContainer>
       </BoardHeader>
       <Label For="title">제목</Label>
       <InputTitle

@@ -5,9 +5,6 @@ import { useLocation, Link } from "react-router-dom";
 import {
   Container,
   Lodding,
-  InputTitle,
-  InputDescription,
-  DeleteButton,
   UpdateButton,
   BoardHeader,
   Title,
@@ -19,7 +16,6 @@ import Gravatar from "react-gravatar";
 import HtmlReactParser from "html-react-parser";
 
 import { timeFormat } from "../BoardPage/_utils";
-import ConfirmModal from "../../components/ConfirmModal";
 import BoardWritePage from "../BoardWritePage";
 
 function BoardDetailPage() {
@@ -33,7 +29,7 @@ function BoardDetailPage() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  });
 
   const [detailPost, setDetailPost] = useState("");
   const { pathname } = useLocation();
@@ -47,56 +43,10 @@ function BoardDetailPage() {
   const [description, setDescription] = useState("");
 
   //확인, 취소 모달
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const onClickPostUpdate = () => {
     setTitle(detailPost.data.title);
     setDescription(detailPost.data.description);
     setUpadteMode(true);
-  };
-  const onClickPostDelete = () => {
-    //DB로부터 삭제요청
-    const deleteId = {
-      _id: postId,
-    };
-    axios
-      .post("/api/board/delete", deleteId)
-      .then(({ data }) => {
-        console.log("delete result :: ", data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const onClickPostUpdateComplete = () => {
-    //DB에 업데이트 요청
-    setUpadteMode(false);
-    const variable = { _id: postId, title: title, description: description };
-    console.log("post update, variable :: ", variable);
-    axios
-      .post("/api/board/update", variable)
-      .then(({ data }) => {
-        setDetailPost(data);
-        console.log("detail data :: ", data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const onChangeTitle = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const onChangeDescription = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const onClickConfirmModal = () => {
-    setShowConfirmModal(true);
-  };
-
-  const onCloseConfirmModal = () => {
-    setShowConfirmModal(false);
   };
 
   if (!detailPost) {
@@ -130,11 +80,9 @@ function BoardDetailPage() {
                   {detailPost.data.writer}
                 </Profile>
               </td>
+              <td>작성일&nbsp;&nbsp;{timeFormat(detailPost.data.createdAt)}</td>
               <td>
-                작성일&nbsp;≫&nbsp;{timeFormat(detailPost.data.createdAt)}
-              </td>
-              <td>
-                최근 수정일&nbsp;≫&nbsp;
+                최근 수정일&nbsp;&nbsp;
                 {detailPost.data.updatedAt
                   ? timeFormat(detailPost.data.updatedAt)
                   : "수정 안함"}

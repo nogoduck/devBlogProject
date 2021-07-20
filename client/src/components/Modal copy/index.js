@@ -9,8 +9,6 @@ import {
   ModalTitle,
   ModalContent,
   ButtonContainer,
-  SubmitButton,
-  CancelButton,
 } from "./styled";
 import PropTypes from "prop-types";
 
@@ -46,14 +44,11 @@ function Modal({
   close,
   style,
   useCloseButton,
-  useSubmitButton,
-  useCancelButton,
   modalHeader,
   notice,
   title,
   content,
   option,
-  confirm,
 }) {
   const stopPropagation = useCallback((e) => {
     // console.log("Modal, stopPropagation!");
@@ -121,14 +116,8 @@ function Modal({
         <ContentContainer>
           <ModalTitle>{title}</ModalTitle>
           <ModalContent>{content}</ModalContent>
-          {children}
         </ContentContainer>
-        <ButtonContainer>
-          {useCancelButton && <CancelButton onClick={close}>취소</CancelButton>}
-          {useSubmitButton && (
-            <SubmitButton onClick={confirm}>확인</SubmitButton>
-          )}
-        </ButtonContainer>
+        <ButtonContainer>{children}</ButtonContainer>
       </ModalContainer>
     </Container>
   );
@@ -136,8 +125,6 @@ function Modal({
 
 Modal.defaultProps = {
   useCloseButton: true,
-  useSubmitButton: true,
-  useCancelButton: true,
   //props 의 기본값을 지정, 보내는 컴포넌트 측에서 값을 넣어주지 않아도
   // defaultProps의 값을 대입해줌
   // 입력사항이 없는 알림창 모달 같은 경우에 버튼을 사용하지 않기 위해 인자를 받음
