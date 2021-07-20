@@ -24,6 +24,7 @@ import { GiCheckMark } from "react-icons/gi";
 import { RiAlarmWarningLine } from "react-icons/ri";
 
 import ConfirmModal from "../../components/ConfirmModal";
+import AlertModal from "../../components/AlertModal";
 
 //postId가 존재하면 글을 수정하는 페이지로 전환된다
 function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
@@ -109,6 +110,13 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         <GiCheckMark style={{ color: "green" }} />
         게시글이 등록되었습니다
       </ConfirmModal>
+      <AlertModal
+        show={true}
+        notice="한 번 등록한ㅇ 게시무릉ㄴ 삭제가 불가능한다"
+        modalHeader="알림창"
+        title="게시물 등록이 성공되었습니다"
+        content="hi"
+      ></AlertModal>
       <BoardHeader>
         <Title>{postId ? "글수정하기" : "글쓰기"}</Title>
         {postId && (
