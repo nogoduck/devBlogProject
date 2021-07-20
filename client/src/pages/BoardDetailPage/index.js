@@ -152,24 +152,6 @@ function BoardDetailPage() {
             changeTitle={title}
             changeDescription={description}
           />
-          <BoardHeader>
-            <InputTitle type="text" value={title} onChange={onChangeTitle} />
-            {detailPost && (
-              <UpdateButton onClick={onClickPostUpdateComplete}>
-                수정완료
-              </UpdateButton>
-            )}
-          </BoardHeader>
-          <InputDescription
-            type="text"
-            value={description}
-            onChange={onChangeDescription}
-          />
-          <button onClick={onClickConfirmModal}>삭제</button>
-          <ConfirmModal show={showConfirmModal} close={onCloseConfirmModal}>
-            게시글을 삭제하면 복구가 불가능합니다
-          </ConfirmModal>
-          {/* <DeleteButton onClick={onClickPostDelete}>삭제하기</DeleteButton> */}
         </Container>
       );
     }

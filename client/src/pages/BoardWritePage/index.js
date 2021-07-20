@@ -1,4 +1,3 @@
-import { withRouter } from "react-router-dom";
 import {
   Container,
   InputTitle,
@@ -16,14 +15,15 @@ import {
   DeleteButton,
 } from "./styled";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ConfirmModal from "../../components/ConfirmModal";
-
+import axios from "axios";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-// import DocumentEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import { GiCheckMark } from "react-icons/gi";
+import { RiAlarmWarningLine } from "react-icons/ri";
+
+import ConfirmModal from "../../components/ConfirmModal";
 
 //postId가 존재하면 글을 수정하는 페이지로 전환된다
 function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
@@ -67,6 +67,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       .post("/api/board/update", paylaod)
       .then(({ data }) => {
         console.log("Update Post data >> ", data);
+        history.push(`/menu/board/${postId}`);
       })
       .catch((err) => {
         console.log("Update Post Error >> ", err);
@@ -82,6 +83,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       .then(({ data }) => {
         console.log("Delete Post data >> ", data);
         onCloseDeleteConfirmModal();
+        history.push("/menu/board");
       })
       .catch((err) => {
         console.log("Delete Post Error >> ", err);
@@ -99,6 +101,14 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
   return (
     <Container>
       <Link to="/menu/board">뒤로가기</Link>
+      <ConfirmModal
+        show={false}
+        content="hi"
+        style={{ backgroundColor: "transparent", padding: "300px" }}
+      >
+        <GiCheckMark style={{ color: "green" }} />
+        게시글이 등록되었습니다
+      </ConfirmModal>
       <BoardHeader>
         <Title>{postId ? "글수정하기" : "글쓰기"}</Title>
         {postId && (
@@ -106,10 +116,12 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         )}
         {postId && (
           <ConfirmModal
+            style={{ padding: "30px", backgroundColor: "yellow" }}
             show={showConfirmModal}
             close={onCloseDeleteConfirmModal}
             content="게시글을 삭제하면 복구가 불가능합니다"
           >
+            <RiAlarmWarningLine style={{ color: "red" }} />
             <DeleteModalCancelButton onClick={onCloseDeleteConfirmModal}>
               취소
             </DeleteModalCancelButton>
@@ -152,7 +164,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
           console.log("Focus.", editor);
         }}
       />
-      <Label For="title">첨부파일</Label>&nbsp;
+      <Label For="title">첨부파일 (구현안됌)</Label>&nbsp;
       <Box>
         <AddButton>추가</AddButton>
         <CancelButton>삭제</CancelButton>

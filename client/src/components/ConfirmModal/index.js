@@ -3,14 +3,9 @@ import Modal from "../Modal";
 
 import { ModalContent } from "./styled";
 
-function ConfirmModal({ children, show, close, content }) {
+function ConfirmModal({ children, style, show, close, content }) {
   return (
-    <Modal
-      show={show}
-      close={close}
-      useCloseButton={false}
-      style={{ padding: "30px" }}
-    >
+    <Modal show={show} close={close} useCloseButton={false} style={style}>
       <ModalContent>{content}</ModalContent>
       {children}
     </Modal>
