@@ -13,6 +13,7 @@ import {
   DeleteModalSubmitButton,
   DeleteModalCancelButton,
   DeleteButton,
+  AlertSubmitButton,
 } from "./styled";
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
@@ -33,6 +34,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
   const [title, setTitle] = useState(changeTitle);
   const [description, setDescription] = useState(changeDescription);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -51,9 +53,8 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       .post("/api/board/create", paylaod)
       .then(({ data }) => {
         console.log("Create Post data >> ", data);
-
-        alert("게시글이 성공적으로 등록되었습니다");
-        history.push("/menu/board");
+        setShowAlertModal(true);
+        // history.push("/menu/board");
       })
       .catch((err) => {
         console.log("Create Post Error >> ", err);
@@ -111,12 +112,16 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         게시글이 등록되었습니다
       </ConfirmModal>
       <AlertModal
-        show={true}
-        notice="한 번 등록한ㅇ 게시무릉ㄴ 삭제가 불가능한다"
-        modalHeader="알림창"
+        show={showAlertModal}
+        // notice="한 번 등록한 게시물은 삭제가 불가능합니다. 신중하게 생각해주세요"
+        modalHeader="성공"
         title="게시물 등록이 성공되었습니다"
-        content="hi"
-      ></AlertModal>
+        content="게시판으로 이동합니다"
+      >
+        <Link to="/menu/board">
+          <AlertSubmitButton>확인</AlertSubmitButton>
+        </Link>
+      </AlertModal>
       <BoardHeader>
         <Title>{postId ? "글수정하기" : "글쓰기"}</Title>
         {postId && (

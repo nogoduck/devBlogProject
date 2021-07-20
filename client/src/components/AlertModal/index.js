@@ -5,14 +5,18 @@ import {
   CloseButton,
   ModalHeader,
   ModalNotice,
+  ContentContainer,
   ModalTitle,
   ModalContent,
+  ButtonContainer,
 } from "./styled";
 import PropTypes from "prop-types";
 
-import { GiCheckMark } from "react-icons/gi";
-import { RiAlarmWarningLine } from "react-icons/ri";
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import { TiWarning } from "react-icons/ti";
+
+//option에 따라 알림창 헤더의 아이콘이 바뀐다
+//option argument => success, failed, warning, danger
 
 function Modal({
   children,
@@ -21,10 +25,10 @@ function Modal({
   style,
   useCloseButton,
   modalHeader,
-  modalTitle,
   notice,
   title,
   content,
+  option,
 }) {
   const stopPropagation = useCallback((e) => {
     // console.log("Modal, stopPropagation!");
@@ -41,7 +45,6 @@ function Modal({
     <Container onClick={close}>
       <ModalContainer onClick={stopPropagation} style={style}>
         {useCloseButton && <CloseButton onClick={close}>&times;</CloseButton>}
-        {children}
         <ModalHeader>
           <IoIosCheckmarkCircle
             style={{
@@ -52,11 +55,20 @@ function Modal({
           />
           {modalHeader}
         </ModalHeader>
-        <ModalNotice>{notice}3332</ModalNotice>
-        <GiCheckMark />
 
-        <ModalTitle>{title}</ModalTitle>
-        <ModalContent>{content}</ModalContent>
+        {notice && (
+          <ModalNotice>
+            <TiWarning />
+            &nbsp;
+            {notice}
+          </ModalNotice>
+        )}
+
+        <ContentContainer>
+          <ModalTitle>{title}</ModalTitle>
+          <ModalContent>{content}</ModalContent>
+        </ContentContainer>
+        <ButtonContainer>{children}</ButtonContainer>
       </ModalContainer>
     </Container>
   );

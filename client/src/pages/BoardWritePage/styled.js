@@ -249,3 +249,23 @@ export const DeleteButton = styled.button`
     color: #fff;
   }
 `;
+
+export const AlertSubmitButton = styled.button`
+  font-weight: 800;
+  width: 80px;
+  height: 30px;
+  border-radius: 3px;
+  background: #cce6ff;
+  border: 1px solid #c3cfe0;
+  transition: 0.1s;
+
+  /* bottom: 0; */
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 1px #73b7fa inset;
+  }
+  &:active {
+    background: #73b7fa;
+    color: #fff;
+  }
+`;
