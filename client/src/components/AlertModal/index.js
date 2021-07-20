@@ -14,6 +14,8 @@ import PropTypes from "prop-types";
 
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { TiWarning } from "react-icons/ti";
+import { RiAlarmWarningFill, RiErrorWarningFill } from "react-icons/ri";
+import { BsExclamationOctagonFill } from "react-icons/bs";
 
 // [Alert Modal Document]==================================
 //
@@ -31,8 +33,8 @@ import { TiWarning } from "react-icons/ti";
 //  - notice : 모달 제목아래에 주의문구를 추가하여 강조를 줄 수 있다. 입력하지 않으면 보이지 않는다
 //  - title : 알림창의 제목
 //  - content : 알림창의 세부내용
-//  - option : ("success", "failed", "warning", "danger")을 각각 인자로 받으며 옵션마다 ModalHeader
-//            에 제일 좌측 모서리에 표시되는 아이콘이 바뀐다.
+//  - option : ("success", "warning", "danger", "failed")을 각각 인자로 받으며 옵션마다
+//            ModalHeader에 제일 좌측 모서리에 표시되는 아이콘이 바뀐다.
 //
 // ========================================================
 
@@ -64,13 +66,42 @@ function Modal({
       <ModalContainer onClick={stopPropagation} style={style}>
         {useCloseButton && <CloseButton onClick={close}>&times;</CloseButton>}
         <ModalHeader>
-          <IoIosCheckmarkCircle
-            style={{
-              color: "green",
-              padding: "2px 4px 0 8px",
-              fontSize: "20px",
-            }}
-          />
+          {option === "success" && (
+            <IoIosCheckmarkCircle
+              style={{
+                color: "green",
+                padding: "2px 4px 0 8px",
+                fontSize: "20px",
+              }}
+            />
+          )}
+          {option === "warning" && (
+            <RiAlarmWarningFill
+              style={{
+                color: "#f0932b",
+                padding: "2px 4px 0 8px",
+                fontSize: "20px",
+              }}
+            />
+          )}
+          {option === "danger" && (
+            <RiErrorWarningFill
+              style={{
+                color: "#4834d4",
+                padding: "2px 4px 0 8px",
+                fontSize: "20px",
+              }}
+            />
+          )}
+          {option === "failed" && (
+            <BsExclamationOctagonFill
+              style={{
+                color: "#b32304",
+                padding: "2px 4px 0 8px",
+                fontSize: "18px",
+              }}
+            />
+          )}
           {modalHeader}
         </ModalHeader>
 

@@ -116,11 +116,13 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         게시글이 등록되었습니다
       </ConfirmModal>
       <AlertModal
-        show={showAlertModal}
+        show={true}
+        // show={showAlertModal}
         close={onSubmitAlert}
         modalHeader="성공"
         title="게시물 등록이 성공되었습니다"
         content="게시판으로 이동합니다"
+        option="danger"
       >
         <AlertSubmitButton onClick={onSubmitAlert}>확인</AlertSubmitButton>
       </AlertModal>
