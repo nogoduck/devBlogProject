@@ -15,8 +15,26 @@ import PropTypes from "prop-types";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { TiWarning } from "react-icons/ti";
 
-//option에 따라 알림창 헤더의 아이콘이 바뀐다
-//option argument => success, failed, warning, danger
+// [Alert Modal Document]==================================
+//
+//  - children : 버튼을 넣을 공간
+//  - show : (true, false) 불리언 값만 받으며 모달을 켜주고 꺼준다
+//  - close : show를 관리하는 함수를 받는다
+//            ex)
+//            const [showModal, setShowModal]
+//            const onClickShowModal = () => { setShowModal(false) }
+//            위의 훅과 함수가 모달을 관리 한다고 할 때 onClickShowModal
+//            함수를 인자로 넣어준다.
+//  - style : 디자인이 된 알림창 모달이므로 거의 사용할 일은 없을 것이지만 커스텀이 가능하다
+//  - useCloseButton : (true, false) 불리언 값을 받으며 닫기버튼 사용여부를 받는다
+//  - modalHeader : 모달의 제일 상단부분의 제목
+//  - notice : 모달 제목아래에 주의문구를 추가하여 강조를 줄 수 있다. 입력하지 않으면 보이지 않는다
+//  - title : 알림창의 제목
+//  - content : 알림창의 세부내용
+//  - option : ("success", "failed", "warning", "danger")을 각각 인자로 받으며 옵션마다 ModalHeader
+//            에 제일 좌측 모서리에 표시되는 아이콘이 바뀐다.
+//
+// ========================================================
 
 function Modal({
   children,

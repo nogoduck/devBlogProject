@@ -100,6 +100,10 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
     setShowConfirmModal((prev) => !prev);
   };
 
+  const onSubmitAlert = () => {
+    history.push("/menu/board");
+  };
+
   return (
     <Container>
       <Link to="/menu/board">뒤로가기</Link>
@@ -113,14 +117,12 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       </ConfirmModal>
       <AlertModal
         show={showAlertModal}
-        // notice="한 번 등록한 게시물은 삭제가 불가능합니다. 신중하게 생각해주세요"
+        close={onSubmitAlert}
         modalHeader="성공"
         title="게시물 등록이 성공되었습니다"
         content="게시판으로 이동합니다"
       >
-        <Link to="/menu/board">
-          <AlertSubmitButton>확인</AlertSubmitButton>
-        </Link>
+        <AlertSubmitButton onClick={onSubmitAlert}>확인</AlertSubmitButton>
       </AlertModal>
       <BoardHeader>
         <Title>{postId ? "글수정하기" : "글쓰기"}</Title>
