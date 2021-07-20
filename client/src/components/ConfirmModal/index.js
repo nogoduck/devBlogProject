@@ -1,13 +1,18 @@
 import React from "react";
 import Modal from "../Modal";
-import { SubmitButton, CancelButton } from "./styled";
 
-function ConfirmModal({ children, show, close }) {
+import { ModalContent } from "./styled";
+
+function ConfirmModal({ children, show, close, content }) {
   return (
-    <Modal show={show} close={close} useCloseButton={false}>
-      <div>{children}</div>
-      {/* <CancelButton onClick={close}>취소</CancelButton>
-      <SubmitButton>확인</SubmitButton> */}
+    <Modal
+      show={show}
+      close={close}
+      useCloseButton={false}
+      style={{ padding: "30px" }}
+    >
+      <ModalContent>{content}</ModalContent>
+      {children}
     </Modal>
   );
 }

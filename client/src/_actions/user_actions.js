@@ -11,6 +11,7 @@ export function signinUser(onSubmitData) {
     payload: request,
   };
 }
+
 export function signupUser(onSubmitData) {
   const request = axios
     .post("/api/users/signup", onSubmitData)
@@ -23,9 +24,9 @@ export function signupUser(onSubmitData) {
 }
 
 export function auth() {
-  const request = axios.get("/api/users/auth").then((res) => {
-    console.log("auth res.data => ", res.data);
-    return res.data;
+  const request = axios.get("/api/users/auth").then(({ data }) => {
+    console.log("[Redux] auth data >> ", data);
+    return data;
   });
 
   return {
