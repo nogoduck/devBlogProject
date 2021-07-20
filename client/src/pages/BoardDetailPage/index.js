@@ -16,9 +16,11 @@ import {
 } from "./styled";
 import axios from "axios";
 import Gravatar from "react-gravatar";
+import HtmlReactParser from "html-react-parser";
 
 import { timeFormat } from "../BoardPage/_utils";
 import ConfirmModal from "../../components/ConfirmModal";
+import BoardWritePage from "../BoardWritePage";
 
 function BoardDetailPage() {
   useEffect(() => {
@@ -139,13 +141,17 @@ function BoardDetailPage() {
               </td>
             </tr>
           </BoardInfo>
-          <p>{detailPost.data.description}</p>
+          <p>{HtmlReactParser(detailPost.data.description)}</p>
         </Container>
       );
     } else {
       return (
         <Container>
-          <Link to="/menu/board">뒤로가기</Link> <br />
+          <BoardWritePage
+            postId={postId}
+            changeTitle={title}
+            changeDescription={description}
+          />
           <BoardHeader>
             <InputTitle type="text" value={title} onChange={onChangeTitle} />
             {detailPost && (

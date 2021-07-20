@@ -6,8 +6,8 @@ function ConfirmModal({ children, show, close }) {
   return (
     <Modal show={show} close={close} useCloseButton={false}>
       <div>{children}</div>
-      <CancelButton onClick={close}>취소</CancelButton>
-      <SubmitButton>확인</SubmitButton>
+      {/* <CancelButton onClick={close}>취소</CancelButton>
+      <SubmitButton>확인</SubmitButton> */}
     </Modal>
   );
 }

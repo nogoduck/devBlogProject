@@ -19,17 +19,20 @@ export const Table = styled.table`
   border-collapse: collapse;
   font-size: 14px;
   width: 100%;
+  border: none;
 
   & tr {
+    border: none;
     border-bottom: 1px solid #ced6e0;
   }
   & tr:last-child {
     border: none;
   }
-  & tr,
-  td,
+
+  th,
   td {
     text-align: center;
+    border: none;
   }
   & td:first-child {
     padding: 8px 50px 8px 8px;

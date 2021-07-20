@@ -2,7 +2,6 @@ import { withRouter } from "react-router-dom";
 import {
   Container,
   InputTitle,
-  InputDescription,
   Label,
   SubmitButton,
   BoardHeader,
@@ -11,29 +10,38 @@ import {
   CancelButton,
   Box,
   BoxFile,
-  EditorContainer,
+  UpdateButton,
+  DeleteModalSubmitButton,
+  DeleteModalCancelButton,
+  DeleteButton,
 } from "./styled";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import ConfirmModal from "../../components/ConfirmModal";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 // import DocumentEditor from "@ckeditor/ckeditor5-build-decoupled-document";
-import HtmlReactParser from "html-react-parser";
-import ReactHtmlParser from "react-html-parser";
 
-// import NodeHtmlParser from "node-html-parser";
-
-function BoardWritePage({ history }) {
+function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
   const user = useSelector((state) => state.user);
   console.log("user > ", user);
 
   //글쓰기 함수 처리해줘야함 + 서버로 요청 보내서 db에 삽입하기
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(changeTitle);
+  const [description, setDescription] = useState(changeDescription);
   // const [File, setFile] = useState("")
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const onCloseConfirmModal = () => {
+    setShowConfirmModal(false);
+  };
+
+  const onClickConfirmModal = () => {
+    setShowConfirmModal(true);
+  };
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -65,14 +73,61 @@ function BoardWritePage({ history }) {
       });
   };
 
+  const onClickPostUpdateComplete = () => {
+    //DB에 업데이트 요청
+    const variable = { _id: postId, title: title, description: description };
+    console.log("post update, variable :: ", variable);
+    axios
+      .post("/api/board/update", variable)
+      .then(({ data }) => {
+        console.log("detail data :: ", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onClickPostDelete = () => {
+    //DB로부터 삭제요청
+    const deleteId = {
+      _id: postId,
+    };
+    axios
+      .post("/api/board/delete", deleteId)
+      .then(({ data }) => {
+        console.log("delete result :: ", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   console.log("desc > ", description);
 
   return (
     <Container>
       <Link to="/menu/board">뒤로가기</Link>
       <BoardHeader>
-        <Title>글쓰기</Title>
-        <SubmitButton onClick={onSubmit}>등록</SubmitButton>
+        <Title>{changeTitle ? "글수정하기" : "글쓰기"}</Title>
+        {changeTitle && (
+          <DeleteButton onClick={onClickConfirmModal}>삭제</DeleteButton>
+        )}
+        {changeTitle && (
+          <ConfirmModal show={showConfirmModal} close={onCloseConfirmModal}>
+            <DeleteModalCancelButton>취소</DeleteModalCancelButton>
+            <DeleteModalSubmitButton onClick={onClickPostDelete}>
+              확인
+            </DeleteModalSubmitButton>
+            게시글을 삭제하면 복구가 불가능합니다
+          </ConfirmModal>
+        )}
+
+        {changeTitle ? (
+          <UpdateButton onClick={onClickPostUpdateComplete}>
+            수정완료
+          </UpdateButton>
+        ) : (
+          <SubmitButton onClick={onSubmit}>등록</SubmitButton>
+        )}
       </BoardHeader>
       <Label For="title">제목</Label>
       <InputTitle
@@ -82,35 +137,24 @@ function BoardWritePage({ history }) {
         onChange={onChangeTitle}
       />
       <Label For="description">내용</Label>
-      <EditorContainer>
-        <CKEditor
-          editor={ClassicEditor}
-          data="<p>Hello from CKEditor 5!</p>"
-          onReady={(editor) => {
-            // You can store the "editor" and use when it is needed.
-            console.log("Editor is ready to use!", editor);
-          }}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setDescription(data);
-            console.log({ event, editor, data });
-          }}
-          onBlur={(event, editor) => {
-            console.log("Blur.", editor);
-          }}
-          onFocus={(event, editor) => {
-            console.log("Focus.", editor);
-          }}
-        />
-      </EditorContainer>
-      {/* {NodeHtmlParser(description)} */}
-      {HtmlReactParser(description)}
-      {ReactHtmlParser(description)}
-      <br />
-      <InputDescription
-        id="description"
-        // value={description}
-        // onChange={onChangeDescription}
+      <CKEditor
+        editor={ClassicEditor}
+        data={description}
+        onReady={(editor) => {
+          // You can store the "editor" and use when it is needed.
+          console.log("Editor is ready to use!", editor);
+        }}
+        onChange={(event, editor) => {
+          const data = editor.getData();
+          setDescription(data);
+          console.log({ event, editor, data });
+        }}
+        onBlur={(event, editor) => {
+          console.log("Blur.", editor);
+        }}
+        onFocus={(event, editor) => {
+          console.log("Focus.", editor);
+        }}
       />
       <Label For="title">첨부파일</Label>&nbsp;
       <Box>

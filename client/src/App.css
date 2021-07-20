@@ -20,6 +20,14 @@ li {
   list-style: none;
   font-family: "Noto Sans KR", sans-serif;
 }
+table {
+  border-collapse: collapse;
+}
+tr,
+th,
+td {
+  border: 1px solid black;
+}
 a:link {
   text-decoration: none;
 }
