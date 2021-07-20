@@ -20,6 +20,7 @@ import Clock from "../../Clock";
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
 import SignOutModal from "../../SignOutModal";
+import AlertModal from "../../AlertModal";
 
 function RightItem({ history }) {
   //로그인 모달 변수
@@ -118,7 +119,6 @@ function RightItem({ history }) {
         </SignInModal>
 
         {/* 회원가입 모달 */}
-
         <SignUpButton onClick={onToggleSignUp}>회원가입</SignUpButton>
         <SignUpModal show={showSignUpModal} close={onCloseModal}>
           이미 계정이 있습니까?&nbsp;
@@ -137,6 +137,7 @@ function RightItem({ history }) {
           />
         </LinkToGitHub>
 
+        {/* 유저 프로필 */}
         <Profile
           style={{ fontSize: "16px" }}
           onClick={onToggleProfileMenu}
@@ -155,12 +156,17 @@ function RightItem({ history }) {
           />
           {isLogin.authStatus.name}
         </Profile>
-        <button onClick={notModal}>모달 없는 로그아웃</button>
         <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
-        <SignOutModal
+        <AlertModal
           show={showSignOutModal}
           close={onClickSignoutButton}
-        ></SignOutModal>
+          modalHeader="로그아웃"
+          title="로그아웃 하시겠습니까?"
+          content="로그아웃 하시겠습니까?"
+          option="warning"
+          confirm={notModal}
+        ></AlertModal>
+
         {showProfileMenu && (
           <ProfileMenuContainer onClick={onCloseProfileMenu}>
             <ProfileMenu>

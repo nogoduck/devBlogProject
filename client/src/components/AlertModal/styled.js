@@ -60,6 +60,7 @@ export const ModalHeader = styled.div`
   height: 32px;
   border-radius: 5px 5px 0 0;
   display: flex;
+  font-size: 16px;
   align-items: center;
 `;
 
