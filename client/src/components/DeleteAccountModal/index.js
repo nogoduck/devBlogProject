@@ -26,7 +26,7 @@ function DeleteAccountModal({ history, show, close }) {
     };
 
     axios
-      .delete("/api/users/deleteaccount", {
+      .delete("/api/users/delete/account", {
         data: {
           payload,
         },

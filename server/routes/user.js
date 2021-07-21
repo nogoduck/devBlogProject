@@ -1,13 +1,44 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const cookieParser = require("cookie-parser");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-const jwt = require("jsonwebtoken");
+const multer = require("multer");
 
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
+
+//multer 관련 변수 (파일 처리)
+const storage = multer.diskStorage({
+  // 파일 저장 경로
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  // 파일 저장시 파일명
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+
+const upload = multer({ dest: storage }).single("file");
+
+router.post("/update/image", (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      return res.json({
+        success: false,
+        message: "파일 저장에 실패했습니다",
+      });
+    }
+  });
+  // console.log("[multer] upload  req >> ", req);
+  // console.log("[multer] upload  res >> ", res);
+  return res.json({
+    success: true,
+    // fileName: res,
+    // fileName: res.req.file.name,
+    // filePath: res.req.file.path,
+    message: "파일을 저장했습니다.",
+  });
+});
 
 router.post("/signup", (req, res) => {
   const user = new User(req.body);
@@ -82,7 +113,7 @@ router.get("/signout", auth, (req, res) => {
   });
 });
 
-router.post("/updatenickname", (req, res) => {
+router.post("/update/nickname", (req, res) => {
   const { _id, changeNickname } = req.body;
   User.findByIdAndUpdate(_id, { nickname: changeNickname }, (err, user) => {
     if (err) return res.json({ updateNickname: false, err });
@@ -93,7 +124,7 @@ router.post("/updatenickname", (req, res) => {
   });
 });
 
-router.patch("/updatepassword", (req, res) => {
+router.patch("/update/password", (req, res) => {
   const { _id, currentPassword, changePassword } = req.body;
 
   //아이디 조회
@@ -139,7 +170,7 @@ router.patch("/updatepassword", (req, res) => {
   }); //User.findById
 }); //router.patch
 
-router.delete("/deleteaccount", (req, res) => {
+router.delete("/delete/account", (req, res) => {
   console.log(req.body);
   const { _id, email, password } = req.body.payload;
   console.log(_id);

@@ -15,6 +15,7 @@ import {
 } from "./styled";
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
+import axios from "axios";
 
 import useInput from "../../hooks/useInput";
 import DeleteAccountModal from "../../components/DeleteAccountModal";
@@ -28,6 +29,29 @@ function SettingAccountPage() {
 
   const onCloseDeleteAccountModal = () => {
     setShowDeleteAccountModal(false);
+  };
+
+  const onClickUpdatePassword = () => {
+    let currentPassword, changePassword;
+
+    const payload = {
+      _id: user.authStatus._id,
+      currentPassword: currentPassword,
+      changePassword: changePassword,
+    };
+    console.log("payload >> ", payload);
+
+    axios
+      .post("/api/users/update/password", payload)
+      .then(({ data }) => {
+        console.log("data >> ", data);
+        setTimeout(() => {
+          //변경 완료 문구
+        }, 5000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const user = useSelector((state) => state.user);

@@ -117,7 +117,7 @@ export const EditPicket = styled.div`
   background-color: #fff;
 `;
 
-export const EditPrictureSection = styled.div`
+export const EditLabel = styled.label`
   &:hover {
     cursor: pointer;
   }

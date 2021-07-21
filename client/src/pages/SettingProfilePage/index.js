@@ -10,8 +10,8 @@ import {
   Message,
   Error,
   ErrorInput,
+  EditLabel,
   EditPicket,
-  EditPrictureSection,
   UpdateNicknameButton,
   SettingProfileContainer,
 } from "./styled";
@@ -29,6 +29,7 @@ function SettingProfilePage({ history }) {
   const [userNickname, setUserNickname] = useState("");
   const [errorUpdateNickname, setErrorUpdateNickname] = useState(false);
   const [successUpdateNickname, setSuccessUpdateNickname] = useState(false);
+  const [selectImage, setSelectImage] = useState({});
 
   const onChangeUserNickname = (e) => {
     setUserNickname(e.target.value);
@@ -42,7 +43,7 @@ function SettingProfilePage({ history }) {
     console.log("payload >> ", payload);
 
     axios
-      .post("/api/users/updatenickname", payload)
+      .post("/api/users/update/nickname", payload)
       .then(({ data }) => {
         setSuccessUpdateNickname(true);
         console.log("data >> ", data);
@@ -57,8 +58,31 @@ function SettingProfilePage({ history }) {
   };
 
   const onFileSeletor = (e) => {
-    console.log(e.target.files[0]);
+    let fd = new FormData();
+    let file = e.target.files[0];
+    console.log(fd);
+    console.log("e > ", e);
+
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    };
+
+    axios
+      .post("/api/users/update/image", fd, config)
+      .then(({ data }) => {
+        console.log("data >> ", data);
+        setTimeout(() => {
+          //변경 완료 문구
+        }, 5000);
+      })
+      .catch((err) => {
+        alert("프로필 변경에 실패했습니다.");
+      });
+
+    fd.append("file", file);
   };
+
+  console.log("img >> ", selectImage);
 
   return (
     <Container>
@@ -92,7 +116,7 @@ function SettingProfilePage({ history }) {
         <div>
           <Label>프로필 사진</Label>
 
-          <EditPrictureSection>
+          <EditLabel for="select-file">
             <Gravatar
               email={user.authStatus.email}
               size={250}
@@ -111,9 +135,8 @@ function SettingProfilePage({ history }) {
               />
               수정
             </EditPicket>
-          </EditPrictureSection>
-
-          <input type="file" onChange={onFileSeletor} />
+          </EditLabel>
+          <input type="file" id="select-file" onChange={onFileSeletor} />
         </div>
       </SettingProfileContainer>
     </Container>
