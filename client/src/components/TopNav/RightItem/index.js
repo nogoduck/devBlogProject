@@ -145,7 +145,7 @@ function RightItem({ history }) {
               width: "30px",
               height: "30px",
               marginRight: "5px",
-              borderRadius: "25%",
+              borderRadius: "50%",
             }}
           />
           <Nickname>{isLogin.authStatus.nickname}</Nickname>

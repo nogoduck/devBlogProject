@@ -10,14 +10,9 @@ import SettingAccountPage from "../SettingAccountPage";
 
 function SettingPage({ history }) {
   const user = useSelector((state) => state.user);
-  console.log(user);
-
-  console.log("SettingPage Landering");
 
   const { pathname } = useLocation();
   let activePath = pathname.substring(9);
-  console.log(activePath);
-  console.log(typeof activePath);
 
   if (activePath === "") {
     activePath = null;
@@ -40,7 +35,7 @@ function SettingPage({ history }) {
             width: "50px",
             height: "50px",
             marginRight: "12px",
-            borderRadius: "25%",
+            borderRadius: "50%",
           }}
         />
         <NameBox>

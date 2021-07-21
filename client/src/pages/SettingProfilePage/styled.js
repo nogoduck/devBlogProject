@@ -96,8 +96,29 @@ export const SettingProfileContainer = styled.div`
   & > div:nth-child(2) {
     /* border: 1px solid red; */
     width: 256px;
+    position: relative;
   }
   & > div:nth-child(2) > input[type="file"] {
     display: none;
+  }
+`;
+
+export const EditPicket = styled.div`
+  width: 84px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #d0d7de;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 24px;
+  left: 0px;
+  background-color: #fff;
+`;
+
+export const EditPrictureSection = styled.div`
+  &:hover {
+    cursor: pointer;
   }
 `;

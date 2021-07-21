@@ -10,14 +10,17 @@ import {
   Message,
   Error,
   ErrorInput,
+  EditPicket,
+  EditPrictureSection,
   UpdateNicknameButton,
   SettingProfileContainer,
 } from "./styled";
 import { useSelector } from "react-redux";
-
 import Gravatar from "react-gravatar";
 import axios from "axios";
+import { RiImageEditFill } from "react-icons/ri";
 
+import Menu from "../../components/Menu";
 //유효성 검사 12글자 이하, 공백 여부 추가 예정
 //기존의 닉네임과 같은지 검사
 
@@ -89,18 +92,26 @@ function SettingProfilePage({ history }) {
         <div>
           <Label>프로필 사진</Label>
 
-          <Gravatar
-            email={user.authStatus.email}
-            size={250}
-            default="wavatar"
-            style={{
-              width: "250px",
-              height: "250px",
-              marginRight: "12px",
-              borderRadius: "25%",
-              border: "3px solid #d0d7de",
-            }}
-          />
+          <EditPrictureSection>
+            <Gravatar
+              email={user.authStatus.email}
+              size={250}
+              default="wavatar"
+              style={{
+                width: "250px",
+                height: "250px",
+                marginRight: "12px",
+                borderRadius: "50%",
+                border: "1px solid #d0d7de",
+              }}
+            />
+            <EditPicket>
+              <RiImageEditFill
+                style={{ fontSize: "20px", marginRight: "4px" }}
+              />
+              수정
+            </EditPicket>
+          </EditPrictureSection>
 
           <input type="file" onChange={onFileSeletor} />
         </div>
