@@ -87,12 +87,17 @@ export const SettingProfileContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap-reverse;
 
+  //닉네임 섹션
   & > div:nth-child(1) {
     /* border: 1px solid black; */
-    flex: 2;
+    flex: 1;
   }
+  //이미지 섹션
   & > div:nth-child(2) {
     /* border: 1px solid red; */
-    flex: 1;
+    width: 256px;
+  }
+  & > div:nth-child(2) > input[type="file"] {
+    display: none;
   }
 `;

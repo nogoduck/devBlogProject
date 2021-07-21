@@ -29,6 +29,10 @@ const UserSchema = new mongoose.Schema(
     token: {
       type: String,
     },
+    imagePath: {
+      type: String,
+      trim: true,
+    },
   },
   { versionKey: false }
 );

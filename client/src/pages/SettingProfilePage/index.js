@@ -41,16 +41,20 @@ function SettingProfilePage({ history }) {
     axios
       .post("/api/users/updatenickname", payload)
       .then(({ data }) => {
-        history.push("/setting/profile");
         setSuccessUpdateNickname(true);
         console.log("data >> ", data);
         setTimeout(() => {
           setSuccessUpdateNickname(false);
+          history.push("/setting/profile");
         }, 5000);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const onFileSeletor = (e) => {
+    console.log(e.target.files[0]);
   };
 
   return (
@@ -71,7 +75,9 @@ function SettingProfilePage({ history }) {
             </Message>
             {successUpdateNickname && (
               <Message style={{ color: "#009432" }}>
-                닉네임이 성공적으로 변경되었습니다.
+                닉네임이 성공적으로 변경되었습니다. <br />
+                페이지를 새로고침하면 반영되며 5초 후에 자동으로 새로고침
+                됩니다.
               </Message>
             )}
             <UpdateNicknameButton onClick={onClickUpdateNickname}>
@@ -82,6 +88,7 @@ function SettingProfilePage({ history }) {
 
         <div>
           <Label>프로필 사진</Label>
+
           <Gravatar
             email={user.authStatus.email}
             size={250}
@@ -91,8 +98,11 @@ function SettingProfilePage({ history }) {
               height: "250px",
               marginRight: "12px",
               borderRadius: "25%",
+              border: "3px solid #d0d7de",
             }}
           />
+
+          <input type="file" onChange={onFileSeletor} />
         </div>
       </SettingProfileContainer>
     </Container>
