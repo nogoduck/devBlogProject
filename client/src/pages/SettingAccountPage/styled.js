@@ -27,6 +27,7 @@ export const Line = styled.hr``;
 
 export const Label = styled.label`
   margin-top: 16px;
+  margin-bottom: 4px;
   padding: 0 0 0 4px;
   font-size: 14px;
   font-weight: 800;
