@@ -65,3 +65,20 @@ export const Menu = styled.div`
 export const Content = styled.div`
   margin: 0 8px;
 `;
+
+export const NameBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+  height: 64px;
+
+  & > div:first-child {
+    font-size: 24px;
+    font-weight: 800;
+  }
+  & > div:nth-child(2) {
+    font-size: 16px;
+    font-weight: 400;
+    color: #57606a;
+  }
+`;

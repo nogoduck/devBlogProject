@@ -1,7 +1,7 @@
 import { Route, Switch, withRouter, Link, useLocation } from "react-router-dom";
 
 import React, { useEffect } from "react";
-import { Container, Profile, Menu, Content } from "./styled";
+import { Container, Profile, Menu, Content, NameBox } from "./styled";
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
 
@@ -40,11 +40,14 @@ function SettingPage({ history }) {
           style={{
             width: "50px",
             height: "50px",
-            marginRight: "5px",
+            marginRight: "12px",
             borderRadius: "25%",
           }}
         />
-        {user.authStatus.nickname}
+        <NameBox>
+          <div>{user.authStatus.name}</div>
+          <div>{user.authStatus.nickname}</div>
+        </NameBox>
       </Profile>
       <Menu>
         <ul>
