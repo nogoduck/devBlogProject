@@ -82,6 +82,17 @@ router.get("/signout", auth, (req, res) => {
   });
 });
 
+router.post("/updatenickname", (req, res) => {
+  const { _id, changeNickname } = req.body;
+  User.findByIdAndUpdate(_id, { nickname: changeNickname }, (err, user) => {
+    if (err) return res.json({ updateNickname: false, err });
+    return res.status(200).json({
+      updateNickname: true,
+      message: "닉네임을 변경했습니다.",
+    });
+  });
+});
+
 router.patch("/updatepassword", (req, res) => {
   const { _id, currentPassword, changePassword } = req.body;
 
