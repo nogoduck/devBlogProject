@@ -47,7 +47,7 @@ function DeleteAccountModal({ history, show, close }) {
 
   const onSubmitSuccessDeleteAccount = () => {
     setShowSuccessDeleteAccountModal(false);
-    history.push("/");
+    // history.push("/");
   };
 
   return (

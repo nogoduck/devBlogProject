@@ -12,14 +12,9 @@ export default function (ArgsComponent, option, admin = null) {
     useEffect(() => {
       dispatch(auth()).then((res) => {
         if (option) {
-          console.log("option === true");
         } else {
-          console.log("option === false");
         }
-        console.log("hoc - auth: ", res);
-        console.log("auth - option : ", option);
         if (res.payload.isAuth) {
-          console.log("Login State => Succeed");
           //로그인이 된 상황
           if (option) {
             //optione === true
@@ -30,7 +25,6 @@ export default function (ArgsComponent, option, admin = null) {
             // history.push("/");
           }
         } else {
-          console.log("Login State => null");
           //로그인이 안된 상황
           if (option) {
             //optione === true

@@ -66,12 +66,10 @@ function RightItem({ history }) {
   };
 
   const onCloseProfileMenu = () => {
-    console.log("닫아야 한다");
     setShowProfileMenu(false);
   };
 
   const onToggleProfileMenu = () => {
-    console.log("토글해야  한다");
     setShowProfileMenu((prev) => !prev);
   };
 
@@ -79,17 +77,14 @@ function RightItem({ history }) {
     axios
       .get("/api/users/signout")
       .then((res) => {
-        console.log("로그아웃 성공");
         //로그아웃 성공
 
         if (res.data.success) {
-          console.log("로그아웃 - 집으로");
           history.push("/");
         }
       })
       .catch((err) => {
-        console.log("로그아웃 실패");
-        // alert("로그아웃에 실패했습니다.");
+        alert("로그아웃에 실패했습니다.");
       });
   };
 

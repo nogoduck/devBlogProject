@@ -9,18 +9,15 @@ function SignOutModal({ history, show, close }) {
     axios
       .get("/api/users/signout")
       .then((res) => {
-        console.log("로그아웃 성공");
         //로그아웃 성공
 
         if (res.data.success) {
-          console.log("로그아웃 - 집으로");
           show = false;
           history.push("/");
         }
       })
       .catch((err) => {
-        console.log("로그아웃 실패");
-        // alert("로그아웃에 실패했습니다.");
+        alert("로그아웃에 실패했습니다.");
       });
   };
 

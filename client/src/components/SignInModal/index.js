@@ -36,7 +36,7 @@ function SignInModal({ children, show, close }) {
 
         //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
         dispatch(auth()).then((res) => {
-          console.log("Login Auth Status : ", res);
+          // console.log("Login Auth Status >> ", res);
         });
       } else {
         //아이디 또는 비밀번호가 일치하지 않을 때

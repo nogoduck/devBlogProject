@@ -22,7 +22,6 @@ function SettingPage({ history }) {
   if (activePath === "") {
     activePath = null;
   }
-  console.log("if > ", activePath);
 
   useEffect(() => {
     if (!user.authStatus.isAuth) {

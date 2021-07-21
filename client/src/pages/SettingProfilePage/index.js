@@ -1,12 +1,12 @@
 import { withRouter } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Label,
   Input,
   Title,
   Line,
-  Form,
+  NicknameContainer,
   Message,
   Error,
   ErrorInput,
@@ -16,24 +16,68 @@ import {
 import { useSelector } from "react-redux";
 
 import Gravatar from "react-gravatar";
+import axios from "axios";
 
-function SettingProfilePage() {
+//유효성 검사 12글자 이하, 공백 여부 추가 예정
+//기존의 닉네임과 같은지 검사
+
+function SettingProfilePage({ history }) {
   const user = useSelector((state) => state.user);
-  console.log(user);
+  const [userNickname, setUserNickname] = useState("");
+  const [errorUpdateNickname, setErrorUpdateNickname] = useState(false);
+  const [successUpdateNickname, setSuccessUpdateNickname] = useState(false);
+
+  const onChangeUserNickname = (e) => {
+    setUserNickname(e.target.value);
+  };
+
+  const onClickUpdateNickname = () => {
+    const payload = {
+      _id: user.authStatus._id,
+      changeNickname: userNickname,
+    };
+    console.log("payload >> ", payload);
+
+    axios
+      .post("/api/users/updatenickname", payload)
+      .then(({ data }) => {
+        history.push("/setting/profile");
+        setSuccessUpdateNickname(true);
+        console.log("data >> ", data);
+        setTimeout(() => {
+          setSuccessUpdateNickname(false);
+        }, 5000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Container>
       <Title>프로필 설정</Title>
       <Line />
       <SettingProfileContainer>
         <div>
-          <Form>
+          <NicknameContainer>
             <Label>닉네임</Label>
-            <Input type="text" value={user.authStatus.nickname}></Input>
+            <Input
+              type="text"
+              value={userNickname}
+              onChange={onChangeUserNickname}
+            ></Input>
             <Message>
               닉네임은 12글자 이하로 입력가능하며 공백은 허용하지 않습니다.
             </Message>
-            <UpdateNicknameButton>닉네임 변경</UpdateNicknameButton>
-          </Form>
+            {successUpdateNickname && (
+              <Message style={{ color: "#009432" }}>
+                닉네임이 성공적으로 변경되었습니다.
+              </Message>
+            )}
+            <UpdateNicknameButton onClick={onClickUpdateNickname}>
+              닉네임 변경
+            </UpdateNicknameButton>
+          </NicknameContainer>
         </div>
 
         <div>

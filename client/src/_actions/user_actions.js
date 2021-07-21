@@ -25,7 +25,7 @@ export function signupUser(onSubmitData) {
 
 export function auth() {
   const request = axios.get("/api/users/auth").then(({ data }) => {
-    console.log("[Redux] auth data >> ", data);
+    // console.log("[Redux] auth data >> ", data);
     return data;
   });
 

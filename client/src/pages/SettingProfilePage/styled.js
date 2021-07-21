@@ -33,13 +33,13 @@ export const Title = styled.div`
 
 export const Line = styled.hr``;
 
-export const Form = styled.form`
+export const NicknameContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 export const Message = styled.div`
-  font-size: 12px;
+  font-size: 13px;
   margin: 8px 0;
 `;
 
