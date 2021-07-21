@@ -1,11 +1,16 @@
 import React from "react";
 import { Input, Label, Error, DeleteAccountForm } from "./styled";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import AlertModal from "../AlertModal";
 
 function DeleteAccountModal({ show, close }) {
+  const user = useSelector((state) => state.user);
+  console.log("user >> ", user);
+
   const onSubmitDeleteAccount = () => {
+    console.log(user.authStatus._id);
     console.log("delete user");
   };
 

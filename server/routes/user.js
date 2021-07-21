@@ -78,4 +78,13 @@ router.get("/signout", auth, (req, res) => {
   });
 });
 
+router.delete("/deleteaccount/:num1/:num2/game", (req, res) => {
+  console.log(req.params.num1);
+  console.log(req.query);
+
+  console.log(req.body);
+
+  res.send("hi");
+});
+
 module.exports = router;

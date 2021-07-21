@@ -19,7 +19,6 @@ import Gravatar from "react-gravatar";
 import Clock from "../../Clock";
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
-import SignOutModal from "../../SignOutModal";
 import AlertModal from "../../AlertModal";
 
 function RightItem({ history }) {
@@ -75,7 +74,7 @@ function RightItem({ history }) {
     setShowProfileMenu((prev) => !prev);
   };
 
-  const notModal = () => {
+  const onClickSignOut = () => {
     axios
       .get("/api/users/signout")
       .then((res) => {
@@ -164,7 +163,7 @@ function RightItem({ history }) {
           title="로그아웃 하시겠습니까?"
           content="로그아웃 하시겠습니까?"
           option="warning"
-          confirm={notModal}
+          confirm={onClickSignOut}
         ></AlertModal>
 
         {showProfileMenu && (

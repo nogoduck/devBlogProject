@@ -1,40 +1,36 @@
 import styled from "styled-components";
 
-export const DeleteAccountModalSubmitButton = styled.button`
-  /* float: right; */
-  font-weight: 800;
-  width: 80px;
-  height: 30px;
-  border-radius: 3px;
-  background: #cce6ff;
-  border: 1px solid #c3cfe0;
-  transition: 0.1s;
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0px 0px 5px 1px #73b7fa inset;
-  }
-  &:active {
-    background: #73b7fa;
-    color: #fff;
+export const DeleteAccountForm = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Input = styled.input`
+  width: 97%;
+  padding: 5px 0px 5px 7px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #7f8fa6;
+  transition: 0.3s;
+  margin-top: 4px;
+  &:focus {
+    box-shadow: 0px 0px 5px 1px #7f8fa6;
   }
 `;
 
-export const DeleteAccountModalCancelButton = styled.button`
-  /* float: right; */
+export const Label = styled.label`
+  margin-top: 16px;
+  padding: 0 0 0 4px;
+  font-size: 14px;
   font-weight: 800;
-  width: 80px;
-  height: 30px;
-  border-radius: 3px;
-  background: #ffe3de;
-  border: 1px solid #c3cfe0;
-  transition: 0.1s;
-  margin-right: 10px;
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0px 0px 5px 1px #ff9785 inset;
-  }
-  &:active {
-    background: #ff9785;
-    color: #fff;
-  }
+  color: #000;
+  position: relative;
+  display: inline-block;
+`;
+
+export const Error = styled.div`
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: #ff3f34;
 `;

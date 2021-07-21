@@ -26,7 +26,7 @@ function SignOutModal({ history, show, close }) {
 
   return (
     <Modal show={show} close={close} useCloseButton={false}>
-      <div>로그아웃을 진행하겠습니까?</div>
+      <div>로그아웃을 하겠습니까?</div>
       <CancelButton onClick={close}>취소</CancelButton>
       <SubmitButton onClick={onClickSignOut}>확인</SubmitButton>
     </Modal>
