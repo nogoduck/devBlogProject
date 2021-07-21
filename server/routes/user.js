@@ -62,6 +62,7 @@ router.get("/auth", auth, (req, res) => {
   res.status(200).json({
     isAuth: true,
     _id: req.user._id,
+    nickname: req.user.nickname,
     name: req.user.name,
     email: req.user.email,
     isAuth: true,
@@ -78,13 +79,59 @@ router.get("/signout", auth, (req, res) => {
   });
 });
 
-router.delete("/deleteaccount/:num1/:num2/game", (req, res) => {
-  console.log(req.params.num1);
-  console.log(req.query);
-
+router.delete("/deleteaccount", (req, res) => {
   console.log(req.body);
+  const { _id, email, password } = req.body;
+  console.log(_id);
+  console.log(email);
 
-  res.send("hi");
-});
+  User.findById(_id, (err, user) => {
+    if (!user) {
+      return res.json({
+        deleteAccount: false,
+        message: "_id값과 동일한 유저가 존재하지 않습니다.",
+      });
+    } else {
+      console.log("[delete] user found by id >> ", user);
+    }
+
+    //유저를 찾았으면 입력된 이메일과 동일한지 비교
+    if (email !== user.email) {
+      return res.json({
+        deleteAccount: false,
+        message: "현재 로그인된 계정과 입력된 이메일이 일치하지 않습니다.",
+      });
+    } else {
+      console.log("[delete] compare email >> ", true);
+    }
+
+    //이메일이 동일하다면 입력된 비밀번호를 복호화해서 등록된 비밀번호와 비교
+    user.comparePassword(password, (err, pass) => {
+      if (!pass) {
+        return res.json({
+          deleteAccount: false,
+          message: "현재 로그인된 계정과 입력된 비밀번호가 일치하지 않습니다.",
+        });
+      } else {
+        console.log("[delete] compare password >> ", true);
+      }
+    }); //user.comparePassword
+
+    // 비밀번호가 동일한 경우 db에서 해당계정을 삭제한다
+    User.findByIdAndRemove(_id, (err, doc) => {
+      console.log("[result] doc >> ", doc);
+      if (err) {
+        console.log("[delete] doc delete result >> ", false, err);
+        return res.status(500).json({ message: err });
+      } else {
+        console.log("[delete] doc delete result >> ", true);
+        return res.status(200).json({
+          success: true,
+          data: doc,
+        });
+      }
+    }); //User.findByIdAndRemove
+  }); //User.findByid
+}); //router.delete
 
 module.exports = router;

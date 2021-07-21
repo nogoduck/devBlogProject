@@ -6,6 +6,13 @@ import { useDispatch } from "react-redux";
 import { signupUser, auth } from "../../_actions/user_actions";
 import Modal from "../Modal";
 
+// + 추가 예정 사항 (아직 추가 안됌)
+// + 공백 유효성 검사 함수
+// + Server측에서 Email 중복여부 응답
+// + 회원가입 완료시 창 닫기
+// + [다른 컴포넌트도 해당] 모든 요청 관련된 버튼들은 한번만 요청가게 설정
+// + 유효성조건이 일치하지 않으면 버튼 비활성화
+
 function SignUpModal({ children, show, close }) {
   const dispatch = useDispatch();
   const {
@@ -44,10 +51,12 @@ function SignUpModal({ children, show, close }) {
   useEffect(() => {
     //회원가입 모달 창을 닫을 때 입력된 내용이나 에러 초기화
     if (!show) {
+      setValue("nickname");
       setValue("name");
       setValue("email");
       setValue("password");
       setValue("passwordConfirm");
+      errors.nickname = false;
       errors.name = false;
       errors.email = false;
       errors.password = false;
@@ -75,6 +84,30 @@ function SignUpModal({ children, show, close }) {
         >
           <div style={{ fontSize: "24px" }}>회원가입</div>
           <Form onSubmit={handleSubmit(onSubmit)}>
+            <Label>닉네임</Label>
+            <Input
+              id={errors.nickname && "warningInput"}
+              spellCheck="false"
+              name="nickname"
+              {...register("nickname", {
+                required: true,
+                maxLength: 12,
+              })}
+              autoFocus
+              placeholder="canyou"
+            />
+            {errors.nickname && errors.nickname.type === "required" && (
+              <Error>
+                <TiWarning />
+                &nbsp;닉네임을 입력해주세요
+              </Error>
+            )}
+            {errors.nickname && errors.nickname.type === "maxLength" && (
+              <Error>
+                <TiWarning />
+                &nbsp;닉네임은 12자 이하로 입력가능합니다
+              </Error>
+            )}
             <Label>이름</Label>
             <Input
               id={errors.name && "warningInput"}
@@ -84,7 +117,6 @@ function SignUpModal({ children, show, close }) {
                 required: true,
                 maxLength: 10,
               })}
-              autoFocus
               placeholder="canyou"
             />
             {errors.name && errors.name.type === "required" && (

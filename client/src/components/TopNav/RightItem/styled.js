@@ -76,7 +76,7 @@ export const SignUpButton = styled.div`
 export const Profile = styled.div`
   position: absolute;
   right: 60px;
-  font-size: 12px;
+  font-size: 16px;
   height: 60px;
   width: 140px;
   background: #3498db;
@@ -92,6 +92,11 @@ export const Profile = styled.div`
     box-shadow: 0px 0px 5px 3px #2980b9 inset;
     color: #fff;
   }
+`;
+
+export const Nickname = styled.div`
+  max-width: 90px;
+  /* text-align: center; */
 `;
 
 export const LogoutButton = styled.div`

@@ -41,6 +41,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
   //게시글 생성 요청
   const onSubmitCreatePost = () => {
     const paylaod = {
+      nickname: user.authStatus.nickname,
       writer: user.authStatus.name,
       email: user.authStatus.email,
       title: title,

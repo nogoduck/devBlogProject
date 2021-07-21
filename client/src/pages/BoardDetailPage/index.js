@@ -29,7 +29,7 @@ function BoardDetailPage() {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   const [detailPost, setDetailPost] = useState("");
   const { pathname } = useLocation();
@@ -77,7 +77,7 @@ function BoardDetailPage() {
                       borderRadius: "25%",
                     }}
                   />
-                  {detailPost.data.writer}
+                  {detailPost.data.nickname}
                 </Profile>
               </td>
               <td>작성일&nbsp;&nbsp;{timeFormat(detailPost.data.createdAt)}</td>

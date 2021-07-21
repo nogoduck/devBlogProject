@@ -9,6 +9,7 @@ import {
   SignUpButton,
   SignInButton,
   Profile,
+  Nickname,
   LogoutButton,
   ProfileMenuContainer,
   ProfileMenu,
@@ -138,7 +139,6 @@ function RightItem({ history }) {
 
         {/* 유저 프로필 */}
         <Profile
-          style={{ fontSize: "16px" }}
           onClick={onToggleProfileMenu}
           id={showProfileMenu ? "showProfileMenu" : ""}
         >
@@ -153,7 +153,7 @@ function RightItem({ history }) {
               borderRadius: "25%",
             }}
           />
-          {isLogin.authStatus.name}
+          <Nickname>{isLogin.authStatus.nickname}</Nickname>
         </Profile>
         <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
         <AlertModal

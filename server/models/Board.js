@@ -11,6 +11,10 @@ const BoardSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    nickname: {
+      type: String,
+      required: true,
+    },
     writer: {
       type: String,
       required: true,
