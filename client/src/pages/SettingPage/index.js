@@ -44,7 +44,7 @@ function SettingPage({ history }) {
             borderRadius: "25%",
           }}
         />
-        {user.authStatus.name}
+        {user.authStatus.nickname}
       </Profile>
       <Menu>
         <ul>
