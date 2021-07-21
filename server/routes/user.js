@@ -105,41 +105,25 @@ router.patch("/updatepassword", (req, res) => {
       }
 
       //비밀번호가 일치한 경우 바꾸기를 희망하는 비밀번호를 암호화한다
-      bcrypt.genSalt(saltRounds, (err, salt) => {
-        if (err) {
-          console.log("[bcrypt] salt err >> ", err);
-          res.status(400).json({
-            updatePassword: false,
-          });
-        }
-        console.log("[bcrypt] salt >> ", salt);
+      user.encryptPassword(changePassword, (err, encodePassword) => {
+        console.log("err >> ", err);
+        console.log("encodePassword >> ", encodePassword);
 
-        bcrypt.hash(changePassword, salt, (err, hash) => {
-          if (err) {
-            console.log("[bcrypt] hash err >> ", err);
-            res.status(400).json({
-              updatePassword: false,
+        //암호화 한 비밀번호를 db에 저장한다.
+        User.findByIdAndUpdate(
+          _id,
+          { password: encodePassword },
+          { new: true },
+          (err, doc) => {
+            if (err) console.log("[update] err >> ", err);
+            console.log("[update] doc >> ", doc);
+            res.status(200).json({
+              updatePassword: true,
+              message: "비밀번호를 변경했습니다.",
             });
           }
-          console.log("[bcrypt] hash >> ", hash);
-          const encodePassword = hash;
-
-          //암호화 한 비밀번호를 db에 저장한다.
-          User.findByIdAndUpdate(
-            _id,
-            { password: encodePassword },
-            { new: true },
-            (err, doc) => {
-              if (err) console.log("[update] err >> ", err);
-              console.log("[update] doc >> ", doc);
-              res.status(200).json({
-                updatePassword: true,
-                message: "비밀번호를 변경했습니다.",
-              });
-            }
-          );
-        });
-      });
+        ); //User.findByIdAndUpdate
+      }); //user.encryptPassword
     }); //user.comparePassword
   }); //User.findById
 }); //router.patch

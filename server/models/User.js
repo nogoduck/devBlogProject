@@ -70,6 +70,23 @@ UserSchema.methods.comparePassword = function (plainPassword, cb) {
   });
 };
 
+UserSchema.methods.encryptPassword = function (plainPassword, cb) {
+  console.log("[encryptPassword] plainPassword >> ", plainPassword);
+  bcrypt.genSalt(saltRounds, (err, salt) => {
+    if (err) console.log("[bcrypt] salt err >> ", err);
+    console.log("[bcrypt] salt >> ", salt);
+
+    bcrypt.hash(plainPassword, salt, (err, hash) => {
+      if (err) {
+        console.log("[bcrypt] hash err >> ", err);
+        cb(err);
+      }
+      console.log("[bcrypt] hash >> ", hash);
+      cb(null, hash);
+    });
+  });
+};
+
 UserSchema.methods.createToken = function (cb) {
   const user = this;
   console.log("token user this ", user);
