@@ -18,25 +18,26 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ dest: storage }).single("file");
+const upload = multer({ storage: storage }).single("file");
 
 router.post("/update/image", (req, res) => {
+  console.log("image 요청");
+
   upload(req, res, (err) => {
     if (err) {
       return res.json({
         success: false,
         message: "파일 저장에 실패했습니다",
+        error: err,
       });
     }
-  });
-  // console.log("[multer] upload  req >> ", req);
-  // console.log("[multer] upload  res >> ", res);
-  return res.json({
-    success: true,
-    // fileName: res,
-    // fileName: res.req.file.name,
-    // filePath: res.req.file.path,
-    message: "파일을 저장했습니다.",
+
+    return res.json({
+      success: true,
+      fileName: req.file.filename,
+      filePath: req.file.filepath,
+      message: "파일을 저장했습니다.",
+    });
   });
 });
 
