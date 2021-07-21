@@ -36,6 +36,7 @@ const UserSchema = new mongoose.Schema(
 UserSchema.pre("save", function (next) {
   const user = this;
 
+  //비밀번호 변경때만 암호화를 하기 위한 조건인데 작동 조건을 잘 몰라서 사용하지 않고 있다.
   if (user.isModified("password")) {
     bcrypt.genSalt(saltRounds, (err, salt) => {
       if (err) return next(err);
@@ -58,12 +59,12 @@ UserSchema.methods.comparePassword = function (plainPassword, cb) {
   const user = this;
 
   bcrypt.compare(plainPassword, user.password, (err, pass) => {
-    console.log("plaingPassword::", plainPassword);
+    console.log("plaingPassword >> ", plainPassword);
 
     if (plainPassword === user.password) {
-      console.log("password true");
+      console.log("password compare >> ", true);
     }
-    console.log("PASS:", pass);
+    console.log("pass >> ", pass);
     if (err) return cb(err);
     cb(null, pass);
   });

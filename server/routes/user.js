@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const cookieParser = require("cookie-parser");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const jwt = require("jsonwebtoken");
 
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
@@ -79,9 +82,71 @@ router.get("/signout", auth, (req, res) => {
   });
 });
 
+router.patch("/updatepassword", (req, res) => {
+  const { _id, currentPassword, changePassword } = req.body;
+
+  //아이디 조회
+  User.findById(_id, (err, user) => {
+    if (!user) {
+      return res.json({
+        updatePassword: false,
+        message: "_id값과 동일한 유저가 존재하지 않습니다.",
+      });
+    }
+
+    // 유저가 존재한다면 현재 비밀번호 복호화 후 일치하는지 확인
+    console.log("[update] user found by id >> ", user);
+    user.comparePassword(currentPassword, (err, pass) => {
+      if (!pass) {
+        return res.json({
+          updatePassword: false,
+          message: "현재 로그인된 계정과 입력된 비밀번호가 일치하지 않습니다.",
+        });
+      }
+
+      //비밀번호가 일치한 경우 바꾸기를 희망하는 비밀번호를 암호화한다
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        if (err) {
+          console.log("[bcrypt] salt err >> ", err);
+          res.status(400).json({
+            updatePassword: false,
+          });
+        }
+        console.log("[bcrypt] salt >> ", salt);
+
+        bcrypt.hash(changePassword, salt, (err, hash) => {
+          if (err) {
+            console.log("[bcrypt] hash err >> ", err);
+            res.status(400).json({
+              updatePassword: false,
+            });
+          }
+          console.log("[bcrypt] hash >> ", hash);
+          const encodePassword = hash;
+
+          //암호화 한 비밀번호를 db에 저장한다.
+          User.findByIdAndUpdate(
+            _id,
+            { password: encodePassword },
+            { new: true },
+            (err, doc) => {
+              if (err) console.log("[update] err >> ", err);
+              console.log("[update] doc >> ", doc);
+              res.status(200).json({
+                updatePassword: true,
+                message: "비밀번호를 변경했습니다.",
+              });
+            }
+          );
+        });
+      });
+    }); //user.comparePassword
+  }); //User.findById
+}); //router.patch
+
 router.delete("/deleteaccount", (req, res) => {
   console.log(req.body);
-  const { _id, email, password } = req.body;
+  const { _id, email, password } = req.body.payload;
   console.log(_id);
   console.log(email);
 
@@ -112,25 +177,25 @@ router.delete("/deleteaccount", (req, res) => {
           deleteAccount: false,
           message: "현재 로그인된 계정과 입력된 비밀번호가 일치하지 않습니다.",
         });
-      } else {
-        console.log("[delete] compare password >> ", true);
       }
-    }); //user.comparePassword
 
-    // 비밀번호가 동일한 경우 db에서 해당계정을 삭제한다
-    User.findByIdAndRemove(_id, (err, doc) => {
-      console.log("[result] doc >> ", doc);
-      if (err) {
-        console.log("[delete] doc delete result >> ", false, err);
-        return res.status(500).json({ message: err });
-      } else {
-        console.log("[delete] doc delete result >> ", true);
-        return res.status(200).json({
-          success: true,
-          data: doc,
-        });
-      }
-    }); //User.findByIdAndRemove
+      //비밀번호가 일치
+      console.log("[delete] compare password >> ", true);
+      // 비밀번호가 동일한 경우 db에서 해당계정을 삭제한다
+      User.findByIdAndRemove(_id, (err, doc) => {
+        console.log("[result] doc >> ", doc);
+        if (err) {
+          console.log("[delete] doc delete result >> ", false, err);
+          return res.status(500).json({ message: err });
+        } else {
+          console.log("[delete] doc delete result >> ", true);
+          return res.status(200).json({
+            deleteAccount: true,
+            data: doc,
+          });
+        }
+      }); //User.findByIdAndRemove
+    }); //user.comparePassword
   }); //User.findByid
 }); //router.delete
 
