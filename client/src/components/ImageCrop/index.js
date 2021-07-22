@@ -66,6 +66,7 @@ function ImageCrop({ show, close, src }) {
   }, [completedCrop]);
 
   const onClickSaveImage = (canvas, crop) => {
+    console.log("save");
     if (!crop || !canvas) {
       return;
     }
@@ -124,7 +125,7 @@ function ImageCrop({ show, close, src }) {
           <input type="file" accept="image/*" onChange={onSelectFile} />
         </div>
         <ReactCrop
-          src={src}
+          src={upImg}
           onImageLoaded={onLoad}
           crop={crop}
           onChange={(c) => setCrop(c)}
@@ -133,6 +134,7 @@ function ImageCrop({ show, close, src }) {
           minWidth={250}
           minHeight={250}
           keepSelection={true}
+          style={{ maxHeight: "400px", maxWidth: "500px", paddingTop: "30px" }}
         />
         <div>
           <canvas

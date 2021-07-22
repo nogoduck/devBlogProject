@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
-import { Container, MenuContainer, CloseButton } from "./styled";
+import { Container, MenuContainer } from "./styled";
 
-function Menu({ children, show, close, style, useCloseButton }) {
+function Menu({ children, show, close, style }) {
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
   }, []);
@@ -13,15 +13,11 @@ function Menu({ children, show, close, style, useCloseButton }) {
   return (
     <Container onClick={close}>
       <MenuContainer onClick={stopPropagation} style={style}>
-        {useCloseButton && <CloseButton onClick={close}>&times;</CloseButton>}
+        {/* <button onClick={close}>닫는다</button> */}
         {children}
       </MenuContainer>
     </Container>
   );
 }
-
-Menu.defaultProps = {
-  useCloseButton: true,
-};
 
 export default Menu;

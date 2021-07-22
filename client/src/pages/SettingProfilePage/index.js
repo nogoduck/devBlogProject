@@ -1,5 +1,5 @@
 import { withRouter } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Container,
   Label,
@@ -10,7 +10,8 @@ import {
   Message,
   Error,
   ErrorInput,
-  EditLabel,
+  List,
+  EditProfileImage,
   EditPicket,
   ProfileImage,
   UpdateNicknameButton,
@@ -22,6 +23,7 @@ import axios from "axios";
 import { RiImageEditFill } from "react-icons/ri";
 
 import Menu from "../../components/Menu";
+import Modal from "../../components/Modal";
 import ImageCrop from "../../components/ImageCrop";
 
 //유효성 검사 12글자 이하, 공백 여부 추가 예정
@@ -33,8 +35,21 @@ function SettingProfilePage({ history, src }) {
   const [errorUpdateNickname, setErrorUpdateNickname] = useState(false);
   const [successUpdateNickname, setSuccessUpdateNickname] = useState(false);
   const [image, setImage] = useState("");
+  const [showEditProfileMenu, setShowEditProfileMenu] = useState(false);
 
   const [showImageCropModal, setShowImageCropModal] = useState(false);
+
+  const stopPropagation = useCallback((e) => {
+    e.stopPropagation();
+  }, []);
+
+  const onClickEditProfileMenu = () => {
+    setShowEditProfileMenu((prev) => !prev);
+  };
+
+  const onCloseEditProfileMenu = () => {
+    setShowEditProfileMenu(false);
+  };
 
   const onClickImageCropModal = () => {
     setShowImageCropModal((prev) => !prev);
@@ -70,36 +85,6 @@ function SettingProfilePage({ history, src }) {
       });
   };
 
-  const onFileSeletor = (e) => {
-    let fd = new FormData();
-    let file = e.target.files[0];
-
-    const config = {
-      header: { "content-type": "multipart/form-data" },
-    };
-
-    fd.append("file", file);
-
-    console.log("config >> ", config);
-    console.log("file >> ", file);
-    console.log("fd >> ", fd);
-
-    axios
-      .post("/api/users/update/image", fd, config)
-      .then(({ data }) => {
-        console.log("data >> ", data);
-
-        setImage(data);
-
-        setTimeout(() => {
-          //변경 완료 문구
-        }, 5000);
-      })
-      .catch((err) => {
-        alert("프로필 변경에 실패했습니다.");
-      });
-  };
-
   console.log("image >> ", image);
   return (
     <Container>
@@ -131,33 +116,23 @@ function SettingProfilePage({ history, src }) {
           </NicknameContainer>
         </div>
 
-        {/* 초기화면 프로필 이미지 구성 계획, 
- 페이지 접속 => 
- 1. imagePath가 있는지 조회 없으면 Gravatar 이메일 이미지 랜더링
- 1-1. 유저가 이미지를 변경 하려는 경우 변경내역 다 메모리를 통해 미리보기로 보여준다
- 1-2. 유저가 프로필을 저장할때 server 측의 multer모듈을 통해 로컬 스토리지에 저장후 
-      db를 통해 user 모델의 imagePath 컬렉션에 image경로를 넣어준다.
- 
- 
-
-      
- 
-2. imagePath가 존재하는 경우 이미지 랜더링 
-2-1. 이미지 저장시 기존의 이미지는 로컬 스토리지에서 삭제 후 저장한다
-2-2. 이미지를 기본이미지로 저장 시 로컬 스토리지에서 삭제 후 imagePath를 제거해준다.
-  
-
-
- 3. 메뉴 항목 중 기본 선택 시 동작
- 
-
-
-
- */}
-
-        <div>
+        <div style={{ position: "relative" }}>
           <Label>프로필 사진</Label>
-          <EditLabel for="select-file">
+
+          {/* ref학습해서 바깥쪽 꺼짐동작 구현예정 */}
+          <Menu
+            show={showEditProfileMenu}
+            close={onCloseEditProfileMenu}
+            style={{ position: "absolute", right: "30px", bottom: "100px" }}
+          >
+            <List>
+              <ul>
+                <li onClick={onClickImageCropModal}>프로필 사진 업로드</li>
+                <li>기본 이미지로 변경</li>
+              </ul>
+            </List>
+          </Menu>
+          <EditProfileImage onClick={onClickEditProfileMenu}>
             {image ? (
               <ProfileImage src={`http://localhost:5050/${image.filePath}`} />
             ) : (
@@ -174,15 +149,13 @@ function SettingProfilePage({ history, src }) {
                 }}
               />
             )}
-
             <EditPicket>
               <RiImageEditFill
                 style={{ fontSize: "20px", marginRight: "4px" }}
               />
-              수정
+              변경
             </EditPicket>
-          </EditLabel>
-          <input type="file" id="select-file" onChange={onFileSeletor} />
+          </EditProfileImage>
         </div>
       </SettingProfileContainer>
       <button onClick={onClickImageCropModal}>showModal</button>

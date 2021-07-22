@@ -104,7 +104,7 @@ export const SettingProfileContainer = styled.div`
 `;
 
 export const EditPicket = styled.div`
-  width: 84px;
+  width: 74px;
   height: 32px;
   display: flex;
   justify-content: center;
@@ -115,9 +115,10 @@ export const EditPicket = styled.div`
   bottom: 24px;
   left: 0px;
   background-color: #fff;
+  font-size: 15px;
 `;
 
-export const EditLabel = styled.label`
+export const EditProfileImage = styled.div`
   width: 250px;
   height: 250px;
   &:hover {
@@ -130,4 +131,23 @@ export const ProfileImage = styled.img`
   height: 250px;
   border-radius: 50%;
   border: 1px solid #d0d7de;
+`;
+
+export const List = styled.div`
+  font-size: 15px;
+
+  & li {
+    padding: 4px 20px;
+  }
+  & li:first-child {
+    margin-top: 8px;
+  }
+  & li:last-child {
+    margin-bottom: 8px;
+  }
+  & li:hover {
+    background-color: #0969da;
+    color: #fff;
+    cursor: pointer;
+  }
 `;
