@@ -130,6 +130,21 @@ function ImageCrop({ show, close, src }) {
 
     fd.append("file", file);
 
+    console.log("----------------------blob to Url---[failed]");
+    let blob = new Blob([new ArrayBuffer(file)], { type: "image/png" });
+    console.log("blob > ", blob);
+    const url = window.URL.createObjectURL(blob);
+    console.log("url > ", url);
+    console.log("------------------------------------");
+
+    file.arrayBuffer().then((buffer) => {
+      console.log("buffer > ", buffer);
+      // const url2 = window.URL.createObjectURL(buffer);
+      // console.log("url2 > ", url2);
+    });
+
+    console.log(window.URL.createObjectURL(file));
+
     const config = {
       header: {
         processData: false,
