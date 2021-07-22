@@ -34,6 +34,16 @@ function SettingProfilePage({ history, src }) {
   const [successUpdateNickname, setSuccessUpdateNickname] = useState(false);
   const [image, setImage] = useState("");
 
+  const [showImageCropModal, setShowImageCropModal] = useState(false);
+
+  const onClickImageCropModal = () => {
+    setShowImageCropModal((prev) => !prev);
+  };
+
+  const onCloseImageCropModal = () => {
+    setShowImageCropModal(false);
+  };
+
   const onChangeUserNickname = (e) => {
     setUserNickname(e.target.value);
   };
@@ -175,7 +185,8 @@ function SettingProfilePage({ history, src }) {
           <input type="file" id="select-file" onChange={onFileSeletor} />
         </div>
       </SettingProfileContainer>
-      <ImageCrop src="http://localhost:5050/UploadProfileImage/1626927201666_ad12.png" />
+      <button onClick={onClickImageCropModal}>showModal</button>
+      <ImageCrop show={showImageCropModal} close={onCloseImageCropModal} />
     </Container>
   );
 }
