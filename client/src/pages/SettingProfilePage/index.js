@@ -170,8 +170,8 @@ function SettingProfilePage({ history, src }) {
           </EditLabel>
           <input type="file" id="select-file" onChange={onFileSeletor} />
         </div>
-        <ImageCrop src="http://localhost:5050/UploadProfileImage/1626927201666_ad12.png" />
       </SettingProfileContainer>
+      <ImageCrop src="http://localhost:5050/UploadProfileImage/1626927201666_ad12.png" />
     </Container>
   );
 }
