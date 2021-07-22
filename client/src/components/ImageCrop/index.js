@@ -97,8 +97,6 @@ function ImageCrop({ show, close, src }) {
   const [blobPath, setBlobPath] = useState("");
 
   const onClickSaveImage = (canvas, crop) => {
-    let file;
-
     if (!crop || !canvas) {
       return;
     }
@@ -106,18 +104,66 @@ function ImageCrop({ show, close, src }) {
     console.log("saveImage");
     console.log(canvas, crop);
 
-    canvas.toBlob(
-      (blob) => {
-        const blobURL = window.URL.createObjectURL(blob);
+    const canvasUrl = canvas.toDataURL("image/png");
 
-        console.log("blobURL >> ", blobURL);
-        setBlobPath(blobURL);
+    console.log("canvasUrl > ", canvasUrl);
 
-        post();
+    //base64로 데이터 인코딩
+    const base64Incoding = atob(canvasUrl.split(",")[1]);
+    console.log("base64Incoding > ", base64Incoding);
+
+    const array = [];
+
+    //charCodeAt : 주어진 인덱스마다 UTF-16코드를 나타내는 0~65536 사이의 정수로 변환
+    for (let i = 0; i < base64Incoding.length; i++) {
+      array.push(base64Incoding.charCodeAt(i));
+    }
+
+    console.log("array > ", array);
+
+    //blob 생성
+    const file = new Blob([new Uint8Array(array)], { type: "image/png" });
+
+    console.log("file > ", file);
+
+    const fd = new FormData();
+
+    fd.append("file", file);
+
+    const config = {
+      header: {
+        processData: false,
+        "content-type": false,
       },
-      "image/png",
-      1
-    );
+    };
+
+    console.log("fd >> ", fd);
+
+    axios
+      .post("/api/users/update/image", fd, config)
+      .then(({ data }) => {
+        console.log("data >> ", data);
+
+        setTimeout(() => {
+          //변경 완료 문구
+        }, 5000);
+      })
+      .catch((err) => {
+        alert("프로필 변경에 실패했습니다.");
+      });
+
+    // canvas.toBlob(
+    //   (blob) => {
+    //     const blobURL = window.URL.createObjectURL(blob);
+
+    //     console.log("blobURL >> ", blobURL);
+    //     setBlobPath(blobURL);
+
+    //     post();
+    //   },
+    //   "image/png",
+    //   1
+    // );
 
     // ------------------ 전송 -----------------
   };
