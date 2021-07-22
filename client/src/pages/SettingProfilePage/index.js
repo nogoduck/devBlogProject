@@ -12,6 +12,7 @@ import {
   ErrorInput,
   EditLabel,
   EditPicket,
+  ProfileImage,
   UpdateNicknameButton,
   SettingProfileContainer,
 } from "./styled";
@@ -29,7 +30,7 @@ function SettingProfilePage({ history }) {
   const [userNickname, setUserNickname] = useState("");
   const [errorUpdateNickname, setErrorUpdateNickname] = useState(false);
   const [successUpdateNickname, setSuccessUpdateNickname] = useState(false);
-  const [selectImage, setSelectImage] = useState({});
+  const [image, setImage] = useState("");
 
   const onChangeUserNickname = (e) => {
     setUserNickname(e.target.value);
@@ -60,17 +61,20 @@ function SettingProfilePage({ history }) {
   const onFileSeletor = (e) => {
     let fd = new FormData();
     let file = e.target.files[0];
-    console.log(fd);
-    console.log("e > ", e);
 
     const config = {
       header: { "content-type": "multipart/form-data" },
     };
 
+    fd.append("file", file);
+
     axios
       .post("/api/users/update/image", fd, config)
       .then(({ data }) => {
         console.log("data >> ", data);
+
+        setImage(data);
+
         setTimeout(() => {
           //변경 완료 문구
         }, 5000);
@@ -78,12 +82,9 @@ function SettingProfilePage({ history }) {
       .catch((err) => {
         alert("프로필 변경에 실패했습니다.");
       });
-
-    fd.append("file", file);
   };
 
-  console.log("img >> ", selectImage);
-
+  console.log("image >> ", image);
   return (
     <Container>
       <Title>프로필 설정</Title>
@@ -115,20 +116,27 @@ function SettingProfilePage({ history }) {
 
         <div>
           <Label>프로필 사진</Label>
-
+          <img src="http://localhost:5050/uploads/1626912673589_ad08.png" />
+          <img src="http://localhost:5050/1626912673589_ad08.png" />
           <EditLabel for="select-file">
-            <Gravatar
-              email={user.authStatus.email}
-              size={250}
-              default="wavatar"
-              style={{
-                width: "250px",
-                height: "250px",
-                marginRight: "12px",
-                borderRadius: "50%",
-                border: "1px solid #d0d7de",
-              }}
-            />
+            {image ? (
+              // <div>{image.fileName}</div>
+              <ProfileImage src={`http://localhost:5050/${image.filePath}`} />
+            ) : (
+              <Gravatar
+                email={user.authStatus.email}
+                size={250}
+                default="wavatar"
+                style={{
+                  width: "250px",
+                  height: "250px",
+                  marginRight: "12px",
+                  borderRadius: "50%",
+                  border: "1px solid #d0d7de",
+                }}
+              />
+            )}
+
             <EditPicket>
               <RiImageEditFill
                 style={{ fontSize: "20px", marginRight: "4px" }}
