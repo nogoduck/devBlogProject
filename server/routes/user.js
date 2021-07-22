@@ -23,6 +23,8 @@ const upload = multer({ storage: storage }).single("file");
 router.post("/update/image", (req, res) => {
   console.log("image 요청");
 
+  console.log("req data >> ", req);
+
   upload(req, res, (err) => {
     if (err) {
       return res.json({
@@ -34,8 +36,8 @@ router.post("/update/image", (req, res) => {
 
     return res.json({
       success: true,
-      fileName: req.file.filename,
-      filePath: req.file.path,
+      // fileName: req.file.filename,
+      // filePath: req.file.path,
       message: "파일을 저장했습니다.",
     });
   });

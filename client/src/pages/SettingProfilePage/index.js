@@ -70,6 +70,10 @@ function SettingProfilePage({ history, src }) {
 
     fd.append("file", file);
 
+    console.log("config >> ", config);
+    console.log("file >> ", file);
+    console.log("fd >> ", fd);
+
     axios
       .post("/api/users/update/image", fd, config)
       .then(({ data }) => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Container } from "./styled";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import axios from "axios";
 
 import Modal from "../Modal";
 
@@ -10,6 +11,7 @@ function generateDownload(canvas, crop) {
     return;
   }
 
+  //자세히는 모르겠으나 캔버스에서 잘려간 부분을 메모리에 올려주는 역할을 하는 것 같다
   canvas.toBlob(
     (blob) => {
       const previewUrl = window.URL.createObjectURL(blob);
@@ -19,6 +21,10 @@ function generateDownload(canvas, crop) {
       anchor.href = URL.createObjectURL(blob);
       anchor.click();
 
+      console.log("previewUrl > ", previewUrl);
+      console.log("anchor > ", anchor);
+      console.log("anchor.download > ", anchor.download);
+      console.log("anchor.href > ", anchor.href);
       window.URL.revokeObjectURL(previewUrl);
     },
     "image/png",
@@ -30,7 +36,14 @@ function ImageCrop({ show, close, src }) {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
-  const [crop, setCrop] = useState({ aspect: 1 / 1, x: 0, y: 0 });
+  const [crop, setCrop] = useState({
+    unit: "px",
+    width: 250,
+    height: 250,
+    aspect: 1 / 1,
+    x: 0,
+    y: 0,
+  });
   const [completedCrop, setCompletedCrop] = useState(null);
 
   const onSelectFile = (e) => {
@@ -81,7 +94,11 @@ function ImageCrop({ show, close, src }) {
   console.log("ref >> ", previewCanvasRef.current);
   console.log("com crop >> ", completedCrop);
 
+  const [blobPath, setBlobPath] = useState("");
+
   const onClickSaveImage = (canvas, crop) => {
+    let file;
+
     if (!crop || !canvas) {
       return;
     }
@@ -89,12 +106,53 @@ function ImageCrop({ show, close, src }) {
     console.log("saveImage");
     console.log(canvas, crop);
 
-    canvas.toBlob((blob) => {
-      const previewUrl = window.URL.createObjectURL(blob);
+    canvas.toBlob(
+      (blob) => {
+        const blobURL = window.URL.createObjectURL(blob);
 
-      console.log(previewUrl);
-    });
+        console.log("blobURL >> ", blobURL);
+        setBlobPath(blobURL);
+
+        post();
+      },
+      "image/png",
+      1
+    );
+
+    // ------------------ 전송 -----------------
   };
+
+  function post() {
+    let fd = new FormData();
+    //  let file = e.target.files[0];
+    // console.log("file >> ", file);
+    console.log("blobPath >> ", blobPath);
+
+    let objBlob = new Blob([blobPath], { type: "image/*" });
+
+    console.log("objBlob > ", objBlob);
+
+    const config = {
+      header: { "content-type": "multipart/form-data" },
+    };
+
+    fd.append("file", blobPath);
+
+    console.log("fd >> ", fd);
+
+    axios
+      .post("/api/users/update/image", fd, config)
+      .then(({ data }) => {
+        console.log("data >> ", data);
+
+        setTimeout(() => {
+          //변경 완료 문구
+        }, 5000);
+      })
+      .catch((err) => {
+        alert("프로필 변경에 실패했습니다.");
+      });
+  }
 
   return (
     <div>
