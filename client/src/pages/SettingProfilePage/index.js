@@ -114,13 +114,34 @@ function SettingProfilePage({ history }) {
           </NicknameContainer>
         </div>
 
+        {/* 초기화면 프로필 이미지 구성 계획, 
+ 페이지 접속 => 
+ 1. imagePath가 있는지 조회 없으면 Gravatar 이메일 이미지 랜더링
+ 1-1. 유저가 이미지를 변경 하려는 경우 변경내역 다 메모리를 통해 미리보기로 보여준다
+ 1-2. 유저가 프로필을 저장할때 server 측의 multer모듈을 통해 로컬 스토리지에 저장후 
+      db를 통해 user 모델의 imagePath 컬렉션에 image경로를 넣어준다.
+ 
+ 
+
+      
+ 
+2. imagePath가 존재하는 경우 이미지 랜더링 
+2-1. 이미지 저장시 기존의 이미지는 로컬 스토리지에서 삭제 후 저장한다
+2-2. 이미지를 기본이미지로 저장 시 로컬 스토리지에서 삭제 후 imagePath를 제거해준다.
+  
+
+
+ 3. 메뉴 항목 중 기본 선택 시 동작
+ 
+
+
+
+ */}
+
         <div>
           <Label>프로필 사진</Label>
-          <img src="http://localhost:5050/uploads/1626912673589_ad08.png" />
-          <img src="http://localhost:5050/1626912673589_ad08.png" />
           <EditLabel for="select-file">
             {image ? (
-              // <div>{image.fileName}</div>
               <ProfileImage src={`http://localhost:5050/${image.filePath}`} />
             ) : (
               <Gravatar

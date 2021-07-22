@@ -118,7 +118,16 @@ export const EditPicket = styled.div`
 `;
 
 export const EditLabel = styled.label`
+  width: 250px;
+  height: 250px;
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const ProfileImage = styled.img`
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px solid #d0d7de;
 `;

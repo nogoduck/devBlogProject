@@ -10,7 +10,7 @@ const { auth } = require("../middleware/auth");
 const storage = multer.diskStorage({
   // 파일 저장 경로
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, "UploadProfileImage/");
   },
   // 파일 저장시 파일명
   filename: (req, file, cb) => {
@@ -35,7 +35,7 @@ router.post("/update/image", (req, res) => {
     return res.json({
       success: true,
       fileName: req.file.filename,
-      filePath: req.file.filepath,
+      filePath: req.file.path,
       message: "파일을 저장했습니다.",
     });
   });

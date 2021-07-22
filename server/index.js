@@ -20,6 +20,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use("/UploadProfileImage", express.static("UploadProfileImage"));
 
 //=============[EXP CODE]==============
 // 사용법이 미숙한 코드나 문법을 테스트
@@ -41,6 +42,13 @@ mongoose
 app.use("/api/users", userRouter);
 app.use("/api/board", boardRouter);
 app.use("/api/todo", todoRouter);
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    index: true,
+    state: true,
+  });
+});
 
 app.listen(port, () => {
   console.log(`Connected Port: ${port}`);
