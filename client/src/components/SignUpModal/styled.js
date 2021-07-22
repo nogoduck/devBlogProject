@@ -97,7 +97,6 @@ export const Line = styled.fieldset`
 
 export const Button = styled.button`
   width: 300px;
-
   height: 30px;
   border-radius: 3px;
   background: #dff9fb;

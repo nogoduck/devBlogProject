@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Container } from "./styled";
+import { Container, InputHidden, InputLabel } from "./styled";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import axios from "axios";
 
 import Modal from "../Modal";
+import AlertModal from "../AlertModal";
 
-function ImageCrop({ show, close, src }) {
+function ImageCrop({ show, close }) {
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
   const [crop, setCrop] = useState({
     unit: "px",
-    width: 250,
-    height: 250,
+    width: 150,
+    height: 150,
     aspect: 1 / 1,
     x: 0,
     y: 0,
@@ -33,6 +34,10 @@ function ImageCrop({ show, close, src }) {
   }, []);
 
   useEffect(() => {
+    if (!show) {
+      setUpImg("");
+    }
+
     if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
       return;
     }
@@ -63,16 +68,17 @@ function ImageCrop({ show, close, src }) {
       crop.width,
       crop.height
     );
-  }, [completedCrop]);
+  }, [completedCrop, show]);
 
-  const onClickSaveImage = (canvas, crop) => {
-    console.log("save");
+  const onClickUploadImage = (canvas, crop) => {
+    console.log("Upload");
+    console.log("canvas, crop > ", canvas, "+", crop);
     if (!crop || !canvas) {
       return;
     }
 
     const canvasUrl = canvas.toDataURL("image/png");
-    // console.log("canvasUrl > ", canvasUrl);
+    console.log("canvasUrl > ", canvasUrl);
 
     //base64로 데이터 인코딩
     const base64Incoding = atob(canvasUrl.split(",")[1]);
@@ -117,13 +123,18 @@ function ImageCrop({ show, close, src }) {
         alert("프로필 변경에 실패했습니다.");
       });
   };
-
+  console.log(previewCanvasRef.current, completedCrop);
   return (
-    <Modal show={show} close={close}>
-      <div>
-        <div>
-          <input type="file" accept="image/*" onChange={onSelectFile} />
-        </div>
+    <AlertModal
+      show={show}
+      close={close}
+      modalHeader="프로필 사진 변경"
+      submitButtonName="업로드"
+      confirm={() =>
+        onClickUploadImage(previewCanvasRef.current, completedCrop)
+      }
+    >
+      <Container>
         <ReactCrop
           src={upImg}
           onImageLoaded={onLoad}
@@ -131,30 +142,24 @@ function ImageCrop({ show, close, src }) {
           onChange={(c) => setCrop(c)}
           onComplete={(c) => setCompletedCrop(c)}
           circularCrop={true}
-          minWidth={250}
-          minHeight={250}
+          minWidth={150}
+          minHeight={150}
           keepSelection={true}
-          style={{ maxHeight: "400px", maxWidth: "500px", paddingTop: "30px" }}
+          style={{ marginBottom: "8px" }}
         />
-        <div>
-          <canvas
-            ref={previewCanvasRef}
-            style={{
-              width: "250px",
-              height: "250px",
-              borderRadius: "50%",
-            }}
-          />
-        </div>
-        <button
-          onClick={() =>
-            onClickSaveImage(previewCanvasRef.current, completedCrop)
-          }
-        >
-          Server Save
-        </button>
-      </div>
-    </Modal>
+
+        <InputLabel for="select-image">이미지 선택</InputLabel>
+        <InputHidden
+          type="file"
+          accept="image/*"
+          id="select-image"
+          onChange={onSelectFile}
+        />
+
+        {/* Canvas Preview Section */}
+        <canvas ref={previewCanvasRef} style={{ display: "none" }} />
+      </Container>
+    </AlertModal>
   );
 }
 
