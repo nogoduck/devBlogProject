@@ -1,37 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Container } from "./styled";
-import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
+import Cropper from "react-easy-crop";
 
 import Modal from "../Modal";
+
 function ImageCrop({ show, close, src }) {
   const [crop, setCrop] = useState({
-    unit: "px",
-    width: "250",
-    height: "250",
-    lock: true,
+    x: 0,
+    y: 0,
   });
+  const [zoom, setZoom] = useState(1);
 
-  // ReactCrop.circularCrop(true);
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    console.log(croppedArea, croppedAreaPixels);
+  }, []);
 
   return (
-    <Modal show={true} colse={close} style={{}}>
-      <ReactCrop
-        src={src}
+    <div>
+      <Cropper
+        image={src}
         crop={crop}
-        width="500px"
-        onChange={(newCrop) => setCrop(newCrop)}
+        zoom={zoom}
+        cropShape="round"
+        showGrid={false}
+        aspect={1 / 1}
+        onCropChange={setCrop}
+        onCropComplete={onCropComplete}
+        onZoomChange={setZoom}
       />
-
-      <canvas
-        ref={previewCanvasRef}
-        // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
-        style={{
-          width: Math.round(completedCrop?.width ?? 0),
-          height: Math.round(completedCrop?.height ?? 0),
-        }}
-      />
-    </Modal>
+      <button>확인</button>
+      <button>확인</button>
+      <button>확인</button>
+    </div>
   );
 }
 
