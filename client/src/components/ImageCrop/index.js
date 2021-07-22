@@ -123,17 +123,46 @@ function ImageCrop({ show, close }) {
         alert("프로필 변경에 실패했습니다.");
       });
   };
+
+  const readBlob = (e) => {
+    console.log("e > ", e.target.files[0]);
+    const reader = new FileReader();
+    const url2 = reader.readAsDataURL(e.target.files[0]);
+    console.log("blob > ", url2);
+    console.log(
+      "convert file >> ",
+      window.URL.createObjectURL(e.target.files[0])
+    );
+
+    var bytes, blob;
+    bytes = new Uint8Array(e.target.files[0]);
+    blob = new Blob([bytes], { type: "image/png" });
+    console.log("try1 > ", window.URL.createObjectURL(blob));
+  };
+
+  function previewFile(e) {
+    console.log("e > ", e.target.files[0]);
+    const d = e.target.files[0];
+    var reader = new FileReader();
+
+    if (d) {
+      console.log("d > ", reader.readAsDataURL(d));
+    }
+  }
+
   console.log(previewCanvasRef.current, completedCrop);
   return (
     <AlertModal
       show={show}
       close={close}
-      modalHeader="프로필 사진 변경"
+      modalHeader="프로필 사진 업로드"
       submitButtonName="업로드"
       confirm={() =>
         onClickUploadImage(previewCanvasRef.current, completedCrop)
       }
     >
+      <input type="file" onChange={previewFile} />
+
       <Container>
         <ReactCrop
           src={upImg}
