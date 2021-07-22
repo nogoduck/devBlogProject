@@ -1,84 +1,144 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Container } from "./styled";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 
 import Modal from "../Modal";
-import Cropper from "react-cropper";
-import "cropperjs/dist/cropper.css";
+
+function generateDownload(canvas, crop) {
+  if (!crop || !canvas) {
+    return;
+  }
+
+  canvas.toBlob(
+    (blob) => {
+      const previewUrl = window.URL.createObjectURL(blob);
+
+      const anchor = document.createElement("a");
+      anchor.download = "cropPreview.png";
+      anchor.href = URL.createObjectURL(blob);
+      anchor.click();
+
+      window.URL.revokeObjectURL(previewUrl);
+    },
+    "image/png",
+    1
+  );
+}
 
 function ImageCrop({ show, close, src }) {
-  const [image, setImage] = useState(src);
-  const [cropData, setCropData] = useState("#");
-  const [cropper, setCropper] = useState();
-  const onChange = (e) => {
-    e.preventDefault();
-    let files;
-    if (e.dataTransfer) {
-      files = e.dataTransfer.files;
-    } else if (e.target) {
-      files = e.target.files;
+  const [upImg, setUpImg] = useState();
+  const imgRef = useRef(null);
+  const previewCanvasRef = useRef(null);
+  const [crop, setCrop] = useState({ aspect: 1 / 1, x: 0, y: 0 });
+  const [completedCrop, setCompletedCrop] = useState(null);
+
+  const onSelectFile = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setUpImg(reader.result));
+      reader.readAsDataURL(e.target.files[0]);
     }
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-    reader.readAsDataURL(files[0]);
   };
 
-  const getCropData = () => {
-    if (typeof cropper !== "undefined") {
-      setCropData(cropper.getCroppedCanvas().toDataURL());
+  const onLoad = useCallback((img) => {
+    imgRef.current = img;
+  }, []);
+
+  useEffect(() => {
+    if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
+      return;
     }
+
+    const image = imgRef.current;
+    const canvas = previewCanvasRef.current;
+    const crop = completedCrop;
+
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    const ctx = canvas.getContext("2d");
+    const pixelRatio = window.devicePixelRatio;
+
+    canvas.width = crop.width * pixelRatio;
+    canvas.height = crop.height * pixelRatio;
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    ctx.imageSmoothingQuality = "high";
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+  }, [completedCrop]);
+
+  console.log("ref >> ", previewCanvasRef.current);
+  console.log("com crop >> ", completedCrop);
+
+  const onClickSaveImage = (canvas, crop) => {
+    if (!crop || !canvas) {
+      return;
+    }
+
+    console.log("saveImage");
+    console.log(canvas, crop);
+
+    canvas.toBlob((blob) => {
+      const previewUrl = window.URL.createObjectURL(blob);
+
+      console.log(previewUrl);
+    });
   };
-  console.log(cropData);
 
   return (
     <div>
-      <div style={{ width: "100%" }}>
-        <input type="file" onChange={onChange} />
-        <button>Use default img</button>
-        <br />
-        <br />
-        <Cropper
-          style={{ height: 400, width: 400 }}
-          zoomTo={0.5}
-          initialAspectRatio={1}
-          preview=".img-preview"
-          src={image}
-          viewMode={1}
-          minCropBoxHeight={10}
-          minCropBoxWidth={10}
-          background={false}
-          responsive={true}
-          autoCropArea={1}
-          checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
-          onInitialized={(instance) => {
-            setCropper(instance);
+      <div>
+        <input type="file" accept="image/*" onChange={onSelectFile} />
+      </div>
+      <ReactCrop
+        src={upImg}
+        onImageLoaded={onLoad}
+        crop={crop}
+        onChange={(c) => setCrop(c)}
+        onComplete={(c) => setCompletedCrop(c)}
+        circularCrop={true}
+        minWidth={250}
+        minHeight={250}
+        keepSelection={true}
+      />
+      <div>
+        <canvas
+          ref={previewCanvasRef}
+          style={{
+            width: "250px",
+            height: "250px",
+            borderRadius: "50%",
           }}
-          guides={false}
         />
       </div>
-      <div>
-        <div className="box" style={{ width: "50%", float: "right" }}>
-          <h1>Preview</h1>
-          <div
-            className="img-preview"
-            style={{ width: "100%", float: "left", height: "300px" }}
-          />
-        </div>
-        <div
-          className="box"
-          style={{ width: "50%", float: "right", height: "300px" }}
-        >
-          <h1>
-            <span>Crop</span>
-            <button style={{ float: "right" }} onClick={getCropData}>
-              Crop Image
-            </button>
-          </h1>
-          <img style={{ width: "100%" }} src={cropData} alt="cropped" />
-        </div>
-      </div>
-      <br style={{ clear: "both" }} />
+      <button
+        onClick={() =>
+          onClickSaveImage(previewCanvasRef.current, completedCrop)
+        }
+      >
+        Server Save
+      </button>
+
+      <button
+        type="button"
+        disabled={!completedCrop?.width || !completedCrop?.height}
+        onClick={() =>
+          generateDownload(previewCanvasRef.current, completedCrop)
+        }
+      >
+        Download cropped image
+      </button>
     </div>
   );
 }
