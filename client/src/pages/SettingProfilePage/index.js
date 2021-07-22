@@ -22,10 +22,12 @@ import axios from "axios";
 import { RiImageEditFill } from "react-icons/ri";
 
 import Menu from "../../components/Menu";
+import ImageCrop from "../../components/ImageCrop";
+
 //유효성 검사 12글자 이하, 공백 여부 추가 예정
 //기존의 닉네임과 같은지 검사
 
-function SettingProfilePage({ history }) {
+function SettingProfilePage({ history, src }) {
   const user = useSelector((state) => state.user);
   const [userNickname, setUserNickname] = useState("");
   const [errorUpdateNickname, setErrorUpdateNickname] = useState(false);
@@ -88,6 +90,7 @@ function SettingProfilePage({ history }) {
   return (
     <Container>
       <Title>프로필 설정</Title>
+
       <Line />
       <SettingProfileContainer>
         <div>
@@ -167,6 +170,7 @@ function SettingProfilePage({ history }) {
           </EditLabel>
           <input type="file" id="select-file" onChange={onFileSeletor} />
         </div>
+        <ImageCrop src="http://localhost:5050/UploadProfileImage/1626927201666_ad12.png" />
       </SettingProfileContainer>
     </Container>
   );
