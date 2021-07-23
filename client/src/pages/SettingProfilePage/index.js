@@ -76,9 +76,10 @@ function SettingProfilePage({ history }) {
         validation: true,
         void: true,
       });
-      // setTimeout(() => {
-      //   setErrorUpdateNickname({ ...errorUpdateNickname, void: false });
-      // }, 5000);
+      setTimeout(() => {
+        setErrorUpdateNickname({ ...errorUpdateNickname, void: false });
+      }, 5000);
+      return true;
     }
 
     //공백체크 초기값이 -1이고 공백이 발견되면 인덱스를 반환
@@ -88,9 +89,10 @@ function SettingProfilePage({ history }) {
         validation: true,
         trim: true,
       });
-      // setTimeout(() => {
-      //   setErrorUpdateNickname({ ...errorUpdateNickname, trim: false });
-      // }, 5000);
+      setTimeout(() => {
+        setErrorUpdateNickname({ ...errorUpdateNickname, trim: false });
+      }, 5000);
+      return true;
     }
 
     //글자 제한 초과
@@ -100,9 +102,10 @@ function SettingProfilePage({ history }) {
         validation: true,
         leng: true,
       });
-      // setTimeout(() => {
-      //   setErrorUpdateNickname({ ...errorUpdateNickname, leng: false });
-      // }, 5000);
+      setTimeout(() => {
+        setErrorUpdateNickname({ ...errorUpdateNickname, leng: false });
+      }, 5000);
+      return true;
     }
 
     //공백, 검사와 중복되어 사용하지 못하고 있음
@@ -115,17 +118,9 @@ function SettingProfilePage({ history }) {
         validation: true,
         special: true,
       });
-
-      // setTimeout(() => {
-      //   setErrorUpdateNickname({ ...errorUpdateNickname, special: false });
-      // }, 5000);
-    }
-
-    console.log("errorUpdaeNickname >> ", errorUpdateNickname);
-    if (errorUpdateNickname.validation) {
       setTimeout(() => {
-        setErrorUpdateNickname(false);
-      }, 2000);
+        setErrorUpdateNickname({ ...errorUpdateNickname, special: false });
+      }, 5000);
       return true;
     }
   };
