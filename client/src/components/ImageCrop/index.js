@@ -149,8 +149,7 @@ function ImageCrop({ show, close }) {
       console.log("d > ", reader.readAsDataURL(d));
     }
   }
-
-  console.log(previewCanvasRef.current, completedCrop);
+  console.log("canvas x, y >> ", previewCanvasRef.current, completedCrop);
   return (
     <AlertModal
       show={show}

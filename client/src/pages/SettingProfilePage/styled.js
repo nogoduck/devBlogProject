@@ -40,6 +40,7 @@ export const NicknameContainer = styled.div`
 
 export const Message = styled.div`
   font-size: 13px;
+  width: 376px;
   margin: 8px 0;
 `;
 

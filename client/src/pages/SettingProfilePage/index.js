@@ -23,25 +23,26 @@ import axios from "axios";
 import { RiImageEditFill } from "react-icons/ri";
 
 import Menu from "../../components/Menu";
-import Modal from "../../components/Modal";
 import ImageCrop from "../../components/ImageCrop";
 
 //유효성 검사 12글자 이하, 공백 여부 추가 예정
 //기존의 닉네임과 같은지 검사
 
-function SettingProfilePage({ history, src }) {
+function SettingProfilePage({ history }) {
   const user = useSelector((state) => state.user);
   const [userNickname, setUserNickname] = useState("");
-  const [errorUpdateNickname, setErrorUpdateNickname] = useState(false);
+  const [errorUpdateNickname, setErrorUpdateNickname] = useState({
+    validation: false,
+    void: false,
+    trim: false,
+    leng: false,
+    special: false,
+  });
   const [successUpdateNickname, setSuccessUpdateNickname] = useState(false);
   const [image, setImage] = useState("");
   const [showEditProfileMenu, setShowEditProfileMenu] = useState(false);
 
   const [showImageCropModal, setShowImageCropModal] = useState(false);
-
-  const stopPropagation = useCallback((e) => {
-    e.stopPropagation();
-  }, []);
 
   const onClickEditProfileMenu = () => {
     setShowEditProfileMenu((prev) => !prev);
@@ -63,7 +64,82 @@ function SettingProfilePage({ history, src }) {
     setUserNickname(e.target.value);
   };
 
+  const nicknameValidation = () => {
+    //입력 안된 상태
+    if (
+      userNickname === "" ||
+      userNickname === undefined ||
+      userNickname === null
+    ) {
+      setErrorUpdateNickname({
+        ...errorUpdateNickname,
+        validation: true,
+        void: true,
+      });
+      // setTimeout(() => {
+      //   setErrorUpdateNickname({ ...errorUpdateNickname, void: false });
+      // }, 5000);
+    }
+
+    //공백체크 초기값이 -1이고 공백이 발견되면 인덱스를 반환
+    if (userNickname.search(/\s/) > -1) {
+      setErrorUpdateNickname({
+        ...errorUpdateNickname,
+        validation: true,
+        trim: true,
+      });
+      // setTimeout(() => {
+      //   setErrorUpdateNickname({ ...errorUpdateNickname, trim: false });
+      // }, 5000);
+    }
+
+    //글자 제한 초과
+    if (userNickname.length > 12) {
+      setErrorUpdateNickname({
+        ...errorUpdateNickname,
+        validation: true,
+        leng: true,
+      });
+      // setTimeout(() => {
+      //   setErrorUpdateNickname({ ...errorUpdateNickname, leng: false });
+      // }, 5000);
+    }
+
+    //공백, 검사와 중복되어 사용하지 못하고 있음
+    //특수문자 검사
+    const regExp = /^[가-힣a-zA-Z]+$/;
+    console.log("reg > ", regExp.test(userNickname));
+    if (!regExp.test(userNickname)) {
+      setErrorUpdateNickname({
+        ...errorUpdateNickname,
+        validation: true,
+        special: true,
+      });
+
+      // setTimeout(() => {
+      //   setErrorUpdateNickname({ ...errorUpdateNickname, special: false });
+      // }, 5000);
+    }
+
+    console.log("errorUpdaeNickname >> ", errorUpdateNickname);
+    if (errorUpdateNickname.validation) {
+      setTimeout(() => {
+        setErrorUpdateNickname(false);
+      }, 2000);
+      return true;
+    }
+  };
+
   const onClickUpdateNickname = () => {
+    //초기화
+    setErrorUpdateNickname(false);
+
+    // 유효성 검사
+    if (nicknameValidation()) {
+      console.log("유효성 부적절");
+      return null;
+    }
+
     const payload = {
       _id: user.authStatus._id,
       changeNickname: userNickname,
@@ -85,7 +161,6 @@ function SettingProfilePage({ history, src }) {
       });
   };
 
-  console.log("image >> ", image);
   return (
     <Container>
       <Title>프로필 설정</Title>
@@ -103,6 +178,29 @@ function SettingProfilePage({ history, src }) {
             <Message>
               닉네임은 12글자 이하로 입력가능하며 공백은 허용하지 않습니다.
             </Message>
+            {errorUpdateNickname && errorUpdateNickname.void && (
+              <Message style={{ color: "#e74c3c" }}>
+                닉네임이 입력되지 않았습니다.
+              </Message>
+            )}
+            {errorUpdateNickname && errorUpdateNickname.trim && (
+              <Message style={{ color: "#e74c3c" }}>
+                닉네임에 공백이 포함되어 있습니다. <br />
+                공백을 제거 후 다시 시도하세요
+              </Message>
+            )}
+            {errorUpdateNickname && errorUpdateNickname.leng && (
+              <Message style={{ color: "#e74c3c" }}>
+                닉네임이 입력 최대범위를 초과했습니다 <br />
+                12글자 이하로 입력해주세요
+              </Message>
+            )}
+            {errorUpdateNickname && errorUpdateNickname.special && (
+              <Message style={{ color: "#e74c3c" }}>
+                특수문자가 포함되어 있습니다 <br />
+                제거 후 다시 시도하세요.
+              </Message>
+            )}
             {successUpdateNickname && (
               <Message style={{ color: "#009432" }}>
                 닉네임이 성공적으로 변경되었습니다. <br />
