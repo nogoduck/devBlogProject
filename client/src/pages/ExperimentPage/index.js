@@ -35,7 +35,8 @@ function ExperimentPage({ history }) {
   const resetPage = () => {
     history.push("/menu/experiment");
   };
-
+  const [blobURL, setBlobURL] = useState("");
+  const [fileURL, setFileURL] = useState("");
   function inputFile(e) {
     const file = e.target.files[0];
     const formData = new FormData();
@@ -48,9 +49,11 @@ function ExperimentPage({ history }) {
 
     console.log("blob >> ", blob);
 
-    console.log("convert file blob >> ", window.URL.createObjectURL(blob));
-
-    console.log("convert file >> ", window.URL.createObjectURL(file));
+    const blobURL = window.URL.createObjectURL(blob);
+    setBlobURL(window.URL.createObjectURL(blob));
+    const fileURL = window.URL.createObjectURL(file);
+    console.log("convert blob >> ", blobURL);
+    console.log("convert file >> ", fileURL);
 
     const config = {
       header: {
@@ -80,9 +83,9 @@ function ExperimentPage({ history }) {
       <input type="file" onChange={inputFile} />
       <h4>blob 데이터 입력 후 출력</h4>
       <input type="file" />
-
+      <div>{blobURL}</div>
+      <img src={`${blobURL}`} />
       <hr />
-
       <ol>
         <li style={{ listStyle: "unset" }}>모달간에 전환</li>
         <li style={{ listStyle: "unset" }}>
