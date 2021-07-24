@@ -1,45 +1,59 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { Modal } from "./styled";
 
-function ModalRef({ children, style, showModal, setShowModal, close }) {
+function ModalRef({ children, style, shows, close }) {
   const refValue = useRef();
-  console.log("refValue >> ", refValue);
-  console.log("refValue.current >> ", refValue.current);
+  const [show, setShow] = useState(false);
 
-  // const closeModal = (e) => {
-  //   if (modalRef.current === e.target) {
-  //     setShowModal(false);
-  //   }
-  // };
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+  };
+
+  const onCloseModal = useCallback(
+    (e) => {
+      console.log("--- [click] --------------");
+      console.log("refValue.current >> ", refValue.current);
+      console.log("windows e.target >> ", e.target);
+
+      if (show && refValue.current !== e.target) {
+        console.log("동일함");
+        setShow(false);
+      }
+    },
+    [show, setShow]
+  );
 
   const keyPress = useCallback(
     (e) => {
-      if (e.key === "Escape" && showModal === true) {
-        setShowModal(false);
+      console.log("키 눌림");
+      if (e.key === "Escape" && show === true) {
+        setShow(false);
       }
     },
-    [setShowModal, showModal]
+    [show, setShow]
   );
 
   useEffect(() => {
-    document.addEventListener("keydown", keyPress);
+    window.addEventListener("click", onCloseModal);
+    window.addEventListener("keydown", keyPress);
     return () => {
-      document.removeEventListener("keydown", keyPress);
+      window.removeEventListener("click", onCloseModal);
+      window.removeEventListener("keydown", keyPress);
     };
-  }, [keyPress]);
-
-  const onClickModal = (e) => {
-    console.log("modal ref click [true]");
-  };
+  }, [onCloseModal, keyPress]);
+  console.log("show > ", show);
 
   return (
     <>
-      <Modal style={style} ref={refValue} onClick={onClickModal}>
-        <button onClick={() => setShowModal((prev) => !prev)}>&times;</button>
-        <button onClick={close}>Close Parents Modal</button>
-        Modal Ref
-        {children}
-      </Modal>
+      <button onClick={() => setShow((prev) => !prev)}>show</button>
+      {show && (
+        <Modal style={style} ref={refValue} onClick={stopPropagation}>
+          <button onClick={() => setShow((prev) => !prev)}>&times;</button>
+          <button onClick={close}>Close Parents Modal</button>
+          Modal Ref
+          {children}
+        </Modal>
+      )}
     </>
   );
 }

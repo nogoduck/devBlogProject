@@ -39,6 +39,10 @@ function ModalSection() {
     setShowModalRef((prev) => !prev);
   };
 
+  const onCloseModalRef = () => {
+    setShowModalRef(false);
+  };
+
   return (
     <>
       <h3>모달</h3>
@@ -70,10 +74,11 @@ function ModalSection() {
         <button onClick={onClickToggleParentsModal}>Toggle ParentsModal</button>
       </ModalChildren>
 
-      <ModalRef
+      {/* <ModalRef
         showModal={showModalRef}
         setShowModal={setShowModalRef}
-      ></ModalRef>
+      ></ModalRef> */}
+      <ModalRef show={showModalRef} close={onCloseModalRef}></ModalRef>
       <button onClick={onClickModalRef}>RefModal</button>
     </>
   );
