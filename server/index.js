@@ -14,6 +14,7 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user");
 const boardRouter = require("./routes/board");
 const todoRouter = require("./routes/todo");
+const testRouter = require("./routes/testRoute");
 
 // app.use(cors(corsOptions));
 app.use(morgan("dev"));
@@ -42,6 +43,7 @@ mongoose
 app.use("/api/users", userRouter);
 app.use("/api/board", boardRouter);
 app.use("/api/todo", todoRouter);
+app.use("/test", testRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({
