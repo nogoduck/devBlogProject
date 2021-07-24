@@ -59,10 +59,36 @@ function ExperimentPage({ history }) {
     console.log("creteObjectURL >> ", outputURL2);
   };
 
+  const getBlobFile = () => {
+    // axios
+    //   .get("/api/test")
+    //   .then(({ data }) => {
+    //     console.log("data >> ", data);
+    //   })
+    //   .catch((err) => {
+    //     console.log("err >> ", err);
+    //   });
+    axios
+      .post("/api/test")
+      .then(({ data }) => {
+        console.log("data >> ", data);
+        console.log(window.URL.createObjectURL(data));
+        setOutputURL2(window.URL.createObjectURL(data));
+
+        const reader = new FileReader();
+        console.log(reader.readAsDataURL(data));
+        setOutputURL1(reader.readAsDataURL(data));
+      })
+      .catch((err) => {
+        console.log("err >> ", err);
+      });
+  };
+
   return (
     <Container>
       <Table1>
         <button onClick={resetPage}>Page Reset</button>
+        <button onClick={getBlobFile}>파일 가져오기</button>
         <h3>File 처리</h3>
         <h4>파일 입력 후 blob 변환</h4>
         <input type="file" onChange={inputFile} />

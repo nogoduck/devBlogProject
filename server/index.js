@@ -43,7 +43,7 @@ mongoose
 app.use("/api/users", userRouter);
 app.use("/api/board", boardRouter);
 app.use("/api/todo", todoRouter);
-app.use("/test", testRouter);
+app.use("/api/test", testRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({
