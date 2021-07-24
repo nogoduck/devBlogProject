@@ -16,8 +16,6 @@ function ExperimentPage({ history }) {
     const file = e.target.files[0];
     const formData = new FormData();
 
-    formData.append("file", file);
-
     let blob = new Blob([file], {
       type: "image/png",
     });
@@ -30,6 +28,7 @@ function ExperimentPage({ history }) {
     console.log("convert blob >> ", blobURL);
     console.log("convert file >> ", fileURL);
 
+    formData.append("file", blob);
     const config = {
       header: {
         processData: false,
