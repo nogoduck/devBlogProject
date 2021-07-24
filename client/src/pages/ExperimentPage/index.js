@@ -1,36 +1,11 @@
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import React, { useState } from "react";
-import { Container, Button } from "./styled";
+// import { Container } from "./styled";
 
-import Modal from "./Modal";
 import ModalSection from "./ModalSection";
 
 function ExperimentPage({ history }) {
-  const [showModal, setShowModal] = useState(false);
-  const [showModalParents, setShowModalParents] = useState(false);
-  const [showModalChildren, setShowModalChildren] = useState(false);
-
-  const onClickModal = () => {
-    console.log("showModal: ", showModal);
-    setShowModal((prev) => !prev);
-  };
-
-  const onClickParentsModal = () => {
-    setShowModalParents((prev) => !prev);
-  };
-
-  const onClickChildrenModal = () => {
-    setShowModalChildren((prev) => !prev);
-  };
-  const onCloseParentsModal = () => {
-    setShowModalParents(false);
-  };
-
-  const onCloseChildrenModal = () => {
-    setShowModalChildren(false);
-  };
-
   const resetPage = () => {
     history.push("/menu/experiment");
   };
@@ -87,10 +62,6 @@ function ExperimentPage({ history }) {
       <hr />
 
       <ModalSection />
-      <Container>
-        <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
-        <Button onClick={onClickModal}>Modal Practice Button</Button>
-      </Container>
     </>
   );
 }

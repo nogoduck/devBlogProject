@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 300px;
-  border: 5px dashed red;
+  /* position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 5px dashed yellow; */
 `;
 
 export const ModalContainer = styled.div`
@@ -32,4 +32,9 @@ export const CloseButton = styled.button`
   position: absolute;
   top: 0px;
   right: 10px;
+`;
+
+export const Modal = styled.div`
+  border: 3px solid purple;
+  padding: 16px;
 `;
