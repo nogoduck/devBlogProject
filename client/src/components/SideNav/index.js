@@ -90,14 +90,14 @@ function SideNav() {
             </li>
           </Link>
 
-          <Link to="/menu/modal">
-            <li className={activePath.includes("modal") && "active"}>
+          <Link to="/menu/experiment">
+            <li className={activePath.includes("experiment") && "active"}>
               <b></b>
               <b></b>
               <MenuIcon>
                 <AiTwotoneExperiment />
               </MenuIcon>
-              <MenuTitle id={isTablet && "hidden"}>모달</MenuTitle>
+              <MenuTitle id={isTablet && "hidden"}>실험실</MenuTitle>
             </li>
           </Link>
 

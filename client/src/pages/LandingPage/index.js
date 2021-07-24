@@ -9,7 +9,7 @@ import LandingContent from "./LangdingContent";
 import AboutPage from "../AboutPage";
 import BoardPage from "../BoardPage";
 import CardPage from "../CardPage";
-import ModalPage from "../ModalPage";
+import ExperimentPage from "../ExperimentPage";
 import VideoPage from "../VideoPage";
 import BoardWritePage from "../BoardWritePage";
 import BoardDetailPage from "../BoardDetailPage";
@@ -46,7 +46,10 @@ function LandingPage() {
             />
             <Route path="/menu/board" component={Auth(BoardPage, null)} />
             <Route path="/menu/card" component={Auth(CardPage, null)} />
-            <Route path="/menu/modal" component={Auth(ModalPage, null)} />
+            <Route
+              path="/menu/experiment"
+              component={Auth(ExperimentPage, null)}
+            />
             <Route path="/menu/video" component={Auth(VideoPage, null)} />
             <Route path="/setting" component={Auth(SettingPage, null)} />
           </Switch>

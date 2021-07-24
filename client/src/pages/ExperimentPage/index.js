@@ -5,7 +5,7 @@ import { Container, Button } from "./styled";
 import Modal from "./Modal";
 import ModalParents from "./ModalParents";
 import ModalChildren from "./ModalChildren";
-function ModalPage() {
+function ExperimentPage() {
   const [showModal, setShowModal] = useState(false);
   const [showModalParents, setShowModalParents] = useState(false);
   const [showModalChildren, setShowModalChildren] = useState(false);
@@ -59,4 +59,4 @@ function ModalPage() {
   );
 }
 
-export default withRouter(ModalPage);
+export default withRouter(ExperimentPage);
