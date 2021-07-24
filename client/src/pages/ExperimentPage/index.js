@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { Container, Button } from "./styled";
 
 import Modal from "./Modal";
-import ModalParents from "./ModalParents";
-import ModalChildren from "./ModalChildren";
+import ModalSection from "./ModalSection";
+
 function ExperimentPage({ history }) {
   const [showModal, setShowModal] = useState(false);
   const [showModalParents, setShowModalParents] = useState(false);
@@ -16,20 +16,19 @@ function ExperimentPage({ history }) {
     setShowModal((prev) => !prev);
   };
 
-  const onClickParents = () => {
+  const onClickParentsModal = () => {
     setShowModalParents((prev) => !prev);
   };
 
-  const onClickChildren = () => {
+  const onClickChildrenModal = () => {
     setShowModalChildren((prev) => !prev);
   };
-  const goParents = () => {
-    setShowModalChildren(false);
-    setShowModalParents(true);
-  };
-  const goChildren = () => {
+  const onCloseParentsModal = () => {
     setShowModalParents(false);
-    setShowModalChildren(true);
+  };
+
+  const onCloseChildrenModal = () => {
+    setShowModalChildren(false);
   };
 
   const resetPage = () => {
@@ -86,27 +85,11 @@ function ExperimentPage({ history }) {
       <div>{blobURL}</div>
       <img src={`${blobURL}`} />
       <hr />
-      <ol>
-        <li style={{ listStyle: "unset" }}>모달간에 전환</li>
-        <li style={{ listStyle: "unset" }}>
-          모달의 자식모달 호출, 자식모달의 자식 호출
-        </li>
-      </ol>
+
+      <ModalSection />
       <Container>
-        <Button onClick={onClickModal}>Modal Practice Button</Button>
-        <button onClick={onClickParents}>
-          303 <hr /> (Parent)
-        </button>
-        <button onClick={onClickChildren}>
-          41-3 <hr /> (Children)
-        </button>
-        <ModalParents show={showModalParents}>
-          <button onClick={goChildren}>41-3으로 이동합니다</button>
-        </ModalParents>
-        <ModalChildren show={showModalChildren}>
-          <button onClick={goParents}>303으로 이동</button>
-        </ModalChildren>
         <Modal showModal={showModal} setShowModal={setShowModal}></Modal>
+        <Button onClick={onClickModal}>Modal Practice Button</Button>
       </Container>
     </>
   );

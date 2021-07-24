@@ -1,21 +1,22 @@
-import React, { useState } from "react";
-import ModalParents from "../ModalParents";
-import { Modal } from "./styled";
+import React from "react";
+import { Container, Modal } from "./styled";
 
-function ModalChildren({ show, children }) {
-  const [showModal] = useState(false);
+function ModalChildren({ children, style, show, close }) {
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+  };
 
   if (!show) {
     return null;
   }
+
   return (
-    <>
-      <Modal>
-        41-3 <br />
-        {children}::
-        <ModalParents show={showModal}></ModalParents>
+    <Container onClick={close}>
+      <Modal onClick={stopPropagation} style={style}>
+        <button onClick={close}>Close Children Modal</button>
+        {children}
       </Modal>
-    </>
+    </Container>
   );
 }
 

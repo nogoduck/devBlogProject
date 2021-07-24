@@ -1,16 +1,22 @@
 import React from "react";
-import { Modal } from "./styled";
+import { Container, Modal } from "./styled";
 
-function ModalParents({ show, children }) {
+function ModalParents({ children, style, show, close }) {
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+  };
+
   if (!show) {
     return null;
   }
+
   return (
-    <Modal>
-      303
-      <br />
-      {children}💨
-    </Modal>
+    <Container onClick={close}>
+      <Modal onClick={stopPropagation} style={style}>
+        <button onClick={close}>Close Parents Modal</button>
+        {children}
+      </Modal>
+    </Container>
   );
 }
 
