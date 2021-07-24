@@ -141,13 +141,44 @@ function ImageCrop({ show, close }) {
   };
 
   function previewFile(e) {
-    console.log("e > ", e.target.files[0]);
-    const d = e.target.files[0];
-    var reader = new FileReader();
+    console.log("target.files > ", e.target.files[0]);
+    const f = e.target.files[0];
+    let reader = new FileReader();
 
-    if (d) {
-      console.log("d > ", reader.readAsDataURL(d));
-    }
+    // console.log("readAsDataURL > ", reader.readAsDataURL(f));
+    console.log("readAsText > ", reader.readAsText(f));
+    // console.log("readAsArrayBuffer > ", reader.readAsArrayBuffer(f));
+  }
+
+  function previewTextFile(e) {
+    const file = e.target.files[0];
+    const fd = new FormData();
+
+    fd.append("file", file);
+
+    console.log("convert file >> ", window.URL.createObjectURL(file));
+
+    const config = {
+      header: {
+        processData: false,
+        "content-type": false,
+      },
+    };
+
+    console.log("fd >> ", fd);
+
+    axios
+      .post("/api/users/update/image", fd, config)
+      .then(({ data }) => {
+        console.log("data >> ", data);
+
+        setTimeout(() => {
+          //변경 완료 문구
+        }, 5000);
+      })
+      .catch((err) => {
+        alert("프로필 변경에 실패했습니다.");
+      });
   }
   console.log("canvas x, y >> ", previewCanvasRef.current, completedCrop);
   return (
@@ -173,7 +204,7 @@ function ImageCrop({ show, close }) {
           minWidth={150}
           minHeight={150}
           keepSelection={true}
-          style={{ marginBottom: "8px" }}
+          style={{ marginBottom: "8px", maxWidth: "400px", maxHeight: "400px" }}
         />
 
         <InputLabel for="select-image">이미지 선택</InputLabel>
