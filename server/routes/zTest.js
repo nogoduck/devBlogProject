@@ -43,6 +43,23 @@ router.post("/save", (req, res) => {
   });
 });
 
+router.post("/sendfile", (req, res) => {
+  const filename = "origin_blob.png";
+  const filePath = path.join(__dirname, `../../zDummyFile/${filename}`);
+  console.log("[zTest] file path >> ", filePath);
+
+  const fileMime = mime.lookup(filePath);
+  console.log("[zTest] file mime >> ", fileMime);
+
+  fs.readFile(filePath, (err, data) => {
+    if (err) console.log(err);
+    res.writeHead(206, {
+      "Content-Type": fileMime,
+    });
+    res.end(data);
+  });
+});
+
 router.post("/form/save", (req, res) => {
   console.log("[zTest] req.body >> ", req.body);
 

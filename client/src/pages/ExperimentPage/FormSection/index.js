@@ -81,6 +81,7 @@ const FormSection = () => {
         <input type="file" onChange={onChangeFile} /> <br />
         <button onClick={postForm}>제출</button>
       </form>
+      <img src={`http://localhost:5050/zDummyFile/origin_blob`} width="300px" />
     </div>
   );
 };

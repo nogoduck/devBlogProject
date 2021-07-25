@@ -60,7 +60,7 @@ function FileSection({ history }) {
 
   const getBlobFile = () => {
     axios
-      .post("/api/test")
+      .post("/api/test/sendfile")
       .then(({ data }) => {
         console.log("data >> ", data);
         setOutputURL3(data);
