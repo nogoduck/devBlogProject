@@ -6,7 +6,7 @@ export const Container = styled.div`
 `;
 
 export const Table1 = styled.div`
-  flex: 1;
+  width: 200px;
 `;
 
 export const Table2 = styled.div`
@@ -42,5 +42,7 @@ export const Image = styled.div`
     overflow: hidden;
   }
   & > img {
+    border: none;
+    outline: none;
   }
 `;

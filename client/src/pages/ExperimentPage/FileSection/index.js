@@ -11,6 +11,7 @@ function ExperimentPage({ history }) {
   const [fileURL, setFileURL] = useState("");
   const [outputURL1, setOutputURL1] = useState(true);
   const [outputURL2, setOutputURL2] = useState(true);
+  const [outputURL3, setOutputURL3] = useState(false);
 
   function inputFile(e) {
     const file = e.target.files[0];
@@ -52,6 +53,8 @@ function ExperimentPage({ history }) {
       });
   }
 
+  console.log("output3 >> ", outputURL3);
+
   const outputFile = (e) => {
     const reader = new FileReader();
     // const readAsDataURL = reader.readAsDataURL(e.target.files[0]);
@@ -67,12 +70,13 @@ function ExperimentPage({ history }) {
       .post("/api/test")
       .then(({ data }) => {
         console.log("data >> ", data);
+        setOutputURL3(data);
         // console.log(window.URL.createObjectURL(data));
-        setOutputURL2(window.URL.createObjectURL(data));
+        // setOutputURL2(window.URL.createObjectURL(data));
 
-        const reader = new FileReader();
+        // const reader = new FileReader();
         // console.log(reader.readAsDataURL(data));
-        setOutputURL1(reader.readAsDataURL(data));
+        // setOutputURL1(reader.readAsDataURL(data));
       })
       .catch((err) => {
         console.log("err >> ", err);
@@ -108,6 +112,16 @@ function ExperimentPage({ history }) {
           <span>2</span>
           {outputURL2 && (
             <img src={`${outputURL2}`} width="150px" height="150px" />
+          )}
+        </Image>
+        <Image>
+          <span>3</span>
+          {outputURL3 && (
+            <img
+              src={`data:image/png;base64,${outputURL3}`}
+              width="150px"
+              height="150px"
+            />
           )}
         </Image>
       </Table2>
