@@ -57,12 +57,25 @@ router.post("/", (req, res) => {
   const imgMime = mime.lookup(imagePath);
   console.log("imgMime >> ", imgMime);
 
-  res.send("test");
+  //Buffer생성
+  const createBuffer = Buffer.from("버퍼를 만들어보자.");
+  console.log("createBuffer >> ", createBuffer);
+  console.log("createBuffer.toString >> ", createBuffer.toString());
 
-  // fs.readfile의 기본값이 utf-8로 알고 있어서 옵션을 적지 않아도 그렇게 읽힐줄 알았는데 그렇지 않고 버퍼로 읽혔다.
+  //Buffer.alloc 와 allocUnsafe 비교 : 둘다 버퍼를 지정한 용량 만큼 공간을 확보하는 개념까진 비슷하나 alloc은 모두 00 으로 초기화를 해주는 반면
+  //allocUnsafe는 초기화 되지 않은 쓰레기값을 그대로 사용한다 때문에 더 빠르긴하지만 쓰레기 값을 그대로 들고가 값이 의도대로 나오지 않을수도 있다.
+  const allocBuffer = Buffer.alloc(1024); //1kb buffer  1byte => 1024 or 1000 현실세계에서 쓰는 단위와 컴퓨터 단위로 둘 다 사용하지만 정확하게는 1024가 맞다.
+  console.log("allocBuffer >> ", allocBuffer);
+  const unsafeAllocBuffer = Buffer.allocUnsafe(1024); //1kb buffer  1byte => 1024 or 1000 현실세계에서 쓰는 단위와 컴퓨터 단위로 둘 다 사용하지만 정확하게는 1024가 맞다.
+  console.log("unsafeAllocBuffer >> ", unsafeAllocBuffer);
+  // fs.readfile의 기본값이 utf-8로 알고 있어서 옵션을 적지 않아도 그렇게 읽힐줄 알았는데 그렇지 않고 버퍼로 읽혔다. (binary파일을 읽어서 그런건가 싶다.)
   fs.readFile(imagePath, (err, data) => {
     if (err) return res.json({ err: err });
     console.log("data >> ", data);
+
+    return res
+      .set({ "Content-Type": imgMime, "Content-Disposition": "inline" })
+      .send(data);
   });
 
   // res.send(Buffer.from(readfile, "binary"));
