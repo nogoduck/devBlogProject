@@ -1,24 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import useInput from "../../../hooks/useInput";
 
 const FormSection = () => {
+  const [file, setFile] = useState(false);
   const [input1, setInput1, onChangeInput1] = useInput();
   const [input2, setInput2, onChangeInput2] = useInput();
 
   const postForm = (e) => {
     e.preventDefault();
 
-    const fd = new FormData();
-    console.log(input1, input2);
-    fd.append("objectValue1", input1);
-    fd.append("objectValue2", input2);
+    //FormData는 브라우저 정책으로 데이터가 보이지 않는다
+    //https://stackoverflow.com/questions/17066875/how-to-inspect-formdata
+    const url1 = URL.createObjectURL(file);
+    console.log("file to blob url1 >> ", url1);
 
-    console.log("fd >> ", fd);
+    const fd = new FormData();
+    const blob = new Blob([file], { type: "image/png" });
+    console.log("blob >> ", blob);
+    const url2 = URL.createObjectURL(blob);
+    console.log("blob to blob url2 >> ", url2);
+    const setting = {
+      headers: {
+        ProcessData: false,
+        // "Content-Type": "multipart/form-data",
+      },
+    };
+
+    console.log(input1, input2);
+    // fd.append("objectValue1", input1);
+    // fd.append("objectValue2", input2);
+    fd.append("file", file);
+
+    console.log("fd >> ", fd, setting);
+
+    for (let key of fd.keys()) {
+      console.log("key >>", key);
+    }
+    for (let value of fd.values()) {
+      console.log("value >>", value);
+    }
 
     axios
-      .post("/api/test/form/save", fd)
+      .post("/api/test/save", fd)
       .then(({ data }) => {
         console.log("data >> ", data);
       })
@@ -27,6 +52,13 @@ const FormSection = () => {
       });
   };
 
+  const onChangeFile = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+    console.log(file);
+  };
+
+  console.log("ffff > ", file);
   return (
     <div>
       <h3>폼 요청, 응답</h3>
@@ -46,7 +78,7 @@ const FormSection = () => {
         <br />
         <input type="text" value={input2} onChange={onChangeInput2} />
         <br />
-        <input type="file" /> <br />
+        <input type="file" onChange={onChangeFile} /> <br />
         <button onClick={postForm}>제출</button>
       </form>
     </div>

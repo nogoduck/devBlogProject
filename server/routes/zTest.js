@@ -15,16 +15,14 @@ const storage = multer.diskStorage({
   },
   // 파일 저장시 파일명
   filename: (req, file, cb) => {
-    cb(null, `${Date.now().toString().substr(6)}_${file.originalname}`);
+    console.log("[storage] save file > ", file);
+    cb(null, `${Date.now().toString().substr(0)}_${file.originalname}`);
   },
 });
 
 const upload = multer({ storage: storage }).single("file");
 
 router.post("/save", (req, res) => {
-  console.log("[zTest] req >> ", req);
-  console.log("[zTest] req.file >> ", req.file);
-  console.log("[zTest] req.data >> ", req.data);
   console.log("[zTest] req.body >> ", req.body);
 
   upload(req, res, (err) => {
