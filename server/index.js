@@ -14,7 +14,7 @@ const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user");
 const boardRouter = require("./routes/board");
 const todoRouter = require("./routes/todo");
-const testRouter = require("./routes/testRoute");
+const testRouter = require("./routes/zTest");
 
 // app.use(cors(corsOptions));
 app.use(morgan("dev"));
@@ -22,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/UploadProfileImage", express.static("UploadProfileImage"));
+app.use("/zDummyFile", express.static("zDummyFile"));
 
 //=============[EXP CODE]==============
 // 사용법이 미숙한 코드나 문법을 테스트

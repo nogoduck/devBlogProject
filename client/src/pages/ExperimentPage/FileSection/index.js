@@ -43,7 +43,7 @@ function ExperimentPage({ history }) {
     console.log("formData >> ", formData);
 
     axios
-      .post("/api/users/update/image", formData, config)
+      .post("/api/test/save", formData, config)
       .then(({ data }) => {
         console.log("save file success...");
         console.log("data >> ", data);
@@ -53,16 +53,12 @@ function ExperimentPage({ history }) {
       });
   }
 
-  console.log("output3 >> ", outputURL3);
-
   const outputFile = (e) => {
     const reader = new FileReader();
     // const readAsDataURL = reader.readAsDataURL(e.target.files[0]);
     // const creteObjectURL = window.URL.createObjectURL(e.target.files[0]);
     setOutputURL1(reader.readAsDataURL(e.target.files[0]));
     setOutputURL2(window.URL.createObjectURL(e.target.files[0]));
-    console.log("readAsDataURL > ", outputURL1);
-    console.log("creteObjectURL >> ", outputURL2);
   };
 
   const getBlobFile = () => {
@@ -71,6 +67,19 @@ function ExperimentPage({ history }) {
       .then(({ data }) => {
         console.log("data >> ", data);
         setOutputURL3(data);
+
+        const fd = new FormData();
+
+        fd.append("img", data);
+        console.log("fd >>", fd);
+        const reader = new FileReader();
+        // let Uint8Arrayblob = new Blob(new Uint8Array(data));
+        let blob = new Blob(data);
+        let file = reader.readAsArrayBuffer(blob);
+        // console.log("data Unit8Array blob >> ", Uint8Arrayblob);
+        console.log("data blob >> ", blob);
+        console.log("blob to file >> ", file);
+
         // console.log(window.URL.createObjectURL(data));
         // setOutputURL2(window.URL.createObjectURL(data));
 
@@ -82,6 +91,10 @@ function ExperimentPage({ history }) {
         console.log("err >> ", err);
       });
   };
+
+  console.log("outputURL1 >> ", outputURL1);
+  console.log("outputURL2 >> ", outputURL2);
+  // console.log("outputURL3 >> ", outputURL3);
 
   return (
     <Container>

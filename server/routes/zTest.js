@@ -4,8 +4,43 @@ const router = express.Router();
 const fs = require("fs");
 const path = require("path");
 const mime = require("mime");
-
+const multer = require("multer");
 //mime/lite버전을 사용하고 싶은데 로드가 되지 않는다 mime보다 1/3 밖에 용량이 안된다고 한다.
+//multer 관련 변수 (파일 처리)
+
+const storage = multer.diskStorage({
+  // 파일 저장 경로
+  destination: (req, file, cb) => {
+    cb(null, "zDummyFile/");
+  },
+  // 파일 저장시 파일명
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now().toString().substr(6)}_${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage: storage }).single("file");
+
+router.post("/save", (req, res) => {
+  console.log("[zTest] req >> ", req);
+
+  upload(req, res, (err) => {
+    if (err) {
+      return res.json({
+        success: false,
+        message: "파일 저장에 실패했습니다",
+        error: err,
+      });
+    }
+
+    return res.json({
+      success: true,
+      // fileName: req.file.filename,
+      // filePath: req.file.path,
+      message: "파일을 저장했습니다.",
+    });
+  });
+});
 
 router.get("/", (req, res) => {
   res.send("response testRouter...");
