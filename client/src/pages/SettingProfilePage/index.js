@@ -252,6 +252,10 @@ function SettingProfilePage({ history }) {
         </div>
       </SettingProfileContainer>
       <button onClick={onClickImageCropModal}>showModal</button>
+      <img
+        src="http://localhost:5050/UploadProfileImage/1627245116300_blob"
+        alt=""
+      />
       <ImageCrop show={showImageCropModal} close={onCloseImageCropModal} />
     </Container>
   );

@@ -12,9 +12,9 @@ function ImageCrop({ show, close }) {
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
   const [crop, setCrop] = useState({
-    unit: "px",
-    width: 150,
-    height: 150,
+    unit: "%",
+    width: 100,
+    height: 100,
     aspect: 1 / 1,
     x: 0,
     y: 0,
@@ -201,8 +201,8 @@ function ImageCrop({ show, close }) {
           onChange={(c) => setCrop(c)}
           onComplete={(c) => setCompletedCrop(c)}
           circularCrop={true}
-          minWidth={150}
-          minHeight={150}
+          minWidth={50}
+          minHeight={50}
           keepSelection={true}
           style={{ marginBottom: "8px", maxWidth: "400px", maxHeight: "400px" }}
         />
