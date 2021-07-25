@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import React, { useState } from "react";
 import { Container, Table1, Table2, Image } from "./styled";
 
-function ExperimentPage({ history }) {
+function FileSection({ history }) {
   const resetPage = () => {
     history.push("/menu/experiment");
   };
@@ -21,7 +21,7 @@ function ExperimentPage({ history }) {
       type: "image/png",
     });
 
-    console.log("blob >> ", blob);
+    console.log("[Input] new Blob >> ", blob);
 
     const blobURL = window.URL.createObjectURL(blob);
     setBlobURL(window.URL.createObjectURL(blob));
@@ -30,11 +30,8 @@ function ExperimentPage({ history }) {
     console.log("convert file >> ", fileURL);
 
     formData.append("file", blob);
+    formData.append("userName", "angryduck23");
     const config = {
-      // header: {
-      //   processData: false,
-      //   "content-type": false,
-      // },
       header: {
         "Content-Type": "multipart/form-data",
       },
@@ -110,7 +107,7 @@ function ExperimentPage({ history }) {
       <Table2>
         <Image>
           <span>
-            blob URL : <br />
+            Save blob URL
             {blobURL}
           </span>
           <img src={`${blobURL}`} width="150px" height="150px" />
@@ -142,4 +139,4 @@ function ExperimentPage({ history }) {
   );
 }
 
-export default withRouter(ExperimentPage);
+export default withRouter(FileSection);

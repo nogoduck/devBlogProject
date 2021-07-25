@@ -23,6 +23,9 @@ const upload = multer({ storage: storage }).single("file");
 
 router.post("/save", (req, res) => {
   console.log("[zTest] req >> ", req);
+  console.log("[zTest] req.file >> ", req.file);
+  console.log("[zTest] req.data >> ", req.data);
+  console.log("[zTest] req.body >> ", req.body);
 
   upload(req, res, (err) => {
     if (err) {
@@ -39,6 +42,15 @@ router.post("/save", (req, res) => {
       // filePath: req.file.path,
       message: "파일을 저장했습니다.",
     });
+  });
+});
+
+router.post("/form/save", (req, res) => {
+  console.log("[zTest] req.body >> ", req.body);
+
+  res.status(200).json({
+    success: true,
+    value: req.body,
   });
 });
 
