@@ -17,8 +17,10 @@ export const Table2 = styled.div`
 
 export const Image = styled.div`
   position: relative;
-  margin-bottom: 4px;
+  margin: 2px;
   border: 2px dashed red;
+  width: 150px;
+  height: 150px;
 
   & > span {
     position: absolute;
@@ -27,6 +29,9 @@ export const Image = styled.div`
     color: #fff;
     font-size: 12px;
     padding: 0 4px 0 0;
+    max-width: 146px;
+    max-height: 36px;
+    overflow: scroll;
   }
   & > span::before {
     content: "OUTPUT";
@@ -34,16 +39,8 @@ export const Image = styled.div`
     color: #fff;
     font-size: 12px;
     padding: 0 4px;
+    overflow: hidden;
   }
   & > img {
   }
-`;
-
-export const ImageTag = styled.span`
-  content: "OUTPUT";
-  background-color: #000;
-  color: #fff;
-  font-size: 12px;
-  position: absolute;
-  padding: 0 4px;
 `;

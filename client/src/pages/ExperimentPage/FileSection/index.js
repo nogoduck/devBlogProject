@@ -1,7 +1,7 @@
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import React, { useState } from "react";
-import { Container, Table1, Table2, Image, ImageTag } from "./styled";
+import { Container, Table1, Table2, Image } from "./styled";
 
 function ExperimentPage({ history }) {
   const resetPage = () => {
@@ -30,9 +30,12 @@ function ExperimentPage({ history }) {
 
     formData.append("file", blob);
     const config = {
+      // header: {
+      //   processData: false,
+      //   "content-type": false,
+      // },
       header: {
-        processData: false,
-        "content-type": false,
+        "Content-Type": "multipart/form-data",
       },
     };
 
@@ -60,23 +63,15 @@ function ExperimentPage({ history }) {
   };
 
   const getBlobFile = () => {
-    // axios
-    //   .get("/api/test")
-    //   .then(({ data }) => {
-    //     console.log("data >> ", data);
-    //   })
-    //   .catch((err) => {
-    //     console.log("err >> ", err);
-    //   });
     axios
       .post("/api/test")
       .then(({ data }) => {
         console.log("data >> ", data);
-        console.log(window.URL.createObjectURL(data));
+        // console.log(window.URL.createObjectURL(data));
         setOutputURL2(window.URL.createObjectURL(data));
 
         const reader = new FileReader();
-        console.log(reader.readAsDataURL(data));
+        // console.log(reader.readAsDataURL(data));
         setOutputURL1(reader.readAsDataURL(data));
       })
       .catch((err) => {

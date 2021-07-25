@@ -11,12 +11,12 @@ function ModalRef({ children, style, shows, close }) {
 
   const onCloseModal = useCallback(
     (e) => {
-      console.log("--- [click] --------------");
-      console.log("refValue.current >> ", refValue.current);
-      console.log("windows e.target >> ", e.target);
+      // console.log("--- [click] --------------");
+      // console.log("refValue.current >> ", refValue.current);
+      // console.log("windows e.target >> ", e.target);
 
       if (show && refValue.current !== e.target) {
-        console.log("동일함");
+        // console.log("창 닫힘");
         setShow(false);
       }
     },
@@ -25,7 +25,7 @@ function ModalRef({ children, style, shows, close }) {
 
   const keyPress = useCallback(
     (e) => {
-      console.log("키 눌림");
+      // console.log("키 눌림");
       if (e.key === "Escape" && show === true) {
         setShow(false);
       }
@@ -41,7 +41,7 @@ function ModalRef({ children, style, shows, close }) {
       window.removeEventListener("keydown", keyPress);
     };
   }, [onCloseModal, keyPress]);
-  console.log("show > ", show);
+  // console.log("show > ", show);
 
   return (
     <>
