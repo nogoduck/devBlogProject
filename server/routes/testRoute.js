@@ -39,42 +39,63 @@ router.post("/", (req, res) => {
   const readfile = fs.readFileSync(imagePath, "utf-8");
   const readfile2 = fs.readFileSync(imagePath2, "utf-8");
   const readfile3 = fs.readFileSync(imagePath3, "utf-8");
-  //mime version2부터는 getType을 사용하지 않고 lookup을 사용한다 영어만 알았어도 금방 적용했을텐데
-  //엄한 블로그들만 찾아다니며 시간을 허비했다.
-  //이럴떈 내 자신이 너무 싫어진다 영어를 하루빨리 시작해야겠다.
+  //mime version2부터는 getType을 사용하지 않고 lookup을 사용한다 npm 참고
   const imgMime = mime.lookup(imagePath);
   console.log("imgMime >> ", imgMime);
 
   //---------------------------------------------------------------------
   // Stream Section
   //---------------------------------------------------------------------
+  fs.stat(imagePath, (err, stat) => {
+    if (err) return res.json({ err }); //값의 변수명이 키값으로 들어가는 문법으로 알고있다.
+    console.log("stat >> ", stat);
+    const { size } = stat;
+    console.log("stat.size >> ", size);
 
-  const stream = fs.createReadStream(readfile); //path
-  console.log("stream >> ", stream);
+    const start = 0;
+    const end = size - 1;
+    const chunk = end - start + 1;
 
-  let count = 0;
-  //스트림 시작
-  stream.on("data", (data) => {
-    count += 1;
-    console.log("count >> ", count);
+    //스트림 생성
+    const stream = fs.createReadStream(imagePath, { start, end }); //path
 
-    //res.send, res.json, res.end는 한번씩 밖에 응답을 하지 못한다 두번쓰면 반드시 에러 발생한다
-    // 연속으로 파일을 보내기 위해 res.write 사용
+    res.writeHead(206, {
+      "Content-Range": `bytes ${start}-${end}/${size}`,
+      "Accept-Ranges": "bytes",
+      "Content-Length": chunk,
+      "Content-Type": imgMime,
+    });
 
-    res.write(data);
+    stream.pipe(res);
   });
 
-  //스트림을 다 보냈을 시 종료
-  stream.on("end", () => {
-    console.log("Stream end...");
-    res.end();
-  });
+  // console.log("stream >> ", stream);
 
-  //스트림중 에러 발생
-  stream.on("error", () => {
-    console.log("Stream err >> ", err);
-    res.status(500).end("Connect to the Internet...");
-  });
+  // 아래의 data, end 핸들러 대신 pipe로 대체가능
+  //---------------------------------------------------------------------
+  // let count = 0;
+  // //스트림 시작
+  // stream.on("data", (data) => {
+  //   count += 1;
+  //   console.log("count >> ", count);
+
+  //   //res.send, res.json, res.end는 한번씩 밖에 응답을 하지 못한다 두번쓰면 반드시 에러 발생한다
+  //   // 연속으로 파일을 보내기 위해 res.write 사용
+
+  //   res.write(data);
+  // });
+
+  // //스트림을 다 보냈을 시 종료
+  // stream.on("end", () => {
+  //   console.log("Stream end...");
+  //   res.end();
+  // });
+
+  // //스트림중 에러 발생
+  // stream.on("error", (err) => {
+  //   console.log("Stream err >> ", err);
+  //   res.status(500).end("Connect to the Internet...");
+  // });
 
   //---------------------------------------------------------------------
   // Buffer Section
