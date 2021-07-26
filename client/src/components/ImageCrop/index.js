@@ -2,19 +2,21 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Container, InputHidden, InputLabel } from "./styled";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 import Modal from "../Modal";
 import AlertModal from "../AlertModal";
 
 function ImageCrop({ show, close }) {
+  const user = useSelector((state) => state.user);
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
   const [crop, setCrop] = useState({
-    unit: "%",
-    width: 100,
-    height: 100,
+    unit: "px",
+    width: 50,
+    height: 50,
     aspect: 1 / 1,
     x: 0,
     y: 0,
@@ -97,7 +99,10 @@ function ImageCrop({ show, close }) {
 
     const fd = new FormData();
 
+    console.log("_id >> ", user.authStatus._id);
+
     fd.append("file", file);
+    fd.append("_id", "392930dDDfe");
 
     console.log("convert file >> ", window.URL.createObjectURL(file));
 

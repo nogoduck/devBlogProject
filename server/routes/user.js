@@ -6,27 +6,21 @@ const multer = require("multer");
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
 
-//multer 관련 변수 (파일 처리)
+const fileExtension = ".png";
 const storage = multer.diskStorage({
-  // 파일 저장 경로
   destination: (req, file, cb) => {
     cb(null, "UploadProfileImage/");
   },
-  // 파일 저장시 파일명
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
+    cb(null, `${Date.now()}_${file.originalname}${fileExtension}`);
   },
 });
 
 const upload = multer({ storage: storage }).single("file");
 
 router.post("/update/image", (req, res) => {
-  console.log("image 요청");
-
-  console.log("req >> ", req);
-  console.log("req.file >> ", req.file);
-
   upload(req, res, (err) => {
+    console.log("[multer] req > ", req.file);
     if (err) {
       return res.json({
         success: false,
@@ -35,6 +29,9 @@ router.post("/update/image", (req, res) => {
       });
     }
 
+    //이미지 저장 성공
+
+    user.
     return res.json({
       success: true,
       // fileName: req.file.filename,
