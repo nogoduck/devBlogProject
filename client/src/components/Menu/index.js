@@ -10,18 +10,22 @@ function Menu({ children, style, show, close }) {
 
   const onCloseModal = useCallback(
     (e) => {
+      // if (!show) {
+      //   console.log("show false - close");
+      //   close();
+      // }
+
       console.log("modalRef.current >> ", modalRef.current);
       console.log("e.target >> ", e.target);
-      console.log("modal click!");
       if (e.target) {
-        console.log("etrue");
+        console.log("target[true]");
       } else {
-        console.log("efalse");
+        console.log("target[false]");
       }
 
-      console.log("sshow > ", show);
+      console.log("Menu show > ", show);
       if (show && e.target) {
-        console.log("IF");
+        console.log("Menu close...");
         close();
       }
     },
@@ -31,21 +35,18 @@ function Menu({ children, style, show, close }) {
   useEffect(() => {
     console.log("window add click event ");
     window.addEventListener("click", onCloseModal);
+
     return () => {
       console.log("window remove click event ");
       window.removeEventListener("click", onCloseModal);
     };
   }, [onCloseModal]);
 
-  const cs = () => {
-    console.log("cs click");
-    close();
-  };
-
+  console.log("show, close", show, close);
   if (!show) {
+    window.removeEventListener("click", onCloseModal);
     return null;
   }
-  console.log("show and close >> ", show, close);
 
   return (
     <>

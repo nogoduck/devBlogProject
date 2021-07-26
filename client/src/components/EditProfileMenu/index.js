@@ -15,24 +15,23 @@ function EditProfileMenu({ history, show, close, style }) {
   const [showResetProfileModal, setShowResetProfileModal] = useState(false);
 
   const onClickImageCropModal = () => {
-    close();
+    close(); //버그 있음 close를 사용안하면 모달 바깥영역을 클릭할 시 메뉴 모달도 같이 닫히지만 모달의 취소버튼으 누를시 메뉴가 열려있다, close를 사용하면 이와 반대로 동작
     setShowImageCropModal((prev) => !prev);
   };
 
   const onCloseImageCropModal = () => {
+    close();
     setShowImageCropModal(false);
   };
 
   const onClickResetProfileModal = () => {
-    //기본 이미지로 초기화
     close();
     setShowResetProfileModal((prev) => !prev);
   };
 
   const onCloseResetProfileModal = () => {
-    //기본 이미지로 초기화
     close();
-    setShowResetProfileModal((prev) => !prev);
+    setShowResetProfileModal(false);
   };
 
   const onSubmitResetProfile = () => {

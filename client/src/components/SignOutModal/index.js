@@ -12,7 +12,7 @@ function SignOutModal({ history, show, close }) {
         //로그아웃 성공
 
         if (res.data.success) {
-          show = false;
+          close();
           history.push("/");
         }
       })
