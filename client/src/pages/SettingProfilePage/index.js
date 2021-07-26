@@ -226,8 +226,10 @@ function SettingProfilePage({ history }) {
             </List>
           </Menu>
           <EditProfileImage onClick={onClickEditProfileMenu}>
-            {image ? (
-              <ProfileImage src={`http://localhost:5050/${image.filePath}`} />
+            {user.authStatus.imagePath ? (
+              <ProfileImage
+                src={`http://localhost:5050/${user.authStatus.imagePath}`}
+              />
             ) : (
               <Gravatar
                 email={user.authStatus.email}

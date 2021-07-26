@@ -104,7 +104,7 @@ router.post("/signin", (req, res) => {
 
 router.get("/auth", auth, (req, res) => {
   let token = req.cookies.user_auth;
-  console.log("middle token: ", token);
+  console.log("middle token >> ", token);
 
   res.status(200).json({
     isAuth: true,
@@ -112,7 +112,7 @@ router.get("/auth", auth, (req, res) => {
     nickname: req.user.nickname,
     name: req.user.name,
     email: req.user.email,
-    isAuth: true,
+    imagePath: req.user.imagePath,
   });
 });
 

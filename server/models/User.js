@@ -115,6 +115,7 @@ UserSchema.statics.compareToken = function (token, cb) {
   jwt.verify(token, privateKey, (err, decodeToken) => {
     user.findOne({ _id: decodeToken, token: token }, (err, user) => {
       if (err) return cb(err);
+      console.log("compareToken user >> ", user);
       cb(null, user);
     });
   });
