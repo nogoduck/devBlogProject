@@ -32,6 +32,7 @@ const UserSchema = new mongoose.Schema(
     imagePath: {
       type: String,
       trim: true,
+      default: "",
     },
   },
   { versionKey: false }

@@ -17,23 +17,41 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({
-  storage: storage,
-});
+const upload = multer({ storage: storage });
 
 router.post("/update/image", upload.single("image"), (req, res) => {
+  const { _id } = req.body;
+  const {
+    fieldname,
+    originalname,
+    mimetype,
+    destination,
+    filename,
+    path,
+    size,
+  } = req.file;
+
   console.log("req.body > ", req.body);
   console.log("req.file > ", req.file);
 
   //미들웨어 통과 => 이미지 저장 성공
-
-  return res.json({
-    success: true,
-    fileName: req.file.filename,
-    filePath: req.file.path,
-    message: "파일을 저장했습니다.",
-  });
-});
+  //db에 이미지 경로 저장
+  User.findByIdAndUpdate(
+    _id,
+    { imagePath: path },
+    { new: true },
+    (err, user) => {
+      console.log("user >> ", user);
+      if (err) return res.json({ success: false, err });
+      return res.status(200).json({
+        success: true,
+        fileName: filename,
+        filePath: path,
+        message: "파일을 저장했습니다.",
+      }); //return.res
+    }
+  ); //User.findByIdAndUpdate
+}); //router.post
 
 router.post("/signup", (req, res) => {
   const user = new User(req.body);

@@ -81,45 +81,33 @@ function ImageCrop({ show, close }) {
     const canvasUrl = canvas.toDataURL("image/png");
     console.log("canvasUrl > ", canvasUrl);
 
-    //base64로 데이터 인코딩
-    const base64Incoding = atob(canvasUrl.split(",")[1]);
-    // console.log("base64Incoding > ", base64Incoding);
-
-    //charCodeAt : 주어진 인덱스마다 UTF-16코드를 나타내는 0~65536 사이의 정수로 변환
-    const array = [];
-    for (let i = 0; i < base64Incoding.length; i++) {
-      array.push(base64Incoding.charCodeAt(i));
-    }
-    // console.log("array > ", array);
-
     //blob 생성
-    const file = new Blob([new Uint8Array(array)], { type: "image/png" });
-    const fd = new FormData();
+    canvas.toBlob(
+      (file) => {
+        const fd = new FormData();
+        const config = {
+          header: {
+            processData: false,
+            "Content-Type": "multipart/form-data",
+          },
+        };
 
-    fd.append("image", file);
-    fd.append("_id", user.authStatus._id);
+        fd.append("image", file);
+        fd.append("_id", user.authStatus._id);
 
-    const config = {
-      header: {
-        processData: false,
-        "content-type": "multipart/form-data",
+        axios
+          .post("/api/users/update/image", fd, config)
+          .then(({ data }) => {
+            console.log("data >> ", data);
+            close();
+          })
+          .catch((err) => {
+            alert("프로필 변경에 실패했습니다.");
+          });
       },
-    };
-
-    console.log("fd >> ", fd);
-
-    axios
-      .post("/api/users/update/image", fd, config)
-      .then(({ data }) => {
-        console.log("data >> ", data);
-
-        setTimeout(() => {
-          //변경 완료 문구
-        }, 5000);
-      })
-      .catch((err) => {
-        alert("프로필 변경에 실패했습니다.");
-      });
+      "image/png",
+      1
+    );
   };
 
   return (
