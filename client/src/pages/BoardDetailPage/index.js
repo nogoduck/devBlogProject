@@ -2,6 +2,7 @@ import { withRouter } from "react-router-dom";
 
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   Container,
   Lodding,
@@ -19,6 +20,8 @@ import { timeFormat } from "../BoardPage/_utils";
 import BoardWritePage from "../BoardWritePage";
 
 function BoardDetailPage() {
+  const user = useSelector((state) => state.user);
+
   useEffect(() => {
     axios
       .post("/api/board/detail", args)
@@ -66,17 +69,29 @@ function BoardDetailPage() {
             <tr>
               <td>
                 <Profile style={{ fontSize: "15px" }}>
-                  <Gravatar
-                    email={detailPost.data.email}
-                    size={30}
-                    default="wavatar"
-                    style={{
-                      width: "30px",
-                      height: "30px",
-                      marginRight: "5px",
-                      borderRadius: "25%",
-                    }}
-                  />
+                  {user.authStatus.imagePath ? (
+                    <img
+                      src={`http://localhost:5050/${user.authStatus.imagePath}`}
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        marginRight: "5px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  ) : (
+                    <Gravatar
+                      email={user.authStatus.email}
+                      size={250}
+                      default="wavatar"
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        marginRight: "5px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  )}
                   {detailPost.data.nickname}
                 </Profile>
               </td>

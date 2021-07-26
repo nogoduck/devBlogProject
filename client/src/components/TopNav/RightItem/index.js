@@ -24,7 +24,7 @@ import AlertModal from "../../AlertModal";
 
 function RightItem({ history }) {
   //로그인 모달 변수
-  const isLogin = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [userState] = useState("사용자 정보 없음");
@@ -95,7 +95,7 @@ function RightItem({ history }) {
   }, []);
 
   //리덕스에 있는 로그인 상태에 따라 상단바를 변경함
-  if (isLogin.authStatus && !isLogin.authStatus.isAuth) {
+  if (user.authStatus && !user.authStatus.isAuth) {
     return (
       <Right>
         {/* 깃허브 링크 */}
@@ -137,18 +137,30 @@ function RightItem({ history }) {
           onClick={onToggleProfileMenu}
           id={showProfileMenu ? "showProfileMenu" : ""}
         >
-          <Gravatar
-            email={isLogin.authStatus.email}
-            size={30}
-            default="wavatar"
-            style={{
-              width: "30px",
-              height: "30px",
-              marginRight: "5px",
-              borderRadius: "50%",
-            }}
-          />
-          <Nickname>{isLogin.authStatus.nickname}</Nickname>
+          {user.authStatus.imagePath ? (
+            <img
+              src={`http://localhost:5050/${user.authStatus.imagePath}`}
+              style={{
+                width: "30px",
+                height: "30px",
+                marginRight: "5px",
+                borderRadius: "50%",
+              }}
+            />
+          ) : (
+            <Gravatar
+              email={user.authStatus.email}
+              size={250}
+              default="wavatar"
+              style={{
+                width: "30px",
+                height: "30px",
+                marginRight: "5px",
+                borderRadius: "50%",
+              }}
+            />
+          )}
+          <Nickname>{user.authStatus.nickname}</Nickname>
         </Profile>
         <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
         <AlertModal

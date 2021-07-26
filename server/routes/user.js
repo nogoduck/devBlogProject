@@ -19,6 +19,23 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+router.post("/reset/image", (req, res) => {
+  const { _id, imagePath } = req.body;
+  //현재 프로필 이미지 제거 로직 작성예정
+
+  console.log("reset info >> ", _id, imagePath);
+
+  //db에서 imagePath 빈값처리
+  User.findByIdAndUpdate(_id, { imagePath: "" }, { new: true }, (err, user) => {
+    console.log("user >> ", user);
+    if (err) return res.json({ success: false, err });
+    return res.status(200).json({
+      success: true,
+      message: "이미지 파일을 제거했습니다.",
+    }); //return.res
+  }); //User.findByIdAndUpdate
+});
+
 router.post("/update/image", upload.single("image"), (req, res) => {
   const { _id } = req.body;
   const {

@@ -21,7 +21,7 @@ import {
 } from "./_utils";
 
 function BoardPage({ history }) {
-  const isLogin = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
   const [posts, setPosts] = useState("");
   const [boardCnt, setBoardCnt] = useState(0);
@@ -76,7 +76,7 @@ function BoardPage({ history }) {
   };
 
   const onClickWrite = () => {
-    if (!isLogin.authStatus.isAuth) {
+    if (!user.authStatus.isAuth) {
       alert("로그인 한 유저만 게시글을 작성할 수 있습니다.");
     } else {
       history.push("/menu/board/write");

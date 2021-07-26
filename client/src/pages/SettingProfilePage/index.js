@@ -23,7 +23,7 @@ import axios from "axios";
 import { RiImageEditFill } from "react-icons/ri";
 
 import Menu from "../../components/Menu";
-import ImageCrop from "../../components/ImageCrop";
+import EditProfileMenu from "../../components/EditProfileMenu";
 
 //유효성 검사 12글자 이하, 공백 여부 추가 예정
 //기존의 닉네임과 같은지 검사
@@ -39,10 +39,7 @@ function SettingProfilePage({ history }) {
     special: false,
   });
   const [successUpdateNickname, setSuccessUpdateNickname] = useState(false);
-  const [image, setImage] = useState("");
   const [showEditProfileMenu, setShowEditProfileMenu] = useState(false);
-
-  const [showImageCropModal, setShowImageCropModal] = useState(false);
 
   const onClickEditProfileMenu = () => {
     setShowEditProfileMenu((prev) => !prev);
@@ -50,14 +47,6 @@ function SettingProfilePage({ history }) {
 
   const onCloseEditProfileMenu = () => {
     setShowEditProfileMenu(false);
-  };
-
-  const onClickImageCropModal = () => {
-    setShowImageCropModal((prev) => !prev);
-  };
-
-  const onCloseImageCropModal = () => {
-    setShowImageCropModal(false);
   };
 
   const onChangeUserNickname = (e) => {
@@ -213,18 +202,13 @@ function SettingProfilePage({ history }) {
           <Label>프로필 사진</Label>
 
           {/* ref학습해서 바깥쪽 꺼짐동작 구현예정 */}
-          <Menu
+
+          <EditProfileMenu
             show={showEditProfileMenu}
             close={onCloseEditProfileMenu}
             style={{ position: "absolute", right: "30px", bottom: "100px" }}
-          >
-            <List>
-              <ul>
-                <li onClick={onClickImageCropModal}>프로필 사진 업로드</li>
-                <li>기본 이미지로 변경</li>
-              </ul>
-            </List>
-          </Menu>
+          />
+
           <EditProfileImage onClick={onClickEditProfileMenu}>
             {user.authStatus.imagePath ? (
               <ProfileImage
@@ -253,12 +237,6 @@ function SettingProfilePage({ history }) {
           </EditProfileImage>
         </div>
       </SettingProfileContainer>
-      <button onClick={onClickImageCropModal}>showModal</button>
-      <img
-        src="http://localhost:5050/UploadProfileImage/1627245116300_blob"
-        alt=""
-      />
-      <ImageCrop show={showImageCropModal} close={onCloseImageCropModal} />
     </Container>
   );
 }

@@ -27,17 +27,29 @@ function SettingPage({ history }) {
   return (
     <Container>
       <Profile>
-        <Gravatar
-          email={user.authStatus.email}
-          size={50}
-          default="wavatar"
-          style={{
-            width: "50px",
-            height: "50px",
-            marginRight: "12px",
-            borderRadius: "50%",
-          }}
-        />
+        {user.authStatus.imagePath ? (
+          <img
+            src={`http://localhost:5050/${user.authStatus.imagePath}`}
+            style={{
+              width: "50px",
+              height: "50px",
+              marginRight: "12px",
+              borderRadius: "50%",
+            }}
+          />
+        ) : (
+          <Gravatar
+            email={user.authStatus.email}
+            size={250}
+            default="wavatar"
+            style={{
+              width: "50px",
+              height: "50px",
+              marginRight: "12px",
+              borderRadius: "50%",
+            }}
+          />
+        )}
         <NameBox>
           <div>{user.authStatus.name}</div>
           <div>{user.authStatus.nickname}</div>

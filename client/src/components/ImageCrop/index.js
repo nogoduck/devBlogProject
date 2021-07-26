@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Container, InputHidden, InputLabel } from "./styled";
 import ReactCrop from "react-image-crop";
@@ -5,11 +6,9 @@ import "react-image-crop/dist/ReactCrop.css";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import Modal from "../Modal";
 import AlertModal from "../AlertModal";
-import { BsFillDisplayFill } from "react-icons/bs";
 
-function ImageCrop({ show, close }) {
+function ImageCrop({ history, show, close }) {
   const user = useSelector((state) => state.user);
   const [upImg, setUpImg] = useState();
   const imgRef = useRef(null);
@@ -100,6 +99,7 @@ function ImageCrop({ show, close }) {
           .then(({ data }) => {
             console.log("data >> ", data);
             close();
+            history.push("/setting/profile");
           })
           .catch((err) => {
             alert("프로필 변경에 실패했습니다.");
@@ -149,4 +149,4 @@ function ImageCrop({ show, close }) {
   );
 }
 
-export default ImageCrop;
+export default withRouter(ImageCrop);
