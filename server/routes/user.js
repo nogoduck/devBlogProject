@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
+const path = require("path");
 const multer = require("multer");
 
 const { User } = require("../models/User");
@@ -16,28 +17,21 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage }).single("file");
+const upload = multer({
+  storage: storage,
+});
 
-router.post("/update/image", (req, res) => {
-  upload(req, res, (err) => {
-    console.log("[multer] req > ", req.file);
-    if (err) {
-      return res.json({
-        success: false,
-        message: "파일 저장에 실패했습니다",
-        error: err,
-      });
-    }
+router.post("/update/image", upload.single("image"), (req, res) => {
+  console.log("req.body > ", req.body);
+  console.log("req.file > ", req.file);
 
-    //이미지 저장 성공
+  //미들웨어 통과 => 이미지 저장 성공
 
-    user.
-    return res.json({
-      success: true,
-      // fileName: req.file.filename,
-      // filePath: req.file.path,
-      message: "파일을 저장했습니다.",
-    });
+  return res.json({
+    success: true,
+    fileName: req.file.filename,
+    filePath: req.file.path,
+    message: "파일을 저장했습니다.",
   });
 });
 
