@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const fs = require("fs");
 const multer = require("multer");
 
 const { User } = require("../models/User");
@@ -22,6 +23,10 @@ const upload = multer({ storage: storage });
 router.post("/reset/image", (req, res) => {
   const { _id, imagePath } = req.body;
   //현재 프로필 이미지 제거 로직 작성예정
+  fs.unlink(imagePath, (err) => {
+    if (err) console.log("fs err >> failed file remove... ", err);
+    console.log("fs info >> success file remove");
+  });
 
   console.log("reset info >> ", _id, imagePath);
 

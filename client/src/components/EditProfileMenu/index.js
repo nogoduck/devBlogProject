@@ -8,7 +8,7 @@ import Menu from "../../components/Menu";
 import AlertModal from "../../components/AlertModal";
 import ImageCrop from "../../components/ImageCrop";
 
-function EditProfileMenu({ show, close, style }) {
+function EditProfileMenu({ history, show, close, style }) {
   const user = useSelector((state) => state.user);
 
   const [showImageCropModal, setShowImageCropModal] = useState(false);
@@ -44,6 +44,8 @@ function EditProfileMenu({ show, close, style }) {
       .post("/api/users/reset/image", payload)
       .then(({ data }) => {
         console.log("data >> ", data);
+        close();
+        history.push("/setting/profile");
       })
       .catch((err) => {
         console.log(err);
@@ -65,7 +67,7 @@ function EditProfileMenu({ show, close, style }) {
         close={onCloseResetProfileModal}
         option="danger"
         modalHeader="프로필 이미지 초기화 안내"
-        content="기존의 프로필 이미지는 삭제됩니다. 기본 프로필 이미지로 바꾸시겠습니까?"
+        content="기존의 프로필 이미지는 삭제되며 회원가입 시 생성됬던 이미지로 변경됩니다. 기본 프로필 이미지로 바꾸시겠습니까?"
         style={{ width: "300px" }}
         confirm={onSubmitResetProfile}
       />
