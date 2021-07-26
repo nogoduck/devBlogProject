@@ -201,14 +201,6 @@ function SettingProfilePage({ history }) {
         <div style={{ position: "relative" }}>
           <Label>프로필 사진</Label>
 
-          {/* ref학습해서 바깥쪽 꺼짐동작 구현예정 */}
-
-          <EditProfileMenu
-            show={showEditProfileMenu}
-            close={onCloseEditProfileMenu}
-            style={{ position: "absolute", right: "30px", bottom: "100px" }}
-          />
-
           <EditProfileImage onClick={onClickEditProfileMenu}>
             {user.authStatus.imagePath ? (
               <ProfileImage
@@ -234,6 +226,14 @@ function SettingProfilePage({ history }) {
               />
               변경
             </EditPicket>
+            <EditProfileMenu
+              show={showEditProfileMenu}
+              close={onCloseEditProfileMenu}
+              style={{
+                position: "relative",
+                bottom: "24px",
+              }}
+            />
           </EditProfileImage>
         </div>
       </SettingProfileContainer>

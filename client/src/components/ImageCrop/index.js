@@ -88,7 +88,7 @@ function ImageCrop({ history, show, close }) {
           },
         };
 
-        fd.append("image", file);
+        fd.append("image", file, user.authStatus._id);
         fd.append("_id", user.authStatus._id);
         fd.append("currentPath", user.authStatus.imagePath);
 

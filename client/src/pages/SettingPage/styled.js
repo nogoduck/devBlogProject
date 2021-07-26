@@ -39,6 +39,7 @@ export const Menu = styled.div`
   }
   & li:first-child {
     cursor: default;
+    border: none;
     background-color: transparent;
   }
   & li:first-child:hover {
