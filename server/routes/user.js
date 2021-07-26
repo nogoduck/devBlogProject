@@ -42,7 +42,7 @@ router.post("/reset/image", (req, res) => {
 });
 
 router.post("/update/image", upload.single("image"), (req, res) => {
-  const { _id } = req.body;
+  const { _id, currentPath } = req.body;
   const {
     fieldname,
     originalname,
@@ -55,6 +55,17 @@ router.post("/update/image", upload.single("image"), (req, res) => {
 
   console.log("req.body > ", req.body);
   console.log("req.file > ", req.file);
+
+  //현재 이미 설정된 이미지가 있다면 제거해준다.
+  //(db의 패스는 변경해주지 않아도 된다 추가한 이미지경로로 덮어 씌우면 되기 때문에)
+
+  if (currentPath) {
+    console.log("이미지 제거 시도");
+    fs.unlink(currentPath, (err) => {
+      if (err) console.log("fs err >> failed file remove... ", err);
+      console.log("fs info >> success file remove");
+    });
+  }
 
   //미들웨어 통과 => 이미지 저장 성공
   //db에 이미지 경로 저장

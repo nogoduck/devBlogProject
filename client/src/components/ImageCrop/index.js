@@ -77,9 +77,6 @@ function ImageCrop({ history, show, close }) {
       return;
     }
 
-    const canvasUrl = canvas.toDataURL("image/png");
-    console.log("canvasUrl > ", canvasUrl);
-
     //blob 생성
     canvas.toBlob(
       (file) => {
@@ -93,6 +90,7 @@ function ImageCrop({ history, show, close }) {
 
         fd.append("image", file);
         fd.append("_id", user.authStatus._id);
+        fd.append("currentPath", user.authStatus.imagePath);
 
         axios
           .post("/api/users/update/image", fd, config)
