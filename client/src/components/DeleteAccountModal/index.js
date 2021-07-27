@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Input, Label, Error, DeleteAccountForm } from "./styled";
+import { Input, Label, DeleteAccountForm } from "./styled";
 import axios from "axios";
 
 import useInput from "../../hooks/useInput";
@@ -23,6 +23,7 @@ function DeleteAccountModal({ history, show, close }) {
       _id: user.authStatus._id,
       email: email,
       password: password,
+      imagePath: user.authStatus.imagePath,
     };
 
     axios
@@ -47,7 +48,7 @@ function DeleteAccountModal({ history, show, close }) {
 
   const onSubmitSuccessDeleteAccount = () => {
     setShowSuccessDeleteAccountModal(false);
-    // history.push("/");
+    history.push("/");
   };
 
   return (

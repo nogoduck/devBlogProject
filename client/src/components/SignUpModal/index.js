@@ -1,3 +1,4 @@
+import { withRouter } from "react-router-dom";
 import React, { useRef, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { TiWarning } from "react-icons/ti";
@@ -5,6 +6,7 @@ import { Input, SubmitButton, Label, Error, Footer, Form } from "./styled";
 import { useDispatch } from "react-redux";
 import { signupUser, auth } from "../../_actions/user_actions";
 import Modal from "../Modal";
+import AlertModal from "../AlertModal";
 
 // + 추가 예정 사항 (아직 추가 안됌)
 // + 공백 유효성 검사 함수
@@ -13,7 +15,7 @@ import Modal from "../Modal";
 // + [다른 컴포넌트도 해당] 모든 요청 관련된 버튼들은 한번만 요청가게 설정
 // + 유효성조건이 일치하지 않으면 버튼 비활성화
 
-function SignUpModal({ children, show, close }) {
+function SignUpModal({ history, children, show, close }) {
   const dispatch = useDispatch();
   const {
     register,
@@ -23,7 +25,6 @@ function SignUpModal({ children, show, close }) {
     formState: { errors },
   } = useForm();
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const [succeessSignUp, setSucceessSignUp] = useState(false);
   const password = useRef();
 
   password.current = watch("password");
@@ -32,7 +33,8 @@ function SignUpModal({ children, show, close }) {
     dispatch(signupUser(user)).then((res) => {
       if (res.payload.signupSuccess) {
         //회원가입 성공
-        setShowSignUpModal(false);
+        close();
+        setShowSuccessSignUpModal(true);
 
         //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
         dispatch(auth()).then((res) => {
@@ -46,6 +48,13 @@ function SignUpModal({ children, show, close }) {
 
   const onClickSignUpModal = () => {
     setShowSignUpModal((prev) => !prev);
+  };
+
+  //회원가입 완료
+  const [showSuccessSignUpModal, setShowSuccessSignUpModal] = useState(false);
+
+  const onSubmitSuccessSignUp = () => {
+    console.log("회원가입 성공 모달 확인");
   };
 
   useEffect(() => {
@@ -64,12 +73,6 @@ function SignUpModal({ children, show, close }) {
     }
   }, [errors, setValue, show]);
 
-  useEffect(() => {
-    if (succeessSignUp) {
-      alert("회원가입 성공");
-    }
-    setSucceessSignUp(false);
-  }, [succeessSignUp]);
   return (
     <div>
       <span onClick={onClickSignUpModal}>
@@ -210,8 +213,17 @@ function SignUpModal({ children, show, close }) {
           </Footer>
         </Modal>
       </span>
+      <AlertModal
+        show={showSuccessSignUpModal}
+        close={onSubmitSuccessSignUp}
+        modalHeader="회원가입"
+        title="회원가입에 성공했습니다"
+        option="success"
+        useCancelButton={false}
+        confirm={onSubmitSuccessSignUp}
+      ></AlertModal>
     </div>
   );
 }
 
-export default SignUpModal;
+export default withRouter(SignUpModal);

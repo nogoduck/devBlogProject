@@ -60,7 +60,6 @@ router.post("/update/image", upload.single("image"), (req, res) => {
   //(db의 패스는 변경해주지 않아도 된다 추가한 이미지경로로 덮어 씌우면 되기 때문에)
 
   if (currentPath) {
-    console.log("이미지 제거 시도");
     fs.unlink(currentPath, (err) => {
       if (err) console.log("fs err >> failed file remove... ", err);
       console.log("fs info >> success file remove");
@@ -218,7 +217,7 @@ router.patch("/update/password", (req, res) => {
 
 router.delete("/delete/account", (req, res) => {
   console.log(req.body);
-  const { _id, email, password } = req.body.payload;
+  const { _id, email, password, imagePath } = req.body.payload;
   console.log(_id);
   console.log(email);
 
@@ -253,6 +252,14 @@ router.delete("/delete/account", (req, res) => {
 
       //비밀번호가 일치
       console.log("[delete] compare password >> ", true);
+      //비밀번호가 동일한 경우 등록된 프로필 이미지파일을 제거해준다
+      if (imagePath) {
+        fs.unlink(imagePath, (err) => {
+          if (err) console.log("fs err >> failed file remove... ", err);
+          console.log("fs info >> success file remove");
+        });
+      }
+
       // 비밀번호가 동일한 경우 db에서 해당계정을 삭제한다
       User.findByIdAndRemove(_id, (err, doc) => {
         console.log("[result] doc >> ", doc);

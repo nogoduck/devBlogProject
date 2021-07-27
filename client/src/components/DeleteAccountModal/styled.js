@@ -27,10 +27,3 @@ export const Label = styled.label`
   position: relative;
   display: inline-block;
 `;
-
-export const Error = styled.div`
-  margin: 5px 0 0 0;
-  font-size: 14px;
-  font-weight: 800;
-  color: #ff3f34;
-`;

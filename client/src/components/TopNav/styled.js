@@ -4,6 +4,7 @@ export const Header = styled.div`
   color: #d2dae2;
   position: fixed;
   background-color: #fff;
+  /* background-color: transparent; */
   font-size: 30px;
   height: 48px;
   width: 100%;
