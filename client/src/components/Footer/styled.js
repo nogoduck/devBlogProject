@@ -7,7 +7,7 @@ export const Container = styled.div`
   height: 300px;
   padding: 24px;
   /* width: 100%; */
-  z-index: 512;
+  /* z-index: 512; */
 `;
 
 export const LogoContainer = styled.div`

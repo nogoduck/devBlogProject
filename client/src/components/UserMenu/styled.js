@@ -1,43 +1,41 @@
 import styled from "styled-components";
 
-export const MenuItems = styled.div`
-  border-radius: 0 0 10px 10px;
-  background-color: #3498db;
-  top: 60px;
-  right: 60px;
-  border: 1px solid #3498db;
-  border-width: 0 1px 1px 1px;
-  transition: 0.2s 0s ease-in-out;
-  font-size: 16px;
-  font-weight: 12px;
-  color: #fff;
-  z-index: 10;
-  & a {
-    color: #fff;
+export const List = styled.div`
+  font-size: 14px;
+  color: #000;
+  border: 1px solid #d0d7de;
+  border-radius: 5px;
+  background-color: #fff;
+  hr {
+    border: none;
+    border-top: 1px solid #d0d7de;
   }
-
+  a {
+    color: #000;
+  }
   & li {
-    padding: 6px 0;
-    cursor: pointer;
-    width: 100%;
-    border-bottom: 1px solid #fff;
-    text-align: center;
-    transition: 0.2s;
-    color: #fff;
+    padding: 4px 20px;
+  }
+  & li:first-child {
+    margin-top: 8px;
   }
   & li:last-child {
-    border: none;
-  }
-  & li:last-child:hover {
-    border: none;
-    color: #fff;
-  }
-
-  & #clock:hover {
-    border-radius: 0 0 10px 10px;
+    margin-bottom: 6px;
   }
   & li:hover {
-    box-shadow: 0px 0px 5px 3px #2980b9 inset;
+    background-color: #0969da;
     color: #fff;
+    cursor: pointer;
+  }
+  & li:nth-child(-n + 2) {
+    background-color: #fff;
+    color: #000;
+    cursor: default;
+    text-align: center;
+  }
+  & li:nth-child(-n + 2):hover {
+    background-color: #fff;
+    color: #000;
+    cursor: default;
   }
 `;

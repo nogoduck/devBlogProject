@@ -1,13 +1,16 @@
 import { Link, withRouter } from "react-router-dom";
 import React, { useState } from "react";
-import { MenuItems } from "./styled";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { BiLinkExternal } from "react-icons/bi";
 
+import { List } from "./styled";
 import Clock from "../Clock";
 import Menu from "../Menu";
 import AlertModal from "../AlertModal";
 const UserMenu = ({ history, show, close }) => {
+  const user = useSelector((state) => state.user);
+
   const [showSignOutModal, setShowSignOutModal] = useState(false);
 
   const onClickSignoutButton = () => {
@@ -35,18 +38,24 @@ const UserMenu = ({ history, show, close }) => {
       close={close}
       style={{
         position: "absolute",
-        width: "140px",
-        top: "60px",
-        right: "60px",
+        minWidth: "180px",
+        top: "48px",
+        right: "24px",
       }}
     >
-      <MenuItems>
+      <List>
         <ul>
-          <Link to="/setting">
-            <li>설정</li>
-          </Link>
-          <li onClick={onClickSignoutButton}>로그아웃</li>
-          <li>
+          <li className="nickname">
+            <b>{user.authStatus.nickname}</b>
+          </li>
+          <li className="email">{user.authStatus.email}</li>
+          <hr />
+          <li className="setting">
+            <Link to="/setting">
+              <div>설정</div>
+            </Link>
+          </li>
+          <li className="github">
             GitHub
             <BiLinkExternal
               style={{ fontSize: "16px", display: "inline-block" }}
@@ -55,8 +64,12 @@ const UserMenu = ({ history, show, close }) => {
           <li id="clock">
             <Clock />
           </li>
+          <hr />
+          <li className="logout" onClick={onClickSignoutButton}>
+            로그아웃
+          </li>
         </ul>
-      </MenuItems>
+      </List>
       <AlertModal
         show={showSignOutModal}
         close={onClickSignoutButton}
