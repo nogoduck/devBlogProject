@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
-// index.js
 export const Container = styled.div`
-  float: left;
-  margin-left: 10px;
+  background-color: #fff;
+  border: 5px solid yellow;
+  /* border-top: 1px solid #dadce0; */
+  height: 300px;
+  padding: 24px;
+  /* width: 100%; */
+  z-index: 512;
 `;
 
 export const LogoContainer = styled.div`
-  position: absolute;
+  /* position: absolute; */
   margin: 1px 7px;
   font-size: 22px;
   letter-spacing: -1px;

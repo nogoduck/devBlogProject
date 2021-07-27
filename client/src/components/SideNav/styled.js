@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   flex: none;
-
   display: flex;
   flex-direction: column;
   width: 200px;
@@ -10,7 +9,7 @@ export const Container = styled.div`
   border: none;
   background-color: #fff;
   box-shadow: 0 0 4px 1px #c8cbcd;
-
+  z-index: 1500;
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     //tablet
     width: 64px;

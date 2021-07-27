@@ -1,7 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { Container, LogoContainer } from "./styled.js";
-import { AiOutlineBug } from "react-icons/ai";
+import React from "react";
+import { Container } from "./styled.js";
 import { useMediaQuery } from "react-responsive";
 
 import Logo from "./Logo";
@@ -11,7 +10,7 @@ function LeftItem() {
 
   return (
     <Container id={!isDesktop && "isMobileTopNav"}>
-      <Link to="/" style={{ color: "#fff", zIndex: "2025" }}>
+      <Link to="/">
         <Logo style={{ top: "2px" }} />
       </Link>
     </Container>

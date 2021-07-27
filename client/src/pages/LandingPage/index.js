@@ -2,9 +2,10 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import React from "react";
 
-import { Main, Content } from "./styled";
+import { Main, ContentContainer, Content } from "./styled";
 import TopNav from "../../components/TopNav";
 import SideNav from "../../components/SideNav";
+import Footer from "../../components/Footer";
 
 import LandingContent from "./LangdingContent";
 import AboutPage from "../AboutPage";
@@ -34,29 +35,32 @@ function LandingPage() {
       <TopNav />
       <Main>
         <SideNav />
-        <Content className={isDesktop ? "" : "full"}>
-          <Switch>
-            <Route exact path="/" component={Auth(LandingContent, null)} />
-            <Route path="/menu/about" component={Auth(AboutPage, false)} />
-            <Route
-              true
-              path="/menu/board/write"
-              component={Auth(BoardWritePage, true)}
-            />
-            <Route
-              path="/menu/board/:postId"
-              component={Auth(BoardDetailPage, null)}
-            />
-            <Route path="/menu/board" component={Auth(BoardPage, null)} />
-            <Route path="/menu/card" component={Auth(CardPage, null)} />
-            <Route
-              path="/menu/experiment"
-              component={Auth(ExperimentPage, null)}
-            />
-            <Route path="/menu/video" component={Auth(VideoPage, null)} />
-            <Route path="/setting" component={Auth(SettingPage, null)} />
-          </Switch>
-        </Content>
+        <ContentContainer>
+          <Content className={isDesktop ? "" : "full"}>
+            <Switch>
+              <Route exact path="/" component={Auth(LandingContent, null)} />
+              <Route path="/menu/about" component={Auth(AboutPage, false)} />
+              <Route
+                true
+                path="/menu/board/write"
+                component={Auth(BoardWritePage, true)}
+              />
+              <Route
+                path="/menu/board/:postId"
+                component={Auth(BoardDetailPage, null)}
+              />
+              <Route path="/menu/board" component={Auth(BoardPage, null)} />
+              <Route path="/menu/card" component={Auth(CardPage, null)} />
+              <Route
+                path="/menu/experiment"
+                component={Auth(ExperimentPage, null)}
+              />
+              <Route path="/menu/video" component={Auth(VideoPage, null)} />
+              <Route path="/setting" component={Auth(SettingPage, null)} />
+            </Switch>
+          </Content>
+          <Footer />
+        </ContentContainer>
       </Main>
     </>
   );

@@ -2,19 +2,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
 
-html {
-  height: 100vh;
-}
-
+html,
 body {
   /* height: 100%; */
   font-family: "Noto Sans KR", sans-serif;
   margin: 0px;
   padding: 0px;
   user-select: none;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   background-color: #e8eaed;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
 }
 
 ol,
