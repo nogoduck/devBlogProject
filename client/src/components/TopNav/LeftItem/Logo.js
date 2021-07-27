@@ -1,41 +1,48 @@
 import React from "react";
 import { LogoContainer } from "./styled.js";
 import { AiOutlineBug } from "react-icons/ai";
-function Logo() {
+function Logo({ style }) {
   return (
-    <LogoContainer>
-      <AiOutlineBug
+    <LogoContainer style={style}>
+      <div
         style={{
-          color: "#d2dae2",
-          fontSize: "16px",
-          fontColor: "#ff3f34",
-          transform: "rotate(72deg)",
           position: "absolute",
-          left: "55px",
-          top: "7px",
+          top: "0px",
+          left: "-13px",
         }}
-      />
-      <AiOutlineBug
-        style={{
-          fontSize: "20px",
-          transform: "rotate(110deg)",
-          position: "absolute",
-          left: "72px",
-          top: "7px",
-        }}
-      />
-      <AiOutlineBug
-        style={{
-          fontSize: "24px",
-          transform: "rotate(90deg)",
-          position: "absolute",
-          left: "100px",
-          top: "7px",
-        }}
-      />
+      >
+        <AiOutlineBug
+          style={{
+            color: "#757575d2dae2",
+            fontSize: "12px",
+            transform: "rotate(72deg)",
+            position: "absolute",
+            left: "55px",
+            top: "14px",
+          }}
+        />
+        <AiOutlineBug
+          style={{
+            fontSize: "16px",
+            transform: "rotate(90deg)",
+            position: "absolute",
+            left: "72px",
+            top: "9px",
+          }}
+        />
+        <AiOutlineBug
+          style={{
+            fontSize: "18px",
+            transform: "rotate(110deg)",
+            position: "absolute",
+            left: "90px",
+            top: "12px",
+          }}
+        />
+      </div>
       <div>d</div>
       ev
-      <span style={{ fontSize: "32px", color: "#ff3f34" }}>.</span>
+      <span style={{ fontSize: "44px", color: "red" }}>.</span>
       <span>Log</span>
     </LogoContainer>
   );

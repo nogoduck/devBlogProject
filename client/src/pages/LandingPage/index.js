@@ -1,7 +1,7 @@
 import { Route, Switch, withRouter } from "react-router-dom";
 import React from "react";
 
-import { Content } from "./styled";
+import { Main, Content } from "./styled";
 import TopNav from "../../components/TopNav";
 import SideNav from "../../components/SideNav";
 
@@ -29,7 +29,7 @@ function LandingPage() {
   return (
     <>
       <TopNav />
-      <div style={{ display: "flex" }}>
+      <Main>
         <SideNav />
         <Content>
           <Switch>
@@ -54,7 +54,7 @@ function LandingPage() {
             <Route path="/setting" component={Auth(SettingPage, null)} />
           </Switch>
         </Content>
-      </div>
+      </Main>
     </>
   );
 }

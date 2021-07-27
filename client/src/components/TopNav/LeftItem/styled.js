@@ -9,12 +9,11 @@ export const Container = styled.div`
 export const LogoContainer = styled.div`
   position: absolute;
   margin: 1px 7px;
-  /* margin: 7px; */
   font-size: 26px;
-  letter-spacing: 2px;
+  letter-spacing: -1px;
   padding: 0px 7px 0px 7px;
   font-family: "Roboto", sans-serif;
-
+  color: #757575;
   &:hover {
   }
 

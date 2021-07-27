@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  flex: none;
   margin: 10px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  width: 240px;
-  height: 100vh;
+  width: 200px;
+  height: 100%;
   border-radius: 10px;
   border: none;
   background-color: #ced6e0;
@@ -97,13 +98,14 @@ export const Container = styled.div`
 `;
 
 export const MenuButton = styled.button`
-  position: absolute;
-  color: #d2dae2;
-  background-color: #1e272e;
+  position: fixed;
+  color: #757575;
+  background-color: transparent;
   font-size: 24px;
-  top: 16px;
+  top: 12px;
   left: 8px;
   border: none;
+  z-index: 2050;
   &:hover {
     cursor: pointer;
   }
