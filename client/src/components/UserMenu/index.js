@@ -2,7 +2,6 @@ import { Link, withRouter } from "react-router-dom";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { BiLinkExternal } from "react-icons/bi";
 
 import { List } from "./styled";
 import Clock from "../Clock";
@@ -39,7 +38,7 @@ const UserMenu = ({ history, show, close }) => {
       style={{
         position: "absolute",
         minWidth: "180px",
-        top: "48px",
+        top: "56px",
         right: "24px",
       }}
     >
@@ -54,12 +53,6 @@ const UserMenu = ({ history, show, close }) => {
             <Link to="/setting">
               <div>설정</div>
             </Link>
-          </li>
-          <li className="github">
-            GitHub
-            <BiLinkExternal
-              style={{ fontSize: "16px", display: "inline-block" }}
-            />
           </li>
           <li id="clock">
             <Clock />

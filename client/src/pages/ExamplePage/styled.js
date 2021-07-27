@@ -32,7 +32,7 @@ export const Article = styled.div`
   padding: 24px;
   position: relative;
   border: 2px solid #ff793f;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   & li {
     width: 50px;

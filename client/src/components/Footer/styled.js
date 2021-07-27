@@ -2,36 +2,63 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #fff;
-  border: 5px solid yellow;
-  /* border-top: 1px solid #dadce0; */
-  height: 300px;
   padding: 24px;
-  /* width: 100%; */
-  /* z-index: 512; */
+  position: relative;
+
+  & hr {
+    border: none;
+    border-top: 1px solid #e8eaed;
+    width: 90%;
+    float: left;
+  }
 `;
 
-export const LogoContainer = styled.div`
-  /* position: absolute; */
-  margin: 1px 7px;
-  font-size: 22px;
-  letter-spacing: -1px;
-  padding: 0px 7px 0px 7px;
-  z-index: 1000;
-  font-family: "Roboto", sans-serif;
-  color: #757575;
-  &:hover {
-    cursor: pointer;
+export const GitHubLink = styled.div`
+  & a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+`;
+export const BugSet = styled.div`
+  position: relative;
+`;
+export const LogoSection = styled.div`
+  position: relative;
+  /* border: 1px solid black; */
+  height: 42px;
+  margin: ;
+`;
+export const Label = styled.label`
+  font-size: 14px;
+  font-weight: 800;
+  color: #000;
+`;
+export const Gap = styled.label`
+  background-color: #e8eaed;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: -36px;
+  right: 80px;
+  transform: rotate(20deg);
+  border-radius: 35px 52px 31px 46px;
 
-  & > .initial {
-    display: inline-block;
-    font-size: 28px;
+  @media screen and (max-width: 1023px) {
+    //tablet
+
+    background-color: black;
+    display: none;
   }
-  & > .dot {
-    font-size: 32px;
-    color: red;
-  }
-  & > span {
-    font-size: 18px;
-  }
+`;
+
+export const ContentContainer = styled.label`
+  display: flex;
+  justify-content: space-between;
+  margin-left: 16px;
+  margin-right: 12%;
+`;
+export const Content = styled.label`
+  font-size: 14px;
 `;
