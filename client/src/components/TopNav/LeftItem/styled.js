@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const LogoContainer = styled.div`
   position: absolute;
   margin: 1px 7px;
-  font-size: 26px;
+  font-size: 22px;
   letter-spacing: -1px;
   padding: 0px 7px 0px 7px;
   font-family: "Roboto", sans-serif;
@@ -17,12 +17,15 @@ export const LogoContainer = styled.div`
   &:hover {
   }
 
-  & > div {
+  & > .initial {
     display: inline-block;
-    font-size: 36px;
+    font-size: 28px;
   }
-
+  & > .dot {
+    font-size: 32px;
+    color: red;
+  }
   & > span {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;

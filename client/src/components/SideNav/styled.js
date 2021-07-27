@@ -2,16 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   flex: none;
-  margin: 10px;
-  background-color: #fff;
+
   display: flex;
   flex-direction: column;
   width: 200px;
-  height: 100%;
-  border-radius: 10px;
+  height: 100vh;
   border: none;
-  background-color: #ced6e0;
-  /* border-right: 1px solid #e5e5e5; */
+  background-color: #fff;
+  box-shadow: 0 0 4px 1px #c8cbcd;
 
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     //tablet

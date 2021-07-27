@@ -11,19 +11,20 @@ function Logo({ style }) {
           left: "-13px",
         }}
       >
-        <AiOutlineBug
+        {/* 로고 위에 배치한 버그 아이콘 */}
+        {/* <AiOutlineBug
           style={{
             color: "#757575d2dae2",
-            fontSize: "12px",
+            fontSize: "8px",
             transform: "rotate(72deg)",
             position: "absolute",
             left: "55px",
-            top: "14px",
+            top: "10px",
           }}
         />
         <AiOutlineBug
           style={{
-            fontSize: "16px",
+            fontSize: "12px",
             transform: "rotate(90deg)",
             position: "absolute",
             left: "72px",
@@ -32,17 +33,17 @@ function Logo({ style }) {
         />
         <AiOutlineBug
           style={{
-            fontSize: "18px",
+            fontSize: "16px",
             transform: "rotate(110deg)",
             position: "absolute",
             left: "90px",
             top: "12px",
           }}
-        />
+        /> */}
       </div>
-      <div>d</div>
+      <div className="initial">d</div>
       ev
-      <span style={{ fontSize: "44px", color: "red" }}>.</span>
+      <span className="dot">.</span>
       <span>Log</span>
     </LogoContainer>
   );

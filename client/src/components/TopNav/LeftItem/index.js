@@ -12,7 +12,7 @@ function LeftItem() {
   return (
     <Container id={!isDesktop && "isMobileTopNav"}>
       <Link to="/" style={{ color: "#fff", zIndex: "2025" }}>
-        <Logo style={{ top: "-6px" }} />
+        <Logo style={{ top: "2px" }} />
       </Link>
     </Container>
   );

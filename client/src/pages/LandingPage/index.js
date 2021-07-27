@@ -1,4 +1,5 @@
 import { Route, Switch, withRouter } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 import React from "react";
 
 import { Main, Content } from "./styled";
@@ -26,12 +27,14 @@ import Auth from "../../hoc/auth";
 // 3: 값을 넘기지 않으면 기본값 null, 유저등급 지정
 // ex) 0 = 1 = admin, 2 = guest
 function LandingPage() {
+  const isDesktop = useMediaQuery({ query: "(min-width:1024px)" });
+
   return (
     <>
       <TopNav />
       <Main>
         <SideNav />
-        <Content>
+        <Content className={isDesktop ? "" : "full"}>
           <Switch>
             <Route exact path="/" component={Auth(LandingContent, null)} />
             <Route path="/menu/about" component={Auth(AboutPage, false)} />
