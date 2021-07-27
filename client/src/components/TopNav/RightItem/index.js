@@ -21,6 +21,7 @@ import Clock from "../../Clock";
 import SignInModal from "../../SignInModal";
 import SignUpModal from "../../SignUpModal";
 import AlertModal from "../../AlertModal";
+import Menu from "../../Menu";
 
 function RightItem({ history }) {
   //로그인 모달 변수
@@ -28,14 +29,10 @@ function RightItem({ history }) {
 
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [userState] = useState("사용자 정보 없음");
-  //회원가입 모달 변수
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-
-  //프로필 메뉴 모달 변수
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-
-  //로그아웃 모달 변수
   const [showSignOutModal, setShowSignOutModal] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const onToggleSignIn = () => {
     setShowSignInModal((prev) => !prev);
@@ -54,23 +51,19 @@ function RightItem({ history }) {
     setShowSignInModal(false);
     setShowSignUpModal(true);
   };
-
   //회원가입 모달의 하단 로그인 바로가기 버튼
   const onClickSignInButton = (e) => {
     setShowSignUpModal(false);
     setShowSignInModal(true);
   };
-
   const onClickSignoutButton = () => {
     setShowSignOutModal((prev) => !prev);
   };
-
-  const onCloseProfileMenu = () => {
-    setShowProfileMenu(false);
+  const onToggleUserMenu = () => {
+    setShowUserMenu((prev) => !prev);
   };
-
-  const onToggleProfileMenu = () => {
-    setShowProfileMenu((prev) => !prev);
+  const onCloseUserMenu = () => {
+    setShowUserMenu(false);
   };
 
   const onClickSignOut = () => {
@@ -87,12 +80,6 @@ function RightItem({ history }) {
         alert("로그아웃에 실패했습니다.");
       });
   };
-
-  useEffect(() => {
-    window.addEventListener("scroll", (e) => {
-      setShowProfileMenu(false);
-    });
-  }, []);
 
   //리덕스에 있는 로그인 상태에 따라 상단바를 변경함
   if (user.authStatus && !user.authStatus.isAuth) {
@@ -133,10 +120,7 @@ function RightItem({ history }) {
         </LinkToGitHub>
 
         {/* 유저 프로필 */}
-        <Profile
-          onClick={onToggleProfileMenu}
-          id={showProfileMenu ? "showProfileMenu" : ""}
-        >
+        <Profile onClick={onToggleUserMenu}>
           {user.authStatus.imagePath ? (
             <img
               src={`http://localhost:5050/${user.authStatus.imagePath}`}
@@ -162,6 +146,28 @@ function RightItem({ history }) {
           )}
           <Nickname>{user.authStatus.nickname}</Nickname>
         </Profile>
+        <Menu
+          show={showUserMenu}
+          close={onCloseUserMenu}
+          style={{
+            position: "absolute",
+            width: "140px",
+            top: "60px",
+            right: "60px",
+            // backgroundColor: "#3498db",
+          }}
+        >
+          <ProfileMenu>
+            <ul>
+              <Link to="/setting">
+                <li>설정</li>
+              </Link>
+              <li id="clock">
+                <Clock />
+              </li>
+            </ul>
+          </ProfileMenu>
+        </Menu>
         <LogoutButton onClick={onClickSignoutButton}>로그아웃</LogoutButton>
         <AlertModal
           show={showSignOutModal}
@@ -172,21 +178,6 @@ function RightItem({ history }) {
           option="warning"
           confirm={onClickSignOut}
         ></AlertModal>
-
-        {showProfileMenu && (
-          <ProfileMenuContainer onClick={onCloseProfileMenu}>
-            <ProfileMenu>
-              <ul>
-                <Link to="/setting">
-                  <li>설정</li>
-                </Link>
-                <li id="clock">
-                  <Clock />
-                </li>
-              </ul>
-            </ProfileMenu>
-          </ProfileMenuContainer>
-        )}
       </Right>
     );
   }

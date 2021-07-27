@@ -15,9 +15,4 @@ export const Container = styled.div`
 export const MenuContainer = styled.div`
   display: inline-block;
   position: relative;
-  color: #000;
-  border: 1px solid #d0d7de;
-  border-radius: 5px;
-  background-color: #fff;
-  /* box-shadow: 0px 0px 5px 1px #7f8fa6; */
 `;

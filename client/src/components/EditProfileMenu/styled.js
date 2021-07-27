@@ -4,7 +4,10 @@ export const Container = styled.div``;
 
 export const List = styled.div`
   font-size: 15px;
-
+  color: #000;
+  border: 1px solid #d0d7de;
+  border-radius: 5px;
+  background-color: #fff;
   & li {
     padding: 4px 20px;
   }

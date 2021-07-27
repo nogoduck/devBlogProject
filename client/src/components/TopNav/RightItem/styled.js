@@ -123,8 +123,6 @@ export const Right = styled.div`
 `;
 
 export const ProfileMenu = styled.div`
-  position: absolute;
-  width: 138px;
   border-radius: 0 0 10px 10px;
   background-color: #3498db;
   top: 60px;
