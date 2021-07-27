@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Main = styled.div`
   display: flex;
   flex-direction: row;
+  height: 100%;
 
   & .full {
     margin: 0px;
@@ -11,7 +12,6 @@ export const Main = styled.div`
 
 export const ContentContainer = styled.div`
   width: 100%;
-  /* position: relative; */
   display: flex;
   flex-direction: column;
 `;

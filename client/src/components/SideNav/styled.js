@@ -5,22 +5,23 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 200px;
-  height: 100vh;
+  padding: 0 auto;
   border: none;
   background-color: #fff;
   box-shadow: 0 0 4px 1px #c8cbcd;
   z-index: 1500;
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     //tablet
-    width: 64px;
+    width: 48px;
   }
 
   @media screen and (max-width: 767px) {
     //mobile
     /* display: none; */
   }
+
   & ul {
-    padding: 24px 0 24px 8px;
+    padding: 24px 0 24px 0px;
   }
 
   & li {
@@ -32,65 +33,15 @@ export const Container = styled.div`
     position: relative;
   }
 
-  & .active {
-    /* background: rgba(0, 0, 0, 0.1); */
-    background: #fff;
-    border-radius: 12px 0 0 12px;
+  & #active {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px 0 0 2px;
     color: #000;
   }
 
   & li:hover {
-    /* background: rgba(0, 0, 0, 0.1); */
-    background: #fff;
-    border-radius: 12px 0 0 12px;
-  }
-
-  & li b:nth-child(1) {
-    border: none;
-    /* border: 1px solid black; */
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    position: absolute;
-    right: 0px;
-    top: -10px;
-    display: none;
-  }
-
-  & li b:nth-child(1)::before {
-    content: "";
-    position: absolute;
-    border-bottom-right-radius: 12px;
-    width: 100%;
-    height: 100%;
-    background: #ced6e0;
-  }
-
-  & li b:nth-child(2) {
-    border: none;
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    position: absolute;
-    right: 0px;
-    bottom: -10px;
-    display: none;
-  }
-
-  & li b:nth-child(2)::before {
-    content: "";
-    position: absolute;
-    border-top-right-radius: 12px;
-    width: 100%;
-    height: 100%;
-    background: #ced6e0;
-  }
-
-  /* & li:hover b:nth-child(1), */
-  & li:hover b:nth-child(2),
-  /* & .active b:nth-child(1), */
-  & .active b:nth-child(2) {
-    display: block;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px 0 0 2px;
   }
 `;
 

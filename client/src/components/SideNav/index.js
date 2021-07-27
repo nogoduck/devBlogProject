@@ -47,9 +47,7 @@ function SideNav() {
       <Container id={hiddenMenu && "hiddenSideNav"}>
         <ul>
           <Link to="/">
-            <li className={activePath.includes("null") && "active"}>
-              <b></b>
-              <b></b>
+            <li id={activePath.includes("null") && "active"}>
               <MenuIcon>
                 <AiFillHome />
               </MenuIcon>
@@ -58,9 +56,7 @@ function SideNav() {
           </Link>
 
           <Link to="/menu/about">
-            <li className={activePath.includes("about") && "active"}>
-              <b></b>
-              <b></b>
+            <li id={activePath.includes("about") && "active"}>
               <MenuIcon>
                 <FaPaperPlane />
               </MenuIcon>
@@ -69,9 +65,7 @@ function SideNav() {
           </Link>
 
           <Link to="/menu/card">
-            <li className={activePath.includes("card") && "active"}>
-              <b></b>
-              <b></b>
+            <li id={activePath.includes("card") && "active"}>
               <MenuIcon>
                 <AiFillPicture />
               </MenuIcon>
@@ -80,9 +74,7 @@ function SideNav() {
           </Link>
 
           <Link to="/menu/board">
-            <li className={activePath.includes("board") && "active"}>
-              <b></b>
-              <b></b>
+            <li id={activePath.includes("board") && "active"}>
               <MenuIcon>
                 <FaClipboardList />
               </MenuIcon>
@@ -91,9 +83,7 @@ function SideNav() {
           </Link>
 
           <Link to="/menu/experiment">
-            <li className={activePath.includes("experiment") && "active"}>
-              <b></b>
-              <b></b>
+            <li id={activePath.includes("experiment") && "active"}>
               <MenuIcon>
                 <AiTwotoneExperiment />
               </MenuIcon>
@@ -102,9 +92,7 @@ function SideNav() {
           </Link>
 
           <Link to="/menu/video">
-            <li className={activePath.includes("video") && "active"}>
-              <b></b>
-              <b></b>
+            <li id={activePath.includes("video") && "active"}>
               <MenuIcon>
                 <FaPhotoVideo />
               </MenuIcon>

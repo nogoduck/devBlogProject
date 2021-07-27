@@ -4,7 +4,9 @@ export const Container = styled.div`
   background-color: #fff;
   padding: 24px;
   position: relative;
+  overflow: hidden;
 
+  /* width: 100%; */
   & hr {
     border: none;
     border-top: 1px solid #e8eaed;
@@ -15,10 +17,10 @@ export const Container = styled.div`
 
 export const GitHubLink = styled.div`
   & a {
-    position: relative;
+    /* position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
   }
 `;
 export const BugSet = styled.div`
@@ -26,9 +28,7 @@ export const BugSet = styled.div`
 `;
 export const LogoSection = styled.div`
   position: relative;
-  /* border: 1px solid black; */
   height: 42px;
-  margin: ;
 `;
 export const Label = styled.label`
   font-size: 14px;

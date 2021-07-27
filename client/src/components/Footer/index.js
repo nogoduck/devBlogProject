@@ -59,17 +59,20 @@ function Footer() {
         <div>
           <Label>Email</Label>
           <br />
-          <Content>nogoad22@gmail.com</Content>
+          <Content>
+            <i>null</i>
+          </Content>
+          {/* <Content>nogoad22@gmail.com</Content> */}
         </div>
         <div>
           <Content>
+            <Label>Github</Label>
             <GitHubLink>
               <a
                 href="https://github.com/nogoduck"
                 target="_blank"
                 rel="noreferrer noopener nofollow"
               >
-                <Label>Github</Label>
                 <BiLinkExternal
                   style={{
                     fontSize: "16px",
