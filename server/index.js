@@ -29,11 +29,6 @@ app.use("/zDummyFile", express.static("zDummyFile"));
 //=============[EXP CODE]==============
 // 사용법이 미숙한 코드나 문법을 테스트
 
-const mime = require("mime");
-
-console.log(mime.lookup("txt")); // ⇨ 'text/plain'
-// mime.getExtension("text/plain");
-
 //=====================================
 
 mongoose
