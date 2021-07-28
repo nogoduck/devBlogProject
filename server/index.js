@@ -1,4 +1,4 @@
-const port = process.env.PORT || 5050;
+const PORT = process.env.PORT || 5050;
 const config = require("./config/key");
 const mongoose = require("mongoose");
 const express = require("express");
@@ -60,6 +60,6 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Connected Port: ${port}`);
+app.listen(PORT, () => {
+  console.log(`Connected PORT: ${PORT}`);
 });

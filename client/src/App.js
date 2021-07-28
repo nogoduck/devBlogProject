@@ -5,6 +5,8 @@ import ExamplePage from "./pages/ExamplePage";
 
 import Auth from "./hoc/auth";
 
+const ENDPOINT = "http://localhost:5000/";
+
 function App() {
   return (
     <>
