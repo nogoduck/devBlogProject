@@ -3,7 +3,7 @@ const config = require("./config/key");
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
+// const morgan = require("morgan");
 // const cors = require("cors");
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -17,7 +17,7 @@ const todoRouter = require("./routes/todo");
 const testRouter = require("./routes/zTest");
 
 // app.use(cors(corsOptions));
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 app.use(express.json());
 //extended: true(qs-library 사용) , false(queryString library사용) / 가장 큰 차이점은 json에 중첩된 데이터의 사용 여부로 보인다.
 //https://stackoverflow.com/questions/29960764/what-does-extended-mean-in-express-4-0/45690436#45690436
