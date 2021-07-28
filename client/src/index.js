@@ -7,6 +7,19 @@ import promiseMiddleware from "redux-promise";
 import ReduxThunk from "redux-thunk";
 import Reducer from "./_reducers";
 
+import fs from "fs";
+const path = `../.env`;
+const variable = `
+ ENV_VAR_1=${process.env.ENV_VAR_1_NETLIFY}\n
+ ENV_VAR_2=${process.env.ENV_VAR_2_NETLIFY}\n
+ ENV_VAR_3=${process.env.ENV_VAR_3_NETLIFY}
+`;
+fs.writeFileSync(path, variable);
+
+console.log("ENV_VAR1 >> ", variable.ENV_VAR_1);
+console.log("ENV_VAR2 >> ", variable.ENV_VAR_2);
+console.log("ENV_VAR3 >> ", variable.ENV_VAR_3);
+
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,
   ReduxThunk
