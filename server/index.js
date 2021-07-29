@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 // const morgan = require("morgan");
-const cors = require("cors");
+// const cors = require("cors");
 const corsOptions = {
   origin: "http://localhost:3000",
   Credential: true,
@@ -16,7 +16,7 @@ const boardRouter = require("./routes/board");
 const todoRouter = require("./routes/todo");
 const testRouter = require("./routes/zTest");
 
-app.use(cors());
+// app.use(cors());
 // app.use(cors(corsOptions));
 // app.use(morgan("dev"));
 app.use(express.json());
