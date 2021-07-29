@@ -1,6 +1,6 @@
 import { Route, Switch, withRouter } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import React from "react";
+import React, { useState } from "react";
 
 import { Main, ContentContainer, Content } from "./styled";
 import TopNav from "../../components/TopNav";
@@ -27,11 +27,26 @@ import Auth from "../../hoc/auth";
 //   false(로그인 안한 유저는 접근제한)
 // 3: 값을 넘기지 않으면 기본값 null, 유저등급 지정
 // ex) 0 = 1 = admin, 2 = guest
+import axios from "axios";
 function LandingPage() {
   const isDesktop = useMediaQuery({ query: "(min-width:1024px)" });
+  const [result, setResult] = useState("");
+
+  const connectServer = () => {
+    axios
+      .get("/api/test")
+      .then(({ data }) => {
+        setResult(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
+      <button onClick={connectServer}>Result connect to server</button>
+      <div>{result}</div>
       <TopNav />
       <Main>
         <SideNav />

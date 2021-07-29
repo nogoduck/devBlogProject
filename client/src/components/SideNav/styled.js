@@ -19,6 +19,7 @@ export const Container = styled.div`
   @media screen and (max-width: 767px) {
     //mobile
     /* display: none; */
+    position: fixed;
     top: 48px;
     border-radius: 0 0 16px 0;
   }
