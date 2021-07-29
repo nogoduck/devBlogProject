@@ -32,7 +32,7 @@ app.use("/zDummyFile", express.static("zDummyFile"));
 //=====================================
 
 mongoose
-  .connect(config.mongoURI, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
