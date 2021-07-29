@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     proxy({
-      target: "https://devlog-ad.herokuapp.com/",
+      target: "http://localhost:5051",
       changeOrigin: true,
     })
   );
