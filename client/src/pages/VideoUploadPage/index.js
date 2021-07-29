@@ -4,6 +4,7 @@ import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
+import Static from '../../setupStatic';
 
 function VideoUploadPage({ history }) {
   const user = useSelector((state) => state.user);
@@ -101,10 +102,7 @@ function VideoUploadPage({ history }) {
           )}
         </Dropzone>
         {thumbnailPath && (
-          <img
-            src={`http://localhost:5050/${thumbnailPath}`}
-            alt="thumbnail_image"
-          />
+          <img src={`${Static.URI}${thumbnailPath}`} alt="thumbnail_image" />
         )}
         <input type="text" value={videoTitle} onChange={onChangeVideoTitle} />
         <input
@@ -112,6 +110,9 @@ function VideoUploadPage({ history }) {
           value={videoDescription}
           onChange={onChangeVideoDescription}
         />
+        <div>
+          {Static.URI} / {thumbnailPath}
+        </div>
         <button type="submit">~비디오 등록 !</button>
       </form>
     </>

@@ -1,12 +1,13 @@
-import { Route, Switch, withRouter, Link, useLocation } from "react-router-dom";
+import { Route, Switch, withRouter, Link, useLocation } from 'react-router-dom';
 
-import React, { useEffect } from "react";
-import { Container, Profile, Menu, Content, NameBox } from "./styled";
-import { useSelector } from "react-redux";
-import Gravatar from "react-gravatar";
+import React, { useEffect } from 'react';
+import { Container, Profile, Menu, Content, NameBox } from './styled';
+import { useSelector } from 'react-redux';
+import Gravatar from 'react-gravatar';
 
-import SettingProfilePage from "../SettingProfilePage";
-import SettingAccountPage from "../SettingAccountPage";
+import SettingProfilePage from '../SettingProfilePage';
+import SettingAccountPage from '../SettingAccountPage';
+import Static from '../../setupStatic';
 
 function SettingPage({ history }) {
   const user = useSelector((state) => state.user);
@@ -14,13 +15,13 @@ function SettingPage({ history }) {
   const { pathname } = useLocation();
   let activePath = pathname.substring(9);
 
-  if (activePath === "") {
+  if (activePath === '') {
     activePath = null;
   }
 
   useEffect(() => {
     if (!user.authStatus.isAuth) {
-      history.push("/");
+      history.push('/');
     }
   });
 
@@ -29,12 +30,13 @@ function SettingPage({ history }) {
       <Profile>
         {user.authStatus.imagePath ? (
           <img
-            src={`https://devlog-ad.herokuapp.com/${user.authStatus.imagePath}`}
+            src={`${Static.URI}${user.authStatus.imagePath}`}
+            alt={profile_image}
             style={{
-              width: "50px",
-              height: "50px",
-              marginRight: "12px",
-              borderRadius: "50%",
+              width: '50px',
+              height: '50px',
+              marginRight: '12px',
+              borderRadius: '50%',
             }}
           />
         ) : (
@@ -43,10 +45,10 @@ function SettingPage({ history }) {
             size={250}
             default="wavatar"
             style={{
-              width: "50px",
-              height: "50px",
-              marginRight: "12px",
-              borderRadius: "50%",
+              width: '50px',
+              height: '50px',
+              marginRight: '12px',
+              borderRadius: '50%',
             }}
           />
         )}
@@ -60,12 +62,12 @@ function SettingPage({ history }) {
           <li>
             <div id="title">설정</div>
           </li>
-          <li className={activePath === "profile" ? "active" : ""}>
+          <li className={activePath === 'profile' ? 'active' : ''}>
             <Link to="/setting/profile">
               <div>프로필</div>
             </Link>
           </li>
-          <li className={activePath === "account" ? "active-last" : ""}>
+          <li className={activePath === 'account' ? 'active-last' : ''}>
             <Link to="/setting/account">
               <div>계정</div>
             </Link>

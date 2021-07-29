@@ -1,12 +1,13 @@
-import { withRouter } from "react-router-dom";
-import React, { useState } from "react";
-import { Right, Button, SignIn, Profile } from "./styled";
-import { useSelector } from "react-redux";
-import Gravatar from "react-gravatar";
+import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Right, Button, SignIn, Profile } from './styled';
+import { useSelector } from 'react-redux';
+import Gravatar from 'react-gravatar';
 
-import SignInModal from "../../SignInModal";
-import SignUpModal from "../../SignUpModal";
-import UserMenu from "../../UserMenu";
+import SignInModal from '../../SignInModal';
+import SignUpModal from '../../SignUpModal';
+import UserMenu from '../../UserMenu';
+import Static from '../../../setupStatic';
 
 function RightItem() {
   //로그인 모달 변수
@@ -31,7 +32,7 @@ function RightItem() {
     setShowSignUpModal(true);
   };
   //회원가입 모달의 하단 로그인 바로가기 버튼
-  const onClickSignInButton = (e) => {
+  const onClickSignInButton = () => {
     setShowSignUpModal(false);
     setShowSignInModal(true);
   };
@@ -69,11 +70,12 @@ function RightItem() {
         {/* 유저 프로필 */}
         <Profile
           onClick={onToggleUserMenu}
-          className={showUserMenu ? "active" : ""}
+          className={showUserMenu ? 'active' : ''}
         >
           {user.authStatus.imagePath ? (
             <img
-              src={`https://devlog-ad.herokuapp.com/${user.authStatus.imagePath}`}
+              src={`${Static.URI}${user.authStatus.imagePath}`}
+              alt="profile_image"
             />
           ) : (
             <Gravatar
@@ -83,7 +85,7 @@ function RightItem() {
             />
           )}
         </Profile>
-        <UserMenu show={showUserMenu} close={onCloseUserMenu}></UserMenu>
+        <UserMenu show={showUserMenu} close={onCloseUserMenu} />
       </Right>
     );
   }
