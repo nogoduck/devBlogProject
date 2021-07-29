@@ -27,15 +27,16 @@ function VideoUploadPage() {
         formData.append("file", files[0]);
 
         axios.post("/api/video/createVideo", formData, config).then(({data}) => {
-            console.log(data);
+            console.log('data createVideo >>', data);
             if (data.success) {
+                setVideoPath(data.filePath);
                 let paylaod = {
-                    url: data.url,
+                    filePath: data.filePath,
                     fileName: data.fileName,
                 };
-                setVideoPath(data.url);
 
                 axios.post("/api/video/thumbnail", paylaod).then(({data}) => {
+                    console.log('data thumbnail >>', data);
                     if (data.success) {
                         console.log(data);
 

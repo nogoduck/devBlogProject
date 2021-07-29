@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const ffmpeg = require("fluent-ffmpeg");
-const {Video} = require("../models/Video");
+const { Video } = require("../models/Video");
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -23,21 +23,6 @@ let storage = multer.diskStorage({
 
 const upload = multer({storage: storage}).single("file");
 
-router.post("/createVideo", (req, res) => {
-    console.log("응답");
-    console.log(req.body);
-    console.log("응답2232");
-    upload(req, res, (err) => {
-        if (err) {
-            return res.json({success: false, err});
-        }
-        return res.json({
-            success: true,
-            url: res.req.file.path,
-            fileName: res.req.file.filename,
-        });
-    });
-});
 
 router.post("/uploadVideo", (req, res) => {
     const video = new Video(req.body);
@@ -72,13 +57,30 @@ router.post("/getVideoDetail", (req, res) => {
         });
 });
 
+
+router.post("/createVideo", (req, res) => {
+    upload(req, res, (err) => {
+        if (err) {
+            return res.json({success: false, err});
+        }
+        console.log("req.file >> ", req.file);
+        const { path, filename } = req.file;
+        return res.json({
+            success: true,
+            filePath: path,
+            fileName: filename
+        });
+    });
+});
+
 router.post("/thumbnail", (req, res) => {
-    let filePath = null;
-    let videoLength = null;
+    const {filePath, videoLength} = req.body;
+    console.log('req.body Thumbnail >> ', req.body);
     ffmpeg.setFfmpegPath("C:\\ffmpeg-4.4-full_build\\bin\\ffmpeg.exe");
+
     ffmpeg.ffprobe(req.body.url, (err, metadata) => {
-        console.dir(metadata);
-        console.log(metadata.format.duration);
+        console.dir('metadata > ', metadata);
+        console.log('dr > ', metadata.format.duration);
         videoLength = metadata.format.duration;
     });
 
@@ -90,7 +92,7 @@ router.post("/thumbnail", (req, res) => {
             filePath = "UploadVideo/thumbnail/" + filenames[0];
         })
         .on("end", () => {
-            console.log("Screenshots taken ");
+            console.log("Succeess Create thumbnail");
             return res.json({
                 success: true,
                 videoPath: filePath,
@@ -103,8 +105,8 @@ router.post("/thumbnail", (req, res) => {
         })
         .screenshots({
             count: 3,
-            folder: "uploads/thumbnails",
-            size: "300x250",
+            folder: "UploadVideo/thumbnail",
+            size: "300x180",
             filename: "thumbnail-%b.png",
         });
 });
