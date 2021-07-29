@@ -1,12 +1,43 @@
 import { withRouter } from "react-router-dom";
-import React from "react";
+import React, {useState} from "react";
 
 import { LandingContainer } from "./styled";
 import { AiOutlineBug } from "react-icons/ai";
+import axios from "axios";
 
 function LandingContent() {
+    const [result, setResult] = useState("");
+    const [result2, setResult2] = useState("");
+
+    const connectServer = () => {
+        axios
+            .get("/api/test")
+            .then(({ data }) => {
+                setResult(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+
+
+    const connectServer2 = () => {
+        axios
+            .get("https://devlog-ad.herokuapp.com/api/test")
+            .then(({ data }) => {
+                setResult2(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
   return (
     <LandingContainer>
+        <button onClick={connectServer}>Result connect to server</button>
+        <div>{result}</div>
+        <button onClick={connectServer2}>Result connect to server2</button>
+        <div>{result2}</div>
       <div>
         <div
           style={{
@@ -19,7 +50,7 @@ function LandingContent() {
             marginBottom: "32px",
             textAlign: "center",
           }}
-        >
+         >
           Bug
         </div>
         <AiOutlineBug

@@ -5,10 +5,10 @@ const express = require("express");
 const app = express();
 // const morgan = require("morgan");
 // const cors = require("cors");
-const corsOptions = {
-  origin: "http://localhost:3000",
-  Credential: true,
-};
+// const corsOptions = {
+// origin: "http://localhost:3000",
+//     Credential: true,
+// };
 const cookieParser = require("cookie-parser");
 
 const userRouter = require("./routes/user");
@@ -33,7 +33,7 @@ app.use("/zDummyFile", express.static("zDummyFile"));
 //=====================================
 
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(config.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
