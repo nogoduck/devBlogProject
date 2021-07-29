@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const ffmpeg = require("fluent-ffmpeg");
-const { Video } = require("../models/Video");
+const {Video} = require("../models/Video");
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads/");
+        cb(null, "UploadVideo/");
+        console.log(file);
     },
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}_${file.originalname}`);
@@ -20,12 +21,15 @@ let storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage: storage }).single("file");
+const upload = multer({storage: storage}).single("file");
 
 router.post("/createVideo", (req, res) => {
+    console.log("응답");
+    console.log(req.body);
+    console.log("응답2232");
     upload(req, res, (err) => {
         if (err) {
-            return res.json({ success: false, err });
+            return res.json({success: false, err});
         }
         return res.json({
             success: true,
@@ -38,8 +42,8 @@ router.post("/createVideo", (req, res) => {
 router.post("/uploadVideo", (req, res) => {
     const video = new Video(req.body);
     video.save((err, doc) => {
-        if (err) return res.json({ success: false, err });
-        res.status(200).json({ success: true });
+        if (err) return res.json({success: false, err});
+        res.status(200).json({success: true});
     });
 });
 
@@ -49,30 +53,33 @@ router.get("/getAll", (req, res) => {
         .populate("publisher")
         .exec((err, videos) => {
             if (err) return res.status(400).send(err);
-            res.status(200).json({ success: true, videos });
+            res.status(200).json({success: true, videos});
         });
+});
+
+router.get("/", (req, res) => {
+    res.send("response get")
 });
 
 router.post("/getVideoDetail", (req, res) => {
     console.log("req.body : ", req.body.videoId);
-    Video.findOne({ _id: req.body.videoId })
+    Video.findOne({_id: req.body.videoId})
         .populate("writer")
         .exec((err, videoDetail) => {
             if (err) return res.status(400).send(err);
             console.log("videoDetail :: ", videoDetail);
-            res.status(200).json({ success: true, videoDetail });
+            res.status(200).json({success: true, videoDetail});
         });
 });
 
 router.post("/thumbnail", (req, res) => {
     let filePath = null;
-    let fileDuration = null;
+    let videoLength = null;
     ffmpeg.setFfmpegPath("C:\\ffmpeg-4.4-full_build\\bin\\ffmpeg.exe");
-    //ffmpeg 경로를 추가로 설정해 주어야 윈도우 환경에서 정상 동작함
     ffmpeg.ffprobe(req.body.url, (err, metadata) => {
         console.dir(metadata);
         console.log(metadata.format.duration);
-        fileDuration = metadata.format.duration;
+        videoLength = metadata.format.duration;
     });
 
     ffmpeg(req.body.url)
@@ -80,19 +87,19 @@ router.post("/thumbnail", (req, res) => {
             console.log("Will generate ", filenames.join(", "));
             console.log(filenames);
 
-            filePath = "uploads/thumbnails/" + filenames[0];
+            filePath = "UploadVideo/thumbnail/" + filenames[0];
         })
         .on("end", () => {
             console.log("Screenshots taken ");
             return res.json({
                 success: true,
-                url: filePath,
-                fileDuration: fileDuration,
+                videoPath: filePath,
+                videoLength: videoLength,
             });
         })
         .on("error", (err) => {
             console.log(err);
-            return res.json({ success: false, err });
+            return res.json({success: false, err});
         })
         .screenshots({
             count: 3,

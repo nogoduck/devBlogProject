@@ -2,6 +2,8 @@ import { withRouter } from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
+import VideoUploadPage from "../VideoUploadPage";
+
 function VideoPage() {
   const[video, setVideo] = useState([])
 
@@ -14,7 +16,10 @@ function VideoPage() {
     })
   }, [])
 
-  return <div>Movie, drama, docu</div>;
+  return <div>Movie, drama, docu
+    <VideoUploadPage></VideoUploadPage>
+  </div>;
+
 }
 
 export default withRouter(VideoPage);

@@ -18,38 +18,34 @@ function VideoUploadPage() {
 
     const [video, setVideo] = useState([])
 
-    const onChangeVideo = () => {
+    const onDropVideo = (files) => {
         let formData = new FormData();
+        console.log(files);
         const config = {
             header: { "content-type": "multipart/form-data" },
         };
         formData.append("file", files[0]);
-        axios.post("/api/video/uploadfiles", formData, config).then((res) => {
-            if (res.data.success) {
-                console.log("RES.DATA:", res.data);
-                console.log("File Upload State : Succeed");
 
-                let variable = {
-                    url: res.data.url,
-                    fileName: res.data.fileName,
+        axios.post("/api/video/createVideo", formData, config).then(({data}) => {
+            console.log(data);
+            if (data.success) {
+                let paylaod = {
+                    url: data.url,
+                    fileName: data.fileName,
                 };
+                setVideoPath(data.url);
 
-                setFilePath(res.data.url);
+                axios.post("/api/video/thumbnail", paylaod).then(({data}) => {
+                    if (data.success) {
+                        console.log(data);
 
-                axios.post("/api/video/thumbnail", variable).then((res) => {
-                    if (res.data.success) {
-                        console.log("Create Video Thumbnail : Succeed");
-                        console.log(res.data);
-
-                        setDuration(res.data.fileDuration);
-                        setThumbnailPath(res.data.url);
+                        setVideoLength(data.videoLength);
+                        setThumbnailPath(data.videoPath);
                     } else {
-                        console.log("Create Video Thumbnail : Failed");
                         alert("썸네일 생성을 실패했습니다.");
                     }
                 });
             } else {
-                console.log("File Upload State : Failed");
                 alert("비디오 업로드를 실패했습니다");
             }
         });
@@ -60,7 +56,7 @@ function VideoUploadPage() {
         axios.post("/api/video/upload")
     }
     return <>
-        <Dropzone onDrop={onDrop} multiple={false} maxSize={10_0000_0000}>
+        <Dropzone onDrop={onDropVideo} multiple={false} maxSize={10_0000_0000}>
             {({getRootProps, getInputProps}) => (
                 <div className="dropzone_content" {...getRootProps()}>
                     <input {...getInputProps()} />
@@ -68,6 +64,11 @@ function VideoUploadPage() {
                 </div>
             )}
         </Dropzone>
+        {thumbnailPath && (
+                <img
+                    src={`http://localhost:5050/${thumbnailPath}`}
+                />
+        )}
     </>;
 }
 
