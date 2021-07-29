@@ -1,5 +1,5 @@
 import { withRouter } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ function VideoUploadPage({ history }) {
   const [videoPath, setVideoPath] = useState('');
   const [videoLength, setVideoLength] = useState('');
   const [thumbnailPath, setThumbnailPath] = useState('');
-
+  console.log(videoTitle);
   const onDropVideo = (files) => {
     let formData = new FormData();
     console.log(files);
@@ -50,31 +50,41 @@ function VideoUploadPage({ history }) {
   const onSubmitUploadVideo = (e) => {
     e.preventDefault();
 
-    const payload = {
-      publisher: user.authStatus._id,
-      title: videoTitle,
-      description: videoDescription,
-      videoPath: videoPath,
-      videoLength: videoLength,
-      thumbnailPath: thumbnailPath,
-    };
+    if (!videoTitle) {
+      alert('제목은 반드시 입력해야 합니다.');
+      return null;
+    } else {
+      const payload = {
+        publisher: user.authStatus._id,
+        title: videoTitle,
+        description: videoDescription,
+        videoPath: videoPath,
+        videoLength: videoLength,
+        thumbnailPath: thumbnailPath,
+      };
 
-    axios
-      .post('/api/video/uploadVideo', payload)
-      .then(({ data }) => {
-        console.log('data >> ', data);
-        if (data.success) {
-          alert('성공적으로 업로드를 했습니다.');
-          setTimeout(() => {
-            history.push('/menu/video');
-          }, 0);
-        } else {
-          alert('비디오 업로드에 실패했습니다');
-        }
-      })
-      .catch((err) => {
-        alert('비디오 업로드에 실패했습니다.');
-      });
+      if (videoTitle === '') {
+        console.log(true);
+      } else {
+        console.log(false);
+      }
+      axios
+        .post('/api/video/uploadVideo', payload)
+        .then(({ data }) => {
+          console.log('data >> ', data);
+          if (data.success) {
+            alert('성공적으로 업로드를 했습니다.');
+            setTimeout(() => {
+              history.push('/menu/video');
+            }, 0);
+          } else {
+            alert('비디오 업로드에 실패했습니다');
+          }
+        })
+        .catch(() => {
+          alert('비디오 업로드에 실패했습니다.');
+        });
+    }
   };
 
   return (
@@ -91,9 +101,17 @@ function VideoUploadPage({ history }) {
           )}
         </Dropzone>
         {thumbnailPath && (
-          <img src={`http://localhost:5050/${thumbnailPath}`} />
+          <img
+            src={`http://localhost:5050/${thumbnailPath}`}
+            alt="thumbnail_image"
+          />
         )}
-        <input type="text" value={videoTitle} />
+        <input type="text" value={videoTitle} onChange={onChangeVideoTitle} />
+        <input
+          type="text"
+          value={videoDescription}
+          onChange={onChangeVideoDescription}
+        />
         <button type="submit">~비디오 등록 !</button>
       </form>
     </>
