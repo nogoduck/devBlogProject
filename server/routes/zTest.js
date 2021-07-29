@@ -7,6 +7,7 @@ const mime = require("mime");
 const multer = require("multer");
 //mime/lite버전을 사용하고 싶은데 로드가 되지 않는다 mime보다 1/3 밖에 용량이 안된다고 한다.
 //multer 관련 변수 (파일 처리)
+const { Board } = require("../models/Board");
 
 const storage = multer.diskStorage({
   // 파일 저장 경로
@@ -21,6 +22,22 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }).single("file");
+
+router.get("/condb", (req, res) => {
+  Board.find()
+    .then((data) => {
+      console.log("db connect state >> success");
+      console.log(data);
+      return res.status(200).json({
+        data,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err,
+      });
+    });
+});
 
 router.post("/save", (req, res) => {
   console.log("[zTest] req.body >> ", req.body);
