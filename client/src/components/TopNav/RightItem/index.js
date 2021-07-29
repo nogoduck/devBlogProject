@@ -72,7 +72,9 @@ function RightItem() {
           className={showUserMenu ? "active" : ""}
         >
           {user.authStatus.imagePath ? (
-            <img src={`http://localhost:5050/${user.authStatus.imagePath}`} />
+            <img
+              src={`https://devlog-ad.herokuapp.com/${user.authStatus.imagePath}`}
+            />
           ) : (
             <Gravatar
               email={user.authStatus.email}

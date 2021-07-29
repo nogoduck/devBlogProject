@@ -10,11 +10,6 @@ function Menu({ children, style, show, close }) {
 
   const onCloseModal = useCallback(
     (e) => {
-      // if (!show) {
-      //   console.log("show false - close");
-      //   close();
-      // }
-
       console.log("modalRef.current >> ", modalRef.current);
       console.log("e.target >> ", e.target);
       if (e.target) {
@@ -33,18 +28,13 @@ function Menu({ children, style, show, close }) {
   );
 
   useEffect(() => {
-    console.log("window add click event ");
     window.addEventListener("click", onCloseModal);
-
     return () => {
-      console.log("window remove click event ");
       window.removeEventListener("click", onCloseModal);
     };
   }, [onCloseModal]);
 
-  console.log("show, close", show, close);
   if (!show) {
-    window.removeEventListener("click", onCloseModal);
     return null;
   }
 

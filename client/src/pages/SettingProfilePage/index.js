@@ -204,7 +204,7 @@ function SettingProfilePage({ history }) {
           <EditProfileImage onClick={onClickEditProfileMenu}>
             {user.authStatus.imagePath ? (
               <ProfileImage
-                src={`http://localhost:5050/${user.authStatus.imagePath}`}
+                src={`https://devlog-ad.herokuapp.com/${user.authStatus.imagePath}`}
               />
             ) : (
               <Gravatar

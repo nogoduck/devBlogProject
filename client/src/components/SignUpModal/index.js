@@ -53,8 +53,8 @@ function SignUpModal({ history, children, show, close }) {
   //회원가입 완료
   const [showSuccessSignUpModal, setShowSuccessSignUpModal] = useState(false);
 
-  const onSubmitSuccessSignUp = () => {
-    console.log("회원가입 성공 모달 확인");
+  const onCloseSuccessSignUp = () => {
+    setShowSuccessSignUpModal(false);
   };
 
   useEffect(() => {
@@ -215,12 +215,12 @@ function SignUpModal({ history, children, show, close }) {
       </span>
       <AlertModal
         show={showSuccessSignUpModal}
-        close={onSubmitSuccessSignUp}
+        close={onCloseSuccessSignUp}
         modalHeader="회원가입"
         title="회원가입에 성공했습니다"
         option="success"
         useCancelButton={false}
-        confirm={onSubmitSuccessSignUp}
+        confirm={onCloseSuccessSignUp}
       ></AlertModal>
     </div>
   );

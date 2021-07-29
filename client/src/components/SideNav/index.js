@@ -3,7 +3,7 @@
 // 로 이동후 메뉴 항목 이동하면 메뉴가 닫힘
 // + 다른 페이지 내에서 메뉴 이동하면 정상 동작
 // ########################################
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { Container, MenuButton, MenuIcon, MenuTitle } from "./styled";
@@ -24,6 +24,8 @@ function SideNav() {
   const { pathname } = useLocation();
   let activePath = pathname.substring(5);
 
+  const sideNavRef = useRef();
+
   if (activePath === "") {
     activePath = "null";
   }
@@ -35,8 +37,9 @@ function SideNav() {
   useEffect(() => {
     // setHiddenMenu(isMobile ? true : false);
     // 해당 파일 상단에 적어둔 버그가 있어서 사용하지 않음
-  }, [isMobile]);
+  }, []);
   // console.log(isDesktop, isTablet, isMobile);
+  console.log("ref >> ", sideNavRef);
   return (
     <>
       {!isDesktop && (
@@ -44,7 +47,7 @@ function SideNav() {
           <BiMenu />
         </MenuButton>
       )}
-      <Container id={hiddenMenu && "hiddenSideNav"}>
+      <Container id={hiddenMenu && "hiddenSideNav"} ref={sideNavRef}>
         <ul>
           <Link to="/">
             <li id={activePath.includes("null") && "active"}>

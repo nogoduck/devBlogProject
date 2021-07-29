@@ -10,6 +10,7 @@ export const Container = styled.div`
   background-color: #fff;
   box-shadow: 0 0 4px 1px #c8cbcd;
   z-index: 1500;
+  /* position: fixed; */
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     //tablet
     width: 48px;
@@ -18,6 +19,8 @@ export const Container = styled.div`
   @media screen and (max-width: 767px) {
     //mobile
     /* display: none; */
+    top: 48px;
+    border-radius: 0 0 16px 0;
   }
 
   & ul {

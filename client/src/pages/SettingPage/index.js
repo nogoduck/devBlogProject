@@ -29,7 +29,7 @@ function SettingPage({ history }) {
       <Profile>
         {user.authStatus.imagePath ? (
           <img
-            src={`http://localhost:5050/${user.authStatus.imagePath}`}
+            src={`https://devlog-ad.herokuapp.com/${user.authStatus.imagePath}`}
             style={{
               width: "50px",
               height: "50px",
