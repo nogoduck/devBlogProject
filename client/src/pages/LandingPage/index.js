@@ -31,10 +31,21 @@ import axios from "axios";
 function LandingPage() {
   const isDesktop = useMediaQuery({ query: "(min-width:1024px)" });
   const [result, setResult] = useState("");
+  const [result2, setResult2] = useState("");
 
   const connectServer = () => {
     axios
       .get("/api/test")
+      .then(({ data }) => {
+        setResult(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const connectServer2 = () => {
+    axios
+      .get("https://devlog-ad.herokuapp.com/api/test")
       .then(({ data }) => {
         setResult(data);
       })
@@ -47,6 +58,8 @@ function LandingPage() {
     <>
       <button onClick={connectServer}>Result connect to server</button>
       <div>{result}</div>
+      <button onClick={connectServer2}>Result connect to server2</button>
+      <div>{result2}</div>
       <TopNav />
       <Main>
         <SideNav />
