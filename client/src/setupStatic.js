@@ -1,3 +1,5 @@
+const staticURI = process.env.STATIC_URI || 'http://localhost:5050/';
+
 module.exports = {
-  URI: 'http://localhost:5050/',
+  URI: staticURI,
 };

@@ -31,7 +31,7 @@ function SettingPage({ history }) {
         {user.authStatus.imagePath ? (
           <img
             src={`${Static.URI}${user.authStatus.imagePath}`}
-            alt={profile_image}
+            alt="profile_image"
             style={{
               width: '50px',
               height: '50px',
