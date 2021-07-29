@@ -24,15 +24,6 @@ let storage = multer.diskStorage({
 const upload = multer({storage: storage}).single("file");
 
 
-router.post("/uploadVideo", (req, res) => {
-    const video = new Video(req.body);
-    video.save((err, doc) => {
-        if (err) return res.json({success: false, err});
-        res.status(200).json({success: true});
-    });
-});
-
-
 router.get("/getAll", (req, res) => {
     Video.find()
         .populate("publisher")
@@ -40,10 +31,6 @@ router.get("/getAll", (req, res) => {
             if (err) return res.status(400).send(err);
             res.status(200).json({success: true, videos});
         });
-});
-
-router.get("/", (req, res) => {
-    res.send("response get")
 });
 
 router.post("/getVideoDetail", (req, res) => {
@@ -57,6 +44,15 @@ router.post("/getVideoDetail", (req, res) => {
         });
 });
 
+router.post("/uploadVideo", (req, res) => {
+    const video = new Video(req.body);
+    console.log("video >> ", video);
+    video.save((err, doc) => {
+        if (err) return res.json({success: false, err});
+        console.log("upload save doc >> ", doc);
+        res.status(200).json({success: true});
+    });
+});
 
 router.post("/createVideo", (req, res) => {
 //비디오 파일을 올릴때 썸네일 생성전 비디오를 저장하는 라우터
@@ -78,7 +74,7 @@ router.post("/thumbnail", (req, res) => {
     console.log('req.body Thumbnail >> ', req.body);
     //ffmpeg 압축 푼 경로
     ffmpeg.setFfmpegPath("C:\\ffmpeg-4.4-full_build\\bin\\ffmpeg.exe");
-    let filePath, videoLength
+    let thumbnailPath, videoLength
     ffmpeg.ffprobe(req.body.filePath, (err, metadata) => {
         console.dir('metadata > ', metadata);
         console.log('dr > ', metadata.format.duration);
@@ -86,16 +82,14 @@ router.post("/thumbnail", (req, res) => {
     });
     ffmpeg(req.body.filePath)
         .on("filenames", (filenames) => {
-            console.log("Will generate ", filenames.join(", "));
-            console.log(filenames);
-
-            filePath = "UploadVideo/thumbnail/" + filenames[0];
+            console.log("filenames >> ", filenames);
+            thumbnailPath = "UploadVideo/thumbnail/" + filenames[0];
         })
         .on("end", () => {
             console.log("Succeess Create thumbnail");
             return res.json({
                 success: true,
-                videoPath: filePath,
+                thumbnailPath: thumbnailPath,
                 videoLength: videoLength,
             });
         })
