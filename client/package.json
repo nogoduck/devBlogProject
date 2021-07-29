@@ -31,6 +31,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "client": "react-scripts start",
     "start ": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -57,12 +58,5 @@
   "description": "Create a personal development blog using React",
   "main": "index.js",
   "author": "ad",
-  "license": "MIT",
-  "react-dotenv": {
-    "whitelist": [
-      "ENV_VAR_1",
-      "ENV_VAR_2",
-      "ENV_VAR_3"
-    ]
-  }
+  "license": "MIT"
 }
