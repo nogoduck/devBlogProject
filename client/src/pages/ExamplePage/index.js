@@ -10,22 +10,18 @@ import {
   Article,
   Footer,
   SideNavToggleButton,
-  fiuweafzvjkds,
-  fewaavdvslkvewavnkjf,
+  Test,
 } from './styled';
 
 function ExamplePage() {
   return (
     <>
-      <fewaavdvslkvewavnkjf>dssa</fewaavdvslkvewavnkjf>
       <div>
-        323213212
-        <input type="checkbox" />
-        <SideNavToggleButton type="checkbox" />
-        <fiuweafzvjkds>메뉴다</fiuweafzvjkds>
+        <Test>메뉴 테스트</Test>
       </div>
       <Container>
         <SideSpace />
+        <SideNavToggleButton type="checkbox" />
         <SideNav>SideNav</SideNav>
         <Main>
           <TopSpace />

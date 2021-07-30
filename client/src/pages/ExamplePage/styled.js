@@ -30,6 +30,7 @@ export const SideNav = styled.div`
   border: 2px solid #33d9b2;
   width: 120px;
   height: 100vh;
+  transition: 0.5s;
 `;
 export const SideSpace = styled.div`
   flex: none;
@@ -60,28 +61,26 @@ export const Footer = styled.div`
   position: relative;
   border: 2px solid #ff5252;
 `;
-export const fiuweafzvjkds = styled.div`
+export const Test = styled.div`
   color: green;
   font-size: 32px;
-  //position: absolute;
-  left: 50px;
+  position: absolute;
+  left: -170px;
   border: 5px solid green;
-  position: block;
-`;
-
-export const fewaavdvslkvewavnkjf = styled.div`
-  color: blue;
-  width: 500px;
-  height: 500px;
-  border: 5px solid purple;
+  transition: 1s ease-in-out;
 `;
 
 export const SideNavToggleButton = styled.input`
   width: 50px;
   height: 50px;
-
-  //div[class='test'] {
-  //  color: red;
-  //  font-size: 32px;
-  //}
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  transition: 0.5s;
+  &:checked {
+    left: 250px;
+  }
+  &:checked + div {
+    width: 320px;
+  }
 `;
