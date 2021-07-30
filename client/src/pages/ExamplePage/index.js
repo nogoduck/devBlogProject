@@ -1,9 +1,11 @@
 import React from "react";
 import {
   Container,
+  TopSpace,
   TopNav,
   Main,
   SideNav,
+  SideSpace,
   Content,
   Article,
   Footer,
@@ -12,9 +14,14 @@ import {
 function ExamplePage() {
   return (
     <Container>
-      <TopNav>TopNav</TopNav>
+
+          <SideSpace/>
+        <SideNav>
+          SideNav
+        </SideNav>
       <Main>
-        <SideNav>SideNav</SideNav>
+        <TopSpace/>
+      <TopNav>TopNav</TopNav>
         <Content>
           <Article>
             Article
