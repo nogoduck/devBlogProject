@@ -8,7 +8,13 @@ export const Header = styled.div`
   height: 48px;
   left: 200px;
   right: 0;
-  z-index: 2048;
+  z-index: 1024;
+  transition: 0.2s ease-in-out;
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    //tablet
+    left: 48px;
+  }
 `;
 
 export const Space = styled.div`

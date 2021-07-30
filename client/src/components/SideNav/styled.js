@@ -1,17 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   flex: none;
   display: flex;
   flex-direction: column;
   width: 200px;
-  height:100%;
+  height: 100%;
   border: none;
-//  background-color: #fff;
+  //  background-color: #fff;
   background-color: #fff;
   box-shadow: 0 0 4px 1px #c8cbcd;
-  z-index: 1500;
+  z-index: 2048;
   position: fixed;
+  transition: 0.2s ease-in-out;
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     //tablet
     width: 48px;
@@ -51,9 +52,12 @@ export const Container = styled.div`
 `;
 
 export const Space = styled.div`
-  content:"space";
-  position:relative;
-  margin-left:200px;
+  content: 'space';
+  position: relative;
+  margin-left: 200px;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    margin-left: 48px;
+  }
 `;
 export const MenuButton = styled.button`
   position: fixed;
