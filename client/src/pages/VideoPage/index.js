@@ -6,20 +6,28 @@ import VideoUploadPage from '../VideoUploadPage';
 import Static from '../../setupStatic';
 
 function VideoPage() {
-  const [video, setVideo] = useState([]);
+  const [videoList, setVideoList] = useState([]);
 
   useEffect(() => {
     axios
-      .get('/getAll')
-      .then(({ data }) => {})
+      .get('/api/video/getAll')
+      .then(({ data }) => {
+        if (data.success) {
+          console.log('v >> ', data.videos);
+          setVideoList(data.videos);
+        } else {
+          console.log('get Videos >> failed....');
+        }
+      })
       .catch((err) => {
-        console.log(err);
+        console.log('getVideo err > ', err);
       });
   }, []);
-  console.log(Static.URI);
+
   return (
     <div>
       Movie, drama, docu <br />
+      <div>{Static.URI}</div>
       <VideoUploadPage></VideoUploadPage>
     </div>
   );

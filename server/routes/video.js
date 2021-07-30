@@ -50,10 +50,10 @@ router.post('/uploadVideo', (req, res) => {
 
   //예외처리 ( 빈값 들어오면 반환 ), 제목만 빈 값 허용안하고 내용은 허용함
   if (
-    video.publisher === '' ||
-    video.videoPath === '' ||
-    video.thumbnailPath === '' ||
-    video.title === ''
+    (video.publisher && video.publisher === '') ||
+    (video.videoPath && video.videoPath === '') ||
+    (video.thumbnailPath && video.thumbnailPath === '') ||
+    (video.title && video.title === '')
   ) {
     res.status(400).json({
       success: false,

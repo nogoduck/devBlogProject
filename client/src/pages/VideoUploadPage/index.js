@@ -50,18 +50,18 @@ function VideoUploadPage({ history }) {
 
   const onSubmitUploadVideo = (e) => {
     e.preventDefault();
-
+    const publisherId = user.authStatus.isAuth ? user.authStatus._id : '';
     if (!videoTitle) {
       alert('제목은 반드시 입력해야 합니다.');
       return null;
     } else {
       const payload = {
-        publisher: user.authStatus._id,
+        publisher: publisherId,
         title: videoTitle,
         description: videoDescription,
-        videoPath: videoPath,
-        videoLength: videoLength,
-        thumbnailPath: thumbnailPath,
+        videoPath,
+        videoLength,
+        thumbnailPath,
       };
 
       if (videoTitle === '') {
