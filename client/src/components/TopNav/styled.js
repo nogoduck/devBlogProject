@@ -1,20 +1,20 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Header = styled.div`
   color: #d2dae2;
   position: fixed;
-  background-color: #fff;
-  /* background-color: transparent; */
+  background-color: transparent;
   font-size: 30px;
   height: 48px;
-  width: 100%;
+  left: 200px;
+  right: 0;
   z-index: 2048;
 `;
 
 export const Space = styled.div`
   height: 48px;
-  width: 100%;
-  & .scroll {
+  .scroll {
     box-shadow: 0 0 4px 2px #a8b6bd;
+    background-color: #fff;
   }
 `;

@@ -6,7 +6,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { Container, MenuButton, MenuIcon, MenuTitle } from "./styled";
+import { Container,Space, MenuButton, MenuIcon, MenuTitle } from "./styled";
 import { AiFillPicture, AiTwotoneExperiment, AiFillHome } from "react-icons/ai";
 import { BiMenu } from "react-icons/bi";
 import { FaClipboardList, FaPhotoVideo, FaPaperPlane } from "react-icons/fa";
@@ -46,6 +46,7 @@ function SideNav() {
           <BiMenu />
         </MenuButton>
       )}
+      <Space/>
       <Container id={hiddenMenu && "hiddenSideNav"} ref={sideNavRef}>
         <ul>
           <Link to="/">

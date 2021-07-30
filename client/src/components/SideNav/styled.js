@@ -6,13 +6,12 @@ export const Container = styled.div`
   flex-direction: column;
   width: 200px;
   height:100%;
-  padding: 0 auto;
   border: none;
-border:2px solid green;
+//  background-color: #fff;
   background-color: #fff;
   box-shadow: 0 0 4px 1px #c8cbcd;
   z-index: 1500;
-  /* position: fixed; */
+  position: fixed;
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     //tablet
     width: 48px;
@@ -51,6 +50,11 @@ border:2px solid green;
   }
 `;
 
+export const Space = styled.div`
+  content:"space";
+  position:relative;
+  margin-left:200px;
+`;
 export const MenuButton = styled.button`
   position: fixed;
   color: #757575;
