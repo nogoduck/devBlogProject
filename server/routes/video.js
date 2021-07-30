@@ -32,15 +32,15 @@ router.get('/getAll', (req, res) => {
     });
 });
 
-router.post('/getVideoDetail', (req, res) => {
+router.post('/detailVideo', (req, res) => {
   console.log('req.body : ', req.body.videoId);
   Video.findOne({ _id: req.body.videoId })
 
     .populate('writer')
-    .exec((err, videoDetail) => {
+    .exec((err, getVideo) => {
       if (err) return res.status(400).send(err);
-      console.log('videoDetail :: ', videoDetail);
-      res.status(200).json({ success: true, videoDetail });
+      console.log('getVideo >> ', getVideo);
+      res.status(200).json({ success: true, getVideo });
     });
 });
 
