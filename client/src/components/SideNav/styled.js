@@ -5,8 +5,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 200px;
+  height:100%;
   padding: 0 auto;
   border: none;
+border:2px solid green;
   background-color: #fff;
   box-shadow: 0 0 4px 1px #c8cbcd;
   z-index: 1500;
@@ -19,7 +21,7 @@ export const Container = styled.div`
   @media screen and (max-width: 767px) {
     //mobile
     /* display: none; */
-    position: fixed;
+    // position: fixed;
     top: 48px;
     border-radius: 0 0 16px 0;
   }

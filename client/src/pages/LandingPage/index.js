@@ -2,7 +2,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React from 'react';
 
-import { Main, ContentContainer, Content } from './styled';
+import {Container, Main, ContentContainer, Content } from './styled';
 import TopNav from '../../components/TopNav';
 import SideNav from '../../components/SideNav';
 import Footer from '../../components/Footer';
@@ -33,10 +33,10 @@ function LandingPage() {
   const isDesktop = useMediaQuery({ query: '(min-width:1024px)' });
 
   return (
-    <>
-      <TopNav />
+    <Container>
+      <SideNav />
       <Main>
-        <SideNav />
+      <TopNav />
         <ContentContainer>
           <Content className={isDesktop ? '' : 'full'}>
             <Switch>
@@ -72,7 +72,7 @@ function LandingPage() {
           <Footer />
         </ContentContainer>
       </Main>
-    </>
+    </Container>
   );
 }
 

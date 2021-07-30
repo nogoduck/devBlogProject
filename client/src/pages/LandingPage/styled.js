@@ -1,6 +1,18 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & .full {
+    margin: 0px;
+  }
+`;
+
 export const Main = styled.div`
+flex:1;
+border:2px solid red;
   display: flex;
   flex-direction: row;
   height: 100%;
