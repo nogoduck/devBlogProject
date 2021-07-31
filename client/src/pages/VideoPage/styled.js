@@ -10,17 +10,21 @@ export const VideoContainer = styled.div`
 export const VideoCardContainer = styled.div`
   //border: 2px solid red;
   position: relative;
-  max-width: 300px;
-  padding: 8px;
+  min-width: 250px;
+  max-width: 200px;
   width: 100%;
+  padding: 8px;
   & img {
     width: 100%;
   }
 `;
+export const ImageContainer = styled.div`
+  position: relative;
+`;
 export const VideoLength = styled.div`
   position: absolute;
-  top: 160px;
-  right: 16px;
+  bottom: 12px;
+  right: 6px;
   background-color: #000;
   color: #fff;
   font-weight: 800;
@@ -40,6 +44,14 @@ export const VideoInfo = styled.div`
 export const VideoTitle = styled.div`
   font-size: 15px;
   color: #000;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 200px;
+  height: 40px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const VideoArticle = styled.div`
   font-size: 14px;

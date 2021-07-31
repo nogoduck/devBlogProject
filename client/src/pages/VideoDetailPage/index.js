@@ -33,6 +33,7 @@ function VideoDetailPage({ match }) {
           src={`${Static.URI}${video.videoPath}`}
           controls
         />
+        {video.title}
         <img src="http://placehold.it/50x50" alt="profile_image" />
         {video.publisher.name}
         {video.description}

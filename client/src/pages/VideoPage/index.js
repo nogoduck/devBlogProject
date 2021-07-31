@@ -11,6 +11,7 @@ import {
   VideoTitle,
   VideoLength,
   VideoView,
+  ImageContainer,
 } from './styled';
 import VideoUploadPage from '../VideoUploadPage';
 import Static from '../../setupStatic';
@@ -39,14 +40,17 @@ function VideoPage() {
   const videoCards = videoList.map((v) => {
     let momentVideoLength = moment.utc(1000 * v.videoLength).format(`m : ss`);
     let momentCreatedAt = moment(v.createdAt).format('YY MMM Do ');
+
     console.log('videoPlayTime >> ', momentVideoLength);
     console.log('momentCreatedAt >> ', momentCreatedAt);
 
     return (
       <VideoCardContainer>
         <Link to={`/menu/video/${v._id}`}>
-          <img src={`${Static.URI}${v.thumbnailPath}`} alt="thumbnail_IMG" />
-          <VideoLength>{momentVideoLength}</VideoLength>
+          <ImageContainer>
+            <img src={`${Static.URI}${v.thumbnailPath}`} alt="thumbnail_IMG" />
+            <VideoLength>{momentVideoLength}</VideoLength>
+          </ImageContainer>
 
           <VideoInfoContainer>
             <ProfileImage>
