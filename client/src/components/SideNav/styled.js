@@ -5,22 +5,26 @@ export const GlobalStyle = createGlobalStyle`
     .SideNavExtends{
       width:200px;
     }
-    .SideNavHidden{
-      left:-30px;
-    }
     .ExtendsActive{
       left:0;
       transform:rotate(-180deg);
       padding: 6px 164px 0px 16px;
     }
+    .SideNavMobileHidden{
+    width:0px
+    }
+    .SideNavMobileDefault{
+      width:200px;
+    }
+    
   }
 `;
 export const Container = styled.div`
   top: 0;
   left: 0;
   flex: none;
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
   width: 48px;
   height: 100%;
   border: none;
@@ -49,6 +53,7 @@ export const Container = styled.div`
     font-size: 16px;
     transition: 0s 0s ease-in-out;
     position: relative;
+    display: flex;
   }
 
   & #active {
@@ -68,6 +73,11 @@ export const Space = styled.div`
   position: relative;
   width: 48px;
   flex: none;
+
+  @media screen and (max-width: 920px) {
+    //mobile
+    width: 0px;
+  }
 `;
 
 export const MenuButton = styled.button`
@@ -79,6 +89,7 @@ export const MenuButton = styled.button`
   left: 8px;
   border: none;
   z-index: 2050;
+
   &:hover {
     cursor: pointer;
   }
@@ -88,7 +99,9 @@ export const MenuIcon = styled.span`
   padding-right: 8px;
 `;
 
-export const MenuTitle = styled.span``;
+export const MenuTitle = styled.span`
+  white-space: nowrap;
+`;
 
 export const ExtendsButton = styled.button`
   position: absolute;

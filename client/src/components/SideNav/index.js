@@ -22,48 +22,61 @@ import { FaClipboardList, FaPhotoVideo, FaPaperPlane } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 function SideNav() {
+  //주로 사용하는 해상도
   //Desktop or PC"(min-width:1024px)", Tablet"(min-width:768px) and (max-width:1023px)", Mobile"(max-width:767px)"
-  //반응형 (PC <=> Tablet and Mobile)
-  const isDesktop = useMediaQuery({ query: '(min-width:1024px)' });
-  const isTablet = useMediaQuery({
-    query: '(min-width:768px) and (max-width:1023px)',
-  });
-  const isMobile = useMediaQuery({ query: '(max-width:767px)' });
-  const [hiddenMenu, setHiddenMenu] = useState(false);
-  //현재 페이지 목록 메뉴에 활성화
+  //반응형 (PC and Tablet <=> Mobile), 모바일로 전환되는 픽셀은 920px 으로 Firebase 홈페이지와 동일하게 세팅함
+  const isDesktopAndTablet = useMediaQuery({ query: '(min-width:921px)' });
+  const isMobile = useMediaQuery({ query: '(max-width:920px)' });
   const [useExtends, setUseExtends] = useState(false);
+  const [useHiddenMenu, setUseHiddenMenu] = useState(false);
+
+  //현재 페이지 목록 메뉴에 활성화
   const { pathname } = useLocation();
   let activePath = pathname.substring(5);
 
   const sideNavRef = useRef();
 
-  if (activePath === '') {
-    activePath = 'null';
-  }
+  // if (activePath === '') {
+  //   activePath = 'null';
+  // }
 
-  const onClickToggleMenu = () => {
-    setHiddenMenu((prev) => !prev);
+  const onClickToggleHidden = () => {
+    setUseHiddenMenu((prev) => !prev);
   };
   const onClickToggleExtends = () => {
     setUseExtends((prev) => !prev);
   };
 
   useEffect(() => {
-    // setHiddenMenu(isMobile ? true : false);
-    // 해당 파일 상단에 적어둔 버그가 있어서 사용하지 않음
-  }, []);
+    // if (isDesktopAndTablet) {
+    //   console.log('PC설정');
+    //   setUseHiddenMenu(false);
+    // }
+    // if (isMobile) {
+    //   console.log('모바일설정');
+    //   setUseExtends(false);
+    // }
+  }, [isMobile, isDesktopAndTablet]);
   // console.log(isDesktop, isTablet, isMobile);
   return (
     <>
       <GlobalStyle />
-      {!isDesktop && (
-        <MenuButton onClick={onClickToggleMenu}>
+      {isMobile && (
+        <MenuButton onClick={onClickToggleHidden}>
           <BiMenu />
         </MenuButton>
       )}
       <Space className={useExtends && 'SideNavExtends'} />
 
-      <Container className={useExtends && 'SideNavExtends'} ref={sideNavRef}>
+      <Container
+        className={isDesktopAndTablet && useExtends ? 'SideNavExtends' : ''}
+        className={
+          isMobile && useHiddenMenu
+            ? 'SideNavMobileHidden'
+            : 'SideNavMobileDefault'
+        }
+        ref={sideNavRef}
+      >
         <ul>
           <Link to="/">
             <li id={activePath.includes('null') && 'active'}>
