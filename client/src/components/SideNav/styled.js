@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     .SideNavMobileHidden{
     width:0px
     }
-    .SideNavMobileDefault{
+    .SideNavMobileOpen{
       width:200px;
     }
     

@@ -3,7 +3,7 @@
 // 로 이동후 메뉴 항목 이동하면 메뉴가 닫힘
 // + 다른 페이지 내에서 메뉴 이동하면 정상 동작
 // ########################################
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import {
@@ -14,7 +14,6 @@ import {
   MenuTitle,
   GlobalStyle,
   ExtendsButton,
-  BottomItems,
 } from './styled';
 import { AiFillPicture, AiTwotoneExperiment, AiFillHome } from 'react-icons/ai';
 import { BiMenu } from 'react-icons/bi';
@@ -28,7 +27,7 @@ function SideNav() {
   const isDesktopAndTablet = useMediaQuery({ query: '(min-width:921px)' });
   const isMobile = useMediaQuery({ query: '(max-width:920px)' });
   const [useExtends, setUseExtends] = useState(false);
-  const [useHiddenMenu, setUseHiddenMenu] = useState(false);
+  const [useOpen, setUseOpen] = useState(false);
 
   //현재 페이지 목록 메뉴에 활성화
   const { pathname } = useLocation();
@@ -41,24 +40,48 @@ function SideNav() {
   // }
 
   const onClickToggleHidden = () => {
-    setUseHiddenMenu((prev) => !prev);
+    setUseOpen((prev) => !prev);
   };
   const onClickToggleExtends = () => {
     setUseExtends((prev) => !prev);
   };
 
+  const onCloseSideNav = useCallback(
+    (e) => {
+      console.log('window-click');
+      console.log(e.target);
+      if (useOpen && e.target) {
+        console.log('모바일 메뉴 열림');
+        setUseOpen(false);
+      }
+    },
+    [useOpen]
+  );
+
+  const stopPropagation = useCallback((e) => {
+    e.stopPropagation();
+  }, []);
+
   useEffect(() => {
     if (isDesktopAndTablet) {
       console.log('PC설정');
       //모바일 상태에선 메뉴가 숨겨진 상태가 기본이다.
-      setUseHiddenMenu(false);
+      setUseOpen(false);
     }
     if (isMobile) {
       console.log('모바일설정');
       setUseExtends(false);
     }
-  }, [isMobile, isDesktopAndTablet]);
+    //모바일 상태에서 메뉴 외부 클릭시 닫힘
+    if (useOpen) {
+      window.addEventListener('click', onCloseSideNav);
+      return () => {
+        window.removeEventListener('click', onCloseSideNav);
+      };
+    }
+  }, [isMobile, isDesktopAndTablet, onCloseSideNav]);
   // console.log(isDesktop, isTablet, isMobile);
+
   return (
     <>
       <GlobalStyle />
@@ -70,14 +93,15 @@ function SideNav() {
       <Space className={useExtends && 'SideNavExtends'} />
 
       <Container
+        onClick={stopPropagation}
         className={
           isDesktopAndTablet
             ? useExtends
               ? 'SideNavExtends'
               : ''
-            : !useHiddenMenu
-            ? 'SideNavMobileHidden'
-            : 'SideNavMobileDefault'
+            : useOpen
+            ? 'SideNavMobileOpen'
+            : 'SideNavMobileHidden'
         }
         ref={sideNavRef}
       >
