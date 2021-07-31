@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Container,
   BugSet,
@@ -8,11 +8,11 @@ import {
   Gap,
   ContentContainer,
   Content,
-} from "./styled";
-import { AiOutlineBug } from "react-icons/ai";
-import { BiLinkExternal } from "react-icons/bi";
+} from './styled';
+import { AiOutlineBug } from 'react-icons/ai';
+import { BiLinkExternal } from 'react-icons/bi';
 
-import Logo from "../../components/TopNav/LeftItem/Logo";
+import Logo from '../Header/TopNav/LeftItem/Logo';
 
 function Footer() {
   return (
@@ -23,32 +23,32 @@ function Footer() {
           <Gap />
           <AiOutlineBug
             style={{
-              color: "#d4d6d9",
-              fontSize: "20px",
-              transform: "rotate(140deg)",
-              position: "absolute",
-              top: "0px",
-              right: "62px",
+              color: '#d4d6d9',
+              fontSize: '20px',
+              transform: 'rotate(140deg)',
+              position: 'absolute',
+              top: '0px',
+              right: '62px',
             }}
           />
           <AiOutlineBug
             style={{
-              color: "#d4d6d9",
-              fontSize: "24px",
-              transform: "rotate(100deg)",
-              position: "absolute",
-              top: "22px",
-              right: "30px",
+              color: '#d4d6d9',
+              fontSize: '24px',
+              transform: 'rotate(100deg)',
+              position: 'absolute',
+              top: '22px',
+              right: '30px',
             }}
           />
           <AiOutlineBug
             style={{
-              color: "#d4d6d9",
-              fontSize: "64px",
-              transform: "rotate(120deg)",
-              position: "absolute",
-              top: "16px",
-              right: "-44px",
+              color: '#d4d6d9',
+              fontSize: '64px',
+              transform: 'rotate(120deg)',
+              position: 'absolute',
+              top: '16px',
+              right: '-44px',
             }}
           />
         </BugSet>
@@ -75,10 +75,10 @@ function Footer() {
               >
                 <BiLinkExternal
                   style={{
-                    fontSize: "16px",
-                    display: "inline-block",
-                    color: "#000",
-                    marginTop: "2px",
+                    fontSize: '16px',
+                    display: 'inline-block',
+                    color: '#000',
+                    marginTop: '2px',
                   }}
                 />
               </a>

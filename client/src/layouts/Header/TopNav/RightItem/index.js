@@ -4,10 +4,10 @@ import { Right, Button, SignIn, Profile } from './styled';
 import { useSelector } from 'react-redux';
 import Gravatar from 'react-gravatar';
 
-import SignInModal from '../../SignInModal';
-import SignUpModal from '../../SignUpModal';
-import UserMenu from '../../UserMenu';
-import Static from '../../../setupStatic';
+import SignInModal from '../../../../components/SignInModal';
+import SignUpModal from '../../../../components/SignUpModal';
+import UserMenu from '../../../../components/UserMenu';
+import Static from '../../../../setupStatic';
 
 function RightItem() {
   //로그인 모달 변수

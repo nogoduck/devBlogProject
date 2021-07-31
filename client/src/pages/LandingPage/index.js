@@ -1,83 +1,73 @@
-import { Route, Switch, withRouter } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
-import React from 'react';
+import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
 
-import { Container, Main, ContentContainer, Content } from './styled';
-import TopNav from '../../components/TopNav';
-import SideNav from '../../components/SideNav';
-import Footer from '../../components/Footer';
+import { LandingContainer } from './styled';
+import { AiOutlineBug } from 'react-icons/ai';
+import axios from 'axios';
+import Static from '../../setupStatic';
 
-import LandingContent from './LangdingContent';
-import AboutPage from '../AboutPage';
-import BoardPage from '../BoardPage';
-import CardPage from '../CardPage';
-import ExperimentPage from '../ExperimentPage';
-import VideoPage from '../VideoPage';
-import VideoUploadPage from '../VideoUploadPage';
-import VideoDetailPage from '../VideoDetailPage';
-import BoardWritePage from '../BoardWritePage';
-import BoardDetailPage from '../BoardDetailPage';
-import SettingPage from '../SettingPage';
+function LandingContent() {
+  const [result, setResult] = useState('');
+  const [result2, setResult2] = useState('');
 
-import Auth from '../../hoc/auth';
+  const connectServer = () => {
+    axios
+      .get('/api/test')
+      .then(({ data }) => {
+        setResult(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-// Auth 매개변수:
-// (1, 2, 3) :
-// 1: 컴포넌트
-// 2: null(로그인 여부 상관 없음),
-//   true(로그인 한 유저만 랜더링),
-//   false(로그인 안한 유저는 접근제한)
-// 3: 값을 넘기지 않으면 기본값 null, 유저등급 지정
-// ex) 0 = 1 = admin, 2 = guest
-function LandingPage() {
-  const isDesktop = useMediaQuery({ query: '(min-width:921px)' });
-
+  const connectServer2 = () => {
+    axios
+      .get('https://devlog-ad.herokuapp.com/api/test')
+      .then(({ data }) => {
+        setResult2(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
-    <Container>
-      <SideNav />
-      <Main>
-        <TopNav />
-        <ContentContainer>
-          <Content className={isDesktop ? '' : 'full'}>
-            <Switch>
-              <Route
-                exact
-                path="/menu/home"
-                component={Auth(LandingContent, null)}
-              />
-              <Route path="/menu/about" component={Auth(AboutPage, false)} />
-              <Route
-                true
-                path="/menu/board/write"
-                component={Auth(BoardWritePage, true)}
-              />
-              <Route
-                path="/menu/board/:postId"
-                component={Auth(BoardDetailPage, null)}
-              />
-              <Route path="/menu/board" component={Auth(BoardPage, null)} />
-              <Route path="/menu/card" component={Auth(CardPage, null)} />
-              <Route
-                path="/menu/experiment"
-                component={Auth(ExperimentPage, null)}
-              />
-              <Route
-                path="/menu/video/upload"
-                component={Auth(VideoUploadPage, null)}
-              />
-              <Route
-                path="/menu/video/:videoId"
-                component={Auth(VideoDetailPage, null)}
-              />
-              <Route path="/menu/video" component={Auth(VideoPage, null)} />{' '}
-              <Route path="/setting" component={Auth(SettingPage, null)} />
-            </Switch>
-          </Content>
-          <Footer />
-        </ContentContainer>
-      </Main>
-    </Container>
+    <LandingContainer>
+      <button onClick={connectServer}>Result connect to server</button>
+      <div>{result}</div>
+      <button onClick={connectServer2}>Result connect to server2</button>
+      <div>{result2}</div>
+      <div>
+        <div>{Static.URI}</div>
+        <div>{process.env.NODE_ENV}</div>
+        <div>{process.env.STATIC_URI}</div>
+        <div
+          style={{
+            fontSize: '160px',
+            background:
+              'linear-gradient(142deg, rgba(16,250,43,1) 0%, rgba(45,112,182,1) 50%, rgba(255,1,1,1) 100%)',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+            fontWeight: '800',
+            marginBottom: '32px',
+            textAlign: 'center',
+          }}
+        >
+          Bug
+        </div>
+        <AiOutlineBug
+          style={{
+            fontSize: '400px',
+            background:
+              'linear-gradient(142deg, rgba(16,250,43,1) 0%, rgba(45,112,182,1) 50%, rgba(255,1,1,1) 100%)',
+            color: '#fff',
+            borderRadius: '32px',
+            marginBottom: '32px',
+          }}
+        />
+      </div>
+    </LandingContainer>
   );
 }
 
-export default withRouter(LandingPage);
+export default withRouter(LandingContent);

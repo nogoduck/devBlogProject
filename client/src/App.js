@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
+import LandingPage from './layouts';
 import ExamplePage from './pages/ExamplePage';
 
 import Auth from './hoc/auth';

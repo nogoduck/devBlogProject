@@ -1,38 +1,25 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Container = styled.div`
+export const LandingContainer = styled.div`
+  border: 20px solid rgba(45, 112, 182, 1);
+  border-radius: 32px;
   display: flex;
-  flex-direction: row;
-  height: 100%;
-  position: relative;
-  s & .full {
-    margin: 0px;
-  }
-`;
-
-export const Main = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  //height: 100%;
-
-  & .full {
-    margin: 0px;
-  }
-`;
-
-export const ContentContainer = styled.div`
-  width: 100%;
-  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 `;
-export const Content = styled.div`
-  flex: none;
-  margin: 24px;
-  padding: 24px;
-  user-select: none;
-  background-color: #fff;
-  box-shadow: 0 0 4px 1px #c8cbcd;
+
+//적용안됌
+export const Title = styled.div`
+  font-size: 160px;
+  background: linear-gradient(
+    142deg,
+    rgba(16, 250, 43, 1) 0%,
+    rgba(45, 112, 182, 1) 50%,
+    rgba(255, 1, 1, 1) 100%
+  );
+  --webkit-background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  margin-bottom: 32px;
 `;
