@@ -6,10 +6,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import { Container, Space, MenuButton, MenuIcon, MenuTitle } from './styled';
+import {
+  Container,
+  Space,
+  MenuButton,
+  MenuIcon,
+  MenuTitle,
+  GlobalStyle,
+  ExtendsButton,
+  BottomItems,
+} from './styled';
 import { AiFillPicture, AiTwotoneExperiment, AiFillHome } from 'react-icons/ai';
 import { BiMenu } from 'react-icons/bi';
 import { FaClipboardList, FaPhotoVideo, FaPaperPlane } from 'react-icons/fa';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 function SideNav() {
   //Desktop or PC"(min-width:1024px)", Tablet"(min-width:768px) and (max-width:1023px)", Mobile"(max-width:767px)"
@@ -21,6 +31,7 @@ function SideNav() {
   const isMobile = useMediaQuery({ query: '(max-width:767px)' });
   const [hiddenMenu, setHiddenMenu] = useState(false);
   //현재 페이지 목록 메뉴에 활성화
+  const [useExtends, setUseExtends] = useState(false);
   const { pathname } = useLocation();
   let activePath = pathname.substring(5);
 
@@ -33,6 +44,9 @@ function SideNav() {
   const onClickToggleMenu = () => {
     setHiddenMenu((prev) => !prev);
   };
+  const onClickToggleExtends = () => {
+    setUseExtends((prev) => !prev);
+  };
 
   useEffect(() => {
     // setHiddenMenu(isMobile ? true : false);
@@ -41,21 +55,22 @@ function SideNav() {
   // console.log(isDesktop, isTablet, isMobile);
   return (
     <>
+      <GlobalStyle />
       {!isDesktop && (
         <MenuButton onClick={onClickToggleMenu}>
           <BiMenu />
         </MenuButton>
       )}
-      <Space />
+      <Space className={useExtends && 'SideNavExtends'} />
 
-      <Container id={hiddenMenu && 'hiddenSideNav'} ref={sideNavRef}>
+      <Container className={useExtends && 'SideNavExtends'} ref={sideNavRef}>
         <ul>
           <Link to="/">
             <li id={activePath.includes('null') && 'active'}>
               <MenuIcon>
                 <AiFillHome />
               </MenuIcon>
-              <MenuTitle id={isTablet && 'hidden'}>홈</MenuTitle>
+              <MenuTitle className={!useExtends && 'hidden'}>홈</MenuTitle>
             </li>
           </Link>
 
@@ -64,7 +79,7 @@ function SideNav() {
               <MenuIcon>
                 <FaPaperPlane />
               </MenuIcon>
-              <MenuTitle id={isTablet && 'hidden'}>소개</MenuTitle>
+              <MenuTitle className={!useExtends && 'hidden'}>소개</MenuTitle>
             </li>
           </Link>
 
@@ -73,7 +88,7 @@ function SideNav() {
               <MenuIcon>
                 <AiFillPicture />
               </MenuIcon>
-              <MenuTitle id={isTablet && 'hidden'}>사진</MenuTitle>
+              <MenuTitle className={!useExtends && 'hidden'}>사진</MenuTitle>
             </li>
           </Link>
 
@@ -82,7 +97,7 @@ function SideNav() {
               <MenuIcon>
                 <FaClipboardList />
               </MenuIcon>
-              <MenuTitle id={isTablet && 'hidden'}>게시판</MenuTitle>
+              <MenuTitle className={!useExtends && 'hidden'}>게시판</MenuTitle>
             </li>
           </Link>
 
@@ -91,7 +106,7 @@ function SideNav() {
               <MenuIcon>
                 <AiTwotoneExperiment />
               </MenuIcon>
-              <MenuTitle id={isTablet && 'hidden'}>실험실</MenuTitle>
+              <MenuTitle className={!useExtends && 'hidden'}>실험실</MenuTitle>
             </li>
           </Link>
 
@@ -100,10 +115,17 @@ function SideNav() {
               <MenuIcon>
                 <FaPhotoVideo />
               </MenuIcon>
-              <MenuTitle id={isTablet && 'hidden'}>영상</MenuTitle>
+              <MenuTitle className={!useExtends && 'hidden'}>영상</MenuTitle>
             </li>
           </Link>
         </ul>
+
+        <ExtendsButton
+          onClick={onClickToggleExtends}
+          className={useExtends && 'ExtendsActive'}
+        >
+          <MdKeyboardArrowRight />
+        </ExtendsButton>
       </Container>
     </>
   );

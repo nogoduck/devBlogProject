@@ -1,33 +1,45 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
+export const GlobalStyle = createGlobalStyle`
+  body{
+    .SideNavExtends{
+      width:200px;
+    }
+    .SideNavHidden{
+      left:-30px;
+    }
+    .ExtendsActive{
+      left:0;
+      transform:rotate(-180deg);
+      padding: 6px 164px 0px 16px;
+    }
+  }
+`;
 export const Container = styled.div`
+  top: 0;
+  left: 0;
   flex: none;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 48px;
   height: 100%;
   border: none;
-  //  background-color: #fff;
   background-color: #fff;
   box-shadow: 0 0 4px 1px #c8cbcd;
   z-index: 2048;
   position: fixed;
   transition: 0.2s ease-in-out;
+  overflow: hidden;
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     //tablet
-    width: 48px;
   }
 
   @media screen and (max-width: 767px) {
     //mobile
-    /* display: none; */
-    // position: fixed;
-    top: 48px;
-    border-radius: 0 0 16px 0;
   }
 
   & ul {
-    padding: 24px 0 24px 0px;
+    padding: 90px 0 24px 0px;
   }
 
   & li {
@@ -52,13 +64,12 @@ export const Container = styled.div`
 `;
 
 export const Space = styled.div`
-  content: 'space';
+  transition: 0.2s;
   position: relative;
-  margin-left: 200px;
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    margin-left: 48px;
-  }
+  width: 48px;
+  flex: none;
 `;
+
 export const MenuButton = styled.button`
   position: fixed;
   color: #757575;
@@ -78,3 +89,20 @@ export const MenuIcon = styled.span`
 `;
 
 export const MenuTitle = styled.span``;
+
+export const ExtendsButton = styled.button`
+  position: absolute;
+  bottom: 8px;
+  left: -1px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 24px;
+  overflow: hidden;
+  transition: 0.2s;
+  padding: 6px 20px 0px 14px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;

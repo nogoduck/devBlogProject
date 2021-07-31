@@ -27,10 +27,8 @@ export const ContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: 2px solid blueviolet;
 `;
 export const Content = styled.div`
-  border: 2px solid blue;
   flex: none;
   margin: 24px;
   padding: 24px;

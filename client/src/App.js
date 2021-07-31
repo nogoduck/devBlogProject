@@ -1,9 +1,9 @@
-import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import ExamplePage from "./pages/ExamplePage";
+import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import ExamplePage from './pages/ExamplePage';
 
-import Auth from "./hoc/auth";
+import Auth from './hoc/auth';
 
 function App() {
   return (
