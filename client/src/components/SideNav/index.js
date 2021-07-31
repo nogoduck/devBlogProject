@@ -48,14 +48,15 @@ function SideNav() {
   };
 
   useEffect(() => {
-    // if (isDesktopAndTablet) {
-    //   console.log('PC설정');
-    //   setUseHiddenMenu(false);
-    // }
-    // if (isMobile) {
-    //   console.log('모바일설정');
-    //   setUseExtends(false);
-    // }
+    if (isDesktopAndTablet) {
+      console.log('PC설정');
+      //모바일 상태에선 메뉴가 숨겨진 상태가 기본이다.
+      setUseHiddenMenu(false);
+    }
+    if (isMobile) {
+      console.log('모바일설정');
+      setUseExtends(false);
+    }
   }, [isMobile, isDesktopAndTablet]);
   // console.log(isDesktop, isTablet, isMobile);
   return (
@@ -69,9 +70,12 @@ function SideNav() {
       <Space className={useExtends && 'SideNavExtends'} />
 
       <Container
-        className={isDesktopAndTablet && useExtends ? 'SideNavExtends' : ''}
         className={
-          isMobile && useHiddenMenu
+          isDesktopAndTablet
+            ? useExtends
+              ? 'SideNavExtends'
+              : ''
+            : !useHiddenMenu
             ? 'SideNavMobileHidden'
             : 'SideNavMobileDefault'
         }

@@ -2,7 +2,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React from 'react';
 
-import {Container, Main, ContentContainer, Content } from './styled';
+import { Container, Main, ContentContainer, Content } from './styled';
 import TopNav from '../../components/TopNav';
 import SideNav from '../../components/SideNav';
 import Footer from '../../components/Footer';
@@ -30,13 +30,13 @@ import Auth from '../../hoc/auth';
 // 3: 값을 넘기지 않으면 기본값 null, 유저등급 지정
 // ex) 0 = 1 = admin, 2 = guest
 function LandingPage() {
-  const isDesktop = useMediaQuery({ query: '(min-width:1024px)' });
+  const isDesktop = useMediaQuery({ query: '(min-width:921px)' });
 
   return (
     <Container>
       <SideNav />
       <Main>
-      <TopNav />
+        <TopNav />
         <ContentContainer>
           <Content className={isDesktop ? '' : 'full'}>
             <Switch>
