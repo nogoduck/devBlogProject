@@ -40,7 +40,11 @@ function LandingPage() {
         <ContentContainer>
           <Content className={isDesktop ? '' : 'full'}>
             <Switch>
-              <Route exact path="/" component={Auth(LandingContent, null)} />
+              <Route
+                exact
+                path="/menu/home"
+                component={Auth(LandingContent, null)}
+              />
               <Route path="/menu/about" component={Auth(AboutPage, false)} />
               <Route
                 true

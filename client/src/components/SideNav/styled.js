@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     .ExtendsActive{
       left:0;
-      transform:rotate(-180deg);
+      transform:rotate(180deg);
       padding: 6px 164px 0px 16px;
     }
     .SideNavMobileHidden{
@@ -43,7 +43,7 @@ export const Container = styled.div`
   }
 
   & ul {
-    padding: 90px 0 24px 0px;
+    padding: 64px 0 24px 0px;
   }
 
   & li {
@@ -105,7 +105,7 @@ export const MenuTitle = styled.span`
 
 export const ExtendsButton = styled.button`
   position: absolute;
-  bottom: 8px;
+  top: 8px;
   left: -1px;
   border: none;
   outline: none;

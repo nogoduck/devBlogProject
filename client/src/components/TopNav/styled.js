@@ -6,9 +6,10 @@ export const Header = styled.div`
   background-color: transparent;
   font-size: 30px;
   height: 48px;
-  left: 200px;
+  left: 0px;
   right: 0;
   z-index: 1024;
+  padding-left: 200px;
   transition: 0.2s ease-in-out;
 
   //@media screen and (min-width: 768px) and (max-width: 1023px) {

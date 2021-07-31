@@ -82,12 +82,16 @@ function SideNav() {
         ref={sideNavRef}
       >
         <ul>
-          <Link to="/">
+          <Link to="/menu/home">
             <li id={activePath.includes('null') && 'active'}>
               <MenuIcon>
                 <AiFillHome />
               </MenuIcon>
-              <MenuTitle className={!useExtends && 'hidden'}>홈</MenuTitle>
+              <MenuTitle
+                className={isDesktopAndTablet && !useExtends && 'hidden'}
+              >
+                홈
+              </MenuTitle>
             </li>
           </Link>
 
@@ -96,7 +100,11 @@ function SideNav() {
               <MenuIcon>
                 <FaPaperPlane />
               </MenuIcon>
-              <MenuTitle className={!useExtends && 'hidden'}>소개</MenuTitle>
+              <MenuTitle
+                className={isDesktopAndTablet && !useExtends && 'hidden'}
+              >
+                소개
+              </MenuTitle>
             </li>
           </Link>
 
@@ -105,7 +113,11 @@ function SideNav() {
               <MenuIcon>
                 <AiFillPicture />
               </MenuIcon>
-              <MenuTitle className={!useExtends && 'hidden'}>사진</MenuTitle>
+              <MenuTitle
+                className={isDesktopAndTablet && !useExtends && 'hidden'}
+              >
+                사진
+              </MenuTitle>
             </li>
           </Link>
 
@@ -114,7 +126,11 @@ function SideNav() {
               <MenuIcon>
                 <FaClipboardList />
               </MenuIcon>
-              <MenuTitle className={!useExtends && 'hidden'}>게시판</MenuTitle>
+              <MenuTitle
+                className={isDesktopAndTablet && !useExtends && 'hidden'}
+              >
+                게시판
+              </MenuTitle>
             </li>
           </Link>
 
@@ -123,7 +139,11 @@ function SideNav() {
               <MenuIcon>
                 <AiTwotoneExperiment />
               </MenuIcon>
-              <MenuTitle className={!useExtends && 'hidden'}>실험실</MenuTitle>
+              <MenuTitle
+                className={isDesktopAndTablet && !useExtends && 'hidden'}
+              >
+                실험실
+              </MenuTitle>
             </li>
           </Link>
 
@@ -132,17 +152,23 @@ function SideNav() {
               <MenuIcon>
                 <FaPhotoVideo />
               </MenuIcon>
-              <MenuTitle className={!useExtends && 'hidden'}>영상</MenuTitle>
+              <MenuTitle
+                className={isDesktopAndTablet && !useExtends && 'hidden'}
+              >
+                영상
+              </MenuTitle>
             </li>
           </Link>
         </ul>
 
-        <ExtendsButton
-          onClick={onClickToggleExtends}
-          className={useExtends && 'ExtendsActive'}
-        >
-          <MdKeyboardArrowRight />
-        </ExtendsButton>
+        {isDesktopAndTablet && (
+          <ExtendsButton
+            onClick={onClickToggleExtends}
+            className={useExtends && 'ExtendsActive'}
+          >
+            <MdKeyboardArrowRight />
+          </ExtendsButton>
+        )}
       </Container>
     </>
   );
