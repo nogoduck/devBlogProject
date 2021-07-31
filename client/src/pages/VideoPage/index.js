@@ -1,12 +1,21 @@
 import { Link, withRouter } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { CardContainer, VideoContainer } from './styled';
+import {
+  ProfileImage,
+  VideoCardContainer,
+  VideoContainer,
+  VideoInfo,
+  VideoArticle,
+  VideoInfoContainer,
+  VideoTitle,
+  VideoLength,
+  VideoView,
+} from './styled';
 import VideoUploadPage from '../VideoUploadPage';
 import Static from '../../setupStatic';
 import moment from 'moment';
 import Gravatar from 'react-gravatar';
-
 function VideoPage() {
   const [videoList, setVideoList] = useState([]);
 
@@ -17,58 +26,53 @@ function VideoPage() {
         if (data.success) {
           setVideoList(data.videos);
         } else {
-          alert('영상을 불러올 수 없습니다.');
+          // alert('영상을 불러올 수 없습니다.');
+          console.log('NULL Videos');
         }
       })
       .catch((err) => {
-        alert('영상을 불러올 수 없습니다.' + err);
+        // alert('영상을 불러올 수 없습니다.' + err);
+        console.log('NULL Videos');
       });
   }, []);
 
   const videoCards = videoList.map((v) => {
-    let momentVideoLength = moment
-      .utc(1000 * v.videoLength)
-      .format('H[h] mm[m] ss[s]');
+    let momentVideoLength = moment.utc(1000 * v.videoLength).format(`m : ss`);
     let momentCreatedAt = moment(v.createdAt).format('YY MMM Do ');
     console.log('videoPlayTime >> ', momentVideoLength);
     console.log('momentCreatedAt >> ', momentCreatedAt);
 
     return (
-      <CardContainer>
+      <VideoCardContainer>
         <Link to={`/menu/video/${v._id}`}>
           <img src={`${Static.URI}${v.thumbnailPath}`} alt="thumbnail_IMG" />
-          <div className="duration__absolute">
-            <div className="duration__relative">
-              <span>{momentVideoLength}</span>
-            </div>
-          </div>
-          <div className="video__info">
-            <div className="title">
-              <span className="profile__img">
-                {v.publisher.imagePath ? (
-                  <img
-                    src={`${Static.URI}${v.publisher.imagePath}`}
-                    alt="profile_image"
-                  />
-                ) : (
-                  <Gravatar
-                    email={v.publisher.email}
-                    size={250}
-                    default="wavatar"
-                  />
-                )}
-              </span>
-              <span className=" video__title">{v.title}</span>
-            </div>
-            <div className="video__article video__writerName">
-              {v.publisher.name}
-            </div>
-            <div className="video__article video__date">
-              {v.view} · {momentCreatedAt}
-            </div>
-          </div>
+          <VideoLength>{momentVideoLength}</VideoLength>
+
+          <VideoInfoContainer>
+            <ProfileImage>
+              {v.publisher.imagePath ? (
+                <img
+                  src={`${Static.URI}${v.publisher.imagePath}`}
+                  alt="profile_image"
+                />
+              ) : (
+                <Gravatar
+                  email={v.publisher.email}
+                  size={50}
+                  default="wavatar"
+                />
+              )}
+            </ProfileImage>
+            <VideoInfo>
+              <VideoTitle>{v.title}</VideoTitle>
+              <VideoArticle>{v.publisher.name}</VideoArticle>
+              <VideoArticle>
+                <VideoView>{v.views}</VideoView>· {momentCreatedAt}
+              </VideoArticle>
+            </VideoInfo>
+          </VideoInfoContainer>
         </Link>
-      </CardContainer>
+      </VideoCardContainer>
     );
   });
 
