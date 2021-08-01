@@ -1,32 +1,32 @@
-const mongoose = require("mongoose");
-const express = require("express");
+const mongoose = require('mongoose');
+const express = require('express');
 const router = express.Router();
-const fs = require("fs");
-const path = require("path");
-const mime = require("mime");
-const multer = require("multer");
+const fs = require('fs');
+const path = require('path');
+const mime = require('mime');
+const multer = require('multer');
 //mime/lite버전을 사용하고 싶은데 로드가 되지 않는다 mime보다 1/3 밖에 용량이 안된다고 한다.
 //multer 관련 변수 (파일 처리)
-const { Board } = require("../models/Board");
+const { Board } = require('../models/Board');
 
 const storage = multer.diskStorage({
   // 파일 저장 경로
   destination: (req, file, cb) => {
-    cb(null, "zDummyFile/");
+    cb(null, 'zDummyFile/');
   },
   // 파일 저장시 파일명
   filename: (req, file, cb) => {
-    console.log("[storage] save file > ", file);
+    console.log('[storage] save file > ', file);
     cb(null, `${Date.now().toString().substr(0)}_${file.originalname}`);
   },
 });
 
-const upload = multer({ storage: storage }).single("file");
+const upload = multer({ storage: storage }).single('file');
 
-router.get("/condb", (req, res) => {
+router.get('/condb', (req, res) => {
   Board.find()
     .then((data) => {
-      console.log("db connect state >> success");
+      console.log('db connect state >> success');
       console.log(data);
       return res.status(200).json({
         data,
@@ -39,14 +39,14 @@ router.get("/condb", (req, res) => {
     });
 });
 
-router.post("/save", (req, res) => {
-  console.log("[zTest] req.body >> ", req.body);
+router.post('/save', (req, res) => {
+  console.log('[zTest] req.body >> ', req.body);
 
   upload(req, res, (err) => {
     if (err) {
       return res.json({
         success: false,
-        message: "파일 저장에 실패했습니다",
+        message: '파일 저장에 실패했습니다',
         error: err,
       });
     }
@@ -55,30 +55,30 @@ router.post("/save", (req, res) => {
       success: true,
       // fileName: req.file.filename,
       // filePath: req.file.path,
-      message: "파일을 저장했습니다.",
+      message: '파일을 저장했습니다.',
     });
   });
 });
 
-router.post("/sendfile", (req, res) => {
-  const filename = "origin_blob.png";
+router.post('/sendfile', (req, res) => {
+  const filename = 'origin_blob.png';
   const filePath = path.join(__dirname, `../../zDummyFile/${filename}`);
-  console.log("[zTest] file path >> ", filePath);
+  console.log('[zTest] file path >> ', filePath);
 
   const fileMime = mime.lookup(filePath);
-  console.log("[zTest] file mime >> ", fileMime);
+  console.log('[zTest] file mime >> ', fileMime);
 
   fs.readFile(filePath, (err, data) => {
     if (err) console.log(err);
     res.writeHead(206, {
-      "Content-Type": fileMime,
+      'Content-Type': fileMime,
     });
     res.end(data);
   });
 });
 
-router.post("/form/save", (req, res) => {
-  console.log("[zTest] req.body >> ", req.body);
+router.post('/form/save', (req, res) => {
+  console.log('[zTest] req.body >> ', req.body);
 
   res.status(200).json({
     success: true,
@@ -86,16 +86,18 @@ router.post("/form/save", (req, res) => {
   });
 });
 
-router.get("/", (req, res) => {
-  res.send("response testRouter...");
+router.get('/', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  res.send('response testRouter...');
 });
 
-router.post("/", (req, res) => {
-  console.log("req.file >> ", req.file);
+router.post('/', (req, res) => {
+  console.log('req.file >> ', req.file);
 
-  const filename = "1627179811536_blob";
+  const filename = '1627179811536_blob';
   console.log(
-    "path >> ",
+    'path >> ',
     path.join(__dirname, `../../UploadProfileImage/${filename}`)
   );
 
@@ -112,24 +114,24 @@ router.post("/", (req, res) => {
     `../../UploadProfileImage/artgirl.jpg`
   );
 
-  console.log("imagePath >> ", imagePath);
-  console.log("imagePath2 >> ", imagePath2);
+  console.log('imagePath >> ', imagePath);
+  console.log('imagePath2 >> ', imagePath2);
 
-  const readfile = fs.readFileSync(imagePath, "utf-8");
-  const readfile2 = fs.readFileSync(imagePath2, "utf-8");
-  const readfile3 = fs.readFileSync(imagePath3, "utf-8");
+  const readfile = fs.readFileSync(imagePath, 'utf-8');
+  const readfile2 = fs.readFileSync(imagePath2, 'utf-8');
+  const readfile3 = fs.readFileSync(imagePath3, 'utf-8');
   //mime version2부터는 getType을 사용하지 않고 lookup을 사용한다 npm 참고
   const imgMime = mime.lookup(imagePath);
-  console.log("imgMime >> ", imgMime);
+  console.log('imgMime >> ', imgMime);
 
   //---------------------------------------------------------------------
   // Stream Section
   //---------------------------------------------------------------------
   fs.stat(imagePath, (err, stat) => {
     if (err) return res.json({ err }); //값의 변수명이 키값으로 들어가는 문법으로 알고있다.
-    console.log("stat >> ", stat);
+    console.log('stat >> ', stat);
     const { size } = stat;
-    console.log("stat.size >> ", size);
+    console.log('stat.size >> ', size);
 
     const start = 0;
     const end = size - 1;
@@ -139,10 +141,10 @@ router.post("/", (req, res) => {
     const stream = fs.createReadStream(imagePath, { start, end }); //path
 
     res.writeHead(206, {
-      "Content-Range": `bytes ${start}-${end}/${size}`,
-      "Accept-Ranges": "bytes",
-      "Content-Length": chunk,
-      "Content-Type": imgMime,
+      'Content-Range': `bytes ${start}-${end}/${size}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunk,
+      'Content-Type': imgMime,
     });
 
     stream.pipe(res);

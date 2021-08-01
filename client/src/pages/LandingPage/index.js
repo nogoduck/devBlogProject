@@ -6,6 +6,7 @@ import { AiOutlineBug } from 'react-icons/ai';
 import axios from 'axios';
 import Static from '../../setupStatic';
 
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 function LandingContent() {
   const [result, setResult] = useState('');
   const [result2, setResult2] = useState('');
