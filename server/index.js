@@ -22,7 +22,7 @@ const todoRouter = require('./routes/todo');
 const videoRouter = require('./routes/video');
 const testRouter = require('./routes/zTest');
 
-app.use(cors());
+// app.use(cors());
 app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use(express.json());
