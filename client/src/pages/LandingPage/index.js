@@ -35,6 +35,19 @@ function LandingContent() {
         console.log(err);
       });
   };
+  const connectServerIndex = () => {
+    axios
+      .get('https://devlog-ad.herokuapp.com')
+      .then(({ data }) => {
+        console.log('data >> ', data);
+        const a = data.index;
+        console.log(a);
+        setResult2(toString(data.index));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <LandingContainer>
       <button onClick={connectServer}>
@@ -43,6 +56,9 @@ function LandingContent() {
       <div>{result}</div>
       <button onClick={connectServer2}>
         Result connect to server2 : https://devlog-ad.herokuapp.com/api/test
+      </button>
+      <button onClick={connectServerIndex}>
+        Result connect to server Index : https://devlog-ad.herokuapp.com
       </button>
       <div>{result2}</div>
       <div>

@@ -31,7 +31,7 @@ function BoardPage({ history }) {
     };
     //게시물 가져오는 요청
     axios
-      .post('/api/board', variable)
+      .post('https://devlog-ad.herokuapp.com/api/board', variable)
       .then(({ data }) => {
         setPosts(data.board);
       })
