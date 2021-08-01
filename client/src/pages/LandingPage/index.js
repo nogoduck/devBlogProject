@@ -6,7 +6,9 @@ import { AiOutlineBug } from 'react-icons/ai';
 import axios from 'axios';
 import Static from '../../setupStatic';
 
+axios.defaults.baseURL = 'https://devlog-ad.herokuapp.com';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+axios.defaults.withCredentials = true;
 function LandingContent() {
   const [result, setResult] = useState('');
   const [result2, setResult2] = useState('');
@@ -43,9 +45,9 @@ function LandingContent() {
       </button>
       <div>{result2}</div>
       <div>
-        <div>{Static.URI}</div>
-        <div>{process.env.NODE_ENV}</div>
-        <div>{process.env.STATIC_URI}</div>
+        <div>Static.URI : {Static.URI}</div>
+        <div>env : {process.env.NODE_ENV}</div>
+        <div>base : {process.env.BASE_URL}</div>
         <div
           style={{
             fontSize: '160px',

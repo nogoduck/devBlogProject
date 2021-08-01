@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import promiseMiddleware from "redux-promise";
-import ReduxThunk from "redux-thunk";
-import Reducer from "./_reducers";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import promiseMiddleware from 'redux-promise';
+import ReduxThunk from 'redux-thunk';
+import Reducer from './_reducers';
 
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,
@@ -24,5 +24,5 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
