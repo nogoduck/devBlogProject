@@ -6,11 +6,12 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const corsOptions = {
-  origin: [
-    'https://log1999.com',
-    'https://www.log1999.com',
-    'http://localhost:3000',
-  ],
+  origin: 'http://localhost:3000',
+  // origin: [
+  //   'https://log1999.com',
+  //   'https://www.log1999.com',
+  //   'http://localhost:3000',
+  // ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 };
