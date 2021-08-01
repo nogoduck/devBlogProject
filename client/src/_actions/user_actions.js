@@ -1,6 +1,17 @@
 import axios from 'axios';
 import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from './types';
 
+export function signupUser(onSubmitData) {
+  const request = axios
+    .post('/api/users/signup', onSubmitData, { withCredentials: true })
+    .then((res) => res.data);
+
+  return {
+    type: SIGNUP_USER,
+    payload: request,
+  };
+}
+
 export function signinUser(onSubmitData) {
   const request = axios
     .post('/api/users/signin', onSubmitData, { withCredentials: true })
@@ -8,17 +19,6 @@ export function signinUser(onSubmitData) {
 
   return {
     type: SIGNIN_USER,
-    payload: request,
-  };
-}
-
-export function signupUser(onSubmitData) {
-  const request = axios
-    .post('/api/users/signup', onSubmitData)
-    .then((res) => res.data);
-
-  return {
-    type: SIGNUP_USER,
     payload: request,
   };
 }
