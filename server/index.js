@@ -4,12 +4,12 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const cors = require('cors');
-const corsOptions = {
-  // origin: 'https://log1999.com',
-  origin: '*',
-  Credential: true,
-};
+// const cors = require('cors');
+// const corsOptions = {
+//   // origin: 'https://log1999.com',
+//   origin: '*',
+//   Credential: true,
+// };
 const cookieParser = require('cookie-parser');
 
 const userRouter = require('./routes/user');
