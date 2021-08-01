@@ -99,7 +99,9 @@ router.get('/', (req, res) => {
 router.get('/cookie', (req, res) => {
   res.cookie('PurpleCookie', 'grape').send('쿠키 생성에 성공했습니다.');
 });
-
+router.post('/cookie', (req, res) => {
+  res.cookie('YellowCookie', 'banana').send('쿠키 생성2에 성공했습니다.');
+});
 router.post('/', (req, res) => {
   console.log('req.file >> ', req.file);
 
