@@ -6,6 +6,11 @@ import { applyMiddleware, createStore } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from './_reducers';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://devlog-ad.herokuapp.com';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+// axios.defaults.withCredentials = true;
 
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,

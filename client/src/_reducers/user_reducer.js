@@ -1,4 +1,4 @@
-import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from "../_actions/types.js";
+import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from '../_actions/types.js';
 
 const initialState = {
   authStatus: {
