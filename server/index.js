@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const corsOptions = {
   // origin: 'https://log1999.com',
-  origin: '*',
+  origin: true,
   Credential: true,
 };
 const cookieParser = require('cookie-parser');
