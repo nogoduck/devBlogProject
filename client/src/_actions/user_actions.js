@@ -3,7 +3,7 @@ import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from './types';
 
 export function signinUser(onSubmitData) {
   const request = axios
-    .post('/api/users/signin', onSubmitData)
+    .post('/api/users/signin', onSubmitData, { withCredentials: true })
     .then((res) => res.data);
 
   return {
@@ -24,10 +24,12 @@ export function signupUser(onSubmitData) {
 }
 
 export function auth() {
-  const request = axios.get('/api/users/auth').then(({ data }) => {
-    // console.log("[Redux] auth data >> ", data);
-    return data;
-  });
+  const request = axios
+    .get('/api/users/auth', { withCredentials: true })
+    .then(({ data }) => {
+      // console.log("[Redux] auth data >> ", data);
+      return data;
+    });
 
   return {
     type: AUTH_USER,
