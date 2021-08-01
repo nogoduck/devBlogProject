@@ -3,7 +3,7 @@ import { SIGNIN_USER, SIGNUP_USER, AUTH_USER } from './types';
 
 export function signinUser(onSubmitData) {
   const request = axios
-    .post('/api/users/signin', onSubmitData, { withCredentials: true })
+    .post('/api/users/signin', onSubmitData)
     .then((res) => res.data);
 
   return {
