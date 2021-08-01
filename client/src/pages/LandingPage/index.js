@@ -33,9 +33,13 @@ function LandingContent() {
   };
   return (
     <LandingContainer>
-      <button onClick={connectServer}>Result connect to server</button>
+      <button onClick={connectServer}>
+        Result connect to server : /api/test
+      </button>
       <div>{result}</div>
-      <button onClick={connectServer2}>Result connect to server2</button>
+      <button onClick={connectServer2}>
+        Result connect to server2 : https://devlog-ad.herokuapp.com/api/test
+      </button>
       <div>{result2}</div>
       <div>
         <div>{Static.URI}</div>
