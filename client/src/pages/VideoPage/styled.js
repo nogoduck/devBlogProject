@@ -23,19 +23,19 @@ export const ImageContainer = styled.div`
 `;
 export const VideoLength = styled.div`
   position: absolute;
-  bottom: 12px;
-  right: 6px;
+  bottom: 10px;
+  right: 5px;
   background-color: #000;
   color: #fff;
-  font-weight: 800;
-  font-size: 12px;
-  padding: 2px 5px;
+  //font-weight: 800;
+  font-size: 11px;
+  padding: 0px 3px;
   border-radius: 3px;
 `;
 export const VideoInfoContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 4px;
+  margin-top: 2px;
 `;
 export const VideoInfo = styled.div`
   display: flex;
@@ -48,7 +48,6 @@ export const VideoTitle = styled.div`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   width: 200px;
-  height: 40px;
   line-height: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -65,10 +64,15 @@ export const VideoView = styled.span`
     content: '회';
   }
 `;
+export const VideoCreatedAt = styled.span`
+  &::before {
+    content: ' · ';
+  }
+`;
 export const ProfileImage = styled.span`
   flex: none;
   color: red;
-  margin-right: 14px;
+  margin-right: 10px;
 
   & > img {
     width: 35px;

@@ -1,8 +1,8 @@
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 
-import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   Container,
   Lodding,
@@ -11,30 +11,30 @@ import {
   Title,
   BoardInfo,
   Profile,
-} from "./styled";
-import axios from "axios";
-import Gravatar from "react-gravatar";
-import HtmlReactParser from "html-react-parser";
+} from './styled';
+import axios from 'axios';
+import Gravatar from 'react-gravatar';
+import HtmlReactParser from 'html-react-parser';
 
-import { timeFormat } from "../BoardPage/_utils";
-import BoardWritePage from "../BoardWritePage";
+import { timeFormat } from '../../utils/Time';
+import BoardWritePage from '../BoardWritePage';
 
 function BoardDetailPage() {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
     axios
-      .post("/api/board/detail", args)
+      .post('/api/board/detail', args)
       .then(({ data }) => {
         setDetailPost(data);
-        console.log("detail data :: ", data);
+        console.log('detail data :: ', data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const [detailPost, setDetailPost] = useState("");
+  const [detailPost, setDetailPost] = useState('');
   const { pathname } = useLocation();
   const postId = pathname.substring(12);
   const args = {
@@ -42,8 +42,8 @@ function BoardDetailPage() {
   };
 
   const [upadteMode, setUpadteMode] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   //확인, 취소 모달
   const onClickPostUpdate = () => {
@@ -68,15 +68,15 @@ function BoardDetailPage() {
           <BoardInfo>
             <tr>
               <td>
-                <Profile style={{ fontSize: "15px" }}>
+                <Profile style={{ fontSize: '15px' }}>
                   {user.authStatus.imagePath ? (
                     <img
                       src={`http://localhost:5050/${user.authStatus.imagePath}`}
                       style={{
-                        width: "30px",
-                        height: "30px",
-                        marginRight: "5px",
-                        borderRadius: "50%",
+                        width: '30px',
+                        height: '30px',
+                        marginRight: '5px',
+                        borderRadius: '50%',
                       }}
                     />
                   ) : (
@@ -85,10 +85,10 @@ function BoardDetailPage() {
                       size={250}
                       default="wavatar"
                       style={{
-                        width: "30px",
-                        height: "30px",
-                        marginRight: "5px",
-                        borderRadius: "50%",
+                        width: '30px',
+                        height: '30px',
+                        marginRight: '5px',
+                        borderRadius: '50%',
                       }}
                     />
                   )}
@@ -100,7 +100,7 @@ function BoardDetailPage() {
                 최근 수정일&nbsp;&nbsp;
                 {detailPost.data.updatedAt
                   ? timeFormat(detailPost.data.updatedAt)
-                  : "수정 안함"}
+                  : '수정 안함'}
               </td>
             </tr>
           </BoardInfo>

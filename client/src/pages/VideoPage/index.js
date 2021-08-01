@@ -11,12 +11,14 @@ import {
   VideoTitle,
   VideoLength,
   VideoView,
+  VideoCreatedAt,
   ImageContainer,
 } from './styled';
 import VideoUploadPage from '../VideoUploadPage';
 import Static from '../../setupStatic';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Gravatar from 'react-gravatar';
+import { changeTime2 } from '../../utils/Time';
 function VideoPage() {
   const [videoList, setVideoList] = useState([]);
 
@@ -38,12 +40,9 @@ function VideoPage() {
   }, []);
 
   const videoCards = videoList.map((v) => {
-    let momentVideoLength = moment.utc(1000 * v.videoLength).format(`m : ss`);
-    let momentCreatedAt = moment(v.createdAt).format('YY MMM Do ');
-
-    console.log('videoPlayTime >> ', momentVideoLength);
-    console.log('momentCreatedAt >> ', momentCreatedAt);
-
+    let momentVideoLength = dayjs(1000 * v.videoLength).format(`m : ss`);
+    let momentCreatedAt = changeTime2(v.createdAt);
+    console.log(v.videoLength, v.createdAt);
     return (
       <VideoCardContainer>
         <Link to={`/menu/video/${v._id}`}>
@@ -71,7 +70,8 @@ function VideoPage() {
               <VideoTitle>{v.title}</VideoTitle>
               <VideoArticle>{v.publisher.name}</VideoArticle>
               <VideoArticle>
-                <VideoView>{v.views}</VideoView>· {momentCreatedAt}
+                <VideoView>{v.views}</VideoView>
+                <VideoCreatedAt>{momentCreatedAt}</VideoCreatedAt>
               </VideoArticle>
             </VideoInfo>
           </VideoInfoContainer>
