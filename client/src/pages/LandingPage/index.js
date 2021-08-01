@@ -10,6 +10,16 @@ function LandingContent() {
   const [result, setResult] = useState('');
   const [result2, setResult2] = useState('');
 
+  const createCookie = () => {
+    axios
+      .get('/api/test/cookie', { withCredentials: true })
+      .then(({ data }) => {
+        setResult(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const connectServer = () => {
     axios
       .get('/api/test')
@@ -46,6 +56,9 @@ function LandingContent() {
   };
   return (
     <LandingContainer>
+      <button onClick={createCookie}>
+        Create Cookie... : /api/test/cookie
+      </button>
       <button onClick={connectServer}>
         Result connect to server : /api/test
       </button>

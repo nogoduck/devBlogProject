@@ -9,7 +9,7 @@ import Reducer from './_reducers';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://devlog-ad.herokuapp.com';
-// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = true;
 // axios.defaults.withCredentials = true;
 
 const createStoreWithMiddleware = applyMiddleware(

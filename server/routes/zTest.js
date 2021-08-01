@@ -87,13 +87,17 @@ router.post('/form/save', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, Content-Length, X-Requested-With'
-  );
+  // res.header('Access-Control-Allow-Origin', '*');
+  // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  // res.header(
+  //   'Access-Control-Allow-Headers',
+  //   'Content-Type, Authorization, Content-Length, X-Requested-With'
+  // );
   res.send('response testRouter...');
+});
+
+router.get('/cookie', (req, res) => {
+  res.cookie('PurpleCookie', 'grape').send('쿠키 생성에 성공했습니다.');
 });
 
 router.post('/', (req, res) => {
