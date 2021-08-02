@@ -98,9 +98,20 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cookie1', (req, res) => {
-  res.cookie('Purple2Cookie', 'eggplant', { secure: true, httpOnly: true });
-  res.cookie('Red2Cookie', 'apple', { sameSite: 'lax' });
-  res.cookie('None2Cookie', 'NONE', { sameSite: 'none', secure: true });
+  res.cookie('Purple2Cookie', 'eggplant', {
+    secure: true,
+    httpOnly: true,
+    domain: '.devlog-ad.herokuapp.com/',
+  });
+  res.cookie('Red2Cookie', 'apple', {
+    sameSite: 'lax',
+    domain: '.devlog-ad.herokuapp.com/',
+  });
+  res.cookie('None2Cookie', 'NONE', {
+    sameSite: 'none',
+    secure: true,
+    domain: '.devlog-ad.herokuapp.com/',
+  });
   res.cookie('PurpleCookie', 'grape').send('쿠키 생성에 성공했습니다.');
 });
 
