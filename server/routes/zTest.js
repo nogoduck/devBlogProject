@@ -110,12 +110,12 @@ router.get('/cookie1', (req, res) => {
   res.cookie('DotRed2Cookie', 'a3p4ple', {
     sameSite: 'none',
     secure: true,
-    domain: 'adklog.com/',
+    domain: '.adklog.com/',
   });
   res.cookie('XX1Red2Cookie', '93apple', {
     sameSite: 'none',
     secure: true,
-    domain: 'adklog.com/',
+    domain: '.adklog.com/',
   });
   res.cookie('None2Cookie', 'NONE', {
     sameSite: 'none',
