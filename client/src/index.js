@@ -12,7 +12,7 @@ import axios from 'axios';
 // axios.defaults.baseURL = 'https://devlog-ad.herokuapp.com';
 axios.defaults.baseURL =
   process.env.NODE_ENV === 'production'
-    ? 'https://devlog-ad.herokuapp.com'
+    ? 'https://adklog.com'
     : 'http://localhost:5050';
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 // axios.defaults.headers.post['Access-Control-Allow-Origin'] =
