@@ -6,7 +6,7 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const corsOptions = {
-  origin: 'https://devlog-ad.herokuapp.com',
+  origin: 'https://log1999.com',
   // origin: 'http://localhost:3000',
   // origin: true,
   credentials: true,
