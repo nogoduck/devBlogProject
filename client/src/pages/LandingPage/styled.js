@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import backgroundImg from './BackgroundImage.png';
 
 export const LandingContainer = styled.div`
   border: 20px solid rgba(45, 112, 182, 1);
@@ -9,6 +10,27 @@ export const LandingContainer = styled.div`
   flex-direction: column;
 `;
 
+export const Background = styled.div`
+  background-color: cornflowerblue;
+  opacity: 0.5;
+  //color: red;
+  border: 3px solid red;
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  //z-index: 10;
+`;
+
+export const DIV = styled.div`
+  width: 10px;
+  height: 10px;
+  border: 1px solid greenyellow;
+  &:hover {
+    cursor: pointer;
+  }
+  z-index: 10;
+`;
 //적용안됌
 export const Title = styled.div`
   font-size: 160px;

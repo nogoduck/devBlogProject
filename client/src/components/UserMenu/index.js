@@ -1,12 +1,12 @@
-import { Link, withRouter } from "react-router-dom";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
+import { Link, withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-import { List } from "./styled";
-import Clock from "../Clock";
-import Menu from "../Menu";
-import AlertModal from "../AlertModal";
+import { List } from './styled';
+import Clock from '../Clock';
+import Menu from '../Menu';
+import AlertModal from '../AlertModal';
 const UserMenu = ({ history, show, close }) => {
   const user = useSelector((state) => state.user);
 
@@ -18,16 +18,16 @@ const UserMenu = ({ history, show, close }) => {
 
   const onClickSignOut = () => {
     axios
-      .get("/api/users/signout")
+      .get('/api/users/signout', { withCredentials: true })
       .then((res) => {
         //로그아웃 성공
 
         if (res.data.success) {
-          history.push("/");
+          history.push('/');
         }
       })
       .catch((err) => {
-        alert("로그아웃에 실패했습니다.");
+        alert('로그아웃에 실패했습니다.');
       });
   };
 
@@ -36,10 +36,10 @@ const UserMenu = ({ history, show, close }) => {
       show={show}
       close={close}
       style={{
-        position: "absolute",
-        minWidth: "180px",
-        top: "56px",
-        right: "24px",
+        position: 'absolute',
+        minWidth: '180px',
+        top: '56px',
+        right: '24px',
       }}
     >
       <List>

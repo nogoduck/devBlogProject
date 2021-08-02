@@ -6,13 +6,8 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const corsOptions = {
-  origin: 'http://localhost:3000',
-  // origin: [
-  //   'https://log1999.com',
-  //   'https://www.log1999.com',
-  //   'http://localhost:3000',
-  // ],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  // origin: 'http://localhost:3000',
+  origin: true,
   credentials: true,
 };
 const cookieParser = require('cookie-parser');

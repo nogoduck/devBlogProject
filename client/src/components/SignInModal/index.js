@@ -6,14 +6,14 @@ import {
   ErrorBox,
   Line,
   Form,
-} from "./styled";
-import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { TiWarning } from "react-icons/ti";
-import { useDispatch } from "react-redux";
-import { signinUser, auth } from "../../_actions/user_actions";
-import Modal from "../Modal";
+} from './styled';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { TiWarning } from 'react-icons/ti';
+import { useDispatch } from 'react-redux';
+import { signinUser, auth } from '../../_actions/user_actions';
+import Modal from '../Modal';
 
 function SignInModal({ children, show, close }) {
   const dispatch = useDispatch();
@@ -55,8 +55,8 @@ function SignInModal({ children, show, close }) {
   useEffect(() => {
     //모달을 닫을때마다 입력내용, 유효성오류 초기화
     if (!show) {
-      setValue("email");
-      setValue("password");
+      setValue('email');
+      setValue('password');
       errors.email = false;
       errors.password = false;
       setLoginError(false);
@@ -70,20 +70,20 @@ function SignInModal({ children, show, close }) {
           show={show}
           close={close}
           style={{
-            padding: "30px",
-            width: "300px",
-            height: "450px",
+            padding: '30px',
+            width: '300px',
+            height: '450px',
           }}
         >
-          <div style={{ fontSize: "24px" }}>로그인</div>
+          <div style={{ fontSize: '24px' }}>로그인</div>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Label>이메일</Label>
             <Input
-              id={errors.email && "warningInput"}
+              id={errors.email && 'warningInput'}
               name="email"
               type="email"
               spellCheck="false"
-              {...register("email", {
+              {...register('email', {
                 required: true,
                 pattern: /^\S+@\S+$/i,
               })}
@@ -98,15 +98,15 @@ function SignInModal({ children, show, close }) {
             )}
             <Label>비밀번호</Label>
             <Input
-              id={errors.password && "warningInput"}
+              id={errors.password && 'warningInput'}
               name="password"
               type="password"
               spellCheck="false"
-              {...register("password", {
+              {...register('password', {
                 required: true,
               })}
             />
-            {errors.password && errors.password.type === "required" && (
+            {errors.password && errors.password.type === 'required' && (
               <Error>
                 <TiWarning />
                 &nbsp;비밀번호를 입력해주세요
