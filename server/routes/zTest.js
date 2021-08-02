@@ -106,7 +106,7 @@ router.post('/cookie2', (req, res) => {
   res.cookie('YellowCookie', 'banana').send('쿠키 생성2에(Post) 성공했습니다.');
 });
 
-router.get('/cookie/setHeader', (req, res) => {
+router.post('/cookie/setHeader', (req, res) => {
   res
     .setHeader('set-cookie', ['arrayCookie=Roseberry'])
     .send('헤더 사용해서 쿠키 생성');

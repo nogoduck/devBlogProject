@@ -1,13 +1,16 @@
 import { Link, withRouter } from 'react-router-dom';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { List } from './styled';
 import Clock from '../Clock';
 import Menu from '../Menu';
 import AlertModal from '../AlertModal';
+import { auth } from '../../_actions/user_actions';
 const UserMenu = ({ history, show, close }) => {
+  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
 
   const [showSignOutModal, setShowSignOutModal] = useState(false);
@@ -23,7 +26,10 @@ const UserMenu = ({ history, show, close }) => {
         //로그아웃 성공
 
         if (res.data.success) {
-          history.push('/');
+          // history.push('/');
+          dispatch(auth()).then((res) => {
+            // console.log("Login Auth Status >> ", res);
+          });
         }
       })
       .catch((err) => {

@@ -24,9 +24,13 @@ function LandingContent() {
   };
   const createCookieHeader = () => {
     axios
-      .get('/api/test/cookie/setHeader', {
-        withCredentials: true,
-      })
+      .post(
+        '/api/test/cookie/setHeader',
+        {},
+        {
+          withCredentials: true,
+        }
+      )
       .then(({ data }) => {
         setResult(data);
       })
@@ -48,9 +52,13 @@ function LandingContent() {
   };
   const createCookiePost = () => {
     axios
-      .post('/api/test/cookie2', {
-        withCredentials: true,
-      })
+      .post(
+        '/api/test/cookie2',
+        {},
+        {
+          withCredentials: true,
+        }
+      )
       .then(({ data }) => {
         setResult(data);
       })
