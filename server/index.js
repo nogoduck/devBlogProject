@@ -20,6 +20,7 @@ const corsOptions = {
 const cookieParser = require('cookie-parser');
 
 const userRouter = require('./routes/user');
+
 const boardRouter = require('./routes/board');
 const todoRouter = require('./routes/todo');
 const videoRouter = require('./routes/video');
