@@ -7,13 +7,14 @@ const morgan = require('morgan');
 const cors = require('cors');
 const whitelist = ['http://localhost:3000', 'https://log1999.com'];
 const corsOptions = {
-  origin: (origin, cb) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      cb(null, true);
-    } else {
-      cb(new Error('Not allowed by CORS'));
-    }
-  },
+  // origin: (origin, cb) => {
+  //   if (whitelist.indexOf(origin) !== -1) {
+  //     cb(null, true);
+  //   } else {
+  //     cb(new Error('Not allowed by CORS'));
+  //   }
+  // },
+  origin: true,
   credentials: true,
 };
 const cookieParser = require('cookie-parser');
