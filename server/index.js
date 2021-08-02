@@ -6,8 +6,9 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const corsOptions = {
+  origin: 'https://devlog-ad.herokuapp.com',
   // origin: 'http://localhost:3000',
-  origin: true,
+  // origin: true,
   credentials: true,
 };
 const cookieParser = require('cookie-parser');
@@ -18,7 +19,6 @@ const todoRouter = require('./routes/todo');
 const videoRouter = require('./routes/video');
 const testRouter = require('./routes/zTest');
 
-// app.use(cors());
 app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use(express.json());

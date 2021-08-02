@@ -12,7 +12,7 @@ function LandingContent() {
 
   const createCookie = () => {
     axios
-      .get('https://devlog-ad.herokuapp.com/api/test/cookie', {
+      .get('/api/test/cookie', {
         withCredentials: true,
       })
       .then(({ data }) => {
@@ -24,7 +24,7 @@ function LandingContent() {
   };
   const createCookiePost = () => {
     axios
-      .post('https://devlog-ad.herokuapp.com/api/test/cookie', {
+      .post('/api/test/cookie', {
         withCredentials: true,
       })
       .then(({ data }) => {
