@@ -101,16 +101,26 @@ router.get('/cookie1', (req, res) => {
   res.cookie('Purple2Cookie', 'eggplant', {
     secure: true,
     httpOnly: true,
-    domain: '.devlog-ad.herokuapp.com/',
+    domain: '.adklog.com/',
   });
   res.cookie('Red2Cookie', 'apple', {
     sameSite: 'lax',
-    domain: '.devlog-ad.herokuapp.com/',
+    domain: '.adklog.com/',
+  });
+  res.cookie('DotRed2Cookie', 'a3p4ple', {
+    sameSite: 'none',
+    secure: true,
+    domain: 'adklog.com/',
+  });
+  res.cookie('XX1Red2Cookie', '93apple', {
+    sameSite: 'none',
+    secure: true,
+    domain: 'adklog.com/',
   });
   res.cookie('None2Cookie', 'NONE', {
     sameSite: 'none',
     secure: true,
-    domain: '.devlog-ad.herokuapp.com/',
+    domain: '.adklog.com./',
   });
   res.cookie('PurpleCookie', 'grape').send('쿠키 생성에 성공했습니다.');
 });
