@@ -101,26 +101,26 @@ router.get('/cookie1', (req, res) => {
   res.cookie('Purple2Cookie', 'eggplant', {
     secure: true,
     httpOnly: true,
-    domain: '.adklog.com/',
+    domain: '.log1999/',
   });
   res.cookie('Red2Cookie', 'apple', {
     sameSite: 'lax',
-    domain: '.adklog.com/',
+    domain: '.log1999/',
   });
   res.cookie('DotRed2Cookie', 'a3p4ple', {
     sameSite: 'none',
     secure: true,
-    domain: '.adklog.com/',
+    domain: '.log1999/',
   });
   res.cookie('XX1Red2Cookie', '93apple', {
     sameSite: 'none',
     secure: true,
-    domain: '.adklog.com/',
+    domain: '.log1999/',
   });
   res.cookie('None2Cookie', 'NONE', {
     sameSite: 'none',
     secure: true,
-    domain: '.adklog.com./',
+    domain: '.log1999/',
   });
   res.cookie('PurpleCookie', 'grape').send('쿠키 생성에 성공했습니다.');
 });
