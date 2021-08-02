@@ -98,12 +98,14 @@ router.get('/', (req, res) => {
 });
 
 router.get('/cookie1', (req, res) => {
-  res.cookie('Purple2Cookie', 'eggplant');
+  res.cookie('Purple2Cookie', 'eggplant', { secure: true, httpOnly: true });
   res.cookie('PurpleCookie', 'grape').send('쿠키 생성에 성공했습니다.');
 });
 
 router.post('/cookie2', (req, res) => {
-  res.cookie('YellowCookie', 'banana').send('쿠키 생성2에(Post) 성공했습니다.');
+  res
+    .cookie('YellowCookie', 'banana', { secure: true, httpOnly: true })
+    .send('쿠키 생성2에(Post) 성공했습니다.');
 });
 
 router.post('/cookie/setHeader', (req, res) => {
