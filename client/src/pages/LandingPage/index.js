@@ -12,7 +12,31 @@ function LandingContent() {
 
   const createCookie = () => {
     axios
-      .get('/api/test/cookie', {
+      .get('/api/test/cookie1', {
+        withCredentials: true,
+      })
+      .then(({ data }) => {
+        setResult(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const createCookieHeader = () => {
+    axios
+      .get('/api/test/cookie/setHeader', {
+        withCredentials: true,
+      })
+      .then(({ data }) => {
+        setResult(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const createCookieSerialize = () => {
+    axios
+      .get('/api/test/cookie/serialize', {
         withCredentials: true,
       })
       .then(({ data }) => {
@@ -24,7 +48,7 @@ function LandingContent() {
   };
   const createCookiePost = () => {
     axios
-      .post('/api/test/cookie', {
+      .post('/api/test/cookie2', {
         withCredentials: true,
       })
       .then(({ data }) => {
@@ -73,22 +97,30 @@ function LandingContent() {
     <LandingContainer>
       {/*<Background />*/}
       {/*<DIV />*/}
+
+      <button onClick={createCookieHeader}>
+        Create Cookie... : /api/test/cookie/setHeader
+      </button>
+      <button onClick={createCookieSerialize}>
+        Create Cookie... : /api/test/cookie/serialize
+      </button>
       <button onClick={createCookie}>
-        Create Cookie... : /api/test/cookie
+        Create Cookie... : /api/test/cookie1
       </button>
       <button onClick={createCookiePost}>
-        Post Create Cookie... : /api/test/cookie
+        Post Create Cookie... : /api/test/cookie2
       </button>
       <button onClick={connectServer}>
         Result connect to server : /api/test
       </button>
       <div>{result}</div>
       <button onClick={connectServer2}>
-        Result connect to server2 : https://devlog-ad.herokuapp.com/api/test
+        Result connect to server2 : https://devlog-ad.herokuapp.com /api/test
       </button>
       <button onClick={connectServerIndex}>
         Result connect to server Index : https://devlog-ad.herokuapp.com
       </button>
+
       <div>{result2}</div>
       <div>
         <div>Static.URI : {Static.URI}</div>

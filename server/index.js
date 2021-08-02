@@ -5,10 +5,15 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
+const whitelist = ['http://localhost:3000', 'https://log1999.com'];
 const corsOptions = {
-  origin: 'https://log1999.com',
-  // origin: 'http://localhost:3000',
-  // origin: true,
+  origin: (origin, cb) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      cb(null, true);
+    } else {
+      cb(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 };
 const cookieParser = require('cookie-parser');

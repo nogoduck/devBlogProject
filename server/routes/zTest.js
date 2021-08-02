@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const mime = require('mime');
 const multer = require('multer');
+const cookie = require('cookie');
 //mime/lite버전을 사용하고 싶은데 로드가 되지 않는다 mime보다 1/3 밖에 용량이 안된다고 한다.
 //multer 관련 변수 (파일 처리)
 const { Board } = require('../models/Board');
@@ -96,11 +97,25 @@ router.get('/', (req, res) => {
   res.send('response testRouter...');
 });
 
-router.get('/cookie', (req, res) => {
+router.get('/cookie1', (req, res) => {
+  res.cookie('Purple2Cookie', 'eggplant');
   res.cookie('PurpleCookie', 'grape').send('쿠키 생성에 성공했습니다.');
 });
-router.post('/cookie', (req, res) => {
-  res.cookie('YellowCookie', 'banana').send('쿠키 생성2에 성공했습니다.');
+
+router.post('/cookie2', (req, res) => {
+  res.cookie('YellowCookie', 'banana').send('쿠키 생성2에(Post) 성공했습니다.');
+});
+
+router.get('/cookie/setHeader', (req, res) => {
+  res
+    .setHeader('set-cookie', ['arrayCookie=Roseberry'])
+    .send('헤더 사용해서 쿠키 생성');
+});
+
+router.get('/cookie/serialize', (req, res) => {
+  res
+    .setHeader('Set-Cookie', cookie.serialize('blackCookie', 'blueberry'))
+    .send('Serizlize 사용해서 생성');
 });
 router.post('/', (req, res) => {
   console.log('req.file >> ', req.file);

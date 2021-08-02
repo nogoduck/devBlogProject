@@ -8,8 +8,8 @@ import ReduxThunk from 'redux-thunk';
 import Reducer from './_reducers';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:5050';
-axios.defaults.baseURL = 'https://devlog-ad.herokuapp.com';
+axios.defaults.baseURL = 'http://localhost:5050';
+// axios.defaults.baseURL = 'https://devlog-ad.herokuapp.com';
 // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 // axios.defaults.headers.post['Access-Control-Allow-Origin'] =
 // ('http://localhost:3000');
