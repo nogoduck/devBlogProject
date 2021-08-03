@@ -14,6 +14,7 @@ import {
   MenuTitle,
   GlobalStyle,
   ExtendsButton,
+  HoverItem,
 } from './styled';
 import { AiFillPicture, AiTwotoneExperiment, AiFillHome } from 'react-icons/ai';
 import { BiMenu } from 'react-icons/bi';
@@ -35,10 +36,6 @@ function SideNav() {
 
   const sideNavRef = useRef();
 
-  // if (activePath === '') {
-  //   activePath = 'null';
-  // }
-
   const onClickToggleHidden = () => {
     setUseOpen((prev) => !prev);
   };
@@ -48,10 +45,8 @@ function SideNav() {
 
   const onCloseSideNav = useCallback(
     (e) => {
-      console.log('window-click');
       console.log(e.target);
       if (useOpen && e.target) {
-        console.log('모바일 메뉴 열림');
         setUseOpen(false);
       }
     },
@@ -64,12 +59,10 @@ function SideNav() {
 
   useEffect(() => {
     if (isDesktopAndTablet) {
-      console.log('PC설정');
       //모바일 상태에선 메뉴가 숨겨진 상태가 기본이다.
       setUseOpen(false);
     }
     if (isMobile) {
-      console.log('모바일설정');
       setUseExtends(false);
     }
     //모바일 상태에서 메뉴 외부 클릭시 닫힘
@@ -107,7 +100,10 @@ function SideNav() {
       >
         <ul>
           <Link to="/menu/home">
-            <li id={activePath.includes('null') && 'active'}>
+            <li
+              className="menu_item"
+              id={activePath.includes('null') && 'active'}
+            >
               <MenuIcon>
                 <AiFillHome />
               </MenuIcon>
@@ -116,11 +112,17 @@ function SideNav() {
               >
                 홈
               </MenuTitle>
+              {isDesktopAndTablet && !useExtends && (
+                <HoverItem className="menu_hover">홈</HoverItem>
+              )}
             </li>
           </Link>
 
           <Link to="/menu/about">
-            <li id={activePath.includes('about') && 'active'}>
+            <li
+              className="menu_item"
+              id={activePath.includes('about') && 'active'}
+            >
               <MenuIcon>
                 <FaPaperPlane />
               </MenuIcon>
@@ -129,11 +131,17 @@ function SideNav() {
               >
                 소개
               </MenuTitle>
+              {isDesktopAndTablet && !useExtends && (
+                <HoverItem className="menu_hover">소개</HoverItem>
+              )}
             </li>
           </Link>
 
           <Link to="/menu/card">
-            <li id={activePath.includes('card') && 'active'}>
+            <li
+              className="menu_item"
+              id={activePath.includes('card') && 'active'}
+            >
               <MenuIcon>
                 <AiFillPicture />
               </MenuIcon>
@@ -142,11 +150,17 @@ function SideNav() {
               >
                 사진
               </MenuTitle>
+              {isDesktopAndTablet && !useExtends && (
+                <HoverItem className="menu_hover">사진</HoverItem>
+              )}
             </li>
           </Link>
 
           <Link to="/menu/board">
-            <li id={activePath.includes('board') && 'active'}>
+            <li
+              className="menu_item"
+              id={activePath.includes('board') && 'active'}
+            >
               <MenuIcon>
                 <FaClipboardList />
               </MenuIcon>
@@ -155,11 +169,17 @@ function SideNav() {
               >
                 게시판
               </MenuTitle>
+              {isDesktopAndTablet && !useExtends && (
+                <HoverItem className="menu_hover">게시판</HoverItem>
+              )}
             </li>
           </Link>
 
           <Link to="/menu/experiment">
-            <li id={activePath.includes('experiment') && 'active'}>
+            <li
+              className="menu_item"
+              id={activePath.includes('experiment') && 'active'}
+            >
               <MenuIcon>
                 <AiTwotoneExperiment />
               </MenuIcon>
@@ -168,11 +188,17 @@ function SideNav() {
               >
                 실험실
               </MenuTitle>
+              {isDesktopAndTablet && !useExtends && (
+                <HoverItem className="menu_hover">실험실</HoverItem>
+              )}
             </li>
           </Link>
 
           <Link to="/menu/video">
-            <li id={activePath.includes('video') && 'active'}>
+            <li
+              className="menu_item"
+              id={activePath.includes('video') && 'active'}
+            >
               <MenuIcon>
                 <FaPhotoVideo />
               </MenuIcon>
@@ -181,6 +207,9 @@ function SideNav() {
               >
                 영상
               </MenuTitle>
+              {isDesktopAndTablet && !useExtends && (
+                <HoverItem className="menu_hover">영상</HoverItem>
+              )}
             </li>
           </Link>
         </ul>

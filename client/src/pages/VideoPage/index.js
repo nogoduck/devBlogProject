@@ -44,7 +44,6 @@ function VideoPage() {
   const videoCards = videoList.map((v) => {
     let momentVideoLength = dayjs(1000 * v.videoLength).format(`m : ss`);
     let momentCreatedAt = changeTime2(v.createdAt);
-    console.log(v.videoLength, v.createdAt);
     return (
       <VideoCardContainer>
         <Link to={`/menu/video/${v._id}`}>
@@ -84,7 +83,7 @@ function VideoPage() {
 
   return (
     <>
-      <Title>비디오</Title> <br />
+      <Title>영상</Title> <br />
       <VideoContainer>{videoCards}</VideoContainer>
       <Link to="/menu/video/upload">영상 등록</Link>
       <DefaultProfile useName={true} />

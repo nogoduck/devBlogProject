@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  body{
+  
     .SideNavExtends{
       width:200px;
     }
@@ -11,20 +11,18 @@ export const GlobalStyle = createGlobalStyle`
       padding: 6px 164px 0px 16px;
     }
     .SideNavMobileHidden{
-    width:0px
+      width:0px;
+      overflow: hidden;
     }
     .SideNavMobileOpen{
       width:200px;
     }
-    
-  }
 `;
+
 export const Container = styled.div`
   top: 0;
   left: 0;
   flex: none;
-  //display: flex;
-  //flex-direction: column;
   width: 48px;
   height: 100%;
   border: none;
@@ -33,7 +31,7 @@ export const Container = styled.div`
   z-index: 2048;
   position: fixed;
   transition: 0.2s ease-in-out;
-  overflow: hidden;
+  //overflow: hidden; //사용하면 hover메뉴 사용 불가능
   @media screen and (min-width: 768px) and (max-width: 1023px) {
     //tablet
   }
@@ -65,6 +63,15 @@ export const Container = styled.div`
   & li:hover {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 2px 0 0 2px;
+  }
+
+  & .menu_item:hover .menu_hover {
+    //color: red;
+    display: block;
+  }
+
+  & .menu_hover {
+    display: none;
   }
 `;
 
@@ -118,4 +125,16 @@ export const ExtendsButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+`;
+export const HoverItem = styled.div`
+  background-color: #414c5d;
+  color: #ebecee;
+  white-space: nowrap;
+  padding: 2px 8px;
+  font-size: 12px;
+  position: absolute;
+  top: 8px;
+  left: 64px;
+  border-radius: 4px;
+  z-index: 5000;
 `;

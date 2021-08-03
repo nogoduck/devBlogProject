@@ -3,7 +3,7 @@ import axios from 'axios';
 export function changeTime2(getDate) {
   const staticDate = new Date(getDate);
   const milliSeconds = new Date() - staticDate;
-  console.log('Time >> ', getDate, staticDate);
+  // console.log('Time >> ', getDate, staticDate);
   const seconds = milliSeconds / 1000;
   if (seconds < 60) return `방금 전`;
   const minutes = seconds / 60;
