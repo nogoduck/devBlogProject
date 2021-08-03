@@ -2,6 +2,17 @@ import { withRouter, Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Static from '../../setupStatic';
+import {
+  Container,
+  VideoInfo,
+  VideoTitle,
+  Profile,
+  VideoDescription,
+  VideoView,
+  VideoCreatedAt,
+} from './styled';
+import { timeFormat } from '../../utils/Time';
+import Gravatar from 'react-gravatar';
 
 function VideoDetailPage({ match }) {
   const videoId = match.params.videoId;
@@ -24,20 +35,41 @@ function VideoDetailPage({ match }) {
 
   if (video.publisher) {
     return (
-      <div>
-        <Link to="/menu/video">
-          <button>뒤로가기</button>
-        </Link>
+      <Container>
+        <Link to="/menu/video">뒤로가기</Link>
         <video
           style={{ width: '100%' }}
           src={`${Static.URI}${video.videoPath}`}
           controls
         />
-        {video.title}
-        <img src="http://placehold.it/50x50" alt="profile_image" />
-        {video.publisher.name}
-        {video.description}
-      </div>
+
+        <VideoInfo>
+          <VideoTitle>
+            <div>{video.title}</div>
+            <div className="etc">
+              <VideoView>{video.views}</VideoView>
+              <VideoCreatedAt>{timeFormat(video.createdAt)}</VideoCreatedAt>
+            </div>
+          </VideoTitle>
+          <hr />
+          <Profile>
+            {video.publisher.imagePath ? (
+              <img
+                src={`${Static.URI}${video.publisher.imagePath}`}
+                alt="profile_image"
+              />
+            ) : (
+              <Gravatar
+                email={video.publisher.email}
+                size={250}
+                default="wavatar"
+              />
+            )}
+            {video.publisher.name}
+          </Profile>
+          <VideoDescription>{video.description}</VideoDescription>
+        </VideoInfo>
+      </Container>
     );
   } else {
     return <>영상 불러오는중...</>;

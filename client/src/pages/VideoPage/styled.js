@@ -14,13 +14,14 @@ export const VideoContainer = styled.div`
   gap: 12px;
 `;
 export const VideoCardContainer = styled.div`
-  //border: 2px solid red;
   position: relative;
-  min-width: 250px;
-  max-width: 200px;
-  width: 100%;
-  //padding: 8px;
+
+  @media screen and (max-width: 670px) {
+    width: 100%;
+  }
+
   & img {
+    aspect-ratio: 16/9;
     width: 100%;
   }
 `;

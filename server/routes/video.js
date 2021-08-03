@@ -36,7 +36,7 @@ router.post('/detailVideo', (req, res) => {
   console.log('req.body : ', req.body.videoId);
   Video.findOne({ _id: req.body.videoId })
 
-    .populate('writer')
+    .populate('publisher')
     .exec((err, getVideo) => {
       if (err) return res.status(400).send(err);
       console.log('getVideo >> ', getVideo);

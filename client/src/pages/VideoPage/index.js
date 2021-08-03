@@ -20,6 +20,7 @@ import Static from '../../setupStatic';
 import dayjs from 'dayjs';
 import Gravatar from 'react-gravatar';
 import { changeTime2 } from '../../utils/Time';
+import DefaultProfile from '../../components/DefaultProfile';
 function VideoPage() {
   const [videoList, setVideoList] = useState([]);
 
@@ -85,10 +86,8 @@ function VideoPage() {
     <>
       <Title>비디오</Title> <br />
       <VideoContainer>{videoCards}</VideoContainer>
-      <Link to="/menu/video/upload">
-        <button>영상 등록</button>
-      </Link>
-      <VideoUploadPage />
+      <Link to="/menu/video/upload">영상 등록</Link>
+      <DefaultProfile useName={true} />
     </>
   );
 }
