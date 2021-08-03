@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
-const whitelist = ['http://localhost:3000', 'https://log1999.com'];
+const whitelist = ['http://localhost:3000', 'https://adklog.com'];
 const corsOptions = {
   // origin: (origin, cb) => {
   //   if (whitelist.indexOf(origin) !== -1) {
