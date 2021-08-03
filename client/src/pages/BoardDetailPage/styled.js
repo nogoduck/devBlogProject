@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.table`
   display: flex;
@@ -23,6 +23,9 @@ export const Lodding = styled.div`
 `;
 
 export const UpdateButton = styled.button`
+  position: absolute;
+  top: -16px;
+  right: 0;
   font-weight: 800;
   margin: 15px 0 40px 0;
   width: 84px;
@@ -48,35 +51,19 @@ export const BoardHeader = styled.div`
   flex-direction: row;
 `;
 
-export const Title = styled.div`
-  font-size: 20px;
+export const PostTitle = styled.div`
+  font-size: 44px;
   font-weight: 800;
   margin: 4px 0;
 `;
 
 export const Profile = styled.div`
-  /* font-size: 8px; */
   display: flex;
   align-items: center;
 `;
 
 export const BoardInfo = styled.table`
-  position: absolute;
-  top: 90px;
+  display: flex;
   font-size: 15px;
-  border-collapse: collapse;
-  /* border: 1px solid black; */
-
-  & td {
-    border-right: 1px solid black;
-    padding: 0 10px;
-  }
-
-  & td:first-child {
-    padding-left: 0;
-  }
-
-  & td:last-child {
-    border: none;
-  }
+  align-items: center;
 `;

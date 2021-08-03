@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.table`
   display: flex;
@@ -35,25 +35,34 @@ export const Table = styled.table`
     border: none;
   }
   & td:first-child {
+    //border: 1px solid green;
     padding: 8px 50px 8px 8px;
     text-align: left;
+    position: relative;
   }
   & td:nth-child(2) {
     color: blue;
-    padding: 10px auto;
+    white-space: nowrap;
+    overflow: hidden;
   }
   & td:nth-child(3) {
     color: orange;
-    padding: 10px auto;
   }
   & td:last-child {
     padding: 15px;
     text-align: right;
   }
 `;
+export const BoardTitle = styled.div`
+  //border: 1px solid red;
+  max-width: 350px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 export const BoardHeader = styled.div`
-  /* border: 1px solid black; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,11 +80,11 @@ export const WriteButton = styled.button`
   height: 32px;
 `;
 
-export const Lodding = styled.div`
+export const Loading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 36px;
+  font-size: 24px;
   height: 100%;
 `;
 

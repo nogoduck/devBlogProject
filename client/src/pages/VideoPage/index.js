@@ -2,6 +2,7 @@ import { Link, withRouter } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
+  Title,
   ProfileImage,
   VideoCardContainer,
   VideoContainer,
@@ -81,15 +82,14 @@ function VideoPage() {
   });
 
   return (
-    <div>
-      Movie, drama, docu <br />
-      <div>{Static.URI}</div>
+    <>
+      <Title>비디오</Title> <br />
       <VideoContainer>{videoCards}</VideoContainer>
       <Link to="/menu/video/upload">
         <button>영상 등록</button>
       </Link>
       <VideoUploadPage />
-    </div>
+    </>
   );
 }
 

@@ -15,14 +15,14 @@ import {
   DeleteButton,
   AlertSubmitButton,
   UpdateButtonContainer,
-} from "./styled";
-import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import AlertModal from "../../components/AlertModal";
+} from './styled';
+import React, { useState } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import AlertModal from '../../components/AlertModal';
 
 //postId가 존재하면 글을 수정하는 페이지로 전환된다
 function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
@@ -43,20 +43,21 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
     const paylaod = {
       nickname: user.authStatus.nickname,
       writer: user.authStatus.name,
+      writerId: user.authStatus._id,
       email: user.authStatus.email,
       title: title,
       description: description,
     };
 
     axios
-      .post("/api/board/create", paylaod)
+      .post('/api/board/create', paylaod)
       .then(({ data }) => {
-        console.log("Create Post data >> ", data);
+        console.log('Create Post data >> ', data);
         setShowSuccessCreatePostModal(true);
         // history.push("/menu/board");
       })
       .catch((err) => {
-        console.log("Create Post Error >> ", err);
+        console.log('Create Post Error >> ', err);
       });
   };
 
@@ -65,13 +66,13 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
     const paylaod = { _id: postId, title: title, description: description };
 
     axios
-      .post("/api/board/update", paylaod)
+      .post('/api/board/update', paylaod)
       .then(({ data }) => {
-        console.log("Update Post data >> ", data);
+        console.log('Update Post data >> ', data);
         history.push(`/menu/board/${postId}`);
       })
       .catch((err) => {
-        console.log("Update Post Error >> ", err);
+        console.log('Update Post Error >> ', err);
       });
   };
 
@@ -80,14 +81,14 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
     const payload = { _id: postId };
 
     axios
-      .post("/api/board/delete", payload)
+      .post('/api/board/delete', payload)
       .then(({ data }) => {
-        console.log("Delete Post data >> ", data);
+        console.log('Delete Post data >> ', data);
         onCloseDeleteConfirmModal();
-        history.push("/menu/board");
+        history.push('/menu/board');
       })
       .catch((err) => {
-        console.log("Delete Post Error >> ", err);
+        console.log('Delete Post Error >> ', err);
       });
   };
 
@@ -100,7 +101,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
   };
 
   const onSubmitCreatePostModal = () => {
-    history.push("/menu/board");
+    history.push('/menu/board');
   };
 
   return (
@@ -117,7 +118,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         confirm={onSubmitCreatePostModal}
       ></AlertModal>
       <BoardHeader>
-        <Title>{postId ? "글수정하기" : "글쓰기"}</Title>
+        <Title>{postId ? '글수정하기' : '글쓰기'}</Title>
 
         <AlertModal
           show={showConfirmModal}
@@ -155,7 +156,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         data={description}
         onReady={(editor) => {
           // You can store the "editor" and use when it is needed.
-          console.log("Editor is ready to use!", editor);
+          console.log('Editor is ready to use!', editor);
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
@@ -163,10 +164,10 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
           console.log({ event, editor, data });
         }}
         onBlur={(event, editor) => {
-          console.log("Blur.", editor);
+          console.log('Blur.', editor);
         }}
         onFocus={(event, editor) => {
-          console.log("Focus.", editor);
+          console.log('Focus.', editor);
         }}
       />
       <Label For="title">첨부파일 (구현안됌)</Label>&nbsp;

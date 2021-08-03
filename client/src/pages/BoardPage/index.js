@@ -4,8 +4,9 @@ import {
   BoardHeader,
   Table,
   WriteButton,
-  Lodding,
+  Loading,
   Title,
+  BoardTitle,
   PagingContainer,
 } from './styleds';
 import React, { useEffect, useState } from 'react';
@@ -85,7 +86,7 @@ function BoardPage({ history }) {
   // };
 
   if (!posts) {
-    return <Lodding>로딩중</Lodding>;
+    return <Loading>게시글 불러오는 중...</Loading>;
   } else {
     return (
       <Container>
@@ -101,7 +102,9 @@ function BoardPage({ history }) {
                 return (
                   <tr>
                     <td>
-                      <Link to={`/menu/board/${post._id}`}>{post.title}</Link>
+                      <Link to={`/menu/board/${post._id}`}>
+                        <BoardTitle>{post.title}</BoardTitle>
+                      </Link>
                     </td>
                     <td>{changeTime(post.createdAt)}</td>
                   </tr>

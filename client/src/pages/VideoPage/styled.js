@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 
+export const Title = styled.div`
+  font-size: 20px;
+  margin: 4px 0;
+  text-align: center;
+`;
+
 export const VideoContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  border: 2px solid green;
+  gap: 12px;
 `;
 export const VideoCardContainer = styled.div`
   //border: 2px solid red;
@@ -13,7 +19,7 @@ export const VideoCardContainer = styled.div`
   min-width: 250px;
   max-width: 200px;
   width: 100%;
-  padding: 8px;
+  //padding: 8px;
   & img {
     width: 100%;
   }
