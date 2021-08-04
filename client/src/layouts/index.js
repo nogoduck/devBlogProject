@@ -2,13 +2,7 @@ import { Route, Switch, useLocation, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React from 'react';
 
-import {
-  Container,
-  Main,
-  ContentContainer,
-  Content,
-  ContainerHeaderImg,
-} from './styled';
+import { Container, Main, ContentContainer, Content, Notice } from './styled';
 import TopNav from './Header/TopNav';
 import SideNav from './Nav/LeftSideNav';
 import Footer from './Footer';
@@ -51,6 +45,9 @@ function LandingPage() {
       {/*<ContainerHeaderImg src={img1} alt="" />*/}
       <Main>
         <TopNav />
+        <Notice>
+          개발이 진행중인 페이지로 구현되지 않은 기능들이 다소 있습니다.
+        </Notice>
         <ContentContainer>
           <Content className={isDesktop ? '' : 'full'}>
             <Switch>

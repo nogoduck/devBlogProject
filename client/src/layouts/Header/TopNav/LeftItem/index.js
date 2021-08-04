@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { Container, CurrentPage } from './styled.js';
+import { Container, CurrentPage, NULL } from './styled.js';
 import { useMediaQuery } from 'react-responsive';
 
 import Logo from './Logo';
@@ -44,7 +44,7 @@ function LeftItem() {
 
   return (
     <Container>
-      {isMobile && 'hi'}
+      {isMobile && <NULL />}
 
       <CurrentPage id={isScroll && 'active'}>{pageName}</CurrentPage>
     </Container>

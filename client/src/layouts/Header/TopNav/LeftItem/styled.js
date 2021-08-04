@@ -10,6 +10,16 @@ export const Container = styled.div`
   }
 `;
 
+export const NULL = styled.div`
+  &::before {
+    position: absolute;
+    content: '[...]';
+    font-size: 24px;
+    left: 52px;
+    top: 6px;
+  }
+`;
+
 export const CurrentPage = styled.div`
   position: absolute;
   left: 50%;
@@ -30,6 +40,7 @@ export const LogoContainer = styled.div`
   z-index: 1000;
   font-family: 'Roboto', sans-serif;
   color: #757575;
+
   &:hover {
     cursor: pointer;
   }
@@ -38,10 +49,12 @@ export const LogoContainer = styled.div`
     display: inline-block;
     font-size: 28px;
   }
+
   & > .dot {
     font-size: 32px;
     color: red;
   }
+
   & > span {
     font-size: 18px;
   }

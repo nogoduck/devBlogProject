@@ -5,9 +5,6 @@ export const Container = styled.div`
   flex-direction: row;
   height: 100%;
   position: relative;
-  s & .full {
-    margin: 0px;
-  }
 `;
 
 export const Main = styled.div`
@@ -15,9 +12,6 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-
-  //height: 100%;
-
   & .full {
     margin: 0px;
   }
@@ -28,9 +22,6 @@ export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  //overflow-y: hidden;
-  //overflow-x: hidden;
-  //z-index: 10;
 `;
 export const Content = styled.div`
   //z-index: 32;
@@ -41,11 +32,11 @@ export const Content = styled.div`
   background-color: #fff;
   box-shadow: 0 0 4px 1px #c8cbcd;
 `;
-export const ContainerHeaderImg = styled.img`
-  width: 100%;
-  position: absolute;
-  top: -350px;
-  transform: rotate(180deg);
-  opacity: 0.3;
-  //z-index: 0;
+export const Notice = styled.div`
+  text-align: center;
+  border: 2px solid cornflowerblue;
+  padding: 12px 16px;
+  font-size: 24px;
+  border-radius: 4px;
+  margin: 8px 24px;
 `;
