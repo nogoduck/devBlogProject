@@ -10,11 +10,7 @@ export const Notice = styled.div`
 
 export const Title = styled.div`
   font-size: 20px;
-  position: sticky;
-  top: 10px;
-  z-index: 1500;
-  text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 12px;
 `;
 export const Container = styled.div`
   display: flex;

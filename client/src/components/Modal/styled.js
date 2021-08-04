@@ -6,7 +6,6 @@ export const Container = styled.div`
   right: 0;
   left: 0;
   bottom: 0;
-  z-index: 4096;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,9 +13,9 @@ export const Container = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  z-index: 4096;
   display: inline-block;
-  position: absolute;
+  position: sticky;
+  z-index: 5000;
   color: #000;
   border: 1px solid #808e9b;
   border-radius: 5px;

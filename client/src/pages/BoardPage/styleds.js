@@ -73,11 +73,7 @@ export const BoardHeader = styled.div`
 
 export const Title = styled.div`
   font-size: 20px;
-  margin: 4px 0;
-  position: sticky;
-  top: 10px;
-  z-index: 1500;
-  text-align: center;
+  margin-bottom: 12px;
 `;
 
 export const WriteButton = styled.button`

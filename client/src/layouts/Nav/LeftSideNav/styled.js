@@ -96,7 +96,6 @@ export const MenuButton = styled.button`
   left: 8px;
   border: none;
   z-index: 2050;
-
   &:hover {
     cursor: pointer;
   }

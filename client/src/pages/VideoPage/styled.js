@@ -9,11 +9,7 @@ export const Notice = styled.div`
 `;
 export const Title = styled.div`
   font-size: 20px;
-  margin: 4px 0;
-  text-align: center;
-  position: sticky;
-  top: 10px;
-  z-index: 1500;
+  margin-bottom: 12px;
 `;
 
 export const VideoContainer = styled.div`
