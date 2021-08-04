@@ -6,7 +6,7 @@ export const Title = styled.div`
   text-align: center;
   position: sticky;
   top: 10px;
-  z-index: 2400;
+  z-index: 1500;
 `;
 
 export const VideoContainer = styled.div`

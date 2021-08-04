@@ -1,10 +1,19 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+`;
+
+export const Title2 = styled.div`
+  font-size: 20px;
+  margin: 4px 0;
+  position: sticky;
+  top: 10px;
+  z-index: 1500;
+  text-align: center;
 `;
 
 export const Title = styled.div`

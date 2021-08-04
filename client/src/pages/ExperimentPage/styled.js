@@ -5,5 +5,6 @@ export const Title = styled.div`
   margin: 4px 0;
   position: sticky;
   top: 10px;
-  z-index: 2400;
+  z-index: 1500;
+  text-align: center;
 `;
