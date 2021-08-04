@@ -1,11 +1,19 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
+export const Title = styled.div`
+  font-size: 20px;
+  position: sticky;
+  top: 10px;
+  z-index: 1500;
+  text-align: center;
+  margin-bottom: 28px;
+`;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   font-weight: 800;
   position: relative;
   & hr {
@@ -108,11 +116,11 @@ export const List = styled.div`
     position: absolute;
     right: 12px;
   }
-  & > input[id="list-checkbox"] {
+  & > input[id='list-checkbox'] {
     height: 18px;
     width: 18px;
   }
-  & > input[id="list-checkbox"]:checked {
+  & > input[id='list-checkbox']:checked {
     height: 18px;
     width: 18px;
     color: #009432;
@@ -147,7 +155,7 @@ export const CategoryAdd = styled.button`
   font-weight: 800;
   background: transparent;
   border: none;
-  font-style: "Noto Sans KR", sans-serif;
+  font-style: 'Noto Sans KR', sans-serif;
 `;
 
 export const ListButton = styled.button`
@@ -171,7 +179,7 @@ export const ListButton = styled.button`
   }
 `;
 
-export const Title = styled.div`
+export const cTitle = styled.div`
   color: #000;
   /* border: 1px solid black; */
   margin: 12px 64px 12px 14px;

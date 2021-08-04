@@ -1,14 +1,18 @@
-import { withRouter } from "react-router-dom";
-import React from "react";
-import { Container, Title } from "./styled";
+import { withRouter } from 'react-router-dom';
+import React from 'react';
+import { Container, Title, Body, IMG } from './styled';
 function CardPage() {
   return (
     <Container>
-      <Title>
+      <Title>사진</Title>
+      <Body>
+        <IMG>
+          <img src="http://placehold.it/500x500" alt="img" />
+        </IMG>
+
         <b></b>
         <b></b>
-        카드 예시
-      </Title>
+      </Body>
     </Container>
   );
 }

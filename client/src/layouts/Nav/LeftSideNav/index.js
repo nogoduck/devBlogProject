@@ -133,10 +133,10 @@ function SideNav({ history }) {
               <MenuTitle
                 className={isDesktopAndTablet && !useExtends && 'hidden'}
               >
-                소개
+                계획
               </MenuTitle>
               {isDesktopAndTablet && !useExtends && (
-                <HoverItem className="menu_hover">소개</HoverItem>
+                <HoverItem className="menu_hover">계획</HoverItem>
               )}
             </li>
           </Link>

@@ -87,6 +87,10 @@ export const WriteButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1600;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Loading = styled.div`
