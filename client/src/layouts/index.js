@@ -1,4 +1,4 @@
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, useLocation, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React from 'react';
 
@@ -31,6 +31,12 @@ import Auth from '../hoc/auth';
 // ex) 0 = 1 = admin, 2 = guest
 function LandingPage() {
   const isDesktop = useMediaQuery({ query: '(min-width:921px)' });
+
+  const { pathname } = useLocation();
+  let activePath = pathname.substring(5);
+  console.log('----------------------');
+  console.log(pathname);
+  console.log(activePath);
 
   return (
     <Container>

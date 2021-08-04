@@ -4,7 +4,7 @@
 // + 다른 페이지 내에서 메뉴 이동하면 정상 동작
 // ########################################
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import {
   Container,
@@ -21,7 +21,7 @@ import { BiMenu } from 'react-icons/bi';
 import { FaClipboardList, FaPhotoVideo, FaPaperPlane } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-function SideNav() {
+function SideNav({ history }) {
   //주로 사용하는 해상도
   //Desktop or PC"(min-width:1024px)", Tablet"(min-width:768px) and (max-width:1023px)", Mobile"(max-width:767px)"
   //반응형 (PC and Tablet <=> Mobile), 모바일로 전환되는 픽셀은 920px 으로 Firebase 홈페이지와 동일하게 세팅함
@@ -29,10 +29,10 @@ function SideNav() {
   const isMobile = useMediaQuery({ query: '(max-width:920px)' });
   const [useExtends, setUseExtends] = useState(false);
   const [useOpen, setUseOpen] = useState(false);
-
-  //현재 페이지 목록 메뉴에 활성화
   const { pathname } = useLocation();
   let activePath = pathname.substring(5);
+
+  //현재 페이지 목록 메뉴에 활성화
 
   const sideNavRef = useRef();
 
@@ -52,6 +52,10 @@ function SideNav() {
     },
     [useOpen]
   );
+
+  if (pathname === '/') {
+    history.push('/menu/home');
+  }
 
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
@@ -227,4 +231,4 @@ function SideNav() {
   );
 }
 
-export default SideNav;
+export default withRouter(SideNav);
