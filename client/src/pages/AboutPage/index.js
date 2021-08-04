@@ -27,6 +27,7 @@ import {
   cTitle,
   CategoryETCButtonContainer,
   ListETCButtonContainer,
+  Notice,
 } from './styled';
 
 //AboutPage는 블로그 소개를 목적으로 추가했으나 내 투두리스트를 작성하기도 하고 계획을 쓰기도 하여
@@ -171,6 +172,7 @@ function AboutPage({ history }) {
   return (
     <>
       <Title>계획</Title>
+      <Notice>개발 진행중</Notice>
       <Container>
         <hr />
         <CategoryContainer>
@@ -191,52 +193,6 @@ function AboutPage({ history }) {
                   <cTitle>{vCategory.title}</cTitle>
 
                   {/* dummpy Start  */}
-
-                  <List onMouseOver={inListMouse} onMouseOut={outListMouse}>
-                    1번 고기
-                    <input type="checkbox" name="" id="list-checkbox" />
-                    {hoverList && (
-                      <ListETCButtonContainer>
-                        <button>
-                          <FaEdit />
-                        </button>
-                        <button>
-                          <IoMdRemoveCircle />
-                        </button>
-                      </ListETCButtonContainer>
-                    )}
-                    {/* {vList.memo && vList.memo} */}
-                  </List>
-                  <List onMouseOver={inListMouse} onMouseOut={outListMouse}>
-                    1번 고기
-                    <input type="checkbox" name="" id="list-checkbox" />
-                    {hoverList && (
-                      <ListETCButtonContainer>
-                        <button>
-                          <FaEdit />
-                        </button>
-                        <button>
-                          <IoMdRemoveCircle />
-                        </button>
-                      </ListETCButtonContainer>
-                    )}
-                    {/* {vList.memo && vList.memo} */}
-                  </List>
-                  <List onMouseOver={inListMouse} onMouseOut={outListMouse}>
-                    1번 고기
-                    <input type="checkbox" name="" id="list-checkbox" />
-                    {hoverList && (
-                      <ListETCButtonContainer>
-                        <button>
-                          <FaEdit />
-                        </button>
-                        <button>
-                          <IoMdRemoveCircle />
-                        </button>
-                      </ListETCButtonContainer>
-                    )}
-                    {/* {vList.memo && vList.memo} */}
-                  </List>
 
                   {/* dummpy End  */}
                   {vCategory.list.length > 0 && <hr />}

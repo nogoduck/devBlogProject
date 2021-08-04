@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { changeTime, pagiNation, pagiTotalCalc2 } from '../../utils/Time';
-import { postMacro } from '../../utils/Macro';
+// import { postMacro } from '../../utils/Macro';
 
 function BoardPage({ history }) {
   const user = useSelector((state) => state.user);
@@ -80,8 +80,10 @@ function BoardPage({ history }) {
   };
 
   // 테스트 게시글 작성하는 매크로, 인자로 반복 횟수가 들어간다
+  // 로그인 후에 정상 등록가능
   // const onClickMacro = () => {
-  //   postMacro(10);
+  //   const { nickname, name, email } = user.authStatus;
+  //   postMacro(10, nickname, name, email);
   // };
 
   if (!posts) {
@@ -89,9 +91,8 @@ function BoardPage({ history }) {
   } else {
     return (
       <Container>
-        {/* <button onClick={onClickMacro}>게시글 자동 생성</button> */}
+        {/*<button onClick={onClickMacro}>게시글 자동 생성</button>*/}
         <Title>게시판</Title>
-        <WriteButton onClick={onClickWrite}>글쓰기</WriteButton>
         <Table>
           <tbody>
             {posts &&
@@ -123,6 +124,7 @@ function BoardPage({ history }) {
               );
             })}
         </PagingContainer>
+        <WriteButton onClick={onClickWrite}>글쓰기</WriteButton>
       </Container>
     );
   }

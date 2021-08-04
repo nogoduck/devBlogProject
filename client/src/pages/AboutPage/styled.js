@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Notice = styled.div`
+  border: 2px solid orange;
+  border-radius: 5px;
+  padding: 16px;
+  font-weight: 800;
+  margin: 8px 0;
+`;
+
 export const Title = styled.div`
   font-size: 20px;
   position: sticky;
@@ -18,20 +26,20 @@ export const Container = styled.div`
   position: relative;
   & hr {
     width: 100%;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
   }
 `;
 
 export const Input = styled.input`
   width: 391px;
-  padding: 5px 0px 5px 7px;
+  padding: 5px 0 5px 7px;
   font-size: 20px;
   border-radius: 3px;
   border: 1px solid #c3cfe0;
   transition: 0.3s;
   &:focus {
-    box-shadow: 0px 0px 5px 1px #7f8fa6;
+    box-shadow: 0 0 5px 1px #7f8fa6;
   }
 `;
 
@@ -56,7 +64,7 @@ export const SubmitButton = styled.button`
   transition: 0.1s;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 5px 1px #73b7fa inset;
+    box-shadow: 0 0 5px 1px #73b7fa inset;
   }
   &:active {
     background: #73b7fa;
@@ -76,7 +84,7 @@ export const CancelButton = styled.button`
   margin-right: 10px;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 5px 1px #ff9785 inset;
+    box-shadow: 0 0 5px 1px #ff9785 inset;
   }
   &:active {
     background: #ff9785;
@@ -96,7 +104,7 @@ export const Category = styled.div`
   color: #000;
   border-radius: 5px;
   background-color: transparent;
-  box-shadow: 0px 0px 5px 1px #7f8fa6;
+  box-shadow: 0 0 5px 1px #7f8fa6;
   margin: 8px;
   position: relative;
   min-width: 256px;
@@ -135,7 +143,7 @@ export const CategoryCreate = styled.div`
   cursor: pointer;
   background-color: #dedede;
   /* background-color: transparent; */
-  box-shadow: 0px 0px 5px 1px #7f8fa6;
+  box-shadow: 0 0 5px 1px #7f8fa6;
   position: relative;
   min-width: 200px;
   min-height: 200px;
@@ -155,7 +163,7 @@ export const CategoryAdd = styled.button`
   font-weight: 800;
   background: transparent;
   border: none;
-  font-style: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
 export const ListButton = styled.button`

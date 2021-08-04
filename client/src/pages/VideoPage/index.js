@@ -14,13 +14,12 @@ import {
   VideoView,
   VideoCreatedAt,
   ImageContainer,
+  Notice,
 } from './styled';
-import VideoUploadPage from '../VideoUploadPage';
 import Static from '../../setupStatic';
 import dayjs from 'dayjs';
 import Gravatar from 'react-gravatar';
 import { changeTime2 } from '../../utils/Time';
-import DefaultProfile from '../../components/DefaultProfile';
 function VideoPage() {
   const [videoList, setVideoList] = useState([]);
 
@@ -37,7 +36,7 @@ function VideoPage() {
       })
       .catch((err) => {
         // alert('영상을 불러올 수 없습니다.' + err);
-        console.log('NULL Videos');
+        console.log('NULL Videos', err);
       });
   }, []);
 
@@ -54,14 +53,14 @@ function VideoPage() {
 
           <VideoInfoContainer>
             <ProfileImage>
-              {v.publisher.imagePath ? (
+              {v.publisher && v.publisher.imagePath ? (
                 <img
                   src={`${Static.URI}${v.publisher.imagePath}`}
                   alt="profile_image"
                 />
               ) : (
                 <Gravatar
-                  email={v.publisher.email}
+                  email={v.publisher && v.publisher.email}
                   size={50}
                   default="wavatar"
                 />
@@ -69,7 +68,7 @@ function VideoPage() {
             </ProfileImage>
             <VideoInfo>
               <VideoTitle>{v.title}</VideoTitle>
-              <VideoArticle>{v.publisher.name}</VideoArticle>
+              <VideoArticle>{v.publisher && v.publisher.name}</VideoArticle>
               <VideoArticle>
                 <VideoView>{v.views}</VideoView>
                 <VideoCreatedAt>{momentCreatedAt}</VideoCreatedAt>
@@ -84,9 +83,12 @@ function VideoPage() {
   return (
     <>
       <Title>영상</Title> <br />
+      <Notice>
+        Issue >> 배포한 서버에 썸네일 생성 관련 라이브러리가 설치되어 있지
+        않아서 영상 업로드가 불가능합니다.
+      </Notice>
       <VideoContainer>{videoCards}</VideoContainer>
       <Link to="/menu/video/upload">영상 등록</Link>
-      <DefaultProfile useName={true} />
     </>
   );
 }

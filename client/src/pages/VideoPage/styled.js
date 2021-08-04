@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const Notice = styled.div`
+  border: 2px solid orange;
+  border-radius: 5px;
+  padding: 16px;
+  font-weight: 800;
+  margin: 8px 0;
+`;
 export const Title = styled.div`
   font-size: 20px;
   margin: 4px 0;
@@ -39,7 +46,7 @@ export const VideoLength = styled.div`
   color: #fff;
   //font-weight: 800;
   font-size: 11px;
-  padding: 0px 3px;
+  padding: 0 3px;
   border-radius: 3px;
 `;
 export const VideoInfoContainer = styled.div`

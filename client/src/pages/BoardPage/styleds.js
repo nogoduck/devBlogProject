@@ -85,9 +85,9 @@ export const WriteButton = styled.button`
   width: 84px;
   height: 32px;
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
-  z-index: 1600;
+  //z-index: 1600;
   &:hover {
     cursor: pointer;
   }

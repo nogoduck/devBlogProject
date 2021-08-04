@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Notice = styled.div`
+  border: 2px solid orange;
+  border-radius: 5px;
+  padding: 16px;
+  font-weight: 800;
+  margin: 8px 0;
+`;
+
 export const Container = styled.div``;
 
 export const IMG = styled.div`
@@ -24,7 +32,6 @@ export const Body = styled.div`
   & b:nth-child(1) {
     width: 20px;
     height: 20px;
-    border: 1px solid black;
     position: absolute;
     top: 0;
     left: 0;
@@ -35,7 +42,6 @@ export const Body = styled.div`
   & b:nth-child(2) {
     width: 20px;
     height: 20px;
-    border: 1px outset black;
     position: absolute;
     bottom: 0;
     right: 0;
