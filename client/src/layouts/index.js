@@ -2,7 +2,13 @@ import { Route, Switch, useLocation, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import React from 'react';
 
-import { Container, Main, ContentContainer, Content } from './styled';
+import {
+  Container,
+  Main,
+  ContentContainer,
+  Content,
+  ContainerHeaderImg,
+} from './styled';
 import TopNav from './Header/TopNav';
 import SideNav from './Nav/LeftSideNav';
 import Footer from './Footer';
@@ -20,6 +26,7 @@ import BoardDetailPage from '../pages/BoardDetailPage';
 import SettingPage from '../pages/SettingPage';
 
 import Auth from '../hoc/auth';
+import img1 from '../_image/img1.png';
 
 // Auth 매개변수:
 // (1, 2, 3) :
@@ -41,6 +48,7 @@ function LandingPage() {
   return (
     <Container>
       <SideNav />
+      {/*<ContainerHeaderImg src={img1} alt="" />*/}
       <Main>
         <TopNav />
         <ContentContainer>
@@ -79,6 +87,7 @@ function LandingPage() {
               <Route path="/setting" component={Auth(SettingPage, null)} />
             </Switch>
           </Content>
+          {/*<ContainerHeaderImg src={img1} alt="ContentBottomImage" />*/}
           <Footer />
         </ContentContainer>
       </Main>

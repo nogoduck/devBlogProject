@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import backgroundImg from './LandingContentVer20/BackgroundImage.png';
 
-export const LandingContainer = styled.div`
+export const Container = styled.div`
   border: 20px solid rgba(45, 112, 182, 1);
   border-radius: 32px;
   display: flex;

@@ -4,6 +4,9 @@ export const Title = styled.div`
   font-size: 20px;
   margin: 4px 0;
   text-align: center;
+  position: sticky;
+  top: 10px;
+  z-index: 2400;
 `;
 
 export const VideoContainer = styled.div`

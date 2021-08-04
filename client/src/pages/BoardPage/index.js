@@ -1,7 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import {
   Container,
-  BoardHeader,
   Table,
   WriteButton,
   Loading,
@@ -91,10 +90,8 @@ function BoardPage({ history }) {
     return (
       <Container>
         {/* <button onClick={onClickMacro}>게시글 자동 생성</button> */}
-        <BoardHeader>
-          <Title>게시판</Title>
-          <WriteButton onClick={onClickWrite}>글쓰기</WriteButton>
-        </BoardHeader>
+        <Title>게시판</Title>
+        <WriteButton onClick={onClickWrite}>글쓰기</WriteButton>
         <Table>
           <tbody>
             {posts &&

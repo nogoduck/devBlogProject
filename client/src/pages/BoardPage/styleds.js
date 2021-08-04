@@ -20,7 +20,7 @@ export const Table = styled.table`
   font-size: 14px;
   width: 100%;
   border: none;
-
+  margin-top: 8px;
   & tr {
     border: none;
     border-bottom: 1px solid #ced6e0;
@@ -63,21 +63,29 @@ export const BoardTitle = styled.div`
 `;
 
 export const BoardHeader = styled.div`
-  display: flex;
+  //display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  position: sticky;
+  top: 10px;
 `;
 
 export const Title = styled.div`
   font-size: 20px;
   margin: 4px 0;
+  position: sticky;
+  top: 10px;
+  z-index: 6000;
 `;
 
 export const WriteButton = styled.button`
   color: #000;
   width: 84px;
   height: 32px;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 export const Loading = styled.div`
