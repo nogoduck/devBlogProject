@@ -152,6 +152,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       />
       <Label For="description">내용</Label>
       <CKEditor
+        style={{ width: '100px' }}
         editor={ClassicEditor}
         data={description}
         onReady={(editor) => {
@@ -170,12 +171,12 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
           console.log('Focus.', editor);
         }}
       />
-      <Label For="title">첨부파일 (구현안됌)</Label>&nbsp;
-      <Box>
-        <AddButton>추가</AddButton>
-        <CancelButton>삭제</CancelButton>
-        <BoxFile>example.png</BoxFile>
-      </Box>
+      {/*<Label For="title">첨부파일 (구현안됌)</Label>&nbsp;*/}
+      {/*<Box>*/}
+      {/*  <AddButton>추가</AddButton>*/}
+      {/*  <CancelButton>삭제</CancelButton>*/}
+      {/*  <BoxFile>example.png</BoxFile>*/}
+      {/*</Box>*/}
     </Container>
   );
 }

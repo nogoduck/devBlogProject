@@ -160,25 +160,6 @@ function SideNav({ history }) {
             </li>
           </Link>
 
-          <Link to="/menu/experiment">
-            <li
-              className="menu_item"
-              id={activePath.includes('experiment') && 'active'}
-            >
-              <MenuIcon>
-                <AiTwotoneExperiment />
-              </MenuIcon>
-              <MenuTitle
-                className={isDesktopAndTablet && !useExtends && 'hidden'}
-              >
-                실험실
-              </MenuTitle>
-              {isDesktopAndTablet && !useExtends && (
-                <HoverItem className="menu_hover">실험실</HoverItem>
-              )}
-            </li>
-          </Link>
-
           <Link to="/menu/video">
             <li
               className="menu_item"
@@ -194,6 +175,24 @@ function SideNav({ history }) {
               </MenuTitle>
               {isDesktopAndTablet && !useExtends && (
                 <HoverItem className="menu_hover">영상</HoverItem>
+              )}
+            </li>
+          </Link>
+          <Link to="/menu/experiment">
+            <li
+              className="menu_item"
+              id={activePath.includes('experiment') && 'active'}
+            >
+              <MenuIcon>
+                <AiTwotoneExperiment />
+              </MenuIcon>
+              <MenuTitle
+                className={isDesktopAndTablet && !useExtends && 'hidden'}
+              >
+                실험실
+              </MenuTitle>
+              {isDesktopAndTablet && !useExtends && (
+                <HoverItem className="menu_hover">실험실</HoverItem>
               )}
             </li>
           </Link>

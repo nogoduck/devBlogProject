@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ListSchema = new Schema({
   refId: {
     type: String,
     required: true,
-    default: 'null',
+    default: "null",
   },
   memo: {
     type: String,
     required: true,
-    default: '할 일을 입력해주세요',
+    default: "할 일을 입력해주세요",
   },
   succeed: {
     type: Boolean,
@@ -28,9 +28,15 @@ const TodoSchema = new Schema(
   {
     title: {
       type: String,
-      default: '제목 없음',
+      default: "제목 없음",
     },
-    list: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }],
+    list: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
+    // list2: [
+    //   {
+    //     Type: String,
+    //     default: "null",
+    //   },
+    // ],
     createdAt: {
       type: Date,
       required: true,
@@ -40,7 +46,7 @@ const TodoSchema = new Schema(
   { versionKey: false }
 );
 
-const Todo = mongoose.model('Todo', TodoSchema);
-const List = mongoose.model('List', ListSchema);
+const Todo = mongoose.model("Todo", TodoSchema);
+const List = mongoose.model("List", ListSchema);
 
 module.exports = { Todo, List };

@@ -5,6 +5,7 @@ export const Container = styled.table`
   flex-direction: column;
   position: relative;
   margin-right: 24px;
+  user-select: text;
 
   & a {
     color: #000;
