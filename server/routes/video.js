@@ -114,7 +114,7 @@ router.post('/thumbnail', (req, res) => {
     .screenshots({
       count: 3,
       folder: 'UploadVideo/thumbnail',
-      size: '300x180',
+      size: '320x180',
       filename: 'thumbnail-%b.png',
     });
 });

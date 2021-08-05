@@ -45,9 +45,9 @@ function LandingPage() {
       {/*<ContainerHeaderImg src={img1} alt="" />*/}
       <Main>
         <TopNav />
-        <Notice>
-          개발이 진행중인 페이지로 구현되지 않은 기능들이 다소 있습니다.
-        </Notice>
+        {/*<Notice>*/}
+        {/*  개발이 진행중인 페이지로 구현되지 않은 기능들이 다소 있습니다.*/}
+        {/*</Notice>*/}
         <ContentContainer>
           <Content className={isDesktop ? '' : 'full'}>
             <Switch>

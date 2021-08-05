@@ -1,10 +1,23 @@
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 import Dropzone from 'react-dropzone';
 import { useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import Static from '../../setupStatic';
+import {
+  Container,
+  Label,
+  Drop,
+  InputContainer,
+  LoadingThumbnail,
+  ThumbnailImage,
+  Input,
+  UploadButton,
+  ResponsiveDiv,
+  Desc,
+} from './styled';
+import { BiUpload } from 'react-icons/bi';
 
 function VideoUploadPage({ history }) {
   const user = useSelector((state) => state.user);
@@ -14,9 +27,13 @@ function VideoUploadPage({ history }) {
   const [videoPath, setVideoPath] = useState('');
   const [videoLength, setVideoLength] = useState('');
   const [thumbnailPath, setThumbnailPath] = useState('');
+  const [isThumbnail, setIsThumbnail] = useState(false);
   console.log(videoTitle);
+
   const onDropVideo = (files) => {
+    setIsThumbnail(true);
     let formData = new FormData();
+
     console.log(files);
     const config = {
       header: { 'content-type': 'multipart/form-data' },
@@ -38,12 +55,15 @@ function VideoUploadPage({ history }) {
           if (data.success) {
             setVideoLength(data.videoLength);
             setThumbnailPath(data.thumbnailPath);
+            setIsThumbnail(false);
           } else {
             alert('썸네일 생성을 실패했습니다.');
+            setIsThumbnail(false);
           }
         });
       } else {
         alert('비디오 생성에 실패했습니다');
+        setIsThumbnail(false);
       }
     });
   };
@@ -89,33 +109,54 @@ function VideoUploadPage({ history }) {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmitUploadVideo}>
-        <Dropzone onDrop={onDropVideo} multiple={false} maxSize={10_0000_0000}>
-          {({ getRootProps, getInputProps }) => (
-            <div className="dropzone_content" {...getRootProps()}>
-              <input {...getInputProps()} />
-              <div className="ico_drop">
-                영상 파일을 드래그하거나 선택해주세요.
-              </div>
-            </div>
-          )}
-        </Dropzone>
-        {thumbnailPath && (
-          <img src={`${Static.URI}${thumbnailPath}`} alt="thumbnail_image" />
+    <Container>
+      <Link to="/menu/video">뒤로가기</Link>
+
+      <Dropzone
+        onDrop={onDropVideo}
+        multiple={false}
+        maxSize={10_0000_0000}
+        style={{ border: 'px solid yellow' }}
+      >
+        {({ getRootProps, getInputProps }) => (
+          <Drop className="dropzone_content" {...getRootProps()}>
+            <input {...getInputProps()} />
+            <BiUpload style={{ fontSize: '32px' }} />
+            <div>영상을 드래그하거나 선택해주세요</div>
+            {isThumbnail && (
+              <LoadingThumbnail>썸네일 생성중입니다 . . .</LoadingThumbnail>
+            )}
+          </Drop>
         )}
-        <input type="text" value={videoTitle} onChange={onChangeVideoTitle} />
-        <input
-          type="text"
-          value={videoDescription}
-          onChange={onChangeVideoDescription}
-        />
-        <div>
-          {Static.URI} / {thumbnailPath}
-        </div>
-        <button type="submit">~비디오 등록 !</button>
-      </form>
-    </>
+      </Dropzone>
+      <ResponsiveDiv>
+        <InputContainer>
+          <Label for="video_title">제목</Label>
+          <Input
+            type="text"
+            id="video_title"
+            value={videoTitle}
+            onChange={onChangeVideoTitle}
+          />
+
+          <Label for="video_desc">내용</Label>
+          <Desc
+            id="video_desc"
+            value={videoDescription}
+            onChange={onChangeVideoDescription}
+          />
+
+          <UploadButton onClick={onSubmitUploadVideo}>업로드</UploadButton>
+        </InputContainer>
+
+        <ThumbnailImage>
+          {thumbnailPath && (
+            <img src={`${Static.URI}${thumbnailPath}`} alt="thumbnail_image" />
+          )}
+          {!thumbnailPath && <div>영상을 선택하면 썸네일이 추출됩니다</div>}
+        </ThumbnailImage>
+      </ResponsiveDiv>
+    </Container>
   );
 }
 
