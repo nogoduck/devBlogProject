@@ -11,7 +11,6 @@ export const Header = styled.div`
   z-index: 1024;
   padding-left: 200px;
   transition: 0.2s ease-in-out;
-  overflow: hidden;
   //@media screen and (min-width: 768px) and (max-width: 1023px) {
   //  //tablet
   //  left: 48px;

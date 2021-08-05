@@ -25,7 +25,7 @@ export const CurrentPage = styled.div`
   left: 50%;
   transform: translate(-50%);
   font-size: 18px;
-  top: 55px;
+  top: -35px;
   color: #000;
   transition: 0.2s;
 `;
