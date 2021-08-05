@@ -34,6 +34,7 @@ export const ThumbnailImage = styled.div`
   align-items: center;
   justify-content: center;
   flex: none;
+  order: 0;
   & div {
     font-weight: 800;
     color: #76787d;
@@ -51,14 +52,16 @@ export const Container = styled.div`
 
 export const ResponsiveDiv = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const InputContainer = styled.div`
+  width: 100%;
   margin: 16px 16px 0 0;
   display: flex;
   position: relative;
   flex-direction: column;
-  width: 100%;
+  order: 1;
 `;
 
 export const Input = styled.input`
@@ -74,8 +77,6 @@ export const Input = styled.input`
 `;
 
 export const Desc = styled.textarea`
-  min-height: 90px;
-  min-width: 400px;
   padding: 5px 0px 5px 7px;
   font-size: 16px;
   border-radius: 3px;
