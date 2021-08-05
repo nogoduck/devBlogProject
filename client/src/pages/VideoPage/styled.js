@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  position: relative;
+`;
 export const Notice = styled.div`
   border: 2px solid orange;
   border-radius: 5px;
@@ -10,6 +13,18 @@ export const Notice = styled.div`
 export const Title = styled.div`
   font-size: 20px;
   margin-bottom: 12px;
+`;
+
+export const UploadLink = styled.div`
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  & a {
+    color: #636e72;
+  }
+  & a:hover {
+    color: #0984e3;
+  }
 `;
 
 export const VideoContainer = styled.div`

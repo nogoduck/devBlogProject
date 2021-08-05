@@ -2,6 +2,7 @@ import { Link, withRouter } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {
+  Container,
   Title,
   ProfileImage,
   VideoCardContainer,
@@ -15,6 +16,7 @@ import {
   VideoCreatedAt,
   ImageContainer,
   Notice,
+  UploadLink,
 } from './styled';
 import Static from '../../setupStatic';
 import dayjs from 'dayjs';
@@ -81,15 +83,17 @@ function VideoPage() {
   });
 
   return (
-    <>
+    <Container>
       <Title>영상</Title> <br />
       <Notice>
-        Issue >> 배포한 서버에 썸네일 생성 관련 라이브러리가 설치되어 있지
-        않아서 영상 업로드가 불가능합니다.
+        배포한 서버에 썸네일 생성 관련 라이브러리가 설치되어 있지 않아서 영상
+        업로드가 불가능합니다.
       </Notice>
       <VideoContainer>{videoCards}</VideoContainer>
-      <Link to="/menu/video/upload">영상 등록</Link>
-    </>
+      <UploadLink>
+        <Link to="/menu/video/upload">영상 등록</Link>
+      </UploadLink>
+    </Container>
   );
 }
 

@@ -141,25 +141,6 @@ function SideNav({ history }) {
             </li>
           </Link>
 
-          <Link to="/menu/card">
-            <li
-              className="menu_item"
-              id={activePath.includes('card') && 'active'}
-            >
-              <MenuIcon>
-                <AiFillPicture />
-              </MenuIcon>
-              <MenuTitle
-                className={isDesktopAndTablet && !useExtends && 'hidden'}
-              >
-                사진
-              </MenuTitle>
-              {isDesktopAndTablet && !useExtends && (
-                <HoverItem className="menu_hover">사진</HoverItem>
-              )}
-            </li>
-          </Link>
-
           <Link to="/menu/board">
             <li
               className="menu_item"
@@ -216,6 +197,25 @@ function SideNav({ history }) {
               )}
             </li>
           </Link>
+
+          {/*<Link to="/menu/card">*/}
+          {/*  <li*/}
+          {/*    className="menu_item"*/}
+          {/*    id={activePath.includes('card') && 'active'}*/}
+          {/*  >*/}
+          {/*    <MenuIcon>*/}
+          {/*      <AiFillPicture />*/}
+          {/*    </MenuIcon>*/}
+          {/*    <MenuTitle*/}
+          {/*      className={isDesktopAndTablet && !useExtends && 'hidden'}*/}
+          {/*    >*/}
+          {/*      사진*/}
+          {/*    </MenuTitle>*/}
+          {/*    {isDesktopAndTablet && !useExtends && (*/}
+          {/*      <HoverItem className="menu_hover">사진</HoverItem>*/}
+          {/*    )}*/}
+          {/*  </li>*/}
+          {/*</Link>*/}
         </ul>
 
         {isDesktopAndTablet && (
