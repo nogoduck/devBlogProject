@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container } from './styled';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import NestedComment from '../NestedComment';
 
-const Comment = ({ match }) => {
+const NestedComment = ({ match }) => {
   const user = useSelector((state) => state.user);
   const [inputComment, setInputComment, onChangeInputComment] = useInput('');
   const postId = match.params.postId;
-  const [showNestedComment, setShowNestedComment] = useState(false);
 
-  const onClickShowNestedComment = () => {
-    setShowNestedComment((prev) => !prev);
-  };
-
-  const onSubmitComment = (e) => {
+  const onSubmitNestedComment = (e) => {
     e.preventDefault();
 
     const payload = {
@@ -24,6 +18,7 @@ const Comment = ({ match }) => {
       writer: user.authStatus._id,
       content: inputComment,
     };
+
     axios.post('/api/comment/createComment', payload).then(({ data }) => {
       console.log(data);
     });
@@ -31,8 +26,8 @@ const Comment = ({ match }) => {
 
   return (
     <Container>
-      <p>댓글</p>
-      <form onSubmit={onSubmitComment}>
+      <p>답글</p>
+      <form onSubmit={onSubmitNestedComment}>
         <textarea
           value={inputComment}
           onChange={onChangeInputComment}
@@ -40,10 +35,8 @@ const Comment = ({ match }) => {
 
         <button type="submit">댓글</button>
       </form>
-      <button onClick={onClickShowNestedComment}>답글</button>
-      {showNestedComment && <NestedComment />}
     </Container>
   );
 };
 
-export default withRouter(Comment);
+export default withRouter(NestedComment);
