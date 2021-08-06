@@ -40,22 +40,10 @@ const Comment = ({ match, commentItems }) => {
 
         <button type="submit">댓글</button>
       </form>
-      <button onClick={onClickShowNestedComment}>답글</button>
-      {showNestedComment && <CommentOrigin />}
 
       {commentItems &&
         commentItems.map((v, i) => {
-          return (
-            <>
-              <div>
-                {v._id} - {v.content}
-              </div>
-            </>
-
-            // {v.responseTo ? <div>{v._id}-{v.content}</div> : <div>223</div>}
-
-            // <CommentOrigin>{v.content}</CommentOrigin>
-          );
+          return <CommentOrigin commentOriginItems={v} />;
         })}
     </Container>
   );
