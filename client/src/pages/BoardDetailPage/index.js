@@ -69,6 +69,10 @@ function BoardDetailPage() {
     setUpadteMode(true);
   };
 
+  const reRender = (doc) => {
+    setComments(comments.concat(doc));
+  };
+
   if (!detailPost) {
     return <Lodding>로딩중</Lodding>;
   } else {
@@ -122,7 +126,7 @@ function BoardDetailPage() {
           </BoardInfo>
           <p>{HtmlReactParser(detailPost.data.description)}</p>
 
-          <Comment commentItems={comments} />
+          <Comment reRender={reRender} commentItems={comments} />
         </Container>
       );
     } else {

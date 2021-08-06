@@ -6,15 +6,10 @@ import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CommentOrigin from '../CommentOrigin';
 
-const Comment = ({ match, commentItems }) => {
+const Comment = ({ match, reRender, commentItems }) => {
   const user = useSelector((state) => state.user);
   const [inputComment, setInputComment, onChangeInputComment] = useInput('');
   const postId = match.params.postId;
-  const [showNestedComment, setShowNestedComment] = useState(false);
-
-  const onClickShowNestedComment = () => {
-    setShowNestedComment((prev) => !prev);
-  };
 
   const onSubmitComment = (e) => {
     e.preventDefault();
@@ -25,7 +20,13 @@ const Comment = ({ match, commentItems }) => {
       content: inputComment,
     };
     axios.post('/api/comment/createComment', payload).then(({ data }) => {
-      console.log(data);
+      if (data.success) {
+        console.log(data.doc);
+        setInputComment('');
+        reRender(data.doc);
+      } else {
+        console.log('댓글을 불러오지 못했습니다');
+      }
     });
   };
 
@@ -43,7 +44,7 @@ const Comment = ({ match, commentItems }) => {
 
       {commentItems &&
         commentItems.map((v, i) => {
-          return <CommentOrigin commentOriginItems={v} />;
+          return <CommentOrigin reRender={reRender} commentOriginItems={v} />;
         })}
     </Container>
   );
