@@ -24,6 +24,8 @@ const userRouter = require('./routes/user');
 const boardRouter = require('./routes/board');
 const todoRouter = require('./routes/todo');
 const videoRouter = require('./routes/video');
+const commentRouter = require('./routes/comment');
+
 const testRouter = require('./routes/zTest');
 
 app.use(cors(corsOptions));
@@ -58,6 +60,7 @@ app.use('/api/users', userRouter);
 app.use('/api/board', boardRouter);
 app.use('/api/todo', todoRouter);
 app.use('/api/video', videoRouter);
+app.use('/api/comment', commentRouter);
 app.use('/api/test', testRouter);
 
 app.get('/', (req, res) => {
