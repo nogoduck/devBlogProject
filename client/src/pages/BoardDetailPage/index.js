@@ -19,6 +19,7 @@ import HtmlReactParser from 'html-react-parser';
 import { timeFormat } from '../../utils/Time';
 import BoardWritePage from '../BoardWritePage';
 import Static from '../../setupStatic';
+import Comment from '../../components/Comment';
 
 function BoardDetailPage() {
   const user = useSelector((state) => state.user);
@@ -104,6 +105,8 @@ function BoardDetailPage() {
               : '수정 안함'}
           </BoardInfo>
           <p>{HtmlReactParser(detailPost.data.description)}</p>
+
+          <Comment />
         </Container>
       );
     } else {
