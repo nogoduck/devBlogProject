@@ -9,7 +9,7 @@ import CommentOrigin from '../CommentOrigin';
 const CommentNested = ({ match, commentNestedItems, originId, reRender }) => {
   const [nestedCommentCount, setNestedcommentCount] = useState(0);
   const [showNestedComment, setShowNestedComment] = useState(true);
-  const postId = match.params.postId;
+  // const postId = match.params.postId;
 
   useEffect(() => {
     let commentCount = 0;
@@ -73,6 +73,24 @@ const CommentNested = ({ match, commentNestedItems, originId, reRender }) => {
         </p>
       )}
 
+      {showNestedComment && (
+        <>
+          {commentNestedItems &&
+            commentNestedItems.map((v, i) => (
+              <>
+                {v.responseTo === originId && (
+                  <>
+                    <CommentOrigin reRender={reRender} commentOriginItems={v} />
+                    <CommentNested
+                      originId={v._id}
+                      commentNestedItems={commentNestedItems}
+                    />
+                  </>
+                )}
+              </>
+            ))}
+        </>
+      )}
       {showNestedComment && nestedComment(originId)}
     </Container>
   );
