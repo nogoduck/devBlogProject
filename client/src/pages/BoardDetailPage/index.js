@@ -122,7 +122,7 @@ function BoardDetailPage() {
           </BoardInfo>
           <p>{HtmlReactParser(detailPost.data.description)}</p>
 
-          <Comment />
+          <Comment commentItems={comments} />
         </Container>
       );
     } else {

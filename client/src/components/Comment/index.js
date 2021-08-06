@@ -4,9 +4,9 @@ import useInput from '../../hooks/useInput';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import NestedComment from '../NestedComment';
+import CommentOrigin from '../CommentOrigin';
 
-const Comment = ({ match }) => {
+const Comment = ({ match, commentItems }) => {
   const user = useSelector((state) => state.user);
   const [inputComment, setInputComment, onChangeInputComment] = useInput('');
   const postId = match.params.postId;
@@ -41,7 +41,22 @@ const Comment = ({ match }) => {
         <button type="submit">댓글</button>
       </form>
       <button onClick={onClickShowNestedComment}>답글</button>
-      {showNestedComment && <NestedComment />}
+      {showNestedComment && <CommentOrigin />}
+
+      {commentItems &&
+        commentItems.map((v, i) => {
+          return (
+            <>
+              <div>
+                {v._id} - {v.content}
+              </div>
+            </>
+
+            // {v.responseTo ? <div>{v._id}-{v.content}</div> : <div>223</div>}
+
+            // <CommentOrigin>{v.content}</CommentOrigin>
+          );
+        })}
     </Container>
   );
 };

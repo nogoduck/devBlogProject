@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-const NestedComment = ({ match }) => {
+const CommentOrigin = ({ match, commentItems }) => {
   const user = useSelector((state) => state.user);
   const [inputComment, setInputComment, onChangeInputComment] = useInput('');
   const postId = match.params.postId;
@@ -26,6 +26,13 @@ const NestedComment = ({ match }) => {
 
   return (
     <Container>
+      {/*{commentItems &&*/}
+      {/*commentItems.map((v, i) => {*/}
+      {/*  return (*/}
+      {/*      <>{v.responseTo ? <CommentOrigin>{v.content}</CommentOrigin>} </>*/}
+      {/*  );*/}
+      {/*})}*/}
+
       <p>답글</p>
       <form onSubmit={onSubmitNestedComment}>
         <textarea
@@ -39,4 +46,4 @@ const NestedComment = ({ match }) => {
   );
 };
 
-export default withRouter(NestedComment);
+export default withRouter(CommentOrigin);
