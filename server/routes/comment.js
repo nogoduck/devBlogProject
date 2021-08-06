@@ -7,7 +7,7 @@ router.post('/createComment', (req, res) => {
   const comment = new Comment(req.body);
 
   comment.save((err, doc) => {
-    if (err) return res.json({ success: false, err });
+    if (err) return res.status(400).json({ success: false, err });
     console.log('doc >> ', doc);
 
     Comment.findById(doc._id)
@@ -22,4 +22,17 @@ router.post('/createComment', (req, res) => {
   });
 });
 
+router.post('/getAll', (req, res) => {
+  const postId = req.body._id;
+
+  Comment.find({ postId })
+    .populate('writer')
+    .exec((err, doc) => {
+      if (err) return res.status(400).json({ success: false, err });
+      res.status(200).json({
+        success: true,
+        doc,
+      });
+    });
+});
 module.exports = router;

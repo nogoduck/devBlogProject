@@ -23,13 +23,27 @@ import Comment from '../../components/Comment';
 
 function BoardDetailPage() {
   const user = useSelector((state) => state.user);
+  const [comments, setComments] = useState();
 
   useEffect(() => {
     axios
       .post('/api/board/detail', args)
       .then(({ data }) => {
         setDetailPost(data);
-        console.log('detail data :: ', data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .post('/api/comment/getAll', args)
+      .then(({ data }) => {
+        if (data.success) {
+          console.log('comment > ', data.doc);
+          setComments(data.doc);
+        } else {
+          console.log('댓글을 불러올 수 없습니다.');
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -39,6 +53,7 @@ function BoardDetailPage() {
   const [detailPost, setDetailPost] = useState('');
   const { pathname } = useLocation();
   const postId = pathname.substring(12);
+  //params로 변경예정, SideNav포함
   const args = {
     _id: postId,
   };
@@ -75,6 +90,7 @@ function BoardDetailPage() {
               {detailPost.data.imagePath ? (
                 <img
                   src={`${Static.URI}${user.authStatus.imagePath}`}
+                  alt="user_profile"
                   style={{
                     width: '30px',
                     height: '30px',
