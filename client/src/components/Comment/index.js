@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CommentOrigin from '../CommentOrigin';
+import CommentNested from '../CommentNested';
 
 const Comment = ({ match, reRender, commentItems }) => {
   const user = useSelector((state) => state.user);
@@ -43,9 +44,19 @@ const Comment = ({ match, reRender, commentItems }) => {
       </form>
 
       {commentItems &&
-        commentItems.map((v, i) => {
-          return <CommentOrigin reRender={reRender} commentOriginItems={v} />;
-        })}
+        commentItems.map(
+          (v, i) =>
+            !v.responseTo && (
+              <>
+                __{i}__c
+                <CommentOrigin reRender={reRender} commentOriginItems={v} />
+                <CommentNested
+                  originId={v._id}
+                  commentNestedItems={commentItems}
+                />
+              </>
+            )
+        )}
     </Container>
   );
 };
