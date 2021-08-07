@@ -27,6 +27,7 @@ router.post('/getAll', (req, res) => {
 
   Comment.find({ postId })
     .populate('writer')
+    .sort({ createdAt: 'desc' })
     .exec((err, doc) => {
       if (err) return res.status(400).json({ success: false, err });
       res.status(200).json({

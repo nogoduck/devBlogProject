@@ -29,8 +29,7 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
     setShowOriginComment((prev) => !prev);
   };
 
-  const onSubmitOriginComment = (e) => {
-    e.preventDefault();
+  const onSubmitOriginComment = () => {
     console.log(' >> ', inputOriginComment);
     if (inputOriginComment === '') return null;
 
@@ -45,6 +44,7 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
       if (data.success) {
         console.log(data.doc);
         setInputOriginComment('');
+        setShowOriginComment(false);
         reRender(data.doc);
       } else {
         console.log('댓글을 불러오지 못했습니다');
@@ -66,17 +66,17 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
       <NestedButton onClick={onClickShowOriginComment}>답글</NestedButton>
       {showOriginComment && (
         <div>
-          <Form onSubmit={onSubmitOriginComment}>
+          <Form>
             <TextareaComment>
               <TextareaAutosize
                 value={inputOriginComment}
                 onChange={onChangeInputOriginComment}
-                placeholder="따뜻한 답글을 입력해주세요."
+                placeholder="공개 답글 추가..."
               />
             </TextareaComment>
 
             <SubmitButton
-              type="submit"
+              onClick={onSubmitOriginComment}
               id={inputOriginComment ? '' : 'passive'}
             >
               답글

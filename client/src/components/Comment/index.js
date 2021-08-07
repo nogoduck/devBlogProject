@@ -21,10 +21,8 @@ const Comment = ({ match, reRender, commentItems }) => {
   const user = useSelector((state) => state.user);
   const [inputComment, setInputComment, onChangeInputComment] = useInput('');
   const postId = match.params.postId;
+  const [showCommentButton, setShowCommentButton] = useState(false);
 
-  if (inputComment) {
-    console.log('입력됨');
-  }
   const onSubmitComment = (e) => {
     e.preventDefault();
 
@@ -48,6 +46,12 @@ const Comment = ({ match, reRender, commentItems }) => {
 
   const onClickCancelComment = () => {
     setInputComment('');
+    setShowCommentButton(false);
+  };
+
+  const onFocusTextarea = () => {
+    console.log('Focus');
+    setShowCommentButton(true);
   };
 
   return (
@@ -68,17 +72,24 @@ const Comment = ({ match, reRender, commentItems }) => {
             <TextareaAutosize
               value={inputComment}
               onChange={onChangeInputComment}
+              onFocus={onFocusTextarea}
+              placeholder="공개 댓글 추가..."
             />
           </TextareaComment>
 
           <div />
         </div>
-        <SubmitButton type="submit" id={inputComment ? '' : 'passive'}>
-          댓글
-        </SubmitButton>
-        <CancelButton onClick={inputComment ? null : onClickCancelComment}>
-          취소
-        </CancelButton>
+
+        {showCommentButton && (
+          <>
+            <SubmitButton type="submit" id={inputComment ? '' : 'passive'}>
+              댓글
+            </SubmitButton>
+            <CancelButton onClick={inputComment ? null : onClickCancelComment}>
+              취소
+            </CancelButton>
+          </>
+        )}
       </Form>
 
       {commentItems &&
@@ -87,11 +98,12 @@ const Comment = ({ match, reRender, commentItems }) => {
             !v.responseTo && (
               <>
                 <CommentOrigin reRender={reRender} commentOriginItems={v} />
-                <CommentNestedContainer></CommentNestedContainer>
-                <CommentNested
-                  originId={v._id}
-                  commentNestedItems={commentItems}
-                />
+                <CommentNestedContainer>
+                  <CommentNested
+                    originId={v._id}
+                    commentNestedItems={commentItems}
+                  />
+                </CommentNestedContainer>
               </>
             )
         )}

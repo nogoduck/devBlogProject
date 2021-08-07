@@ -21,7 +21,7 @@ const CommentNested = ({ match, commentNestedItems, originId, reRender }) => {
     });
 
     setNestedcommentCount(commentCount);
-  }, []);
+  }, [commentNestedItems]);
   // console.log('com >> ', commentNestedItems);
 
   const nestedComment = () => {
@@ -31,6 +31,7 @@ const CommentNested = ({ match, commentNestedItems, originId, reRender }) => {
           <>
             <CommentOrigin reRender={reRender} commentOriginItems={v} />
             <CommentNested
+              reRender={reRender}
               originId={v._id}
               commentNestedItems={commentNestedItems}
             />

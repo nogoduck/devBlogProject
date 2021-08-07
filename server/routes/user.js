@@ -127,8 +127,6 @@ router.post('/signin', (req, res) => {
         res
           .cookie('user_auth', user.token, {
             sameSite: 'lax',
-            // sameSite: 'none',
-            // secure: true,
           })
           .status(200)
           .json({
@@ -136,12 +134,6 @@ router.post('/signin', (req, res) => {
             userId: user._id,
             message: '로그인이 성공되었습니다',
           });
-
-        // res.cookie('user_auth', user.token).status(200).json({
-        //   signinSuccess: true,
-        //   userId: user._id,
-        //   message: '로그인이 성공되었습니다',
-        // });
       });
     });
   });

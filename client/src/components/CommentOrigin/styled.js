@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  color: orange;
+  color: #030303;
 `;
 export const Content = styled.div`
   white-space: pre-wrap;
@@ -30,13 +30,13 @@ export const NestedButton = styled.button`
 
 export const CancelButton = styled.button`
   float: right;
-  font-weight: 800;
   width: 80px;
   height: 30px;
   border-radius: 3px;
   background: transparent;
   border: none;
   transition: 0.1s;
+  user-select: none;
   margin-right: 10px;
   &:hover {
     cursor: pointer;
@@ -45,13 +45,14 @@ export const CancelButton = styled.button`
 
 export const SubmitButton = styled.button`
   float: right;
-  font-weight: 800;
   width: 80px;
   height: 30px;
   border-radius: 3px;
   background: #cce6ff;
   border: 1px solid #c3cfe0;
   transition: 0.2s;
+  user-select: none;
+
   &:hover {
     cursor: pointer;
   }

@@ -6,6 +6,7 @@ export const Container = styled.div`
 export const Main = styled.div`
   font-size: 18px;
   margin-bottom: 24px;
+  user-select: none;
 `;
 export const Form = styled.form`
   padding: 0 4px 0 4px;
@@ -42,7 +43,6 @@ export const TextareaComment = styled.div`
 
 export const CancelButton = styled.button`
   float: right;
-  font-weight: 800;
   width: 80px;
   height: 30px;
   border-radius: 3px;
@@ -50,6 +50,8 @@ export const CancelButton = styled.button`
   border: none;
   transition: 0.1s;
   margin-right: 10px;
+  user-select: none;
+
   &:hover {
     cursor: pointer;
   }
@@ -57,13 +59,14 @@ export const CancelButton = styled.button`
 
 export const SubmitButton = styled.button`
   float: right;
-  font-weight: 800;
   width: 80px;
   height: 30px;
   border-radius: 3px;
   background: #cce6ff;
   border: 1px solid #c3cfe0;
   transition: 0.2s;
+  user-select: none;
+
   &:hover {
     cursor: pointer;
   }
