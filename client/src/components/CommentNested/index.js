@@ -21,43 +21,22 @@ const CommentNested = ({ match, commentNestedItems, originId, reRender }) => {
 
     setNestedcommentCount(commentCount);
   }, []);
-  console.log('com >> ', commentNestedItems);
-  const nestedComment = (originCommentId) => {
-    console.log('origin >> ', originCommentId);
-    console.log('origin === >> ', originCommentId);
-    commentNestedItems.map((v, i) => {
-      console.log('V >> ', v);
-      if (v.responseTo === originCommentId) {
-        console.log('동일한 게시물');
-      }
-    });
+  // console.log('com >> ', commentNestedItems);
 
-    commentNestedItems.map(
-      (v, i) => {
-        if (originCommentId === v.responseTo) {
-          return (
-            <>
-              <p>게시물</p>
-            </>
-          );
-        }
-      }
-      //         (
-      //   <>
-      //     __{i}__outNest
-      //     {originCommentId === v.responseTo && (
-      //       <>
-      //         __{i}__inNest
-      //         <CommentOrigin reRender={reRender} commentOriginItems={v} />
-      //         <CommentNested
-      //           originId={v._id}
-      //           commentNestedItems={commentNestedItems}
-      //         />
-      //       </>
-      //     )}
-      //   </>
-      // )
-    );
+  const nestedComment = () => {
+    return commentNestedItems.map((v, i) => (
+      <>
+        {v.responseTo === originId && (
+          <>
+            <CommentOrigin reRender={reRender} commentOriginItems={v} />
+            <CommentNested
+              originId={v._id}
+              commentNestedItems={commentNestedItems}
+            />
+          </>
+        )}
+      </>
+    ));
   };
 
   const onClickShowNextedComment = () => {
@@ -73,24 +52,6 @@ const CommentNested = ({ match, commentNestedItems, originId, reRender }) => {
         </p>
       )}
 
-      {showNestedComment && (
-        <>
-          {commentNestedItems &&
-            commentNestedItems.map((v, i) => (
-              <>
-                {v.responseTo === originId && (
-                  <>
-                    <CommentOrigin reRender={reRender} commentOriginItems={v} />
-                    <CommentNested
-                      originId={v._id}
-                      commentNestedItems={commentNestedItems}
-                    />
-                  </>
-                )}
-              </>
-            ))}
-        </>
-      )}
       {showNestedComment && nestedComment(originId)}
     </Container>
   );
