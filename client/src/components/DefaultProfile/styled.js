@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Profile = styled.div`
-  margin: 5px 25px 0 0;
   border-radius: 50%;
   width: 38px;
   height: 38px;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from './styled';
+import { Container, Content } from './styled';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -42,8 +42,10 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
 
   return (
     <Container>
-      {commentOriginItems.writer.nickname} :{commentOriginItems._id} =>
-      {commentOriginItems.content}
+      <Content>
+        {commentOriginItems.writer.nickname} :{commentOriginItems._id} =>
+        {commentOriginItems.content}
+      </Content>
       <button onClick={onClickShowOriginComment}>답글</button>
       {showOriginComment && (
         <div>

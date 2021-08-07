@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Profile } from './styled';
 import PropTypes from 'prop-types';
 
-const DefaultProfile = ({ useName }) => {
+const DefaultProfile = ({ useName, style }) => {
   const user = useSelector((state) => state.user);
 
   if (!user.authStatus.isAuth) {
@@ -18,15 +18,17 @@ const DefaultProfile = ({ useName }) => {
           <img
             src={`${Static.URI}${user.authStatus.imagePath}`}
             alt="profile_image"
+            style={style}
           />
         ) : (
           <Gravatar
             email={user.authStatus.email}
             size={250}
             default="wavatar"
+            style={style}
           />
         )}
-        <div>{useName && user.authStatus.name}</div>
+        {useName && user.authStatus.name}
       </Profile>
     </>
   );
