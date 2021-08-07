@@ -9,7 +9,7 @@ import { IoCaretUp, IoCaretDown } from 'react-icons/io5';
 
 const CommentNested = ({ match, commentNestedItems, originId, reRender }) => {
   const [nestedCommentCount, setNestedcommentCount] = useState(0);
-  const [showNestedComment, setShowNestedComment] = useState(true);
+  const [showNestedComment, setShowNestedComment] = useState(false);
   // const postId = match.params.postId;
 
   useEffect(() => {

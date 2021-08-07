@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   TextareaComment,
@@ -6,6 +6,7 @@ import {
   Form,
   CancelButton,
   SubmitButton,
+  CommentNestedContainer,
 } from './styled';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
@@ -14,13 +15,13 @@ import { withRouter } from 'react-router-dom';
 import CommentOrigin from '../CommentOrigin';
 import CommentNested from '../CommentNested';
 import DefaultProfile from '../DefaultProfile';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const Comment = ({ match, reRender, commentItems }) => {
   const user = useSelector((state) => state.user);
   const [inputComment, setInputComment, onChangeInputComment] = useInput('');
   const postId = match.params.postId;
 
-  const textareaAuto = useRef();
   if (inputComment) {
     console.log('입력됨');
   }
@@ -48,15 +49,6 @@ const Comment = ({ match, reRender, commentItems }) => {
   const onClickCancelComment = () => {
     setInputComment('');
   };
-  const onHandleAutoHeight = () => {
-    // if (ref === null || ref.current === null) {
-    //   return;
-    // }
-
-    console.log('auto >> ', textareaAuto.current);
-    // ref.current.style.height = '38px';
-    // ref.current.style.height = ref.current.scrollHeight + 'px';
-  };
 
   return (
     <Container>
@@ -71,12 +63,15 @@ const Comment = ({ match, reRender, commentItems }) => {
               flex: 'none',
             }}
           />
-          <TextareaComment
-            value={inputComment}
-            onChange={onChangeInputComment}
-            ref={textareaAuto}
-            onInput={onHandleAutoHeight}
-          ></TextareaComment>
+
+          <TextareaComment>
+            <TextareaAutosize
+              value={inputComment}
+              onChange={onChangeInputComment}
+            />
+          </TextareaComment>
+
+          <div />
         </div>
         <SubmitButton type="submit" id={inputComment ? '' : 'passive'}>
           댓글
@@ -92,6 +87,7 @@ const Comment = ({ match, reRender, commentItems }) => {
             !v.responseTo && (
               <>
                 <CommentOrigin reRender={reRender} commentOriginItems={v} />
+                <CommentNestedContainer></CommentNestedContainer>
                 <CommentNested
                   originId={v._id}
                   commentNestedItems={commentItems}

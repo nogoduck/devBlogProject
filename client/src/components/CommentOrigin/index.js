@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
-import { Container, Content } from './styled';
+import {
+  Container,
+  Content,
+  ContentBody,
+  NestedButton,
+  Form,
+  TextareaComment,
+  SubmitButton,
+  CancelButton,
+} from './styled';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
   const user = useSelector((state) => state.user);
@@ -21,6 +31,8 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
 
   const onSubmitOriginComment = (e) => {
     e.preventDefault();
+    console.log(' >> ', inputOriginComment);
+    if (inputOriginComment === '') return null;
 
     const payload = {
       postId: postId,
@@ -40,26 +52,37 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
     });
   };
 
+  const onClickCancelComment = () => {
+    setInputOriginComment('');
+    setShowOriginComment(false);
+  };
+
   return (
     <Container>
       <Content>
         {commentOriginItems.writer.nickname} :{commentOriginItems._id} =>
-        {commentOriginItems.content}
+        <ContentBody>{commentOriginItems.content}</ContentBody>
       </Content>
-      <button onClick={onClickShowOriginComment}>답글</button>
+      <NestedButton onClick={onClickShowOriginComment}>답글</NestedButton>
       {showOriginComment && (
         <div>
-          <p>답글</p>
-          {/*{commentNestedItems}*/}
-          <form onSubmit={onSubmitOriginComment}>
-            <textarea
-              value={inputOriginComment}
-              onChange={onChangeInputOriginComment}
-              placeholder="따뜻한 답글을 입력해주세요."
-            ></textarea>
+          <Form onSubmit={onSubmitOriginComment}>
+            <TextareaComment>
+              <TextareaAutosize
+                value={inputOriginComment}
+                onChange={onChangeInputOriginComment}
+                placeholder="따뜻한 답글을 입력해주세요."
+              />
+            </TextareaComment>
 
-            <button type="submit">답글</button>
-          </form>
+            <SubmitButton
+              type="submit"
+              id={inputOriginComment ? '' : 'passive'}
+            >
+              답글
+            </SubmitButton>
+            <CancelButton onClick={onClickCancelComment}>취소</CancelButton>
+          </Form>
         </div>
       )}
     </Container>

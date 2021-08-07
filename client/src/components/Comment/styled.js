@@ -21,17 +21,22 @@ export const Form = styled.form`
     cursor: default;
   }
 `;
-export const TextareaComment = styled.textarea`
-  resize: none;
+export const TextareaComment = styled.div`
   width: 100%;
-  margin: 0 0 8px 12px;
-  color: blue;
-  border: 1px solid #a89090;
-  border-width: 0 0 1px 0;
-
-  &:focus {
-    border: 2px solid black;
+  & textarea {
+    resize: none;
+    width: 100%;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0 0 8px 12px;
+    color: #000;
+    border: 1px solid #a89090;
     border-width: 0 0 1px 0;
+  }
+
+  & textarea:focus {
+    border: 1px solid black;
+    border-width: 0 0 2px 0;
   }
 `;
 
@@ -62,4 +67,8 @@ export const SubmitButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const CommentNestedContainer = styled.div`
+  margin-left: 30px;
 `;
