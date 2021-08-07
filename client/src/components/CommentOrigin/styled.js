@@ -84,6 +84,7 @@ export const TextareaComment = styled.div`
   width: 100%;
   margin-left: 8px;
   & textarea {
+    margin: 0 0 8px 12px;
     resize: none;
     width: 99%;
     font-size: 14px;
