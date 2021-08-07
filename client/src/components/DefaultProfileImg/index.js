@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Profile } from './styled';
 import PropTypes from 'prop-types';
 
-const DefaultProfile = ({ useName, style }) => {
+const DefaultProfileImg = ({ useName, style }) => {
   const user = useSelector((state) => state.user);
 
   if (!user.authStatus.isAuth) {
@@ -34,11 +34,11 @@ const DefaultProfile = ({ useName, style }) => {
   );
 };
 
-DefaultProfile.defaultProps = {
+DefaultProfileImg.defaultProps = {
   useName: true,
 };
 
-DefaultProfile.propTypes = {
+DefaultProfileImg.propTypes = {
   useName: PropTypes.bool,
 };
-export default DefaultProfile;
+export default DefaultProfileImg;

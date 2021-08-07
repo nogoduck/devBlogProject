@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import CommentOrigin from '../CommentOrigin';
 import CommentNested from '../CommentNested';
-import DefaultProfile from '../DefaultProfile';
+import DefaultProfile from '../DefaultProfileImg';
 import TextareaAutosize from 'react-textarea-autosize';
 
 const Comment = ({ match, reRender, commentItems }) => {
@@ -76,8 +76,6 @@ const Comment = ({ match, reRender, commentItems }) => {
               placeholder="공개 댓글 추가..."
             />
           </TextareaComment>
-
-          <div />
         </div>
 
         {showCommentButton && (

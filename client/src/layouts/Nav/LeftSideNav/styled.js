@@ -92,7 +92,7 @@ export const MenuButton = styled.button`
   color: #757575;
   background-color: transparent;
   font-size: 24px;
-  top: 12px;
+  top: 6px;
   left: 8px;
   border: none;
   z-index: 2050;

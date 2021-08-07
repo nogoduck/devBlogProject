@@ -9,7 +9,6 @@ export const Main = styled.div`
   user-select: none;
 `;
 export const Form = styled.form`
-  padding: 0 4px 0 4px;
   margin-bottom: 32px;
 
   & div {

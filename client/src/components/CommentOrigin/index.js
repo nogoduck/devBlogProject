@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 import {
   Container,
   Content,
+  ContentHead,
   ContentBody,
   NestedButton,
   Form,
   TextareaComment,
   SubmitButton,
   CancelButton,
+  UserTime,
 } from './styled';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
+import UserProfileImg from '../UserProfileImg';
+import { changeTime2 } from '../../utils/Time';
+import DefaultProfile from '../DefaultProfileImg';
 
 const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
   const user = useSelector((state) => state.user);
@@ -60,31 +65,61 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
   return (
     <Container>
       <Content>
-        {commentOriginItems.writer.nickname} :{commentOriginItems._id} =>
-        <ContentBody>{commentOriginItems.content}</ContentBody>
-      </Content>
-      <NestedButton onClick={onClickShowOriginComment}>답글</NestedButton>
-      {showOriginComment && (
-        <div>
-          <Form>
-            <TextareaComment>
-              <TextareaAutosize
-                value={inputOriginComment}
-                onChange={onChangeInputOriginComment}
-                placeholder="공개 답글 추가..."
-              />
-            </TextareaComment>
+        <ContentHead>
+          <UserProfileImg
+            userImagePath={commentOriginItems.writer.imagePath}
+            userEmail={commentOriginItems.writer.email}
+            style={{
+              width: '40px',
+              height: '40px',
+              flex: 'none',
+            }}
+          />
+        </ContentHead>
+        <ContentBody>
+          <div style={{ marginBottom: '2px' }}>
+            {commentOriginItems.writer.nickname}&nbsp;
+            <UserTime>{changeTime2(commentOriginItems.createdAt)}</UserTime>
+          </div>
+          <div>{commentOriginItems.content}</div>
+          <div>
+            <NestedButton onClick={onClickShowOriginComment}>답글</NestedButton>
+          </div>
 
-            <SubmitButton
-              onClick={onSubmitOriginComment}
-              id={inputOriginComment ? '' : 'passive'}
-            >
-              답글
-            </SubmitButton>
-            <CancelButton onClick={onClickCancelComment}>취소</CancelButton>
-          </Form>
-        </div>
-      )}
+          {showOriginComment && (
+            <div>
+              <Form>
+                <div>
+                  <DefaultProfile
+                    useName={false}
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      flex: 'none',
+                    }}
+                  />
+
+                  <TextareaComment>
+                    <TextareaAutosize
+                      onChange={onChangeInputOriginComment}
+                      value={inputOriginComment}
+                      placeholder="공개 답글 추가..."
+                    />
+                  </TextareaComment>
+                </div>
+
+                <SubmitButton
+                  onClick={onSubmitOriginComment}
+                  id={inputOriginComment ? '' : 'passive'}
+                >
+                  답글
+                </SubmitButton>
+                <CancelButton onClick={onClickCancelComment}>취소</CancelButton>
+              </Form>
+            </div>
+          )}
+        </ContentBody>
+      </Content>
     </Container>
   );
 };

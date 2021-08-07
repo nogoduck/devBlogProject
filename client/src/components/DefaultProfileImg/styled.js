@@ -7,19 +7,11 @@ export const Profile = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 
-  &:hover {
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.1);
-  }
   & img {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    margin-right: 8px;
-  }
-  & div {
-    //white-space: nowrap;
-    //overflow: hidden;
   }
 `;
