@@ -28,9 +28,9 @@ function SignUpModal({ history, children, show, close }) {
     formState: { errors },
   } = useForm();
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const password = useRef();
   const [loading, setLoading] = useState(false);
   const [isEmailError, setIsEmailError] = useState(false);
+  const password = useRef();
   password.current = watch('password');
 
   const onSubmit = (user) => {
@@ -75,6 +75,7 @@ function SignUpModal({ history, children, show, close }) {
     //회원가입 모달 창을 닫을 때 입력된 내용이나 에러 초기화
     if (!show) {
       setLoading(false);
+      setIsEmailError(false);
       setValue('nickname');
       setValue('name');
       setValue('email');

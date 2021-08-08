@@ -90,18 +90,18 @@ router.post('/signup', (req, res) => {
 
   console.log('user >> ', user);
 
-  User.findOne({ email: user.email }, (err, user) => {
+  User.findOne({ email: user.email }, (err, doc) => {
     //회원가입시 이메일이 이미 존재하는 경우
-    console.log('찾은 유저 정보 >> ', user);
-    if (user) {
+    console.log('찾은 유저 정보 >> ', doc);
+    if (doc) {
       res.json({
-        signUpsuccess: false,
+        signupSuccess: false,
         isEmail: true,
       });
     } else {
       //존재하지 않는 경우 정보 저장
       user.save((err, data) => {
-        if (err) return res.json({ success: false, err });
+        if (err) return res.json({ signupSuccess: false, err });
         console.log('save data: ', data);
         return res.status(200).json({
           signupSuccess: true,
