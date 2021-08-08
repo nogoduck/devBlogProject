@@ -9,7 +9,7 @@ const UserProfileImg = ({ style, userImagePath, userEmail }) => {
     <>
       <Profile>
         {userImagePath ? (
-          <img src={userImagePath} alt="profile_image" style={style} />
+          <img src={`${Static.URI}${userImagePath}`} alt="profile_image" style={style} />
         ) : (
           <Gravatar
             email={userEmail}
