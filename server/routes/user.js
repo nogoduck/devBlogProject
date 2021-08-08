@@ -88,15 +88,29 @@ router.post('/update/image', upload.single('image'), (req, res) => {
 router.post('/signup', (req, res) => {
   const user = new User(req.body);
 
-  user.save((err, data) => {
-    if (err) return res.json({ success: false, err });
-    console.log('save data: ', data);
-    return res.status(200).json({
-      signupSuccess: true,
-      message: '회원가입에 성공했습니다.',
-    });
-  });
-});
+  console.log('user >> ', user);
+
+  User.findOne({ email: user.email }, (err, user) => {
+    //회원가입시 이메일이 이미 존재하는 경우
+    console.log('찾은 유저 정보 >> ', user);
+    if (user) {
+      res.json({
+        signUpsuccess: false,
+        isEmail: true,
+      });
+    } else {
+      //존재하지 않는 경우 정보 저장
+      user.save((err, data) => {
+        if (err) return res.json({ success: false, err });
+        console.log('save data: ', data);
+        return res.status(200).json({
+          signupSuccess: true,
+          message: '회원가입에 성공했습니다.',
+        }); //if(err)
+      }); //user.save
+    } //else
+  }); //User.findOne()
+}); //router.post
 
 router.post('/signin', (req, res) => {
   console.log(req.body);
