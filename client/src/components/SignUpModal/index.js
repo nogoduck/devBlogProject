@@ -2,11 +2,21 @@ import { withRouter } from 'react-router-dom';
 import React, { useRef, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { TiWarning } from 'react-icons/ti';
-import { Input, SubmitButton, Label, Error, Footer, Form } from './styled';
+
+import {
+  Input,
+  SubmitButton,
+  Label,
+  Error,
+  Footer,
+  Form,
+  Container,
+} from './styled';
 import { useDispatch } from 'react-redux';
 import { signupUser, auth } from '../../_actions/user_actions';
 import Modal from '../Modal';
 import AlertModal from '../AlertModal';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 // + 추가 예정 사항 (아직 추가 안됌)
 // + 공백 유효성 검사 함수
@@ -26,14 +36,17 @@ function SignUpModal({ history, children, show, close }) {
   } = useForm();
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const password = useRef();
+  const [loading, setLoading] = useState(false);
 
   password.current = watch('password');
 
   const onSubmit = (user) => {
+    setLoading(true);
     dispatch(signupUser(user)).then((res) => {
       if (res.payload.signupSuccess) {
         //회원가입 성공
         close();
+        setLoading(false);
         setShowSuccessSignUpModal(true);
 
         //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
@@ -60,6 +73,7 @@ function SignUpModal({ history, children, show, close }) {
   useEffect(() => {
     //회원가입 모달 창을 닫을 때 입력된 내용이나 에러 초기화
     if (!show) {
+      setLoading(false);
       setValue('nickname');
       setValue('name');
       setValue('email');
@@ -74,7 +88,7 @@ function SignUpModal({ history, children, show, close }) {
   }, [errors, setValue, show]);
 
   return (
-    <div>
+    <Container>
       <span onClick={onClickSignUpModal}>
         <Modal
           show={show}
@@ -97,7 +111,7 @@ function SignUpModal({ history, children, show, close }) {
                 maxLength: 12,
               })}
               autoFocus
-              placeholder="canyou"
+              placeholder="canyon"
             />
             {errors.nickname && errors.nickname.type === 'required' && (
               <Error>
@@ -120,7 +134,7 @@ function SignUpModal({ history, children, show, close }) {
                 required: true,
                 maxLength: 10,
               })}
-              placeholder="canyou"
+              placeholder="canyon"
             />
             {errors.name && errors.name.type === 'required' && (
               <Error>
@@ -205,7 +219,14 @@ function SignUpModal({ history, children, show, close }) {
                 </Error>
               )}
 
-            <SubmitButton onSubmit={onSubmit}>계정 생성하기</SubmitButton>
+            <SubmitButton
+              id={loading ? 'passive' : ''}
+              onSubmit={onSubmit}
+              disabled={loading}
+            >
+              {!loading && <>계정 생성하기</>}
+              {loading && <PulseLoader color="gray" size={4} margin={2} />}
+            </SubmitButton>
           </Form>
           <Footer>
             {children}
@@ -222,7 +243,7 @@ function SignUpModal({ history, children, show, close }) {
         useCancelButton={false}
         confirm={onCloseSuccessSignUp}
       ></AlertModal>
-    </div>
+    </Container>
   );
 }
 

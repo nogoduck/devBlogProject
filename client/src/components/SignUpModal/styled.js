@@ -1,5 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
+export const Container = styled.div`
+  & #passive {
+    background: #e8f0fe;
+    cursor: default;
+  }
+`;
 export const SignUpButton = styled.div`
   font-size: 12px;
   height: 60px;
@@ -71,10 +77,13 @@ export const SubmitButton = styled.button`
   background: linear-gradient(135deg, #ffdd59 0%, #ffa801 100%);
   border: 1px solid #ffa801;
   transition: 0.3s;
+  color: #030303;
+
   &:hover {
     background: #ffdd59;
     cursor: pointer;
   }
+
   &:active {
     background: #ffa801;
     box-shadow: 0px 0px 5px 1px #ffa801;
