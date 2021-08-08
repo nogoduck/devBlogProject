@@ -70,9 +70,7 @@ function BoardDetailPage() {
   };
 
   const reRender = (doc) => {
-    // setComments({ doc, ...comments });
-    console.log('doc >> ', doc);
-    setComments(comments.concat(doc));
+    setComments([doc, ...comments]);
   };
 
   if (!detailPost) {
