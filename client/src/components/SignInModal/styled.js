@@ -1,4 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
+export const Container = styled.div`
+  & #passive {
+    background: #e8f0fe;
+    cursor: default;
+  }
+`;
 
 export const SignInButton = styled.div`
   position: absolute;

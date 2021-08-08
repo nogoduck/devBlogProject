@@ -1,4 +1,5 @@
 import {
+  Container,
   Input,
   SubmitButton,
   Label,
@@ -14,6 +15,7 @@ import { TiWarning } from 'react-icons/ti';
 import { useDispatch } from 'react-redux';
 import { signinUser, auth } from '../../_actions/user_actions';
 import Modal from '../Modal';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 function SignInModal({ children, show, close }) {
   const dispatch = useDispatch();
@@ -25,14 +27,18 @@ function SignInModal({ children, show, close }) {
   } = useForm();
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [loginError, setLoginError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (user) => {
+    setLoading(true);
     //리덕스로 로그인 요청 결과를 받는다
     dispatch(signinUser(user)).then((res) => {
       if (res.payload.signinSuccess) {
         //로그인 성공시 로그인 모달 닫는 코드를 입력해야 하는데 안해도 잘 닫힌다
         //부모 컴포넌트에서 조작을 해야한다 => TopNav
         // setShowSignInModal(false);
+        close();
+        setLoading(false);
 
         //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
         dispatch(auth()).then((res) => {
@@ -55,6 +61,7 @@ function SignInModal({ children, show, close }) {
   useEffect(() => {
     //모달을 닫을때마다 입력내용, 유효성오류 초기화
     if (!show) {
+      setLoading(false);
       setValue('email');
       setValue('password');
       errors.email = false;
@@ -64,7 +71,7 @@ function SignInModal({ children, show, close }) {
   }, [errors, setValue, show]);
 
   return (
-    <div>
+    <Container>
       <span onClick={onClickSignInModal}>
         <Modal
           show={show}
@@ -112,7 +119,14 @@ function SignInModal({ children, show, close }) {
                 &nbsp;비밀번호를 입력해주세요
               </Error>
             )}
-            <SubmitButton>확인</SubmitButton>
+            <SubmitButton
+              id={loading ? 'passive' : ''}
+              onSubmit={onSubmit}
+              disabled={loading}
+            >
+              {!loading && <>로그인</>}
+              {loading && <PulseLoader color="gray" size={4} margin={2} />}
+            </SubmitButton>
           </Form>
           {loginError && (
             <ErrorBox>
@@ -130,7 +144,7 @@ function SignInModal({ children, show, close }) {
           {children}
         </Modal>
       </span>
-    </div>
+    </Container>
   );
 }
 
