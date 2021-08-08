@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     .SideNavMobileHidden{
       width:0px;
-      overflow: hidden;
+      left:-100px;
     }
     .SideNavMobileOpen{
       width:200px;
@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.div`
   top: 0;
-  left: 0;
+  left: 1px;
   flex: none;
   width: 48px;
   height: 100%;
