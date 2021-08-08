@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: fixed;
@@ -29,7 +29,7 @@ export const CloseButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 20px;
   position: absolute;
   top: 0px;
   right: 0px;

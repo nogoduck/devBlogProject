@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const List = styled.div`
   font-size: 14px;
@@ -10,8 +10,8 @@ export const List = styled.div`
     border: none;
     border-top: 1px solid #d0d7de;
   }
-  a {
-    color: #000;
+  & li:hover a {
+    color: #fff;
   }
   & li {
     padding: 4px 20px;

@@ -97,7 +97,7 @@ function SettingProfilePage({ history }) {
     //공백, 검사와 중복되어 사용하지 못하고 있음
     //특수문자 검사
     const regExp = /^[가-힣a-zA-Z]+$/;
-    console.log('reg > ', regExp.test(userNickname));
+    // console.log('reg > ', regExp.test(userNickname));
     if (!regExp.test(userNickname)) {
       setErrorUpdateNickname({
         ...errorUpdateNickname,
@@ -117,7 +117,8 @@ function SettingProfilePage({ history }) {
 
     // 유효성 검사
     if (nicknameValidation()) {
-      console.log('유효성 부적절');
+      //닉네임 변경 유효성 부적절
+      // console.log('닉네임 변경 유효성 부적절');
       return null;
     }
 
@@ -131,14 +132,14 @@ function SettingProfilePage({ history }) {
       .post('/api/users/update/nickname', payload)
       .then(({ data }) => {
         setSuccessUpdateNickname(true);
-        console.log('data >> ', data);
+        // console.log('data >> ', data);
         setTimeout(() => {
           setSuccessUpdateNickname(false);
           history.push('/setting/profile');
         }, 5000);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 

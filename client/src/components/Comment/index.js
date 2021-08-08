@@ -50,7 +50,6 @@ const Comment = ({ match, reRender, commentItems }) => {
   };
 
   const onFocusTextarea = () => {
-    console.log('Focus');
     setShowCommentButton(true);
   };
 

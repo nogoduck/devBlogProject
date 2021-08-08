@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { changeTime, pagiNation, pagiTotalCalc2 } from '../../utils/Time';
+import PulseLoader from 'react-spinners/PulseLoader';
 // import { postMacro } from '../../utils/Macro';
 
 function BoardPage({ history }) {
@@ -87,7 +88,11 @@ function BoardPage({ history }) {
   // };
 
   if (!posts) {
-    return <Loading>게시글 불러오는 중...</Loading>;
+    return (
+      <Loading>
+        <PulseLoader color="gray" size={8} margin={4} />
+      </Loading>
+    );
   } else {
     return (
       <Container>

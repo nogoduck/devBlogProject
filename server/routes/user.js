@@ -192,8 +192,9 @@ router.post('/update/nickname', (req, res) => {
 });
 
 router.patch('/update/password', (req, res) => {
-  const { _id, currentPassword, changePassword } = req.body;
+  const { _id, currentPassword, updatePassword } = req.body;
 
+  console.log('[user] Update pw : ', _id, currentPassword, updatePassword);
   //아이디 조회
   User.findById(_id, (err, user) => {
     if (!user) {
@@ -209,12 +210,13 @@ router.patch('/update/password', (req, res) => {
       if (!pass) {
         return res.json({
           updatePassword: false,
+          mismatchPassword: true,
           message: '현재 로그인된 계정과 입력된 비밀번호가 일치하지 않습니다.',
         });
       }
 
       //비밀번호가 일치한 경우 바꾸기를 희망하는 비밀번호를 암호화한다
-      user.encryptPassword(changePassword, (err, encodePassword) => {
+      user.encryptPassword(updatePassword, (err, encodePassword) => {
         console.log('err >> ', err);
         console.log('encodePassword >> ', encodePassword);
 
@@ -297,7 +299,7 @@ router.delete('/delete/account', (req, res) => {
         }
       }); //User.findByIdAndRemove
     }); //user.comparePassword
-  }); //User.findByid
+  }); //User.findById
 }); //router.delete
 
 module.exports = router;
