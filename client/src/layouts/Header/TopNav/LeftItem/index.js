@@ -36,7 +36,7 @@ function LeftItem() {
     setIsScroll(window.pageYOffset > 16);
   };
 
-  console.log(activePath);
+  // console.log(activePath);
 
   useEffect(() => {
     window.addEventListener('scroll', startScroll);

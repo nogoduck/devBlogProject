@@ -10,6 +10,10 @@ export const List = styled.div`
     border: none;
     border-top: 1px solid #d0d7de;
   }
+  & a {
+    color: #000;
+    display: block;
+  }
   & li:hover a {
     color: #fff;
   }

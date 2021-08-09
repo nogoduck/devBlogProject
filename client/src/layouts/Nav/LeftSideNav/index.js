@@ -45,7 +45,7 @@ function SideNav({ history }) {
 
   const onCloseSideNav = useCallback(
     (e) => {
-      console.log(e.target);
+      // console.log(e.target);
       if (useOpen && e.target) {
         setUseOpen(false);
       }

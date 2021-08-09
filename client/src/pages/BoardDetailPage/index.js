@@ -40,7 +40,7 @@ function BoardDetailPage() {
       .post('/api/comment/getAll', args)
       .then(({ data }) => {
         if (data.success) {
-          console.log('comment > ', data.doc);
+          // console.log('comment > ', data.doc);
           setComments(data.doc);
         } else {
           console.log('댓글을 불러올 수 없습니다.');
