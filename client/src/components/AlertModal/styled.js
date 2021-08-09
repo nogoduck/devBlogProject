@@ -11,6 +11,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.3);
+  cursor: default;
 `;
 
 export const ModalContainer = styled.div`
