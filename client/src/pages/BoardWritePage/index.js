@@ -46,7 +46,11 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       .post('/api/board/create', paylaod)
       .then(({ data }) => {
         console.log('Create Post data >> ', data);
-        setShowSuccessCreatePostModal(true);
+        if (data.success) {
+          setShowSuccessCreatePostModal(true);
+        } else {
+          alert('게시물 등록에 실패했습니다.');
+        }
       })
       .catch((err) => {
         console.log('Create Post Error >> ', err);
