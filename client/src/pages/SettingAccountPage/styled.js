@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div``;
 export const Form = styled.form`
@@ -39,23 +39,6 @@ export const Label = styled.label`
 export const Message = styled.div`
   font-size: 12px;
   margin: 8px 0;
-`;
-export const Error = styled.div`
-  margin: 5px 0 0 0;
-  font-size: 14px;
-  font-weight: 800;
-  color: #ff3f34;
-`;
-
-export const ErrorInput = styled.div`
-  & > input {
-    width: 291px;
-    padding: 5px 0px 5px 7px;
-    font-size: 16px;
-    border-radius: 3px;
-    border: 1px solid #ff3f34;
-    box-shadow: 0px 0px 3px 1px #ea8685 inset;
-  }
 `;
 
 export const UpdatePasswordButton = styled.button`
