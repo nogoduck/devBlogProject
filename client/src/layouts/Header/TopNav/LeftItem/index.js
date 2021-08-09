@@ -1,16 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Container, CurrentPage, NULL } from './styled.js';
 import { useMediaQuery } from 'react-responsive';
 
 import Logo from './Logo';
-import * as path from 'path';
 
-function LeftItem() {
+function LeftItem({ match }) {
   let isMobile = useMediaQuery({ query: '(max-width:920px)' });
   const [isScroll, setIsScroll] = useState(false);
-  const { pathname } = useLocation();
-  let activePath = pathname.substring(6);
+  let activePath = match.params.menu;
 
   const getPageName = (path) => {
     switch (path) {
@@ -51,4 +49,4 @@ function LeftItem() {
   );
 }
 
-export default LeftItem;
+export default withRouter(LeftItem);

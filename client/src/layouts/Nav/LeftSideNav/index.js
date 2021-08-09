@@ -4,7 +4,7 @@
 // + 다른 페이지 내에서 메뉴 이동하면 정상 동작
 // ########################################
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Link, useLocation, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import {
   Container,
@@ -21,7 +21,7 @@ import { BiMenu } from 'react-icons/bi';
 import { FaClipboardList, FaPhotoVideo, FaPaperPlane } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-function SideNav({ history }) {
+function SideNav({ history, match }) {
   //주로 사용하는 해상도
   //Desktop or PC"(min-width:1024px)", Tablet"(min-width:768px) and (max-width:1023px)", Mobile"(max-width:767px)"
   //반응형 (PC and Tablet <=> Mobile), 모바일로 전환되는 픽셀은 920px 으로 Firebase 홈페이지와 동일하게 세팅함
@@ -29,8 +29,7 @@ function SideNav({ history }) {
   const isMobile = useMediaQuery({ query: '(max-width:920px)' });
   const [useExtends, setUseExtends] = useState(false);
   const [useOpen, setUseOpen] = useState(false);
-  const { pathname } = useLocation();
-  let activePath = pathname.substring(5);
+  let activePath = match.params.menu;
 
   //현재 페이지 목록 메뉴에 활성화
 
@@ -52,10 +51,6 @@ function SideNav({ history }) {
     },
     [useOpen]
   );
-
-  if (pathname === '/') {
-    history.push('/menu/home');
-  }
 
   const stopPropagation = useCallback((e) => {
     e.stopPropagation();
@@ -104,10 +99,7 @@ function SideNav({ history }) {
       >
         <ul>
           <Link to="/menu/home">
-            <li
-              className="menu_item"
-              id={activePath.includes('null') && 'active'}
-            >
+            <li className="menu_item" id={activePath === 'home' && 'active'}>
               <MenuIcon>
                 <AiFillHome />
               </MenuIcon>
@@ -123,10 +115,7 @@ function SideNav({ history }) {
           </Link>
 
           <Link to="/menu/about">
-            <li
-              className="menu_item"
-              id={activePath.includes('about') && 'active'}
-            >
+            <li className="menu_item" id={activePath === 'about' && 'active'}>
               <MenuIcon>
                 <FaPaperPlane />
               </MenuIcon>
@@ -142,10 +131,7 @@ function SideNav({ history }) {
           </Link>
 
           <Link to="/menu/board">
-            <li
-              className="menu_item"
-              id={activePath.includes('board') && 'active'}
-            >
+            <li className="menu_item" id={activePath === 'board' && 'active'}>
               <MenuIcon>
                 <FaClipboardList />
               </MenuIcon>
@@ -161,10 +147,7 @@ function SideNav({ history }) {
           </Link>
 
           <Link to="/menu/video">
-            <li
-              className="menu_item"
-              id={activePath.includes('video') && 'active'}
-            >
+            <li className="menu_item" id={activePath === 'video' && 'active'}>
               <MenuIcon>
                 <FaPhotoVideo />
               </MenuIcon>
@@ -181,7 +164,7 @@ function SideNav({ history }) {
           <Link to="/menu/experiment">
             <li
               className="menu_item"
-              id={activePath.includes('experiment') && 'active'}
+              id={activePath === 'experiment' && 'active'}
             >
               <MenuIcon>
                 <AiTwotoneExperiment />
@@ -200,7 +183,7 @@ function SideNav({ history }) {
           {/*<Link to="/menu/card">*/}
           {/*  <li*/}
           {/*    className="menu_item"*/}
-          {/*    id={activePath.includes('card') && 'active'}*/}
+          {/*    id={activePath==='card' && 'active'}*/}
           {/*  >*/}
           {/*    <MenuIcon>*/}
           {/*      <AiFillPicture />*/}

@@ -20,7 +20,6 @@ import BoardDetailPage from '../pages/BoardDetailPage';
 import SettingPage from '../pages/SettingPage';
 
 import Auth from '../hoc/auth';
-import img1 from '../_image/img1.png';
 
 // Auth 매개변수:
 // (1, 2, 3) :
@@ -30,24 +29,19 @@ import img1 from '../_image/img1.png';
 //   false(로그인 안한 유저는 접근제한)
 // 3: 값을 넘기지 않으면 기본값 null, 유저등급 지정
 // ex) 0 = 1 = admin, 2 = guest
-function LandingPage() {
+function LandingPage({ history }) {
   const isDesktop = useMediaQuery({ query: '(min-width:921px)' });
 
   const { pathname } = useLocation();
-  let activePath = pathname.substring(5);
-  console.log('----------------------');
-  console.log(pathname);
-  console.log(activePath);
 
+  if (pathname === '/') {
+    history.push('/menu/home');
+  }
   return (
     <Container>
       <SideNav />
-      {/*<ContainerHeaderImg src={img1} alt="" />*/}
       <Main>
         <TopNav />
-        {/*<Notice>*/}
-        {/*  개발이 진행중인 페이지로 구현되지 않은 기능들이 다소 있습니다.*/}
-        {/*</Notice>*/}
         <ContentContainer>
           <Content className={isDesktop ? '' : 'full'}>
             <Switch>
