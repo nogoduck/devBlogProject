@@ -46,6 +46,7 @@ function SettingAccountPage() {
   });
 
   const onCheckValidation = () => {
+    let errorState = false;
     //updatePassword 유효성 검사
     //입력되지 않았을 때
     if (updatePassword === '') {
@@ -56,7 +57,7 @@ function SettingAccountPage() {
       setTimeout(() => {
         setErrorUpdatePassword({ ...errorUpdatePassword, void: false });
       }, 5000);
-      return true;
+      errorState = true;
     }
 
     // 6글자 이하로 입력되었을 때
@@ -68,7 +69,7 @@ function SettingAccountPage() {
       setTimeout(() => {
         setErrorUpdatePassword({ ...errorUpdatePassword, minLength: false });
       }, 5000);
-      return true;
+      errorState = true;
     }
 
     //updatePasswordCheck 유효성 검사
@@ -84,10 +85,11 @@ function SettingAccountPage() {
           void: false,
         });
       }, 5000);
-      return true;
+      errorState = true;
     }
     //updatePassword 와 동일한지 비교
-    if (updatePassword === updatePasswordCheck) {
+    if (updatePassword !== updatePasswordCheck) {
+      console.log('동일');
       setErrorUpdatePasswordCheck({
         ...errorUpdatePasswordCheck,
         validation: true,
@@ -98,8 +100,10 @@ function SettingAccountPage() {
           validation: false,
         });
       }, 5000);
-      return true;
+      errorState = true;
     }
+
+    return errorState;
   };
 
   const clear = () => {
@@ -116,12 +120,6 @@ function SettingAccountPage() {
   };
 
   const onClickUpdatePassword = () => {
-    if (onCheckValidation()) {
-      //비밀번호 변경 유효성 부적절
-      console.log('비밀번호 변경 유효성 부적절');
-      return null;
-    }
-
     const payload = {
       _id: user.authStatus._id,
       currentPassword: currentPassword,
@@ -142,6 +140,12 @@ function SettingAccountPage() {
           }, 5000);
         } else {
           //변경 실패
+          if (onCheckValidation()) {
+            //비밀번호 변경 유효성 부적절
+            console.log('비밀번호 변경 유효성 부적절');
+            // return null;
+          }
+
           if (data.mismatchPassword) {
             console.log('비밀번호가 일치하지 않음');
             setErrorCurrentPassword({
