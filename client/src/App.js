@@ -10,8 +10,9 @@ function App() {
     <>
       <Router>
         <Route path="/" exact component={LandingPage} />
-        <Route path="/menu/:menu" component={LandingPage} />
-        <Route path="/ex" component={ExamplePage} />
+        <Route path="/ex" exact component={ExamplePage} />
+        <Route path="/:menu" component={LandingPage} />
+        {/*<Route path="/menu/:menu" component={LandingPage} />*/}
       </Router>
     </>
   );

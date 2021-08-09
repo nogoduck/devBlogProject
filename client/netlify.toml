@@ -1,5 +1,14 @@
 [[redirects]]
-    from = "/*"
-    to="/index.html"
-    status = 200
-    force = false
+from = "/*"
+to="/index.html"
+status = 200
+force = false
+
+
+[[redirects]]
+from = "/*"
+to="/static/css"
+status = 200
+force = false
+
+

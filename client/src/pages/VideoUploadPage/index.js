@@ -96,7 +96,7 @@ function VideoUploadPage({ history }) {
           if (data.success) {
             alert('성공적으로 업로드를 했습니다.');
             setTimeout(() => {
-              history.push('/menu/video');
+              history.push('/video');
             }, 0);
           } else {
             alert('비디오 업로드에 실패했습니다');
@@ -110,7 +110,7 @@ function VideoUploadPage({ history }) {
 
   return (
     <Container>
-      <Link to="/menu/video">뒤로가기</Link>
+      <Link to="/video">뒤로가기</Link>
 
       <Dropzone
         onDrop={onDropVideo}

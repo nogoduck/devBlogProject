@@ -97,7 +97,7 @@ function ImageCrop({ history, show, close }) {
           .then(({ data }) => {
             console.log('data >> ', data);
             close();
-            history.push('/menu/setting/profile');
+            history.push('/setting/profile');
           })
           .catch((err) => {
             alert('프로필 변경에 실패했습니다.');

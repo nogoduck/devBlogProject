@@ -42,7 +42,7 @@ function EditProfileMenu({ history, show, close, style }) {
       .then(({ data }) => {
         console.log('data >> ', data);
         close();
-        history.push('/menu/setting/profile');
+        history.push('/setting/profile');
       })
       .catch((err) => {
         console.log(err);

@@ -63,12 +63,12 @@ function SettingPage({ history }) {
             <div id="title">설정</div>
           </li>
           <li className={activePath === 'profile' ? 'active' : ''}>
-            <Link to="/menu/setting/profile">
+            <Link to="/setting/profile">
               <div>프로필</div>
             </Link>
           </li>
           <li className={activePath === 'account' ? 'active-last' : ''}>
-            <Link to="/menu/setting/account">
+            <Link to="/setting/account">
               <div>계정</div>
             </Link>
           </li>
@@ -76,8 +76,8 @@ function SettingPage({ history }) {
       </Menu>
       <Content>
         <Switch>
-          <Route path="/menu/setting/profile" component={SettingProfilePage} />
-          <Route path="/menu/setting/account" component={SettingAccountPage} />
+          <Route path="/setting/profile" component={SettingProfilePage} />
+          <Route path="/setting/account" component={SettingAccountPage} />
         </Switch>
       </Content>
     </Container>

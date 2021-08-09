@@ -59,9 +59,11 @@ function SideNav({ history, match }) {
   useEffect(() => {
     if (isDesktopAndTablet) {
       //모바일 상태에선 메뉴가 숨겨진 상태가 기본이다.
+      console.log('PC모드');
       setUseOpen(false);
     }
     if (isMobile) {
+      console.log('Mobile모드');
       setUseExtends(false);
     }
     //모바일 상태에서 메뉴 외부 클릭시 닫힘
@@ -98,7 +100,7 @@ function SideNav({ history, match }) {
         ref={sideNavRef}
       >
         <ul>
-          <Link to="/menu/home">
+          <Link to="/home">
             <li className="menu_item" id={activePath === 'home' && 'active'}>
               <MenuIcon>
                 <AiFillHome />
@@ -114,7 +116,7 @@ function SideNav({ history, match }) {
             </li>
           </Link>
 
-          <Link to="/menu/about">
+          <Link to="/about">
             <li className="menu_item" id={activePath === 'about' && 'active'}>
               <MenuIcon>
                 <FaPaperPlane />
@@ -130,7 +132,7 @@ function SideNav({ history, match }) {
             </li>
           </Link>
 
-          <Link to="/menu/board">
+          <Link to="/board">
             <li className="menu_item" id={activePath === 'board' && 'active'}>
               <MenuIcon>
                 <FaClipboardList />
@@ -146,7 +148,7 @@ function SideNav({ history, match }) {
             </li>
           </Link>
 
-          <Link to="/menu/video">
+          <Link to="/video">
             <li className="menu_item" id={activePath === 'video' && 'active'}>
               <MenuIcon>
                 <FaPhotoVideo />
@@ -161,7 +163,7 @@ function SideNav({ history, match }) {
               )}
             </li>
           </Link>
-          <Link to="/menu/experiment">
+          <Link to="/experiment">
             <li
               className="menu_item"
               id={activePath === 'experiment' && 'active'}
@@ -180,7 +182,7 @@ function SideNav({ history, match }) {
             </li>
           </Link>
 
-          {/*<Link to="/menu/card">*/}
+          {/*<Link to="/card">*/}
           {/*  <li*/}
           {/*    className="menu_item"*/}
           {/*    id={activePath==='card' && 'active'}*/}

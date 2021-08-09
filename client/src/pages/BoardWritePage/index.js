@@ -47,7 +47,6 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       .then(({ data }) => {
         console.log('Create Post data >> ', data);
         setShowSuccessCreatePostModal(true);
-        // history.push("/menu/board");
       })
       .catch((err) => {
         console.log('Create Post Error >> ', err);
@@ -62,7 +61,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       .post('/api/board/update', paylaod)
       .then(({ data }) => {
         console.log('Update Post data >> ', data);
-        history.push(`/menu/board/${postId}`);
+        history.push(`/board/${postId}`);
       })
       .catch((err) => {
         console.log('Update Post Error >> ', err);
@@ -78,7 +77,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
       .then(({ data }) => {
         console.log('Delete Post data >> ', data);
         onCloseDeleteConfirmModal();
-        history.push('/menu/board');
+        history.push('/board');
       })
       .catch((err) => {
         console.log('Delete Post Error >> ', err);
@@ -94,12 +93,12 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
   };
 
   const onSubmitCreatePostModal = () => {
-    history.push('/menu/board');
+    history.push('/board');
   };
 
   return (
     <Container>
-      <Link to="/menu/board">뒤로가기</Link>
+      <Link to="/board">뒤로가기</Link>
       <AlertModal
         show={showSuccessCreatePostModal}
         close={onSubmitCreatePostModal}

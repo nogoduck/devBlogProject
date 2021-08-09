@@ -1,4 +1,4 @@
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Container, CurrentPage, NULL } from './styled.js';
 import { useMediaQuery } from 'react-responsive';
@@ -24,6 +24,8 @@ function LeftItem({ match }) {
         return '실험실';
       case 'video':
         return '영상';
+      case 'setting':
+        return '설정';
       default:
         return <Logo style={{ top: '-8px', left: '-48px' }} />;
     }
@@ -44,7 +46,9 @@ function LeftItem({ match }) {
     <Container>
       {isMobile && <NULL />}
 
-      <CurrentPage id={isScroll && 'active'}>{pageName}</CurrentPage>
+      <CurrentPage id={isScroll && 'active'}>
+        <Link to={`/${activePath}`}>{pageName}</Link>
+      </CurrentPage>
     </Container>
   );
 }
