@@ -75,10 +75,9 @@ function LandingPage({ history }) {
                 component={Auth(VideoDetailPage, null)}
               />
               <Route path="/menu/video" component={Auth(VideoPage, null)} />{' '}
-              <Route path="/setting" component={Auth(SettingPage, null)} />
+              <Route path="/menu/setting" component={Auth(SettingPage, null)} />
             </Switch>
           </Content>
-          {/*<ContainerHeaderImg src={img1} alt="ContentBottomImage" />*/}
           <Footer />
         </ContentContainer>
       </Main>

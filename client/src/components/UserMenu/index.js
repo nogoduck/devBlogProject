@@ -56,7 +56,7 @@ const UserMenu = ({ history, show, close }) => {
           <li className="email">{user.authStatus.email}</li>
           <hr />
           <li className="setting">
-            <Link to="/setting">설정</Link>
+            <Link to="/menu/setting">설정</Link>
           </li>
           <li id="clock">
             <Clock />
