@@ -59,11 +59,9 @@ function SideNav({ history, match }) {
   useEffect(() => {
     if (isDesktopAndTablet) {
       //모바일 상태에선 메뉴가 숨겨진 상태가 기본이다.
-      console.log('PC모드');
       setUseOpen(false);
     }
     if (isMobile) {
-      console.log('Mobile모드');
       setUseExtends(false);
     }
     //모바일 상태에서 메뉴 외부 클릭시 닫힘
@@ -84,11 +82,11 @@ function SideNav({ history, match }) {
           <BiMenu />
         </MenuButton>
       )}
-      <Space className={useExtends && 'SideNavExtends'} />
+      <Space id={useExtends && 'SideNavExtends'} />
 
       <Container
         onClick={stopPropagation}
-        className={
+        id={
           isDesktopAndTablet
             ? useExtends
               ? 'SideNavExtends'
@@ -205,7 +203,7 @@ function SideNav({ history, match }) {
         {isDesktopAndTablet && (
           <ExtendsButton
             onClick={onClickToggleExtends}
-            className={useExtends && 'ExtendsActive'}
+            id={useExtends && 'ExtendsActive'}
           >
             <MdKeyboardArrowRight />
           </ExtendsButton>

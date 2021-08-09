@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid red;
 
   & a {
     color: #636e72;
@@ -15,7 +14,6 @@ export const Container = styled.div`
 `;
 
 export const BoardHeader = styled.div`
-  border: 1px solid green;
   display: flex;
   justify-content: space-between;
   align-items: center;

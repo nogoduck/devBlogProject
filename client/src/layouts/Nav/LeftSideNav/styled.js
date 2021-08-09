@@ -1,22 +1,22 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  
-    .SideNavExtends{
-      width:200px;
-    }
-    .ExtendsActive{
-      left:0;
-      transform:rotate(180deg);
-      padding: 6px 164px 0px 16px;
-    }
-    .SideNavMobileHidden{
-      width:0px;
-      left:-100px;
-    }
-    .SideNavMobileOpen{
-      width:200px;
-    }
+  #SideNavExtends{
+    width:200px;
+  }
+  #ExtendsActive{
+    left:0;
+    transform:rotate(180deg);
+    padding: 6px 164px 0px 16px;
+  }
+  #SideNavMobileHidden{
+    width:0px;
+    left:-100px;
+  }
+  #SideNavMobileOpen{
+    width:200px;
+  }
+    
 `;
 
 export const Container = styled.div`

@@ -78,7 +78,6 @@ function BoardDetailPage({ match }) {
   if (!detailPost) {
     return (
       <Lodding>
-        Detail
         <PulseLoader color="gray" size={8} margin={4} />
       </Lodding>
     );
