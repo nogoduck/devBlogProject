@@ -11,7 +11,6 @@ import {
   CancelButton,
   UserTime,
 } from './styled';
-import useInput from '../../hooks/useInput';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -22,20 +21,28 @@ import DefaultProfile from '../DefaultProfileImg';
 
 const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
   const user = useSelector((state) => state.user);
-  const [
-    inputOriginComment,
-    setInputOriginComment,
-    onChangeInputOriginComment,
-  ] = useInput('');
+  const isLogin = user.authStatus.isAuth;
+  const [inputOriginComment, setInputOriginComment] = useState('');
   const postId = match.params.postId;
   const [showOriginComment, setShowOriginComment] = useState(false);
 
+  const onChangeInputOriginComment = (e) => {
+    if (isLogin) {
+      setInputOriginComment(e.target.value);
+    }
+  };
   const onClickShowOriginComment = () => {
     setShowOriginComment((prev) => !prev);
   };
 
   const onSubmitOriginComment = () => {
-    console.log(' >> ', inputOriginComment);
+    // console.log(' >> ', inputOriginComment);
+
+    if (!isLogin) {
+      alert('로그인 한 유저만 댓글을 작성할 수 있습니다.');
+      return null;
+    }
+
     if (inputOriginComment === '') return null;
 
     const payload = {
@@ -103,7 +110,11 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
                     <TextareaAutosize
                       onChange={onChangeInputOriginComment}
                       value={inputOriginComment}
-                      placeholder="공개 답글 추가..."
+                      placeholder={
+                        !isLogin
+                          ? '로그인 한 유저만 답글을 작성할 수 있습니다.'
+                          : '공개 답글 추가...'
+                      }
                     />
                   </TextareaComment>
                 </div>

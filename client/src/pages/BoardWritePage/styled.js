@@ -1,10 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-right: 24px;
+  border: 1px solid red;
+
   & a {
     color: #636e72;
   }
@@ -14,19 +15,10 @@ export const Container = styled.div`
 `;
 
 export const BoardHeader = styled.div`
+  border: 1px solid green;
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const WriteButton = styled.button`
-  color: green;
-  width: 100px;
-  right: 0px;
-  bottom: 0px;
-  align-self: flex-end;
-  width: 120px;
-  height: 40px;
 `;
 
 export const Label = styled.label`
@@ -53,7 +45,6 @@ export const Input = styled.input`
 `;
 
 export const InputTitle = styled.input`
-  width: 100%;
   padding: 5px 0px 5px 7px;
   font-size: 16px;
   border-radius: 3px;

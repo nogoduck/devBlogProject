@@ -8,7 +8,6 @@ import {
   SubmitButton,
   CommentNestedContainer,
 } from './styled';
-import useInput from '../../hooks/useInput';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -19,12 +18,24 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 const Comment = ({ match, reRender, commentItems }) => {
   const user = useSelector((state) => state.user);
-  const [inputComment, setInputComment, onChangeInputComment] = useInput('');
+  const isLogin = user.authStatus.isAuth;
+  const [inputComment, setInputComment] = useState('');
   const postId = match.params.postId;
   const [showCommentButton, setShowCommentButton] = useState(false);
 
+  const onChangeInputComment = (e) => {
+    if (isLogin) {
+      setInputComment(e.target.value);
+    }
+  };
+
   const onSubmitComment = (e) => {
     e.preventDefault();
+
+    if (!isLogin) {
+      alert('로그인 한 유저만 댓글을 작성할 수 있습니다.');
+      return null;
+    }
 
     if (inputComment === '') return null;
 
@@ -35,7 +46,7 @@ const Comment = ({ match, reRender, commentItems }) => {
     };
     axios.post('/api/comment/createComment', payload).then(({ data }) => {
       if (data.success) {
-        console.log(data.doc);
+        // console.log(data.doc);
         setInputComment('');
         reRender(data.doc);
       } else {
@@ -72,7 +83,11 @@ const Comment = ({ match, reRender, commentItems }) => {
               value={inputComment}
               onChange={onChangeInputComment}
               onFocus={onFocusTextarea}
-              placeholder="공개 댓글 추가..."
+              placeholder={
+                !isLogin
+                  ? '로그인 한 유저만 댓글을 작성할 수 있습니다.'
+                  : '공개 댓글 추가...'
+              }
             />
           </TextareaComment>
         </div>
