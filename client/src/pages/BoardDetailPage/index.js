@@ -20,6 +20,7 @@ import { timeFormat } from '../../utils/Time';
 import BoardWritePage from '../BoardWritePage';
 import Static from '../../setupStatic';
 import Comment from '../../components/Comment';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 function BoardDetailPage() {
   const user = useSelector((state) => state.user);
@@ -74,7 +75,11 @@ function BoardDetailPage() {
   };
 
   if (!detailPost) {
-    return <Lodding>로딩중</Lodding>;
+    return (
+      <Lodding>
+        <PulseLoader color="gray" size={8} margin={4} />
+      </Lodding>
+    );
   } else {
     if (!upadteMode) {
       return (

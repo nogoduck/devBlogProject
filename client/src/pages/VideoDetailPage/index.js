@@ -10,9 +10,11 @@ import {
   VideoDescription,
   VideoView,
   VideoCreatedAt,
+  Loading,
 } from './styled';
 import { timeFormat } from '../../utils/Time';
 import Gravatar from 'react-gravatar';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 function VideoDetailPage({ match }) {
   const videoId = match.params.videoId;
@@ -72,7 +74,11 @@ function VideoDetailPage({ match }) {
       </Container>
     );
   } else {
-    return <>영상 불러오는중...</>;
+    return (
+      <Loading>
+        <PulseLoader color="gray" size={8} margin={4} />
+      </Loading>
+    );
   }
 }
 

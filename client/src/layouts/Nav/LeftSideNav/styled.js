@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.div`
   top: 0;
-  left: 1px;
+  left: 0px;
   flex: none;
   width: 48px;
   height: 100%;

@@ -36,10 +36,10 @@ function SignUpModal({ history, children, show, close }) {
   const onSubmit = (user) => {
     setLoading(true);
     dispatch(signupUser(user)).then((res) => {
+      setLoading(false);
       if (res.payload.signupSuccess) {
         //회원가입 성공
         close();
-        setLoading(false);
         setShowSuccessSignUpModal(true);
 
         //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
@@ -48,7 +48,6 @@ function SignUpModal({ history, children, show, close }) {
         });
       } else {
         //회원가입 실패
-        setLoading(false);
         if (res.payload.isEmail) {
           setIsEmailError(true);
           console.log('이메일 존재함');

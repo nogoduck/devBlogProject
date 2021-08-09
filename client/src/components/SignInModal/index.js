@@ -33,12 +33,13 @@ function SignInModal({ children, show, close }) {
     setLoading(true);
     //리덕스로 로그인 요청 결과를 받는다
     dispatch(signinUser(user)).then((res) => {
+      setLoading(false);
+
       if (res.payload.signinSuccess) {
         //로그인 성공시 로그인 모달 닫는 코드를 입력해야 하는데 안해도 잘 닫힌다
         //부모 컴포넌트에서 조작을 해야한다 => TopNav
         // setShowSignInModal(false);
         close();
-        setLoading(false);
 
         //상단바 버튼 상태를 바꿔주기 위해 리덕스로 로그인 상태 확인
         dispatch(auth()).then((res) => {

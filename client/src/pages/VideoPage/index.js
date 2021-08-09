@@ -22,6 +22,7 @@ import Static from '../../setupStatic';
 import dayjs from 'dayjs';
 import Gravatar from 'react-gravatar';
 import { changeTime2 } from '../../utils/Time';
+import PulseLoader from 'react-spinners/PulseLoader';
 function VideoPage() {
   const [videoList, setVideoList] = useState([]);
 
@@ -89,7 +90,13 @@ function VideoPage() {
         배포한 서버에 썸네일 생성 관련 라이브러리가 설치되어 있지 않아서 영상
         업로드가 불가능합니다.
       </Notice>
-      <VideoContainer>{videoCards}</VideoContainer>
+      <VideoContainer>
+        {videoCards ? (
+          videoCards
+        ) : (
+          <PulseLoader color="gray" size={8} margin={4} />
+        )}
+      </VideoContainer>
       <UploadLink>
         <Link to="/menu/video/upload">영상 등록</Link>
       </UploadLink>
