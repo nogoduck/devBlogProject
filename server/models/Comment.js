@@ -18,15 +18,6 @@ const commentSchema = new Schema(
     content: {
       type: String,
     },
-
-    // userTo: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'User',
-    // },
-    // userFrom: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'User',
-    // },
   },
   { timestamps: true, versionKey: false }
 );

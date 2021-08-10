@@ -46,7 +46,7 @@ export const InputTitle = styled.input`
   padding: 5px 0px 5px 7px;
   font-size: 16px;
   border-radius: 3px;
-  border: 1px solid #7f8fa6;
+  border: 1px solid #c4c4c4;
   transition: 0.3s;
   margin-top: 4px;
   &:focus {
@@ -61,7 +61,7 @@ export const AddButton = styled.button`
   font-weight: 800;
   border-radius: 3px;
   background: #74b9ff;
-  border: 1px solid #7f8fa6;
+  border: 1px solid #c4c4c4;
   transition: 0.3s;
   &:hover {
     background: #0984e3;
@@ -77,6 +77,11 @@ export const AddButton = styled.button`
 export const Title = styled.div`
   font-size: 20px;
   margin: 4px 0;
+`;
+
+export const InputDescription = styled.div`
+  border: 1px solid #c4c4c4;
+  border-radius: 3px;
 `;
 
 export const SubmitButton = styled.button`

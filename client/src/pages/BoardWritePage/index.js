@@ -8,6 +8,7 @@ import {
   UpdateButton,
   DeleteButton,
   UpdateButtonContainer,
+  InputDescription,
 } from './styled';
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
@@ -147,31 +148,31 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         onChange={onChangeTitle}
       />
       <Label For="description">내용</Label>
-
-      <CKEditor
-        style={{}}
-        onReady={(editor) => {
-          editor.ui
-            .getEditableElement()
-            .parentElement.insertBefore(
-              editor.ui.view.toolbar.element,
-              editor.ui.getEditableElement()
-            );
-        }}
-        onError={({ willEditorRestart }) => {
-          if (willEditorRestart) {
-            this.editor.ui.view.toolbar.element.remove();
-          }
-        }}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          setDescription(data);
-          console.log({ event, editor, data });
-        }}
-        editor={DecoupledEditor}
-        data={description}
-        // config={}
-      />
+      <InputDescription>
+        <CKEditor
+          onReady={(editor) => {
+            editor.ui
+              .getEditableElement()
+              .parentElement.insertBefore(
+                editor.ui.view.toolbar.element,
+                editor.ui.getEditableElement()
+              );
+          }}
+          onError={({ willEditorRestart }) => {
+            if (willEditorRestart) {
+              this.editor.ui.view.toolbar.element.remove();
+            }
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setDescription(data);
+            console.log({ event, editor, data });
+          }}
+          editor={DecoupledEditor}
+          data={description}
+          // config={}
+        />
+      </InputDescription>
     </Container>
   );
 }
