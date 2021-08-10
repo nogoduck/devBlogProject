@@ -15,6 +15,18 @@ export const Container = styled.table`
   }
 `;
 
+export const BoardContent = styled.div`
+  & p {
+    margin: 0;
+  }
+  & tr,
+  td,
+  td {
+    border: 1px solid black;
+    padding: 4px;
+  }
+`;
+
 export const Lodding = styled.div`
   display: flex;
   justify-content: center;

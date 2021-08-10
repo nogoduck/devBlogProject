@@ -11,6 +11,7 @@ import {
   PostTitle,
   BoardInfo,
   Profile,
+  BoardContent,
 } from './styled';
 import axios from 'axios';
 import Gravatar from 'react-gravatar';
@@ -129,7 +130,9 @@ function BoardDetailPage() {
               ? timeFormat(detailPost.data.updatedAt)
               : '수정 안함'}
           </BoardInfo>
-          <p>{HtmlReactParser(detailPost.data.description)}</p>
+          <BoardContent>
+            <p>{HtmlReactParser(detailPost.data.description)}</p>
+          </BoardContent>
 
           <Comment reRender={reRender} commentItems={comments} />
         </Container>
