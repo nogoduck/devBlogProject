@@ -13,9 +13,19 @@ import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {
+  CKEditor,
+  // CKEditorContext
+} from '@ckeditor/ckeditor5-react';
+// import Context from '@ckeditor/ckeditor5-core/src/context';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import AlertModal from '../../components/AlertModal';
+
+// import CodeBlock from '@ckeditor/ckeditor5-code-block';
+// import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock.js';
+// class Editor extends DecoupledEditor {}
+// Editor.builtinPlugins = [CodeBlock];
 
 //postId가 존재하면 글을 수정하는 페이지로 전환된다
 function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
@@ -144,26 +154,32 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         onChange={onChangeTitle}
       />
       <Label For="description">내용</Label>
+      {/*<CKEditorContext context={Context}>*/}
       <CKEditor
-        style={{ width: '50px' }}
-        editor={ClassicEditor}
-        data={description}
+        style={{}}
         onReady={(editor) => {
-          // You can store the "editor" and use when it is needed.
-          console.log('Editor is ready to use!', editor);
+          editor.ui
+            .getEditableElement()
+            .parentElement.insertBefore(
+              editor.ui.view.toolbar.element,
+              editor.ui.getEditableElement()
+            );
+        }}
+        onError={({ willEditorRestart }) => {
+          if (willEditorRestart) {
+            this.editor.ui.view.toolbar.element.remove();
+          }
         }}
         onChange={(event, editor) => {
           const data = editor.getData();
           setDescription(data);
           console.log({ event, editor, data });
         }}
-        onBlur={(event, editor) => {
-          console.log('Blur.', editor);
-        }}
-        onFocus={(event, editor) => {
-          console.log('Focus.', editor);
-        }}
+        editor={DecoupledEditor}
+        data={description}
+        // config={}
       />
+      {/*</CKEditorContext>*/}
     </Container>
   );
 }

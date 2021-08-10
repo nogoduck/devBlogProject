@@ -19,6 +19,7 @@ export const List = styled.div`
   }
   & li {
     padding: 4px 20px;
+    list-style: none;
   }
   & li:first-child {
     margin-top: 8px;

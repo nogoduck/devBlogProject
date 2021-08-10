@@ -23,7 +23,7 @@ ul {
   padding: 0px;
 }
 li {
-  list-style: none;
+  /*list-style: none;*/
   font-family: "Noto Sans KR", sans-serif;
 }
 table {

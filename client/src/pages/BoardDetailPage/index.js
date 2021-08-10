@@ -5,7 +5,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   Container,
-  Lodding,
+  Loading,
   UpdateButton,
   BoardHeader,
   PostTitle,
@@ -77,9 +77,9 @@ function BoardDetailPage() {
 
   if (!detailPost) {
     return (
-      <Lodding>
+      <Loading>
         <PulseLoader color="gray" size={8} margin={4} />
-      </Lodding>
+      </Loading>
     );
   } else {
     if (!upadteMode) {

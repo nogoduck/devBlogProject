@@ -25,9 +25,15 @@ export const BoardContent = styled.div`
     border: 1px solid black;
     padding: 4px;
   }
+  & blockquote {
+    border: 1px solid #0984e3;
+    border-left: 8px solid #0984e3;
+    margin: 12px;
+    padding: 20px;
+  }
 `;
 
-export const Lodding = styled.div`
+export const Loading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,4 +85,5 @@ export const BoardInfo = styled.table`
   display: flex;
   font-size: 15px;
   align-items: center;
+  margin-bottom: 32px;
 `;
