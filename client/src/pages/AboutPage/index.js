@@ -34,9 +34,6 @@ import {
 //페이지명은 그대로 두고 다용도로 사용하고 있다.
 
 function AboutPage({ history }) {
-  // 리스트 추가 멘트 랜덤으로 넣을 예정 (우선순위 > 최하위)
-  // const ListCreateMent = [];
-
   const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false);
   const [showCreateListModal, setShowCreateListModal] = useState(false);
   const [category, setCategory, onChangeCategory] = useInput();
@@ -54,11 +51,11 @@ function AboutPage({ history }) {
       alert('내용을 입력해주세요');
     } else {
       console.log('전송');
-      const data = {
-        title: category,
+      const payload = {
+        category: category,
       };
       axios
-        .post('/api/todo/category/create', data)
+        .post('/api/todo/save', payload)
         .then((res) => {
           console.log(res);
           //응답이 오면 내용 초기화 후 모달 닫기
@@ -80,7 +77,7 @@ function AboutPage({ history }) {
         memo: list,
       };
       axios
-        .post('/api/todo/list/create', args)
+        .post('/api/todo/save', args)
         .then((res) => {
           console.log(res);
           //응답이 오면 내용 초기화 후 모달 닫기
@@ -96,10 +93,10 @@ function AboutPage({ history }) {
 
   const initialRequest = () => {
     axios
-      .get('/api/todo')
+      .get('/api/todo/getAll')
       .then(({ data }) => {
-        console.log('data > ', data);
-        setTodo(data);
+        console.log('data > ', data.doc);
+        setTodo(data.doc);
       })
       .catch((err) => {
         console.log(err);
@@ -118,6 +115,7 @@ function AboutPage({ history }) {
   const onClickCreateListModal = (e) => {
     //현재 클릭된 카테고리를 넣어준다
     setClickCategoryId(e.target.value);
+    console.log('onClick Target', e.target.value);
     setShowCreateListModal((prev) => !prev);
   };
   //리스트 추가 모달 닫기
@@ -177,7 +175,7 @@ function AboutPage({ history }) {
         <hr />
         <CategoryContainer>
           {todo &&
-            todo.category.map((vCategory) => {
+            todo.map((v) => {
               return (
                 <Category>
                   {true && (
@@ -190,15 +188,15 @@ function AboutPage({ history }) {
                       </button>
                     </CategoryETCButtonContainer>
                   )}
-                  <cTitle>{vCategory.title}</cTitle>
+                  <cTitle>{v.category}</cTitle>
 
                   {/* dummpy Start  */}
 
                   {/* dummpy End  */}
-                  {vCategory.list.length > 0 && <hr />}
+                  {v.length > 0 && <hr />}
                   <ListContainer>
-                    {vCategory.list.length > 0 &&
-                      vCategory.list.map((vList) => {
+                    {v.length > 0 &&
+                      v.map((v) => {
                         return (
                           <List
                             onMouseOver={inListMouse}
@@ -220,10 +218,7 @@ function AboutPage({ history }) {
                           </List>
                         );
                       })}
-                    <ListButton
-                      onClick={onClickCreateListModal}
-                      value={vCategory._id}
-                    >
+                    <ListButton onClick={onClickCreateListModal} value={v._id}>
                       <IoMdAddCircle />
                       &nbsp;할 일을 입력해주세요 !
                     </ListButton>

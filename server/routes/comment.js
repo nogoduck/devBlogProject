@@ -13,7 +13,7 @@ router.post('/createComment', (req, res) => {
     Comment.findById(doc._id)
       .populate('writer')
       .exec((err, doc) => {
-        if (err) return res.json({ success: false, doc });
+        if (err) return res.json({ success: false, err });
         res.status(200).json({
           success: true,
           doc,

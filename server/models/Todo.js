@@ -3,12 +3,16 @@ const Schema = mongoose.Schema;
 
 const TodoSchema = new Schema(
   {
-    title: {
-      type: String,
+    writer: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
-    catergory: {
+    category: {
       type: String,
       default: '제목 없음',
+    },
+    categoryTo: {
+      type: String,
     },
     memo: {
       type: String,
@@ -17,13 +21,7 @@ const TodoSchema = new Schema(
     },
     succeed: {
       type: Boolean,
-      required: true,
       default: false,
-    },
-    createdAt: {
-      type: Date,
-      required: true,
-      default: Date.now,
     },
   },
   { timestamps: true, versionKey: false }
