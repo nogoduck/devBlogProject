@@ -13,19 +13,9 @@ import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import {
-  CKEditor,
-  // CKEditorContext
-} from '@ckeditor/ckeditor5-react';
-// import Context from '@ckeditor/ckeditor5-core/src/context';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import AlertModal from '../../components/AlertModal';
-
-// import CodeBlock from '@ckeditor/ckeditor5-code-block';
-// import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock.js';
-// class Editor extends DecoupledEditor {}
-// Editor.builtinPlugins = [CodeBlock];
 
 //postId가 존재하면 글을 수정하는 페이지로 전환된다
 function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
@@ -154,7 +144,7 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         onChange={onChangeTitle}
       />
       <Label For="description">내용</Label>
-      {/*<CKEditorContext context={Context}>*/}
+
       <CKEditor
         style={{}}
         onReady={(editor) => {
@@ -179,7 +169,6 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
         data={description}
         // config={}
       />
-      {/*</CKEditorContext>*/}
     </Container>
   );
 }
