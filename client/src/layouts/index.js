@@ -35,7 +35,7 @@ function LandingPage({ history }) {
   const { pathname } = useLocation();
 
   if (pathname === '/') {
-    history.push('/menu/home');
+    history.push('/home');
   }
   return (
     <Container>
@@ -47,38 +47,37 @@ function LandingPage({ history }) {
             <Switch>
               <Route
                 exact
-                path="/menu/home"
+                path="/home"
                 component={Auth(LandingContent, null)}
               />
-              <Route path="/menu/about" component={Auth(AboutPage, false)} />
+              <Route path="/about" component={Auth(AboutPage, false)} />
               <Route
                 true
-                path="/menu/board/write"
+                path="/board/write"
                 component={Auth(BoardWritePage, true)}
               />
               <Route
-                path="/menu/board/:postId"
+                path="/board/:postId"
                 component={Auth(BoardDetailPage, null)}
               />
-              <Route path="/menu/board" component={Auth(BoardPage, null)} />
-              <Route path="/menu/card" component={Auth(CardPage, null)} />
+              <Route path="/board" component={Auth(BoardPage, null)} />
+              <Route path="/card" component={Auth(CardPage, null)} />
               <Route
-                path="/menu/experiment"
+                path="/experiment"
                 component={Auth(ExperimentPage, null)}
               />
               <Route
-                path="/menu/video/upload"
+                path="/video/upload"
                 component={Auth(VideoUploadPage, null)}
               />
               <Route
-                path="/menu/video/:videoId"
+                path="/video/:videoId"
                 component={Auth(VideoDetailPage, null)}
               />
-              <Route path="/menu/video" component={Auth(VideoPage, null)} />{' '}
+              <Route path="/video" component={Auth(VideoPage, null)} />
               <Route path="/setting" component={Auth(SettingPage, null)} />
             </Switch>
           </Content>
-          {/*<ContainerHeaderImg src={img1} alt="ContentBottomImage" />*/}
           <Footer />
         </ContentContainer>
       </Main>

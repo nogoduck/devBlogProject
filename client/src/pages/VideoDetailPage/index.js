@@ -38,7 +38,7 @@ function VideoDetailPage({ match }) {
   if (video.publisher) {
     return (
       <Container>
-        <Link to="/menu/video">뒤로가기</Link>
+        <Link to="/video">뒤로가기</Link>
         <video
           style={{ width: '100%' }}
           src={`${Static.URI}${video.videoPath}`}

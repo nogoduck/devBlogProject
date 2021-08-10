@@ -1,12 +1,12 @@
-import { withRouter } from "react-router-dom";
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Container, InputHidden, InputLabel } from "./styled";
-import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
-import { useSelector } from "react-redux";
-import axios from "axios";
+import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Container, InputHidden, InputLabel } from './styled';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-import AlertModal from "../AlertModal";
+import AlertModal from '../AlertModal';
 
 function ImageCrop({ history, show, close }) {
   const user = useSelector((state) => state.user);
@@ -14,7 +14,7 @@ function ImageCrop({ history, show, close }) {
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
   const [crop, setCrop] = useState({
-    unit: "px",
+    unit: 'px',
     width: 50,
     height: 50,
     aspect: 1 / 1,
@@ -26,7 +26,7 @@ function ImageCrop({ history, show, close }) {
   const onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
-      reader.addEventListener("load", () => setUpImg(reader.result));
+      reader.addEventListener('load', () => setUpImg(reader.result));
       reader.readAsDataURL(e.target.files[0]);
     }
   };
@@ -37,7 +37,7 @@ function ImageCrop({ history, show, close }) {
 
   useEffect(() => {
     if (!show) {
-      setUpImg("");
+      setUpImg('');
     }
 
     if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
@@ -50,14 +50,14 @@ function ImageCrop({ history, show, close }) {
 
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     const pixelRatio = window.devicePixelRatio;
 
     canvas.width = crop.width * pixelRatio;
     canvas.height = crop.height * pixelRatio;
 
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    ctx.imageSmoothingQuality = "high";
+    ctx.imageSmoothingQuality = 'high';
 
     ctx.drawImage(
       image,
@@ -84,26 +84,26 @@ function ImageCrop({ history, show, close }) {
         const config = {
           header: {
             processData: false,
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         };
 
-        fd.append("image", file, user.authStatus._id);
-        fd.append("_id", user.authStatus._id);
-        fd.append("currentPath", user.authStatus.imagePath);
+        fd.append('image', file, user.authStatus._id);
+        fd.append('_id', user.authStatus._id);
+        fd.append('currentPath', user.authStatus.imagePath);
 
         axios
-          .post("/api/users/update/image", fd, config)
+          .post('/api/users/update/image', fd, config)
           .then(({ data }) => {
-            console.log("data >> ", data);
+            console.log('data >> ', data);
             close();
-            history.push("/setting/profile");
+            history.push('/setting/profile');
           })
           .catch((err) => {
-            alert("프로필 변경에 실패했습니다.");
+            alert('프로필 변경에 실패했습니다.');
           });
       },
-      "image/png",
+      'image/png',
       1
     );
   };
@@ -129,7 +129,7 @@ function ImageCrop({ history, show, close }) {
           minWidth={50}
           minHeight={50}
           keepSelection={true}
-          style={{ marginBottom: "8px", maxWidth: "400px", maxHeight: "400px" }}
+          style={{ marginBottom: '8px', maxWidth: '400px', maxHeight: '400px' }}
         />
 
         <InputLabel for="select-image">이미지 선택</InputLabel>
@@ -141,7 +141,7 @@ function ImageCrop({ history, show, close }) {
         />
 
         {/* Canvas Preview Section */}
-        <canvas ref={previewCanvasRef} style={{ display: "none" }} />
+        <canvas ref={previewCanvasRef} style={{ display: 'none' }} />
       </Container>
     </AlertModal>
   );

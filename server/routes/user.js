@@ -192,7 +192,8 @@ router.post('/update/nickname', (req, res) => {
 });
 
 router.patch('/update/password', (req, res) => {
-  const { _id, currentPassword, updatePassword } = req.body;
+  const { _id, currentPassword, updatePassword, updatePasswordCheck } =
+    req.body;
 
   console.log('[user] Update pw : ', _id, currentPassword, updatePassword);
   //아이디 조회
@@ -212,6 +213,15 @@ router.patch('/update/password', (req, res) => {
           updatePassword: false,
           mismatchPassword: true,
           message: '현재 로그인된 계정과 입력된 비밀번호가 일치하지 않습니다.',
+        });
+      }
+
+      //변경할 비밀번호와 확인 비밀번호가 동일한지 체크
+      if (updatePassword !== updatePasswordCheck) {
+        return res.json({
+          updatePassword: false,
+          notTheSamePassword: true,
+          message: '변경할 비밀번호와 확인 비밀번호가 동일하지 않습니다.',
         });
       }
 

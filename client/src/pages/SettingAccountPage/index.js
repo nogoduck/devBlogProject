@@ -8,8 +8,6 @@ import {
   Form,
   Input,
   Message,
-  Error,
-  ErrorInput,
   UpdatePasswordButton,
   DeleteAccountButton,
 } from './styled';
@@ -89,7 +87,6 @@ function SettingAccountPage() {
     }
     //updatePassword 와 동일한지 비교
     if (updatePassword !== updatePasswordCheck) {
-      console.log('동일');
       setErrorUpdatePasswordCheck({
         ...errorUpdatePasswordCheck,
         validation: true,
@@ -124,8 +121,9 @@ function SettingAccountPage() {
       _id: user.authStatus._id,
       currentPassword: currentPassword,
       updatePassword: updatePassword,
+      updatePasswordCheck: updatePasswordCheck,
     };
-    console.log('payload >> ', payload);
+    // console.log('payload >> ', payload);
 
     axios
       .patch('/api/users/update/password', payload)
@@ -140,6 +138,7 @@ function SettingAccountPage() {
           }, 5000);
         } else {
           //변경 실패
+          //백엔드에서 검사가 완료되서 오지만 한번 더 확인한다.
           if (onCheckValidation()) {
             //비밀번호 변경 유효성 부적절
             console.log('비밀번호 변경 유효성 부적절');
@@ -147,7 +146,7 @@ function SettingAccountPage() {
           }
 
           if (data.mismatchPassword) {
-            console.log('비밀번호가 일치하지 않음');
+            console.log('유저 정보와 비밀번호가 일치하지 않음');
             setErrorCurrentPassword({
               ...errorCurrentPassword,
               validation: true,
@@ -155,6 +154,18 @@ function SettingAccountPage() {
             setTimeout(() => {
               setErrorCurrentPassword({
                 ...errorCurrentPassword,
+                validation: false,
+              });
+            }, 5000);
+          } else if (data.notTheSamePassword) {
+            console.log('비밀번호, 비밀번호 확인 동일하지 않음');
+            setErrorUpdatePasswordCheck({
+              ...errorUpdatePasswordCheck,
+              validation: true,
+            });
+            setTimeout(() => {
+              setErrorUpdatePasswordCheck({
+                ...errorUpdatePasswordCheck,
                 validation: false,
               });
             }, 5000);

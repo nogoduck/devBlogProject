@@ -82,11 +82,11 @@ function SideNav({ history, match }) {
           <BiMenu />
         </MenuButton>
       )}
-      <Space className={useExtends && 'SideNavExtends'} />
+      <Space id={useExtends && 'SideNavExtends'} />
 
       <Container
         onClick={stopPropagation}
-        className={
+        id={
           isDesktopAndTablet
             ? useExtends
               ? 'SideNavExtends'
@@ -98,7 +98,7 @@ function SideNav({ history, match }) {
         ref={sideNavRef}
       >
         <ul>
-          <Link to="/menu/home">
+          <Link to="/home">
             <li className="menu_item" id={activePath === 'home' && 'active'}>
               <MenuIcon>
                 <AiFillHome />
@@ -114,7 +114,7 @@ function SideNav({ history, match }) {
             </li>
           </Link>
 
-          <Link to="/menu/about">
+          <Link to="/about">
             <li className="menu_item" id={activePath === 'about' && 'active'}>
               <MenuIcon>
                 <FaPaperPlane />
@@ -130,7 +130,7 @@ function SideNav({ history, match }) {
             </li>
           </Link>
 
-          <Link to="/menu/board">
+          <Link to="/board">
             <li className="menu_item" id={activePath === 'board' && 'active'}>
               <MenuIcon>
                 <FaClipboardList />
@@ -146,7 +146,7 @@ function SideNav({ history, match }) {
             </li>
           </Link>
 
-          <Link to="/menu/video">
+          <Link to="/video">
             <li className="menu_item" id={activePath === 'video' && 'active'}>
               <MenuIcon>
                 <FaPhotoVideo />
@@ -161,7 +161,7 @@ function SideNav({ history, match }) {
               )}
             </li>
           </Link>
-          <Link to="/menu/experiment">
+          <Link to="/experiment">
             <li
               className="menu_item"
               id={activePath === 'experiment' && 'active'}
@@ -180,7 +180,7 @@ function SideNav({ history, match }) {
             </li>
           </Link>
 
-          {/*<Link to="/menu/card">*/}
+          {/*<Link to="/card">*/}
           {/*  <li*/}
           {/*    className="menu_item"*/}
           {/*    id={activePath==='card' && 'active'}*/}
@@ -203,7 +203,7 @@ function SideNav({ history, match }) {
         {isDesktopAndTablet && (
           <ExtendsButton
             onClick={onClickToggleExtends}
-            className={useExtends && 'ExtendsActive'}
+            id={useExtends && 'ExtendsActive'}
           >
             <MdKeyboardArrowRight />
           </ExtendsButton>

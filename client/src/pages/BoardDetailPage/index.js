@@ -23,7 +23,7 @@ import Static from '../../setupStatic';
 import Comment from '../../components/Comment';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-function BoardDetailPage() {
+function BoardDetailPage({ match }) {
   const user = useSelector((state) => state.user);
   const [comments, setComments] = useState();
 
@@ -54,7 +54,8 @@ function BoardDetailPage() {
 
   const [detailPost, setDetailPost] = useState('');
   const { pathname } = useLocation();
-  const postId = pathname.substring(12);
+  console.log('p >> ', match.params.postId);
+  const postId = match.params.postId;
   //params로 변경예정, SideNav포함
   const args = {
     _id: postId,
@@ -85,7 +86,7 @@ function BoardDetailPage() {
     if (!upadteMode) {
       return (
         <Container>
-          <Link to="/menu/board">뒤로가기</Link>
+          <Link to="/board">뒤로가기</Link>
           <BoardHeader>
             <PostTitle>{detailPost.data.title}</PostTitle>
             {user.authStatus.isAuth &&

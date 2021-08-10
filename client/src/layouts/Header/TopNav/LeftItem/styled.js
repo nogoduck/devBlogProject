@@ -28,6 +28,14 @@ export const CurrentPage = styled.div`
   top: -35px;
   color: #000;
   transition: 0.2s;
+  z-index: 2000;
+
+  & a {
+    color: #000;
+  }
+  & a:hover {
+    cursor: pointer;
+  }
 `;
 
 export const LogoContainer = styled.div`

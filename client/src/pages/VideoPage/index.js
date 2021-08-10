@@ -48,7 +48,7 @@ function VideoPage() {
     let momentCreatedAt = changeTime2(v.createdAt);
     return (
       <VideoCardContainer>
-        <Link to={`/menu/video/${v._id}`}>
+        <Link to={`/video/${v._id}`}>
           <ImageContainer>
             <img src={`${Static.URI}${v.thumbnailPath}`} alt="thumbnail_IMG" />
             <VideoLength>{momentVideoLength}</VideoLength>
@@ -98,7 +98,7 @@ function VideoPage() {
         )}
       </VideoContainer>
       <UploadLink>
-        <Link to="/menu/video/upload">영상 등록</Link>
+        <Link to="/video/upload">영상 등록</Link>
       </UploadLink>
     </Container>
   );

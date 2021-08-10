@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback } from 'react';
 import {
   Container,
   ModalContainer,
@@ -11,13 +11,13 @@ import {
   ButtonContainer,
   SubmitButton,
   CancelButton,
-} from "./styled";
-import PropTypes from "prop-types";
+} from './styled';
+import PropTypes from 'prop-types';
 
-import { IoIosCheckmarkCircle } from "react-icons/io";
-import { TiWarning } from "react-icons/ti";
-import { RiAlarmWarningFill, RiErrorWarningFill } from "react-icons/ri";
-import { BsExclamationOctagonFill } from "react-icons/bs";
+import { IoIosCheckmarkCircle } from 'react-icons/io';
+import { TiWarning } from 'react-icons/ti';
+import { RiAlarmWarningFill, RiErrorWarningFill } from 'react-icons/ri';
+import { BsExclamationOctagonFill } from 'react-icons/bs';
 
 // [Alert Modal Document]==================================
 //
@@ -48,6 +48,7 @@ function AlertModal({
   show,
   close,
   style,
+  useOutside,
   useCloseButton,
   useSubmitButton,
   useCancelButton,
@@ -71,43 +72,43 @@ function AlertModal({
 
   return (
     //Container는 화면 전체 영역이다
-    <Container onClick={close}>
+    <Container onClick={useOutside ? close : null}>
       <ModalContainer onClick={stopPropagation} style={style}>
         {useCloseButton && <CloseButton onClick={close}>&times;</CloseButton>}
         <ModalHeader>
-          {option === "success" && (
+          {option === 'success' && (
             <IoIosCheckmarkCircle
               style={{
-                color: "green",
-                padding: "2px 4px 0 8px",
-                fontSize: "20px",
+                color: 'green',
+                padding: '2px 4px 0 8px',
+                fontSize: '20px',
               }}
             />
           )}
-          {option === "warning" && (
+          {option === 'warning' && (
             <RiAlarmWarningFill
               style={{
-                color: "#f0932b",
-                padding: "2px 4px 0 8px",
-                fontSize: "20px",
+                color: '#f0932b',
+                padding: '2px 4px 0 8px',
+                fontSize: '20px',
               }}
             />
           )}
-          {option === "danger" && (
+          {option === 'danger' && (
             <RiErrorWarningFill
               style={{
-                color: "#4834d4",
-                padding: "2px 4px 0 8px",
-                fontSize: "20px",
+                color: '#4834d4',
+                padding: '2px 4px 0 8px',
+                fontSize: '20px',
               }}
             />
           )}
-          {option === "failed" && (
+          {option === 'failed' && (
             <BsExclamationOctagonFill
               style={{
-                color: "#b32304",
-                padding: "2px 4px 0 8px",
-                fontSize: "18px",
+                color: '#b32304',
+                padding: '2px 4px 0 8px',
+                fontSize: '18px',
               }}
             />
           )}
@@ -139,11 +140,12 @@ function AlertModal({
 }
 
 AlertModal.defaultProps = {
+  useOutside: true,
   useCloseButton: true,
   useSubmitButton: true,
   useCancelButton: true,
-  submitButtonName: "확인",
-  option: "success",
+  submitButtonName: '확인',
+  option: 'success',
   //props 의 기본값을 지정, 보내는 컴포넌트 측에서 값을 넣어주지 않아도
   // defaultProps의 값을 대입해줌
   // 입력사항이 없는 알림창 모달 같은 경우에 버튼을 사용하지 않기 위해 인자를 받음
@@ -154,6 +156,7 @@ AlertModal.propTypes = {
   show: PropTypes.bool,
   close: PropTypes.func,
   style: PropTypes.any,
+  useOutside: PropTypes.bool,
   useCloseButton: PropTypes.bool,
   useSubmitButton: PropTypes.bool,
   useCancelButton: PropTypes.bool,

@@ -3,16 +3,16 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LandingPage from './layouts';
 import ExamplePage from './pages/ExamplePage';
 
-import Auth from './hoc/auth';
+import React from 'react';
 
 function App() {
   return (
     <>
       <Router>
         <Route path="/" exact component={LandingPage} />
-        <Route path="/setting" component={Auth(LandingPage, false)} />
-        <Route path="/menu/:menu" component={LandingPage} />
-        <Route path="/ex" component={ExamplePage} />
+        <Route path="/ex" exact component={ExamplePage} />
+        <Route path="/:menu" component={LandingPage} />
+        {/*<Route path="/menu/:menu" component={LandingPage} />*/}
       </Router>
     </>
   );

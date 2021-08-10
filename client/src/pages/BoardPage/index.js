@@ -76,7 +76,7 @@ function BoardPage({ history }) {
     if (!user.authStatus.isAuth) {
       alert('로그인 한 유저만 게시글을 작성할 수 있습니다.');
     } else {
-      history.push('/menu/board/write');
+      history.push('/board/write');
     }
   };
 
@@ -105,7 +105,7 @@ function BoardPage({ history }) {
                 return (
                   <tr>
                     <td>
-                      <Link to={`/menu/board/${post._id}`}>
+                      <Link to={`/board/${post._id}`}>
                         <BoardTitle>{post.title}</BoardTitle>
                       </Link>
                     </td>

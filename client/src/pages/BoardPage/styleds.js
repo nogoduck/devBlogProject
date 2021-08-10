@@ -53,7 +53,7 @@ export const Table = styled.table`
   }
 `;
 export const BoardTitle = styled.div`
-  max-width: 350px;
+  max-width: 200px;
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
