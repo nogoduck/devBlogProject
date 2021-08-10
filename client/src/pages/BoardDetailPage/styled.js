@@ -31,6 +31,10 @@ export const BoardContent = styled.div`
     margin: 12px;
     padding: 20px;
   }
+  & ul,
+  ol {
+    padding: 4px 24px;
+  }
 `;
 
 export const Loading = styled.div`

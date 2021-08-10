@@ -29,11 +29,13 @@ import {
   ListETCButtonContainer,
   Notice,
 } from './styled';
+import { useSelector } from 'react-redux';
 
 //AboutPage는 블로그 소개를 목적으로 추가했으나 내 투두리스트를 작성하기도 하고 계획을 쓰기도 하여
 //페이지명은 그대로 두고 다용도로 사용하고 있다.
 
 function AboutPage({ history }) {
+  const user = useSelector((state) => state.user);
   const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false);
   const [showCreateListModal, setShowCreateListModal] = useState(false);
   const [category, setCategory, onChangeCategory] = useInput();
@@ -45,13 +47,14 @@ function AboutPage({ history }) {
   //카테고리 버튼은 호버 사용 안할예정 21.07.16 -12:00
   // const [hoverCategory, setHoverCategory] = useState(false);
   const [hoverList, setHoverList] = useState(true);
-
+  console.log(user);
   const onSubmitCategory = () => {
     if (category === '') {
       alert('내용을 입력해주세요');
     } else {
       console.log('전송');
       const payload = {
+        writer: user.authStatus._id,
         category: category,
       };
       axios
@@ -71,24 +74,27 @@ function AboutPage({ history }) {
   const onSubmitList = () => {
     if (list === '') {
       alert('내용을 입력해주세요');
-    } else {
-      const args = {
-        _id: clickCategoryId,
-        memo: list,
-      };
-      axios
-        .post('/api/todo/save', args)
-        .then((res) => {
-          console.log(res);
-          //응답이 오면 내용 초기화 후 모달 닫기
-          setList('');
-          onCloseCreateListModal();
-          history.push('/menu/about');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      return null;
     }
+
+    const payload = {
+      writer: user.authStatus._id,
+      categoryTo: clickCategoryId,
+      memo: list,
+    };
+
+    axios
+      .post('/api/todo/save', payload)
+      .then((res) => {
+        console.log(res);
+        //응답이 오면 내용 초기화 후 모달 닫기
+        setList('');
+        onCloseCreateListModal();
+        history.push('/menu/about');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const initialRequest = () => {
@@ -157,7 +163,6 @@ function AboutPage({ history }) {
     }
   }, [showCreateCategoryModal, showCreateListModal]);
 
-  console.log('todo >> ', todo);
   // todo.map((v) => {
   //   console.log(v);
   // });
