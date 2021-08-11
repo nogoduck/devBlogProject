@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Content = styled.div`
-  padding: 4px 10px;
+  margin: 12px 6px;
   color: blue;
 `;
 
@@ -188,11 +188,9 @@ export const ListButton = styled.button`
   }
 `;
 
-export const cTitle = styled.div`
-  padding: 8px;
+export const CategoryTitle = styled.div`
   color: #000;
-  /* border: 1px solid black; */
-  margin: 12px 64px 12px 14px;
+  margin: 12px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -24,7 +24,7 @@ import {
   ListButton,
   ListContainer,
   List,
-  cTitle,
+  CategoryTitle,
   CategoryETCButtonContainer,
   ListETCButtonContainer,
   Notice,
@@ -66,6 +66,7 @@ function AboutPage({ history }) {
           setCategory('');
           onCloseCreateCategoryModal();
           initialRequest();
+          history.push('/about');
         })
         .catch((err) => {
           console.log(err);
@@ -186,7 +187,7 @@ function AboutPage({ history }) {
                 <>
                   {v.category && (
                     <Category>
-                      <cTitle>{v.category}</cTitle>
+                      <CategoryTitle>{v.category}</CategoryTitle>
                       {v.length > 0 && <hr />}
                       <ListContainer>
                         {v.category && (

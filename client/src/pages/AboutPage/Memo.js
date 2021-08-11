@@ -1,8 +1,6 @@
 import React from 'react';
 import { Content } from './styled';
 const Memo = ({ currentCategory, item }) => {
-  console.log('Memo items >> ', item);
-
   return (
     <>
       {item &&
