@@ -183,28 +183,57 @@ function AboutPage({ history }) {
           {todo &&
             todo.map((v) => {
               return (
-                <>
-                  {v.category && (
-                    <Category>
-                      <cTitle>{v.category}</cTitle>
-                      {v.length > 0 && <hr />}
-                      <ListContainer>
-                        {v.category && (
-                          <>
-                            <Memo currentCategory={v._id} item={todo} />
-                            <ListButton
-                              onClick={onClickCreateListModal}
-                              value={v._id}
-                            >
-                              <IoMdAddCircle />
-                              &nbsp;할 일을 입력해주세요 !
-                            </ListButton>
-                          </>
-                        )}
-                      </ListContainer>
-                    </Category>
+                <Category>
+                  {true && (
+                    <CategoryETCButtonContainer>
+                      <button>
+                        <FaEdit />
+                      </button>
+                      <button>
+                        <IoTrash />
+                      </button>
+                    </CategoryETCButtonContainer>
                   )}
-                </>
+                  {/*<cTitle>{v.category && v.category}</cTitle>*/}
+
+                  {/* dummpy Start  */}
+
+                  {/* dummpy End  */}
+                  {v.length > 0 && <hr />}
+                  <ListContainer>
+                    {/*{v.category && (*/}
+                    {/*  <>*/}
+                    {/*    <Memo currentCategory={v._id} item={todo} />*/}
+                    {/*  </>*/}
+                    {/*)}*/}
+                    {v.length > 0 &&
+                      v.map((v) => {
+                        return (
+                          <List
+                            onMouseOver={inListMouse}
+                            onMouseOut={outListMouse}
+                          >
+                            1번 고기
+                            <input type="checkbox" name="" id="list-checkbox" />
+                            {hoverList && (
+                              <ListETCButtonContainer>
+                                <button>
+                                  <FaEdit />
+                                </button>
+                                <button>
+                                  <IoMdRemoveCircle />
+                                </button>
+                              </ListETCButtonContainer>
+                            )}
+                          </List>
+                        );
+                      })}
+                    <ListButton onClick={onClickCreateListModal} value={v._id}>
+                      <IoMdAddCircle />
+                      &nbsp;할 일을 입력해주세요 !
+                    </ListButton>
+                  </ListContainer>
+                </Category>
               );
             })}
           <CategoryCreate onClick={onClickCreateCategoryModal}>

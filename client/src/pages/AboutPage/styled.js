@@ -189,6 +189,7 @@ export const ListButton = styled.button`
 `;
 
 export const cTitle = styled.div`
+  padding: 8px;
   color: #000;
   /* border: 1px solid black; */
   margin: 12px 64px 12px 14px;
