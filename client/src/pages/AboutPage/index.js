@@ -30,6 +30,7 @@ import {
   Notice,
 } from './styled';
 import { useSelector } from 'react-redux';
+import Memo from './Memo';
 
 //AboutPage는 블로그 소개를 목적으로 추가했으나 내 투두리스트를 작성하기도 하고 계획을 쓰기도 하여
 //페이지명은 그대로 두고 다용도로 사용하고 있다.
@@ -90,7 +91,7 @@ function AboutPage({ history }) {
         //응답이 오면 내용 초기화 후 모달 닫기
         setList('');
         onCloseCreateListModal();
-        history.push('/menu/about');
+        history.push('/about');
       })
       .catch((err) => {
         console.log(err);
@@ -193,14 +194,18 @@ function AboutPage({ history }) {
                       </button>
                     </CategoryETCButtonContainer>
                   )}
-                  <cTitle>{v.category}</cTitle>
+                  <cTitle>{v.category && v.category}</cTitle>
 
-                  {v.memo}
                   {/* dummpy Start  */}
 
                   {/* dummpy End  */}
                   {v.length > 0 && <hr />}
                   <ListContainer>
+                    {v.category && (
+                      <>
+                        <Memo currentCategory={v._id} item={todo} />
+                      </>
+                    )}
                     {v.length > 0 &&
                       v.map((v) => {
                         return (

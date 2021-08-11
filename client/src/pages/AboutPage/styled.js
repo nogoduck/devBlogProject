@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const Content = styled.div`
+  padding: 4px 10px;
+  color: blue;
+`;
+
 export const Notice = styled.div`
   border: 2px solid orange;
   border-radius: 5px;

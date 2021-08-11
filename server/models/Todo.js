@@ -15,7 +15,6 @@ const TodoSchema = new Schema(
     },
     memo: {
       type: String,
-      required: true,
     },
     succeed: {
       type: Boolean,
