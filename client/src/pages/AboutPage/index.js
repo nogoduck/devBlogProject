@@ -195,6 +195,7 @@ function AboutPage({ history }) {
                   )}
                   <cTitle>{v.category}</cTitle>
 
+                  {v.memo}
                   {/* dummpy Start  */}
 
                   {/* dummpy End  */}
@@ -219,7 +220,6 @@ function AboutPage({ history }) {
                                 </button>
                               </ListETCButtonContainer>
                             )}
-                            {/* {vList.memo && vList.memo} */}
                           </List>
                         );
                       })}

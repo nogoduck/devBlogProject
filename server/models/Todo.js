@@ -9,7 +9,6 @@ const TodoSchema = new Schema(
     },
     category: {
       type: String,
-      default: '제목 없음',
     },
     categoryTo: {
       type: String,
@@ -17,7 +16,6 @@ const TodoSchema = new Schema(
     memo: {
       type: String,
       required: true,
-      default: '할 일을 입력해주세요',
     },
     succeed: {
       type: Boolean,
