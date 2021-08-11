@@ -25,6 +25,7 @@ export const Container = styled.div`
   font-family: 'Nanum Gothic', sans-serif;
   font-weight: 800;
   position: relative;
+  user-select: text;
   & hr {
     width: 100%;
     padding: 0;
@@ -204,26 +205,6 @@ export const CategoryETCButtonContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  & > button {
-    position: absolute;
-    background: transparent;
-    border: none;
-    font-size: 16px;
-  }
-  & > button:nth-child(1) {
-    top: 12px;
-    right: 32px;
-  }
-  & > button:nth-child(2) {
-    top: 12px;
-    right: 8px;
-  }
-  & > button:hover {
-    background: transparent;
-    border: none;
-    font-size: 16px;
-    color: #3498db;
-  }
 `;
 export const ListETCButtonContainer = styled.div`
   position: absolute;
@@ -233,25 +214,17 @@ export const ListETCButtonContainer = styled.div`
   justify-content: flex-end;
   width: 100%;
   position: absolute;
+`;
 
-  & > button {
-    position: absolute;
-    background: transparent;
-    border: none;
-    font-size: 16px;
-  }
-  & > button:nth-child(1) {
-    top: 12px;
-    right: 32px;
-  }
-  & > button:nth-child(2) {
-    top: 12px;
-    right: 8px;
-  }
-  & > button:hover {
-    background: transparent;
-    border: none;
-    font-size: 16px;
-    color: #3498db;
-  }
+export const CategoryEditButton = styled.button`
+  color: deeppink;
+`;
+export const CategoryDeleteButton = styled.button`
+  color: blue;
+`;
+export const ListEditButton = styled.button`
+  color: red;
+`;
+export const ListDeleteButton = styled.button`
+  color: orange;
 `;

@@ -23,11 +23,11 @@ import {
   CategoryAdd,
   ListButton,
   ListContainer,
-  List,
   CategoryTitle,
   CategoryETCButtonContainer,
-  ListETCButtonContainer,
   Notice,
+  CategoryEditButton,
+  CategoryDeleteButton,
 } from './styled';
 import { useSelector } from 'react-redux';
 import Memo from './Memo';
@@ -51,27 +51,27 @@ function AboutPage({ history }) {
   console.log(user);
   const onSubmitCategory = () => {
     if (category === '') {
-      alert('내용을 입력해주세요');
-    } else {
-      console.log('전송');
-      const payload = {
-        writer: user.authStatus._id,
-        category: category,
-      };
-      axios
-        .post('/api/todo/save', payload)
-        .then((res) => {
-          console.log(res);
-          //응답이 오면 내용 초기화 후 모달 닫기
-          setCategory('');
-          onCloseCreateCategoryModal();
-          initialRequest();
-          history.push('/about');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      alert('카테고리를 입력해주세요');
+      return null;
     }
+    console.log('전송');
+    const payload = {
+      writer: user.authStatus._id,
+      category: category,
+    };
+    axios
+      .post('/api/todo/save', payload)
+      .then((res) => {
+        console.log(res);
+        //응답이 오면 내용 초기화 후 모달 닫기
+        setCategory('');
+        onCloseCreateCategoryModal();
+        initialRequest();
+        history.push('/about');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const onSubmitList = () => {
     if (list === '') {
@@ -187,6 +187,14 @@ function AboutPage({ history }) {
                 <>
                   {v.category && (
                     <Category>
+                      <CategoryETCButtonContainer>
+                        <CategoryEditButton>
+                          <FaEdit />
+                        </CategoryEditButton>
+                        <CategoryDeleteButton>
+                          <IoTrash />
+                        </CategoryDeleteButton>
+                      </CategoryETCButtonContainer>
                       <CategoryTitle>{v.category}</CategoryTitle>
                       {v.length > 0 && <hr />}
                       <ListContainer>
