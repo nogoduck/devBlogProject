@@ -32,7 +32,7 @@ router.delete('/delete/categoryAll', (req, res) => {
   console.log(req.body);
 
   const { _id } = req.body.payload;
-  console.log('[Todo] delete category categoryTo >> ', categoryTo);
+  console.log('[Todo] delete category _id >> ', _id);
   Todo.findByIdAndDelete(_id, (err, doc) => {
     if (err) return res.status(400).json({ success: false, err });
     return res.status(200).json({

@@ -1,18 +1,5 @@
 import styled from 'styled-components';
 
-export const MemoContent = styled.div`
-  color: #000;
-  font-weight: 400;
-  font-family: 'Noto Sans KR', sans-serif;
-`;
-
-export const MemoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 4px 0;
-`;
-
 export const Notice = styled.div`
   border: 2px solid orange;
   border-radius: 5px;
@@ -52,7 +39,7 @@ export const Container = styled.div`
 export const Input = styled.input`
   width: 391px;
   padding: 5px 0 5px 7px;
-  font-size: 20px;
+  font-size: 16px;
   border-radius: 3px;
   border: 1px solid #c3cfe0;
   transition: 0.3s;
@@ -137,7 +124,7 @@ export const Category = styled.div`
   max-width: 512px;
 `;
 
-export const ListContainer = styled.div`
+export const MemoContainer = styled.div`
   margin: 0 12px;
 `;
 
@@ -174,7 +161,7 @@ export const CategoryAdd = styled.button`
   font-family: 'Noto Sans KR', sans-serif;
 `;
 
-export const ListButton = styled.button`
+export const MemoButton = styled.button`
   display: flex;
   align-items: center;
   margin: 4px 0 8px 0;
@@ -195,7 +182,7 @@ export const ListButton = styled.button`
 
 export const CategoryTitle = styled.div`
   color: #000;
-  margin: 12px;
+  margin: 4px 12px 0 12px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -207,56 +194,21 @@ export const CategorySection1 = styled.div`
   justify-content: space-between;
 `;
 
-export const CategoryEditButton = styled.button``;
-export const CategoryDeleteButton = styled.button``;
+export const CategoryDeleteButton = styled.button`
+  font-size: 16px;
+  font-weight: 800;
+`;
 export const CategorySettingButton = styled.button``;
 export const CategoryETCButtonContainer = styled.div`
-  margin: 6px 2px 0 0;
+  margin: 6px 4px 0 0;
   & button {
     background-color: transparent;
     flex-direction: column;
     user-select: none;
-    font-size: 14px;
     border: none;
     width: 30px;
     height: 30px;
     border-radius: 50%;
     cursor: pointer;
   }
-`;
-export const MemoEditButton = styled.button`
-  color: #2980b9;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-export const MemoDeleteButton = styled.button`
-  color: #e74c3c;
-  border-radius: 50%;
-`;
-export const MemoCompleteButton = styled.button`
-  color: #27ae60;
-  border-radius: 50%;
-`;
-export const MemoETCButtonContainer = styled.div`
-  display: flex;
-  & button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    box-shadow: 0 0 1px 1px orange;
-    border: none;
-    width: 25px;
-    height: 25px;
-    margin: 0 2px;
-    cursor: pointer;
-  }
-`;
-
-export const CompleteMemoContainer = styled.div`
-  font-size: 16px;
-  color: #95a5a6;
-  text-decoration: line-through;
 `;

@@ -13,6 +13,7 @@ import { AiFillSetting } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
 
 import {
+  Notice,
   Title,
   Container,
   Input,
@@ -25,22 +26,17 @@ import {
   CategoryContainer,
   CategorySettingButton,
   CategoryAdd,
-  ListButton,
-  ListContainer,
+  MemoButton,
+  MemoContainer,
   CategoryTitle,
   CategoryETCButtonContainer,
-  Notice,
-  CategoryEditButton,
   CategoryDeleteButton,
-  MemoCompleteButton,
 } from './styled';
 import { useSelector } from 'react-redux';
-import Memo from './Memo';
-import CompleteMemo from './CompleteMemo';
+import Memo from './Section/Memo/index';
+import CompleteMemo from './Section/CompleteMemo/CompleteMemo';
 
-//AboutPage는 블로그 소개를 목적으로 추가했으나 내 투두리스트를 작성하기도 하고 계획을 쓰기도 하여
-//페이지명은 그대로 두고 다용도로 사용하고 있다.
-
+//AboutPage는 블로그 소개를 목적으로 추가했으나 현재는 투두리스트로 사용하고 있다.
 function AboutPage({ history }) {
   const user = useSelector((state) => state.user);
   const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false);
@@ -50,15 +46,12 @@ function AboutPage({ history }) {
   const [todo, setTodo] = useState();
   const [clickCategoryId, setClickCategoryId] = useState('');
   const [showETCButton, setShowETCButton] = useState(false);
+  const [showUpdateCategory, setShowUpdateCategory] = useState(false);
 
   const onClickETCButton = useCallback(() => {
     setShowETCButton((prev) => !prev);
   }, []);
 
-  //카테고리, 리스트 마우스 호버시 클래스명 변경 변수
-  //카테고리 버튼은 호버 사용 안할예정 21.07.16 -12:00
-  // const [hoverCategory, setHoverCategory] = useState(false);
-  const [hoverList, setHoverList] = useState(true);
   const onSubmit = () => {
     let payload = {};
 
@@ -88,31 +81,6 @@ function AboutPage({ history }) {
         setCategory('');
         onCloseCreateCategoryModal();
         initialRequest();
-        history.push('/about');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const onSubmit1 = () => {
-    if (memo === '') {
-      alert('내용을 입력해주세요');
-      return null;
-    }
-
-    const payload = {
-      writer: user.authStatus._id,
-      categoryTo: clickCategoryId,
-      memo: memo,
-    };
-
-    axios
-      .post('/api/todo/save', payload)
-      .then((res) => {
-        console.log(res);
-        //응답이 오면 내용 초기화 후 모달 닫기
-        setMemo('');
-        onCloseCreateListModal();
         history.push('/about');
       })
       .catch((err) => {
@@ -150,37 +118,8 @@ function AboutPage({ history }) {
   const onCloseCreateListModal = () => {
     setShowCreateListModal(false);
   };
-  //카테고리명에 마우스 올렸을떄
-  // const inCategoryMouse = () => {
-  //   console.log("on");
-  //   setHoverCategory(true);
-  // };
-  //카테고리명에 마우스 떠날때
-  // const outCategoryMouse = () => {
-  //   console.log("off");
-  //   setHoverCategory(false);
-  // };
-  //리스트명에 마우스 올렸을때
-  const inListMouse = () => {
-    console.log('onList');
-    setHoverList(true);
-  };
-  //리스트명에 마우스 떠날때
-  const outListMouse = () => {
-    console.log('offList');
-    // setHoverList(false);
-  };
 
-  const onClickCategoryEdit = () => {};
-
-  const onClickCategoryDelete = (e) => {
-    todo.map((v) => {
-      if (v.categoryTo === e.target.value) {
-        alert('메모된 내용을 모두 완료하세요.');
-      }
-    });
-    return null;
-
+  const deleteCategory = (e) => {
     const payload = {
       _id: e.target.value,
     };
@@ -199,6 +138,18 @@ function AboutPage({ history }) {
         }
         alert('카테고리 삭제에 실패했습니다.');
       });
+  };
+
+  const onClickCategoryDelete = (e) => {
+    let isEmptyCatrgory = false;
+    for (let i = 0; i < Object.keys(todo).length; i++) {
+      if (todo[i].categoryTo === e.target.value && !todo[i].succeed) {
+        alert('카테고리내에 내용이 없어야 삭제가 가능합니다.');
+        isEmptyCatrgory = true;
+        break;
+      }
+    }
+    if (!isEmptyCatrgory) deleteCategory(e);
   };
 
   useEffect(() => {
@@ -236,42 +187,43 @@ function AboutPage({ history }) {
                     <Category>
                       <CategorySection1>
                         <CategoryTitle>{v.category}</CategoryTitle>
+
                         <CategoryETCButtonContainer>
-                          {showETCButton && (
-                            <CategoryEditButton
-                              value={v._id}
-                              onClick={onClickCategoryEdit}
-                            >
-                              <FaEdit />
-                            </CategoryEditButton>
-                          )}
                           {showETCButton && (
                             <CategoryDeleteButton
                               value={v._id}
                               onClick={onClickCategoryDelete}
                             >
-                              <IoTrash />
+                              ➖{/*<IoTrash />*/}
                             </CategoryDeleteButton>
                           )}
+
                           {showETCButton ? (
                             <CategorySettingButton
                               value={v._id}
                               onClick={onClickETCButton}
                             >
-                              <GrClose />
+                              ❌{/*<GrClose />*/}
                             </CategorySettingButton>
                           ) : (
                             <CategorySettingButton
                               value={v._id}
                               onClick={onClickETCButton}
                             >
-                              <AiFillSetting />
+                              <AiFillSetting
+                                style={{
+                                  fontSize: '16px',
+                                  position: 'absolute',
+                                  top: '13px',
+                                  right: '11px',
+                                }}
+                              />
                             </CategorySettingButton>
                           )}
                         </CategoryETCButtonContainer>
                       </CategorySection1>
                       {v.length > 0 && <hr />}
-                      <ListContainer>
+                      <MemoContainer>
                         {v.category && (
                           <>
                             <Memo
@@ -279,16 +231,16 @@ function AboutPage({ history }) {
                               item={todo}
                               showETCButton={showETCButton}
                             />
-                            <ListButton
+                            <MemoButton
                               onClick={onClickCreateListModal}
                               value={v._id}
                             >
                               <IoMdAddCircle />
                               &nbsp;할 일을 입력해주세요 !
-                            </ListButton>
+                            </MemoButton>
                           </>
                         )}
-                      </ListContainer>
+                      </MemoContainer>
                     </Category>
                   )}
                 </>
@@ -312,6 +264,7 @@ function AboutPage({ history }) {
             <Input
               type="text"
               id="add_category"
+              placeholder="변경이 불가능 하므로 신중히 입력해주세요."
               value={category}
               onChange={onChangeCategory}
             ></Input>
@@ -338,10 +291,6 @@ function AboutPage({ history }) {
           </Modal>
         )}
       </Container>
-      <Title style={{ fontSize: '16px' }}>
-        완료됨
-        <MemoCompleteButton>✔</MemoCompleteButton>
-      </Title>
 
       <CompleteMemo item={todo} />
     </>

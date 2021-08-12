@@ -12,7 +12,8 @@ import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { IoTrash } from 'react-icons/io5';
-const Memo = ({ history, currentCategory, item, showETCButton }) => {
+
+const Index = ({ history, currentCategory, item, showETCButton }) => {
   const [showUpdateMemoModal, setShowUpdateMemoModal] = useState(false);
   const [selectId, setSelectId] = useState('');
 
@@ -95,8 +96,7 @@ const Memo = ({ history, currentCategory, item, showETCButton }) => {
               <MemoETCButtonContainer>
                 {showETCButton && (
                   <MemoDeleteButton value={v._id} onClick={onClickDeleteMemo}>
-                    <IoTrash />
-                    🗑⚙🔨❌✖
+                    ➖{/*<IoTrash />*/}
                   </MemoDeleteButton>
                 )}
                 {/*onClick={() => this.move}>*/}
@@ -105,7 +105,8 @@ const Memo = ({ history, currentCategory, item, showETCButton }) => {
                     value={v._id}
                     onClick={onClickUpdateMemoModal}
                   >
-                    <FaEdit value={v._id} onClick={onClickUpdateMemoModal} />
+                    🔨
+                    {/*<FaEdit/>*/}
                   </MemoEditButton>
                 )}
 
@@ -127,4 +128,4 @@ const Memo = ({ history, currentCategory, item, showETCButton }) => {
   );
 };
 
-export default withRouter(Memo);
+export default withRouter(Index);

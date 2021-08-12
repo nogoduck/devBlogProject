@@ -1,5 +1,5 @@
 import React from 'react';
-import { CompleteMemoContainer } from './styled';
+import { CompleteMemoContainer, MemoCompleteButton, Title } from './styled';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 const CompleteMemo = ({ item, history }) => {
@@ -20,6 +20,11 @@ const CompleteMemo = ({ item, history }) => {
 
   return (
     <>
+      <Title>
+        완료됨
+        <MemoCompleteButton>✔</MemoCompleteButton>
+      </Title>
+
       <button onClick={onDeleteCompleteMemo}>완료된 항목 전체삭제</button>
       {item &&
         item.map((v) => (
