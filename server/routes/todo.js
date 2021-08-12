@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { Todo } = require('../models/Todo');
+const { log } = require('nodemon/lib/utils');
 
 router.get('/getAll', (req, res) => {
   Todo.find().exec((err, doc) => {
@@ -26,9 +27,10 @@ router.post('/save', (req, res) => {
 });
 
 router.delete('/delete', (req, res) => {
-  const todo = new Todo(req.body);
+  const { _id } = req.body.payload;
+  console.log('[Todo] delete _id >> ', _id);
 
-  todo.save((err, doc) => {
+  Todo.findByIdAndDelete(_id, (err, doc) => {
     if (err) return res.status(400).json({ success: false, err });
     return res.status(200).json({
       success: true,
@@ -38,9 +40,11 @@ router.delete('/delete', (req, res) => {
 });
 
 router.patch('/update/item', (req, res) => {
-  const todo = new Todo(req.body);
+  const { category, memo } = req.body;
 
-  todo.save((err, doc) => {
+  const update = category ? category : memo;
+
+  Todo.findByIdAndUpdate(_id, update, { new: true }, (err, doc) => {
     if (err) return res.status(400).json({ success: false, err });
     return res.status(200).json({
       success: true,

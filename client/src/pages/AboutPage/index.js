@@ -48,7 +48,6 @@ function AboutPage({ history }) {
   //카테고리 버튼은 호버 사용 안할예정 21.07.16 -12:00
   // const [hoverCategory, setHoverCategory] = useState(false);
   const [hoverList, setHoverList] = useState(true);
-  console.log(user);
   const onSubmitCategory = () => {
     if (category === '') {
       alert('카테고리를 입력해주세요');
