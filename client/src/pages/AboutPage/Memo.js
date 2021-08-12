@@ -11,21 +11,26 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 const Memo = ({ history, currentCategory, item }) => {
   const [showUpdateMemoModal, setShowUpdateMemoModal] = useState(false);
+  const [selectId, setSelectId] = useState('');
+
   const [memo, setMemo] = useState('');
 
   const onChangeMemo = (e) => {
     setMemo(e.target.value);
   };
-  const onClickUpdateMemoModal = () => {
+  const onClickUpdateMemoModal = (e) => {
+    console.log('value >> ', e.target.value);
+    setSelectId(e.target.value);
     setShowUpdateMemoModal((prev) => !prev);
+    console.log(selectId);
   };
 
   const onClickDeleteMemo = (e) => {
-    const memoId = e.target.value;
-    console.log(memoId);
+    setSelectId(e.target.value);
+    console.log(selectId);
 
     const payload = {
-      _id: memoId,
+      _id: selectId,
     };
 
     axios
@@ -35,6 +40,7 @@ const Memo = ({ history, currentCategory, item }) => {
         },
       })
       .then(({ data }) => {
+        setSelectId('');
         if (data.success) {
           console.log('투두 삭제 결과 >> ', data);
           history.push('/about');
@@ -44,18 +50,16 @@ const Memo = ({ history, currentCategory, item }) => {
       });
   };
 
-  const onClickUpdateMemo = (e) => {
-    const memoId = e.target.value;
-    console.log(memoId);
-
+  const onClickUpdateMemo = () => {
     const payload = {
-      _id: memoId,
+      _id: selectId,
       memo,
     };
 
     axios.patch('/api/todo/update/item', payload).then(({ data }) => {
+      setSelectId('');
       if (data.success) {
-        console.log('투두 삭제 결과 >> ', data);
+        console.log('투두 변경 결과 >> ', data);
         history.push('/about');
         return null;
       }
@@ -71,7 +75,7 @@ const Memo = ({ history, currentCategory, item }) => {
           {currentCategory === v.categoryTo && (
             <>
               <ListETCButtonContainer>
-                <ListEditButton onClick={onClickUpdateMemoModal}>
+                <ListEditButton value={v._id} onClick={onClickUpdateMemoModal}>
                   <FaEdit />
                 </ListEditButton>
                 <ListDeleteButton value={v._id} onClick={onClickDeleteMemo}>
