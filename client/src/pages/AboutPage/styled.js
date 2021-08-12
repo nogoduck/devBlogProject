@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 
-export const Content = styled.div`
-  margin: 12px 6px;
-  color: blue;
+export const MemoContent = styled.div`
+  color: #000;
+  font-weight: 400;
+  font-family: 'Noto Sans KR', sans-serif;
+`;
+
+export const MemoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4px 0;
 `;
 
 export const Notice = styled.div`
@@ -16,6 +24,14 @@ export const Notice = styled.div`
 export const Title = styled.div`
   font-size: 20px;
   margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  & button {
+    font-size: 10px;
+    width: 24px;
+    height: 24px;
+    margin-left: 4px;
+  }
 `;
 export const Container = styled.div`
   display: flex;
@@ -101,12 +117,20 @@ export const CategoryContainer = styled.div`
 `;
 
 export const Category = styled.div`
+  //Style1
+  //background: #f7f7a0;
+
+  //Style2
+  background: linear-gradient(
+    160deg,
+    rgba(254, 242, 143, 1) 0%,
+    rgba(254, 229, 35, 1) 100%
+  );
   border: 1px solid #808e9b;
   display: inline-block;
   color: #000;
   border-radius: 5px;
-  background-color: transparent;
-  box-shadow: 0 0 5px 1px #7f8fa6;
+  box-shadow: 4px 4px 12px 1px #7f8fa6;
   margin: 8px;
   position: relative;
   min-width: 256px;
@@ -114,7 +138,7 @@ export const Category = styled.div`
 `;
 
 export const ListContainer = styled.div`
-  margin: 4px 8px;
+  margin: 0 12px;
 `;
 
 export const List = styled.div`
@@ -150,6 +174,7 @@ export const CategoryCreate = styled.div`
   min-width: 200px;
   min-height: 200px;
   max-width: 500px;
+  max-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -206,14 +231,16 @@ export const CategoryETCButtonContainer = styled.div`
   justify-content: flex-end;
   width: 100%;
 `;
-export const ListETCButtonContainer = styled.div`
-  position: absolute;
+export const MemoETCButtonContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100%;
-  position: absolute;
+  & button {
+    box-shadow: 0 0 1px 1px orange;
+    border: none;
+    width: 25px;
+    height: 25px;
+    margin: 0 1px;
+    cursor: pointer;
+  }
 `;
 
 export const CategoryEditButton = styled.button`
@@ -222,15 +249,24 @@ export const CategoryEditButton = styled.button`
 export const CategoryDeleteButton = styled.button`
   color: blue;
 `;
-export const ListEditButton = styled.button`
-  width: 32px;
-  height: 32px;
-  z-index: 1;
+export const MemoEditButton = styled.button`
   color: red;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
-export const ListDeleteButton = styled.button`
+export const MemoDeleteButton = styled.button`
   color: orange;
+  font-size: 8px;
+  border-radius: 50%;
 `;
-export const CompleteButton = styled.button`
-  color: orange;
+export const MemoCompleteButton = styled.button`
+  color: green;
+  border-radius: 50%;
+`;
+export const CompleteMemoContainer = styled.div`
+  font-size: 16px;
+  color: #95a5a6;
+  text-decoration: line-through;
 `;

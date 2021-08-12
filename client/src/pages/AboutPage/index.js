@@ -28,9 +28,11 @@ import {
   Notice,
   CategoryEditButton,
   CategoryDeleteButton,
+  MemoCompleteButton,
 } from './styled';
 import { useSelector } from 'react-redux';
 import Memo from './Memo';
+import CompleteMemo from './CompleteMemo';
 
 //AboutPage는 블로그 소개를 목적으로 추가했으나 내 투두리스트를 작성하기도 하고 계획을 쓰기도 하여
 //페이지명은 그대로 두고 다용도로 사용하고 있다.
@@ -133,7 +135,6 @@ function AboutPage({ history }) {
   const onClickCreateListModal = (e) => {
     //현재 클릭된 카테고리를 넣어준다
     setClickCategoryId(e.target.value);
-    console.log('onClick Target', e.target.value);
     setShowCreateListModal((prev) => !prev);
   };
   //리스트 추가 모달 닫기
@@ -174,11 +175,6 @@ function AboutPage({ history }) {
       setMemo('');
     }
   }, [showCreateCategoryModal, showCreateListModal]);
-
-  // todo.map((v) => {
-  //   console.log(v);
-  // });
-  // console.log("todo memo >> ", todo.category);
 
   //---------------------------[ 수정 예정 사항 ]---------------------
   //input을 사용할 시 랜더링이 자주 일어나기 떄문에 따로 뺴줄 예정
@@ -242,7 +238,7 @@ function AboutPage({ history }) {
             <CancelButton onClick={onCloseCreateCategoryModal}>
               취소
             </CancelButton>
-            <Label for="add_category">카테고리 추가</Label>
+            <Label htmlFor="add_category">카테고리 추가</Label>
             <Input
               type="text"
               id="add_category"
@@ -262,7 +258,7 @@ function AboutPage({ history }) {
             <br />
             <SubmitButton onClick={onSubmit}>확인</SubmitButton>
             <CancelButton onClick={onCloseCreateListModal}>취소</CancelButton>
-            <Label for="add_memo">메모 추가</Label>
+            <Label htmlFor="add_memo">메모 추가</Label>
             <Input
               type="text"
               id="add_memo"
@@ -272,6 +268,12 @@ function AboutPage({ history }) {
           </Modal>
         )}
       </Container>
+      <Title style={{ fontSize: '16px' }}>
+        완료됨
+        <MemoCompleteButton>✔</MemoCompleteButton>
+      </Title>
+
+      <CompleteMemo item={todo} />
     </>
   );
 }

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import {
-  Content,
-  ListETCButtonContainer,
-  ListEditButton,
-  ListDeleteButton,
-  CompleteButton,
+  MemoContent,
+  MemoETCButtonContainer,
+  MemoEditButton,
+  MemoDeleteButton,
+  MemoCompleteButton,
+  MemoContainer,
 } from './styled';
 import { FaEdit } from 'react-icons/fa';
 import { IoMdRemoveCircle } from 'react-icons/io';
@@ -27,15 +28,27 @@ const Memo = ({ history, currentCategory, item }) => {
   };
 
   const onClickCompleteMemo = (e) => {
-    console.log('done !! ', e.target.value);
+    const payload = {
+      _id: e.target.value,
+      succeed: true,
+    };
+
+    axios.patch('/api/todo/update/state', payload).then(({ data }) => {
+      setSelectId('');
+      if (data.success) {
+        console.log('상태 변경 결과 >> ', data);
+        history.push('/about');
+        return null;
+      }
+      alert('상태 변경에 실패했습니다.');
+    });
   };
   const onClickDeleteMemo = (e) => {
-    setSelectId(e.target.value);
-    console.log(selectId);
-
     const payload = {
-      _id: selectId,
+      _id: e.target.value,
     };
+
+    console.log('payload >> ', payload);
 
     axios
       .delete('/api/todo/delete/memo', {
@@ -73,24 +86,23 @@ const Memo = ({ history, currentCategory, item }) => {
 
   return (
     <>
-      <hr />
       {item.map((v) => (
         <>
-          {currentCategory === v.categoryTo && (
-            <>
-              <ListETCButtonContainer>
-                <CompleteButton value={v._id} onClick={onClickCompleteMemo}>
+          {currentCategory === v.categoryTo && !v.succeed && (
+            <MemoContainer>
+              <MemoContent>{v.memo}</MemoContent>
+              <MemoETCButtonContainer>
+                <MemoCompleteButton value={v._id} onClick={onClickCompleteMemo}>
                   ✔
-                </CompleteButton>
-                <ListEditButton value={v._id} onClick={onClickUpdateMemoModal}>
+                </MemoCompleteButton>
+                <MemoEditButton value={v._id} onClick={onClickUpdateMemoModal}>
                   🔨
-                </ListEditButton>
-                <ListDeleteButton value={v._id} onClick={onClickDeleteMemo}>
+                </MemoEditButton>
+                <MemoDeleteButton value={v._id} onClick={onClickDeleteMemo}>
                   ➖
-                </ListDeleteButton>
-              </ListETCButtonContainer>
-              <Content>{v.memo}</Content>
-            </> //currentCategory === v.categoryTo
+                </MemoDeleteButton>
+              </MemoETCButtonContainer>
+            </MemoContainer> //currentCategory === v.categoryTo
           )}
         </> //item.map
       ))}
