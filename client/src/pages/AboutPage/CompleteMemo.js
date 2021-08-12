@@ -2,8 +2,8 @@ import React from 'react';
 import { CompleteMemoContainer } from './styled';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-const CompleteMemo = ({ item, reRender }) => {
-  const onDeleteCompleteMemo = ({ history }) => {
+const CompleteMemo = ({ item, history }) => {
+  const onDeleteCompleteMemo = () => {
     axios
       .delete('/api/todo//delete/completeMemoAll')
       .then(({ data }) => {

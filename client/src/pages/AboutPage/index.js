@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,6 +9,8 @@ import { MdLibraryAdd } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
 import { IoTrash } from 'react-icons/io5';
 import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
+import { AiFillSetting } from 'react-icons/ai';
+import { GrClose } from 'react-icons/gr';
 
 import {
   Title,
@@ -18,8 +20,10 @@ import {
   SubmitButton,
   CancelButton,
   Category,
+  CategorySection1,
   CategoryCreate,
   CategoryContainer,
+  CategorySettingButton,
   CategoryAdd,
   ListButton,
   ListContainer,
@@ -45,6 +49,11 @@ function AboutPage({ history }) {
   const [memo, setMemo, onChangeMemo] = useInput();
   const [todo, setTodo] = useState();
   const [clickCategoryId, setClickCategoryId] = useState('');
+  const [showETCButton, setShowETCButton] = useState(false);
+
+  const onClickETCButton = useCallback(() => {
+    setShowETCButton((prev) => !prev);
+  }, []);
 
   //카테고리, 리스트 마우스 호버시 클래스명 변경 변수
   //카테고리 버튼은 호버 사용 안할예정 21.07.16 -12:00
@@ -162,6 +171,36 @@ function AboutPage({ history }) {
     // setHoverList(false);
   };
 
+  const onClickCategoryEdit = () => {};
+
+  const onClickCategoryDelete = (e) => {
+    todo.map((v) => {
+      if (v.categoryTo === e.target.value) {
+        alert('메모된 내용을 모두 완료하세요.');
+      }
+    });
+    return null;
+
+    const payload = {
+      _id: e.target.value,
+    };
+
+    axios
+      .delete('/api/todo/delete/categoryAll', {
+        data: {
+          payload,
+        },
+      })
+      .then(({ data }) => {
+        if (data.success) {
+          console.log('카테고리 삭제 결과 >> ', data);
+          history.push('/about');
+          return null;
+        }
+        alert('카테고리 삭제에 실패했습니다.');
+      });
+  };
+
   useEffect(() => {
     initialRequest();
   }, []);
@@ -195,15 +234,42 @@ function AboutPage({ history }) {
                 <>
                   {v.category && (
                     <Category>
-                      <CategoryETCButtonContainer>
-                        <CategoryEditButton>
-                          <FaEdit />
-                        </CategoryEditButton>
-                        <CategoryDeleteButton>
-                          <IoTrash />
-                        </CategoryDeleteButton>
-                      </CategoryETCButtonContainer>
-                      <CategoryTitle>{v.category}</CategoryTitle>
+                      <CategorySection1>
+                        <CategoryTitle>{v.category}</CategoryTitle>
+                        <CategoryETCButtonContainer>
+                          {showETCButton && (
+                            <CategoryEditButton
+                              value={v._id}
+                              onClick={onClickCategoryEdit}
+                            >
+                              <FaEdit />
+                            </CategoryEditButton>
+                          )}
+                          {showETCButton && (
+                            <CategoryDeleteButton
+                              value={v._id}
+                              onClick={onClickCategoryDelete}
+                            >
+                              <IoTrash />
+                            </CategoryDeleteButton>
+                          )}
+                          {showETCButton ? (
+                            <CategorySettingButton
+                              value={v._id}
+                              onClick={onClickETCButton}
+                            >
+                              <GrClose />
+                            </CategorySettingButton>
+                          ) : (
+                            <CategorySettingButton
+                              value={v._id}
+                              onClick={onClickETCButton}
+                            >
+                              <AiFillSetting />
+                            </CategorySettingButton>
+                          )}
+                        </CategoryETCButtonContainer>
+                      </CategorySection1>
                       {v.length > 0 && <hr />}
                       <ListContainer>
                         {v.category && (

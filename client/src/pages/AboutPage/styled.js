@@ -167,8 +167,8 @@ export const CategoryCreate = styled.div`
   color: #000;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #dedede;
-  /* background-color: transparent; */
+
+  background-color: #fef28fff;
   box-shadow: 0 0 5px 1px #7f8fa6;
   position: relative;
   min-width: 200px;
@@ -179,8 +179,10 @@ export const CategoryCreate = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: 0.2s;
+
   &:hover {
-    background-color: #fff;
+    background: #fef28f61;
   }
 `;
 
@@ -222,49 +224,58 @@ export const CategoryTitle = styled.div`
   text-overflow: ellipsis;
   position: relative;
 `;
-
-export const CategoryETCButtonContainer = styled.div`
-  position: absolute;
+export const CategorySection1 = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
-  width: 100%;
+  justify-content: space-between;
 `;
-export const MemoETCButtonContainer = styled.div`
-  display: flex;
+
+export const CategoryEditButton = styled.button``;
+export const CategoryDeleteButton = styled.button``;
+export const CategorySettingButton = styled.button``;
+export const CategoryETCButtonContainer = styled.div`
+  //border: 1px solid green;
+  margin-right: 6px;
   & button {
+    user-select: none;
+    font-size: 16px;
     box-shadow: 0 0 1px 1px orange;
     border: none;
-    width: 25px;
-    height: 25px;
-    margin: 0 1px;
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    border-radius: 50%;
     cursor: pointer;
   }
 `;
-
-export const CategoryEditButton = styled.button`
-  color: deeppink;
-`;
-export const CategoryDeleteButton = styled.button`
-  color: blue;
-`;
 export const MemoEditButton = styled.button`
-  color: red;
+  color: #2980b9;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 export const MemoDeleteButton = styled.button`
-  color: orange;
-  font-size: 8px;
+  color: #e74c3c;
   border-radius: 50%;
 `;
 export const MemoCompleteButton = styled.button`
-  color: green;
+  color: #27ae60;
   border-radius: 50%;
 `;
+export const MemoETCButtonContainer = styled.div`
+  display: flex;
+  & button {
+    user-select: none;
+    box-shadow: 0 0 1px 1px orange;
+    border: none;
+    width: 25px;
+    height: 25px;
+    margin: 0 2px;
+    cursor: pointer;
+  }
+`;
+
 export const CompleteMemoContainer = styled.div`
   font-size: 16px;
   color: #95a5a6;
