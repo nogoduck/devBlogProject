@@ -4,6 +4,7 @@ import {
   ListETCButtonContainer,
   ListEditButton,
   ListDeleteButton,
+  CompleteButton,
 } from './styled';
 import { FaEdit } from 'react-icons/fa';
 import { IoMdRemoveCircle } from 'react-icons/io';
@@ -19,12 +20,15 @@ const Memo = ({ history, currentCategory, item }) => {
     setMemo(e.target.value);
   };
   const onClickUpdateMemoModal = (e) => {
-    console.log('value >> ', e.target.value);
+    console.log('log >> ', e.target.value);
     setSelectId(e.target.value);
     setShowUpdateMemoModal((prev) => !prev);
     console.log(selectId);
   };
 
+  const onClickCompleteMemo = (e) => {
+    console.log('done !! ', e.target.value);
+  };
   const onClickDeleteMemo = (e) => {
     setSelectId(e.target.value);
     console.log(selectId);
@@ -75,11 +79,14 @@ const Memo = ({ history, currentCategory, item }) => {
           {currentCategory === v.categoryTo && (
             <>
               <ListETCButtonContainer>
+                <CompleteButton value={v._id} onClick={onClickCompleteMemo}>
+                  ✔
+                </CompleteButton>
                 <ListEditButton value={v._id} onClick={onClickUpdateMemoModal}>
-                  <FaEdit />
+                  🔨
                 </ListEditButton>
                 <ListDeleteButton value={v._id} onClick={onClickDeleteMemo}>
-                  <IoMdRemoveCircle />
+                  ➖
                 </ListDeleteButton>
               </ListETCButtonContainer>
               <Content>{v.memo}</Content>

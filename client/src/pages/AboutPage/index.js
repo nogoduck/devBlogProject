@@ -187,10 +187,12 @@ function AboutPage({ history }) {
   return (
     <>
       <Title>계획</Title>
-      <Notice>개발 진행중</Notice>
       <Container>
-        <hr />
         <CategoryContainer>
+          <CategoryCreate onClick={onClickCreateCategoryModal}>
+            <CategoryAdd>카테고리 추가</CategoryAdd>
+            <MdLibraryAdd style={{ fontSize: '48px', marginTop: '4px' }} />
+          </CategoryCreate>
           {todo &&
             todo.map((v) => {
               return (
@@ -226,10 +228,6 @@ function AboutPage({ history }) {
                 </>
               );
             })}
-          <CategoryCreate onClick={onClickCreateCategoryModal}>
-            <CategoryAdd>카테고리 추가</CategoryAdd>
-            <MdLibraryAdd style={{ fontSize: '48px', marginTop: '4px' }} />
-          </CategoryCreate>
         </CategoryContainer>
 
         {showCreateCategoryModal && (

@@ -223,8 +223,14 @@ export const CategoryDeleteButton = styled.button`
   color: blue;
 `;
 export const ListEditButton = styled.button`
+  width: 32px;
+  height: 32px;
+  z-index: 1;
   color: red;
 `;
 export const ListDeleteButton = styled.button`
+  color: orange;
+`;
+export const CompleteButton = styled.button`
   color: orange;
 `;

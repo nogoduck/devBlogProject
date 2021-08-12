@@ -5,13 +5,15 @@ const { Todo } = require('../models/Todo');
 const { log } = require('nodemon/lib/utils');
 
 router.get('/getAll', (req, res) => {
-  Todo.find().exec((err, doc) => {
-    if (err) return res.status(400).json({ success: false, err });
-    return res.status(200).json({
-      success: true,
-      doc,
+  Todo.find()
+    .sort({ updatedAt: 'desc' })
+    .exec((err, doc) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({
+        success: true,
+        doc,
+      });
     });
-  });
 });
 
 router.post('/save', (req, res) => {
