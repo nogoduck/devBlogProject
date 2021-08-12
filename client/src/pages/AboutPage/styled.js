@@ -141,26 +141,6 @@ export const ListContainer = styled.div`
   margin: 0 12px;
 `;
 
-export const List = styled.div`
-  //체크시 해당 리스트 회색으로 처리하고 중앙선 그을 예정 + success:true
-
-  margin: 5px 10px;
-
-  & > input {
-    position: absolute;
-    right: 12px;
-  }
-  & > input[id='list-checkbox'] {
-    height: 18px;
-    width: 18px;
-  }
-  & > input[id='list-checkbox']:checked {
-    height: 18px;
-    width: 18px;
-    color: #009432;
-  }
-`;
-
 export const CategoryCreate = styled.div`
   margin: 8px;
   border: 1px solid #808e9b;
@@ -174,7 +154,6 @@ export const CategoryCreate = styled.div`
   min-width: 200px;
   min-height: 200px;
   max-width: 500px;
-  max-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -196,19 +175,17 @@ export const CategoryAdd = styled.button`
 `;
 
 export const ListButton = styled.button`
+  display: flex;
+  align-items: center;
+  margin: 4px 0 8px 0;
+  justify-content: center;
   color: #747d8c;
-  right: 4px;
-  top: -2px;
   width: 100%;
-  height: 30px;
   font-size: 16px;
   font-weight: 800;
   border: none;
   background-color: transparent;
   transition: 0.1s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   /* border:1px solid black; */
   &:hover {
     color: #000;
@@ -234,16 +211,15 @@ export const CategoryEditButton = styled.button``;
 export const CategoryDeleteButton = styled.button``;
 export const CategorySettingButton = styled.button``;
 export const CategoryETCButtonContainer = styled.div`
-  //border: 1px solid green;
-  margin-right: 6px;
+  margin: 6px 2px 0 0;
   & button {
+    background-color: transparent;
+    flex-direction: column;
     user-select: none;
-    font-size: 16px;
-    box-shadow: 0 0 1px 1px orange;
+    font-size: 14px;
     border: none;
     width: 30px;
     height: 30px;
-    margin: 2px;
     border-radius: 50%;
     cursor: pointer;
   }
@@ -266,6 +242,9 @@ export const MemoCompleteButton = styled.button`
 export const MemoETCButtonContainer = styled.div`
   display: flex;
   & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     user-select: none;
     box-shadow: 0 0 1px 1px orange;
     border: none;

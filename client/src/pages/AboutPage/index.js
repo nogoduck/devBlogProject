@@ -274,7 +274,11 @@ function AboutPage({ history }) {
                       <ListContainer>
                         {v.category && (
                           <>
-                            <Memo currentCategory={v._id} item={todo} />
+                            <Memo
+                              currentCategory={v._id}
+                              item={todo}
+                              showETCButton={showETCButton}
+                            />
                             <ListButton
                               onClick={onClickCreateListModal}
                               value={v._id}
