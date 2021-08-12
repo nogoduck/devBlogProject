@@ -26,9 +26,9 @@ router.post('/save', (req, res) => {
   });
 });
 
-router.delete('/delete', (req, res) => {
+router.delete('/delete/memo', (req, res) => {
   const { _id } = req.body.payload;
-  console.log('[Todo] delete _id >> ', _id);
+  console.log('[Todo] delete memo _id >> ', _id);
 
   Todo.findByIdAndDelete(_id, (err, doc) => {
     if (err) return res.status(400).json({ success: false, err });
@@ -40,9 +40,22 @@ router.delete('/delete', (req, res) => {
 });
 
 router.patch('/update/item', (req, res) => {
-  const { category, memo } = req.body;
+  console.log('요청 받음');
+  console.log(req.body);
+  const { _id, category, memo } = req.body;
+  let update = {};
+  if (category) {
+    update = {
+      category,
+    };
+  }
+  if (memo) {
+    update = {
+      memo,
+    };
+  }
 
-  const update = category ? category : memo;
+  console.log('update >> ', update);
 
   Todo.findByIdAndUpdate(_id, update, { new: true }, (err, doc) => {
     if (err) return res.status(400).json({ success: false, err });

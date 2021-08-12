@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Content,
   ListETCButtonContainer,
@@ -8,17 +8,28 @@ import {
 import { FaEdit } from 'react-icons/fa';
 import { IoMdRemoveCircle } from 'react-icons/io';
 import axios from 'axios';
-const Memo = ({ currentCategory, item }) => {
-  const deleteItem = (e) => {
-    const clickId = e.target.value;
-    console.log(clickId);
+import { withRouter } from 'react-router-dom';
+const Memo = ({ history, currentCategory, item }) => {
+  const [showUpdateMemoModal, setShowUpdateMemoModal] = useState(false);
+  const [memo, setMemo] = useState('');
+
+  const onChangeMemo = (e) => {
+    setMemo(e.target.value);
+  };
+  const onClickUpdateMemoModal = () => {
+    setShowUpdateMemoModal((prev) => !prev);
+  };
+
+  const onClickDeleteMemo = (e) => {
+    const memoId = e.target.value;
+    console.log(memoId);
 
     const payload = {
-      _id: clickId,
+      _id: memoId,
     };
 
     axios
-      .delete('/api/todo/delete', {
+      .delete('/api/todo/delete/memo', {
         data: {
           payload,
         },
@@ -26,13 +37,30 @@ const Memo = ({ currentCategory, item }) => {
       .then(({ data }) => {
         if (data.success) {
           console.log('투두 삭제 결과 >> ', data);
+          history.push('/about');
           return null;
         }
         alert('삭제에 실패했습니다.');
-      })
-      .catch((err) => {
-        console.log('Delete Account Error >> ', err);
       });
+  };
+
+  const onClickUpdateMemo = (e) => {
+    const memoId = e.target.value;
+    console.log(memoId);
+
+    const payload = {
+      _id: memoId,
+      memo,
+    };
+
+    axios.patch('/api/todo/update/item', payload).then(({ data }) => {
+      if (data.success) {
+        console.log('투두 삭제 결과 >> ', data);
+        history.push('/about');
+        return null;
+      }
+      alert('변경에 실패했습니다.');
+    });
   };
 
   return (
@@ -43,20 +71,26 @@ const Memo = ({ currentCategory, item }) => {
           {currentCategory === v.categoryTo && (
             <>
               <ListETCButtonContainer>
-                <ListEditButton>
+                <ListEditButton onClick={onClickUpdateMemoModal}>
                   <FaEdit />
                 </ListEditButton>
-                <ListDeleteButton value={v._id} onClick={deleteItem}>
+                <ListDeleteButton value={v._id} onClick={onClickDeleteMemo}>
                   <IoMdRemoveCircle />
                 </ListDeleteButton>
               </ListETCButtonContainer>
               <Content>{v.memo}</Content>
-            </>
+            </> //currentCategory === v.categoryTo
           )}
-        </>
+        </> //item.map
       ))}
-    </>
+      {showUpdateMemoModal && (
+        <div>
+          <input type="text" value={memo} onChange={onChangeMemo} />
+          <button onClick={onClickUpdateMemo}>변경</button>
+        </div>
+      )}
+    </> //return()
   );
 };
 
-export default Memo;
+export default withRouter(Memo);

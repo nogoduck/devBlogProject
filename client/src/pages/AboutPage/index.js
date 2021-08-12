@@ -40,7 +40,7 @@ function AboutPage({ history }) {
   const [showCreateCategoryModal, setShowCreateCategoryModal] = useState(false);
   const [showCreateListModal, setShowCreateListModal] = useState(false);
   const [category, setCategory, onChangeCategory] = useInput();
-  const [list, setList, onChangeList] = useInput();
+  const [memo, setMemo, onChangeMemo] = useInput();
   const [todo, setTodo] = useState();
   const [clickCategoryId, setClickCategoryId] = useState('');
 
@@ -48,16 +48,27 @@ function AboutPage({ history }) {
   //카테고리 버튼은 호버 사용 안할예정 21.07.16 -12:00
   // const [hoverCategory, setHoverCategory] = useState(false);
   const [hoverList, setHoverList] = useState(true);
-  const onSubmitCategory = () => {
-    if (category === '') {
-      alert('카테고리를 입력해주세요');
+  const onSubmit = () => {
+    let payload = {};
+
+    if (category === '' && memo === '') {
+      alert('내용을 입력해주세요.');
       return null;
     }
-    console.log('전송');
-    const payload = {
-      writer: user.authStatus._id,
-      category: category,
-    };
+
+    if (category) {
+      payload = {
+        writer: user.authStatus._id,
+        category,
+      };
+    }
+    if (memo) {
+      payload = {
+        categoryTo: clickCategoryId,
+        writer: user.authStatus._id,
+        memo,
+      };
+    }
     axios
       .post('/api/todo/save', payload)
       .then((res) => {
@@ -72,8 +83,8 @@ function AboutPage({ history }) {
         console.log(err);
       });
   };
-  const onSubmitList = () => {
-    if (list === '') {
+  const onSubmit1 = () => {
+    if (memo === '') {
       alert('내용을 입력해주세요');
       return null;
     }
@@ -81,7 +92,7 @@ function AboutPage({ history }) {
     const payload = {
       writer: user.authStatus._id,
       categoryTo: clickCategoryId,
-      memo: list,
+      memo: memo,
     };
 
     axios
@@ -89,7 +100,7 @@ function AboutPage({ history }) {
       .then((res) => {
         console.log(res);
         //응답이 오면 내용 초기화 후 모달 닫기
-        setList('');
+        setMemo('');
         onCloseCreateListModal();
         history.push('/about');
       })
@@ -160,14 +171,14 @@ function AboutPage({ history }) {
       setCategory('');
     }
     if (!showCreateListModal) {
-      setList('');
+      setMemo('');
     }
   }, [showCreateCategoryModal, showCreateListModal]);
 
   // todo.map((v) => {
   //   console.log(v);
   // });
-  // console.log("todo list >> ", todo.category);
+  // console.log("todo memo >> ", todo.category);
 
   //---------------------------[ 수정 예정 사항 ]---------------------
   //input을 사용할 시 랜더링이 자주 일어나기 떄문에 따로 뺴줄 예정
@@ -229,7 +240,7 @@ function AboutPage({ history }) {
             style={{ padding: '0px 20px 20px 20px', width: '400px' }}
           >
             <br />
-            <SubmitButton onClick={onSubmitCategory}>확인</SubmitButton>
+            <SubmitButton onClick={onSubmit}>확인</SubmitButton>
             <CancelButton onClick={onCloseCreateCategoryModal}>
               취소
             </CancelButton>
@@ -251,14 +262,14 @@ function AboutPage({ history }) {
             style={{ padding: '0px 20px 20px 20px', width: '400px' }}
           >
             <br />
-            <SubmitButton onClick={onSubmitList}>확인</SubmitButton>
+            <SubmitButton onClick={onSubmit}>확인</SubmitButton>
             <CancelButton onClick={onCloseCreateListModal}>취소</CancelButton>
-            <Label for="add_list">메모 추가</Label>
+            <Label for="add_memo">메모 추가</Label>
             <Input
               type="text"
-              id="add_list"
-              value={list}
-              onChange={onChangeList}
+              id="add_memo"
+              value={memo}
+              onChange={onChangeMemo}
             ></Input>
           </Modal>
         )}
