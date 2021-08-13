@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import {
   Container,
   CompleteMemoContainer,
-  MemoCompleteButton,
+  MemoCompleteIcon,
+  CompleteETCButton,
   DeleteAllButton,
   Title,
   RestoreButton,
   DeleteButton,
+  CompleteText,
 } from './styled';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
@@ -89,8 +91,10 @@ const Index = ({ item, history }) => {
   return (
     <Container>
       <Title>
+        <MemoCompleteIcon>
+          <div>✔</div>
+        </MemoCompleteIcon>
         완료됨
-        <MemoCompleteButton>✔</MemoCompleteButton>
       </Title>
 
       {item &&
@@ -98,18 +102,20 @@ const Index = ({ item, history }) => {
           <div>
             {v.succeed && (
               <CompleteMemoContainer>
-                {v.memo}
-                <RestoreButton
-                  value={`${v._id},${v.categoryTo}`}
-                  onClick={onClickRestoreMemo}
-                >
-                  ♻
-                </RestoreButton>
-                <DeleteButton value={v._id} onClick={onClickDeleteMemo}>
-                  ➖
-                </DeleteButton>
+                <CompleteText>{v.memo}</CompleteText>
+                <CompleteETCButton>
+                  <RestoreButton
+                    value={`${v._id},${v.categoryTo}`}
+                    onClick={onClickRestoreMemo}
+                  >
+                    ♻
+                  </RestoreButton>
+                  <DeleteButton value={v._id} onClick={onClickDeleteMemo}>
+                    ⛔
+                  </DeleteButton>
 
-                <br />
+                  <br />
+                </CompleteETCButton>
               </CompleteMemoContainer>
             )}
           </div>

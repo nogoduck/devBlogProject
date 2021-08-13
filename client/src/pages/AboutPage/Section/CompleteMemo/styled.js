@@ -13,15 +13,29 @@ export const Title = styled.div`
   font-size: 20px;
   display: flex;
   justify-content: center;
-  margin: 16px 0 8px 0;
+
+  margin-top: 2em;
+  margin-bottom: 16px;
 `;
 
-export const MemoCompleteButton = styled.button`
+export const MemoCompleteIcon = styled.div`
+  border: 2px dashed black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #009432;
   border-radius: 50%;
-  margin-left: 8px;
+  margin-right: 8px;
   width: 28px;
   height: 28px;
+  position: relative;
+  font-size: 42px;
+  & div {
+    position: absolute;
+    user-select: none;
+    top: -30px;
+    left: 2px;
+  }
 `;
 
 export const DeleteAllButton = styled.button`
@@ -43,7 +57,9 @@ export const DeleteAllButton = styled.button`
 `;
 
 export const CompleteMemoContainer = styled.div`
-  //border: 1px solid #808e9b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(127, 143, 166, 0.51);
@@ -52,15 +68,36 @@ export const CompleteMemoContainer = styled.div`
   padding: 4px 12px;
   font-size: 16px;
   color: #95a5a6;
-  text-decoration: line-through;
 
   & button {
-    background: transparent;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    user-select: none;
+    box-shadow: 0 0 1px 1px orange;
     border: none;
+    width: 25px;
+    height: 25px;
+    margin: 0 2px;
     cursor: pointer;
   }
 `;
+
+export const CompleteText = styled.div`
+  text-decoration: line-through;
+`;
+
+export const CompleteETCButton = styled.div`
+  display: flex;
+  margin: 0 0 0 8px;
+  position: relative;
+`;
+
 export const RestoreButton = styled.button`
-  font-size: 20px;
+  font-size: 18px;
+  color: green;
+  padding: 0 0 4px 0;
 `;
 export const DeleteButton = styled.button``;

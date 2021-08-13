@@ -96,7 +96,7 @@ const Index = ({ history, currentCategory, item, showETCButton }) => {
               <MemoETCButtonContainer>
                 {showETCButton && (
                   <MemoDeleteButton value={v._id} onClick={onClickDeleteMemo}>
-                    ➖{/*<IoTrash />*/}
+                    ⛔{/*<IoTrash />*/}
                   </MemoDeleteButton>
                 )}
                 {/*onClick={() => this.move}>*/}

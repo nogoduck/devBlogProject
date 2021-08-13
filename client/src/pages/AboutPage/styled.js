@@ -172,7 +172,6 @@ export const MemoButton = styled.button`
   border: none;
   background-color: transparent;
   transition: 0.1s;
-  /* border:1px solid black; */
   &:hover {
     color: #000;
     cursor: pointer;

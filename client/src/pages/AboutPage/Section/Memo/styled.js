@@ -22,6 +22,7 @@ export const MemoDeleteButton = styled.button`
   color: #e74c3c;
 `;
 export const MemoCompleteButton = styled.button`
+  font-size: 20px;
   color: #009432;
   border-radius: 50%;
 `;
@@ -29,7 +30,6 @@ export const MemoETCButtonContainer = styled.div`
   display: flex;
   & > button {
     border-radius: 50%;
-    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -195,7 +195,7 @@ function AboutPage({ history }) {
                               value={v._id}
                               onClick={onClickCategoryDelete}
                             >
-                              ➖{/*<IoTrash />*/}
+                              ⛔{/*<IoTrash />*/}
                             </CategoryDeleteButton>
                           )}
 
