@@ -15,6 +15,7 @@ import {
   GlobalStyle,
   ExtendsButton,
   HoverItem,
+  MenuButtonContainer,
 } from './styled';
 import { AiFillPicture, AiTwotoneExperiment, AiFillHome } from 'react-icons/ai';
 import { BiMenu } from 'react-icons/bi';
@@ -78,9 +79,11 @@ function SideNav({ history, match }) {
     <>
       <GlobalStyle />
       {isMobile && (
-        <MenuButton onClick={onClickToggleHidden}>
-          <BiMenu />
-        </MenuButton>
+        <MenuButtonContainer onClick={onClickToggleHidden}>
+          <MenuButton id={useOpen && 'close'}></MenuButton>
+
+          {/*<BiMenu />*/}
+        </MenuButtonContainer>
       )}
       <Space id={useExtends && 'SideNavExtends'} />
 

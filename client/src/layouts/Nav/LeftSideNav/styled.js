@@ -86,19 +86,57 @@ export const Space = styled.div`
     width: 0px;
   }
 `;
-
-export const MenuButton = styled.button`
-  position: fixed;
-  color: #757575;
-  background-color: transparent;
-  font-size: 24px;
-  top: 6px;
-  left: 8px;
-  border: none;
+export const MenuButtonContainer = styled.div`
+  left: -6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+  width: 46px;
+  height: 46px;
   z-index: 2050;
-  &:hover {
-    cursor: pointer;
+  position: fixed;
+  & #close::before {
+    transform: translateY(0px) rotate(45deg);
+    box-shadow: 0 0 0 #757575;
   }
+  & #close::after {
+    transform: translateY(0px) rotate(-45deg);
+  }
+`;
+export const MenuButton = styled.div`
+  &::before {
+    transition: 0.2s;
+    content: '';
+    width: 18px;
+    height: 2px;
+    background: #757575;
+    position: absolute;
+    transform: translateY(-6px);
+    box-shadow: 0 6px 0 #757575;
+  }
+
+  &::after {
+    transition: 0.2s;
+    content: '';
+    width: 18px;
+    height: 2px;
+    background: #757575;
+    position: absolute;
+    transform: translateY(6px);
+  }
+  //position: fixed;
+  //color: #757575;
+  //background-color: transparent;
+  //font-size: 24px;
+  //top: 6px;
+  //left: 8px;
+  //border: none;
+  //z-index: 2050;
+  //&:hover {
+  //  cursor: pointer;
+  //}
 `;
 
 export const MenuIcon = styled.span`
