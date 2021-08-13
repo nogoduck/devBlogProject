@@ -68,7 +68,11 @@ export const CompleteMemoContainer = styled.div`
   padding: 4px 12px;
   font-size: 16px;
   color: #95a5a6;
+  transition: 0.1s;
 
+  &:hover {
+    transform: scale(1.2);
+  }
   & button {
     text-decoration: none;
     display: flex;

@@ -113,8 +113,6 @@ const Index = ({ item, history }) => {
                   <DeleteButton value={v._id} onClick={onClickDeleteMemo}>
                     ⛔
                   </DeleteButton>
-
-                  <br />
                 </CompleteETCButton>
               </CompleteMemoContainer>
             )}
