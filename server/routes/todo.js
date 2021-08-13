@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const { Todo } = require('../models/Todo');
-const { log } = require('nodemon/lib/utils');
 
 router.get('/getAll', (req, res) => {
   Todo.find()
