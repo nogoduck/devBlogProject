@@ -12,6 +12,8 @@ import { IoMdAddCircle, IoMdRemoveCircle } from 'react-icons/io';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { IoTrash } from 'react-icons/io5';
+import Modal from '../../../../components/Modal';
+import { CancelButton, Input, Label, SubmitButton } from '../../styled';
 
 const Index = ({ history, currentCategory, item, showETCButton }) => {
   const [showUpdateMemoModal, setShowUpdateMemoModal] = useState(false);
@@ -22,11 +24,22 @@ const Index = ({ history, currentCategory, item, showETCButton }) => {
   const onChangeMemo = (e) => {
     setMemo(e.target.value);
   };
+
   const onClickUpdateMemoModal = (e) => {
-    console.log('log >> ', e.target.value);
     setSelectId(e.target.value);
-    setShowUpdateMemoModal((prev) => !prev);
+    for (let i = 0; i < Object.keys(item).length; i++) {
+      if (item[i]._id === e.target.value) {
+        console.log('동일');
+        setMemo(item[i].memo);
+      }
+    }
+
     console.log(selectId);
+    setShowUpdateMemoModal((prev) => !prev);
+  };
+
+  const onCloseUpdateMemoModal = () => {
+    setShowUpdateMemoModal(false);
   };
 
   const onClickCompleteMemo = (e) => {
@@ -118,11 +131,26 @@ const Index = ({ history, currentCategory, item, showETCButton }) => {
           )}
         </> //item.map
       ))}
+
       {showUpdateMemoModal && (
-        <div>
-          <input type="text" value={memo} onChange={onChangeMemo} />
-          <button onClick={onClickUpdateMemo}>변경</button>
-        </div>
+        <Modal
+          useCloseButton={false}
+          show={onClickUpdateMemoModal}
+          close={onCloseUpdateMemoModal}
+          style={{ padding: '0px 20px 20px 20px', width: '400px' }}
+        >
+          <br />
+          <SubmitButton onClick={onClickUpdateMemo}>확인</SubmitButton>
+          <CancelButton onClick={onCloseUpdateMemoModal}>취소</CancelButton>
+          <Label htmlFor="update_memo">메모 수정</Label>
+          <Input
+            type="text"
+            id="update_memo"
+            spellCheck="false"
+            value={memo}
+            onChange={onChangeMemo}
+          ></Input>
+        </Modal>
       )}
     </> //return()
   );

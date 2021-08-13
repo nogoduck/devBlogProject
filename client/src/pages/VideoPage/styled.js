@@ -8,7 +8,7 @@ export const Notice = styled.div`
   border-radius: 5px;
   padding: 16px;
   font-weight: 800;
-  margin: 8px 0;
+  margin: 0 0 32px 0;
 `;
 export const Title = styled.div`
   font-size: 20px;
