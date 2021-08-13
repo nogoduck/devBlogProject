@@ -134,8 +134,7 @@ export const CategoryCreate = styled.div`
   color: #000;
   border-radius: 5px;
   cursor: pointer;
-
-  background-color: #fef28fff;
+  background-color: #fef28f;
   box-shadow: 0 0 5px 1px #7f8fa6;
   position: relative;
   min-width: 200px;

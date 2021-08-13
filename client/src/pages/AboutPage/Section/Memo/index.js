@@ -38,7 +38,7 @@ const Index = ({ history, currentCategory, item, showETCButton }) => {
     axios.patch('/api/todo/update/state', payload).then(({ data }) => {
       setSelectId('');
       if (data.success) {
-        console.log('상태 변경 결과 >> ', data);
+        // console.log('상태 변경 결과 >> ', data);
         history.push('/about');
         return null;
       }
@@ -50,7 +50,7 @@ const Index = ({ history, currentCategory, item, showETCButton }) => {
       _id: e.target.value,
     };
 
-    console.log('payload >> ', payload);
+    // console.log('payload >> ', payload);
 
     axios
       .delete('/api/todo/delete/memo', {
@@ -61,11 +61,11 @@ const Index = ({ history, currentCategory, item, showETCButton }) => {
       .then(({ data }) => {
         setSelectId('');
         if (data.success) {
-          console.log('투두 삭제 결과 >> ', data);
+          // console.log('메모 삭제 결과 >> ', data);
           history.push('/about');
           return null;
         }
-        alert('삭제에 실패했습니다.');
+        alert('메모 삭제에 실패했습니다.');
       });
   };
 

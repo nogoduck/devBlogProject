@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div``;
 
@@ -31,6 +31,7 @@ export const Menu = styled.div`
     border-radius: 6px 6px 0 0;
   }
   & li {
+    list-style: none;
     border-bottom: 1px solid #bdc3c7;
   }
   & li:hover {

@@ -34,7 +34,7 @@ import {
 } from './styled';
 import { useSelector } from 'react-redux';
 import Memo from './Section/Memo/index';
-import CompleteMemo from './Section/CompleteMemo/CompleteMemo';
+import CompleteMemo from './Section/CompleteMemo';
 
 //AboutPage는 블로그 소개를 목적으로 추가했으나 현재는 투두리스트로 사용하고 있다.
 function AboutPage({ history }) {
@@ -76,7 +76,7 @@ function AboutPage({ history }) {
     axios
       .post('/api/todo/save', payload)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         //응답이 오면 내용 초기화 후 모달 닫기
         setCategory('');
         onCloseCreateCategoryModal();
@@ -92,7 +92,7 @@ function AboutPage({ history }) {
     axios
       .get('/api/todo/getAll')
       .then(({ data }) => {
-        console.log('data > ', data.doc);
+        // console.log('data > ', data.doc);
         setTodo(data.doc);
       })
       .catch((err) => {
@@ -132,7 +132,7 @@ function AboutPage({ history }) {
       })
       .then(({ data }) => {
         if (data.success) {
-          console.log('카테고리 삭제 결과 >> ', data);
+          // console.log('카테고리 삭제 결과 >> ', data);
           history.push('/about');
           return null;
         }
@@ -140,6 +140,7 @@ function AboutPage({ history }) {
       });
   };
 
+  //카테고리 안에 내용이 있는지 검증
   const onClickCategoryDelete = (e) => {
     let isEmptyCatrgory = false;
     for (let i = 0; i < Object.keys(todo).length; i++) {
@@ -265,6 +266,7 @@ function AboutPage({ history }) {
               type="text"
               id="add_category"
               placeholder="변경이 불가능 하므로 신중히 입력해주세요."
+              spellCheck="false"
               value={category}
               onChange={onChangeCategory}
             ></Input>
@@ -285,6 +287,7 @@ function AboutPage({ history }) {
             <Input
               type="text"
               id="add_memo"
+              spellCheck="false"
               value={memo}
               onChange={onChangeMemo}
             ></Input>

@@ -5,6 +5,7 @@ export const MemoContent = styled.div`
   color: #000;
   font-weight: 400;
   font-family: 'Noto Sans KR', sans-serif;
+  margin-right: 4px;
 `;
 
 export const MemoContainer = styled.div`
