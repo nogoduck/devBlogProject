@@ -66,6 +66,7 @@ const Comment = ({ match, reRender, commentItems }) => {
 
   return (
     <Container>
+      <hr />
       <Main>댓글</Main>
       <Form onSubmit={onSubmitComment}>
         <div>

@@ -72,9 +72,10 @@ const Index = ({ history, currentCategory, item, showETCButton }) => {
         },
       })
       .then(({ data }) => {
-        setSelectId('');
         if (data.success) {
-          // console.log('메모 삭제 결과 >> ', data);
+          setSelectId('');
+          setMemo('');
+          setShowUpdateMemoModal(false);
           history.push('/about');
           return null;
         }

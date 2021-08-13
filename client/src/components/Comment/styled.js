@@ -2,10 +2,17 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   color: #000;
+
+  & hr {
+    border: none;
+    border-top: 1px solid #e8eaed;
+    width: 100%;
+    float: left;
+  }
 `;
 export const Main = styled.div`
   font-size: 18px;
-  margin-bottom: 24px;
+  margin: 24px 0;
   user-select: none;
 `;
 export const Form = styled.form`
