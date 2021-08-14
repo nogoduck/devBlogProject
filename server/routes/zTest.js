@@ -6,6 +6,7 @@ const path = require('path');
 const mime = require('mime');
 const multer = require('multer');
 const cookie = require('cookie');
+const nodemailer = require('nodemailer');
 //mime/lite버전을 사용하고 싶은데 로드가 되지 않는다 mime보다 1/3 밖에 용량이 안된다고 한다.
 //multer 관련 변수 (파일 처리)
 const { Board } = require('../models/Board');
@@ -23,6 +24,41 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }).single('file');
+
+router.post('/sendmail', (req, res) => {
+  const main = async () => {
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: 'angryduck.log@gmail.com',
+        pass: 'pre@+39&?mHE%-^9ZJ2K$5ZceEP839TZK-aSe4qFRP$xHEfm&V?ArUR@+-?P_fCQ2CS-kvC9AGEELqTH6FB8SVfcd#g*g&^GJ3',
+        // user: process.env.NODEMAILER_USER,
+        // pass: process.env.NODEMAILER_PASS,
+      },
+    });
+
+    let info = await transporter.sendMail({
+      from: 'angryduck.log@gmail.com',
+      to: 'nogo22@naver.com',
+      subject: '[adklog auth] 임시 비밀번호',
+      html: ``,
+    });
+
+    console.log('Message sent: %s', info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+    res.status(200).json({
+      status: 'Success',
+      code: 200,
+      message: 'Sent Auth Email',
+    });
+  };
+
+  main().catch(console.error);
+});
 
 router.get('/condb', (req, res) => {
   Board.find()
