@@ -69,9 +69,29 @@ export const CompleteMemoContainer = styled.div`
   font-size: 16px;
   color: #95a5a6;
   transition: 0.1s;
+  position: relative;
+  & .complete_text {
+    text-decoration: line-through;
+    position: relative;
+  }
 
+  & .complete_text::before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 0%;
+    background: red;
+    top: 10px;
+    transition: 0.5s;
+  }
+  &:hover .complete_text::before {
+    width: 100%;
+  }
+  &:hover .complete_text {
+    text-decoration: none;
+  }
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.2) rotate(4deg);
   }
   & button {
     text-decoration: none;
@@ -87,10 +107,6 @@ export const CompleteMemoContainer = styled.div`
     margin: 0 2px;
     cursor: pointer;
   }
-`;
-
-export const CompleteText = styled.div`
-  text-decoration: line-through;
 `;
 
 export const CompleteETCButton = styled.div`

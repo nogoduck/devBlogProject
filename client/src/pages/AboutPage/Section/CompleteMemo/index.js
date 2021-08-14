@@ -8,7 +8,6 @@ import {
   Title,
   RestoreButton,
   DeleteButton,
-  CompleteText,
 } from './styled';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
@@ -102,7 +101,7 @@ const Index = ({ item, history }) => {
           <div>
             {v.succeed && (
               <CompleteMemoContainer>
-                <CompleteText>{v.memo}</CompleteText>
+                <div className="complete_text">{v.memo}</div>
                 <CompleteETCButton>
                   <RestoreButton
                     value={`${v._id},${v.categoryTo}`}

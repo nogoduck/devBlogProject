@@ -17,7 +17,7 @@ export const Container = styled.table`
 
 export const BoardContent = styled.div`
   & p {
-    margin: 0;
+    margin: 8px;
   }
   & tr,
   td,
@@ -26,9 +26,10 @@ export const BoardContent = styled.div`
     padding: 4px;
   }
   & blockquote {
-    border: 1px solid #0984e3;
-    border-left: 8px solid #0984e3;
-    margin: 12px;
+    //border: 1px solid #0984e3;
+
+    border-left: 6px solid #0984e3;
+    margin: 12px 0;
     padding: 20px;
   }
   & ul,
