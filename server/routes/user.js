@@ -4,25 +4,88 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 const cookie = require('cookie');
+const AWS = require('aws-sdk');
+const multerS3 = require('multer-s3');
 
 const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 
-const fileExtension = '.png';
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'UploadProfileImage/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}${fileExtension}`);
+// const fileExtension = '.png';
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'UploadProfileImage/');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, `${Date.now()}_${file.originalname}${fileExtension}`);
+//   },
+// });
+
+AWS.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: 'ap-northeast-2',
+});
+
+const storageS3 = multerS3({
+  s3: new AWS.S3(),
+  bucket: 'adtable1',
+  key(req, file, cb) {
+    cb(null, `profile/${Date.now()}${path.basename(file.originalname)}`);
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storageS3,
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
+
+router.post('/update/image', upload.single('image'), (req, res) => {
+  const { _id, currentPath } = req.body;
+  const {
+    fieldname,
+    originalname,
+    mimetype,
+    destination,
+    filename,
+    path,
+    size,
+  } = req.file;
+
+  console.log('req.body > ', req.body);
+  console.log('req.file > ', req.file);
+
+  //현재 이미 설정된 이미지가 있다면 제거해준다.
+  //(db의 패스는 변경해주지 않아도 된다 추가한 이미지경로로 덮어 씌우면 되기 때문에)
+
+  if (currentPath) {
+    fs.unlink(currentPath, (err) => {
+      if (err) console.log('fs err >> failed file remove... ', err);
+      console.log('fs info >> success file remove');
+    });
+  }
+
+  //미들웨어 통과 => 이미지 저장 성공
+  //db에 이미지 경로 저장
+  User.findByIdAndUpdate(
+    _id,
+    { imagePath: path },
+    { new: true },
+    (err, user) => {
+      console.log('user >> ', user);
+      if (err) return res.json({ success: false, err });
+      return res.status(200).json({
+        success: true,
+        fileName: filename,
+        filePath: path,
+        message: '파일을 저장했습니다.',
+      }); //return.res
+    }
+  ); //User.findByIdAndUpdate
+}); //router.post
 
 router.post('/reset/image', (req, res) => {
   const { _id, imagePath } = req.body;
-  //현재 프로필 이미지 제거 로직 작성예정
+
   fs.unlink(imagePath, (err) => {
     if (err) console.log('fs err >> failed file remove... ', err);
     console.log('fs info >> success file remove');
@@ -41,7 +104,8 @@ router.post('/reset/image', (req, res) => {
   }); //User.findByIdAndUpdate
 });
 
-router.post('/update/image', upload.single('image'), (req, res) => {
+//unused
+router.post('/unused/update/image', upload.single('image'), (req, res) => {
   const { _id, currentPath } = req.body;
   const {
     fieldname,
