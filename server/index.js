@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const PORT = process.env.PORT || 5050;
 const config = require('./config/key');
 const mongoose = require('mongoose');

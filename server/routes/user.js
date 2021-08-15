@@ -10,7 +10,7 @@ const multerS3 = require('multer-s3');
 const { User } = require('../models/User');
 const { auth } = require('../middleware/auth');
 
-// const fileExtension = '.png';
+const fileExtension = '.png';
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
 //     cb(null, 'UploadProfileImage/');
@@ -26,11 +26,16 @@ AWS.config.update({
   region: 'ap-northeast-2',
 });
 
+console.log(process.env.S3_ACCESS_KEY_ID);
+console.log(process.env.NODE);
 const storageS3 = multerS3({
   s3: new AWS.S3(),
   bucket: 'adtable1',
   key(req, file, cb) {
-    cb(null, `profile/${Date.now()}${path.basename(file.originalname)}`);
+    cb(
+      null,
+      `profile/${Date.now()}${path.basename(file.originalname)}${fileExtension}`
+    );
   },
 });
 
@@ -40,16 +45,10 @@ const upload = multer({
 });
 
 router.post('/update/image', upload.single('image'), (req, res) => {
+  console.log('프로필 저장 ');
+
   const { _id, currentPath } = req.body;
-  const {
-    fieldname,
-    originalname,
-    mimetype,
-    destination,
-    filename,
-    path,
-    size,
-  } = req.file;
+  const { filename, key: path } = req.file;
 
   console.log('req.body > ', req.body);
   console.log('req.file > ', req.file);

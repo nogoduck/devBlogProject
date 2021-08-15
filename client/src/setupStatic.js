@@ -1,7 +1,5 @@
-const staticURI =
-  process.env.NODE_ENV === 'production'
-    ? 'http://noise.adklog.com'
-    : 'http://localhost:5050/';
+const staticURI = process.env.REACT_APP_STATIC_URI;
+
 module.exports = {
   URI: staticURI,
 };

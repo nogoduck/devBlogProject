@@ -7,10 +7,13 @@ import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from './_reducers';
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 axios.defaults.baseURL =
   process.env.NODE_ENV === 'production'
-    ? 'https://noise.adklog.com'
+    ? process.env.REACT_APP_SERVER_URI
     : 'http://localhost:5050';
 
 const createStoreWithMiddleware = applyMiddleware(
