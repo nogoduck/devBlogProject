@@ -26,8 +26,6 @@ AWS.config.update({
   region: 'ap-northeast-2',
 });
 
-console.log(process.env.S3_ACCESS_KEY_ID);
-console.log(process.env.NODE);
 const storageS3 = multerS3({
   s3: new AWS.S3(),
   bucket: 'adtable1',

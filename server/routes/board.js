@@ -92,18 +92,14 @@ router.post('/create', (req, res) => {
 });
 
 router.post('/detail', (req, res) => {
+  console.log(req.body);
   Board.findOne(req.body)
-    .then((data) => {
-      console.log('게시물 상세페이지 불러오기 성공');
-      console.log(data);
-      return res.status(200).json({
-        data,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err,
-      });
+    .populate('writer')
+    .exec((err, doc) => {
+      console.log('유저 찾음', doc);
+
+      if (err) return res.status(500).json({ message: err });
+      return res.status(200).json({ doc });
     });
 });
 

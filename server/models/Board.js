@@ -1,24 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const { getDate } = require("./_utils");
+const { getDate } = require('./_utils');
 
 const BoardSchema = new mongoose.Schema(
   {
-    nickname: {
-      type: String,
-      required: true,
-    },
     writer: {
-      type: String,
-      required: true,
-    },
-    writerId: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
     },
     title: {
       type: String,
@@ -47,6 +35,6 @@ const BoardSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-const Board = mongoose.model("Board", BoardSchema);
+const Board = mongoose.model('Board', BoardSchema);
 
 module.exports = { Board };

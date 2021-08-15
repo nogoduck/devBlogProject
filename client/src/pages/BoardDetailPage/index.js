@@ -31,7 +31,7 @@ function BoardDetailPage({ match }) {
     axios
       .post('/api/board/detail', args)
       .then(({ data }) => {
-        setDetailPost(data);
+        setDetailPost(data.doc);
       })
       .catch((err) => {
         console.log(err);
@@ -76,6 +76,7 @@ function BoardDetailPage({ match }) {
     setComments([doc, ...comments]);
   };
 
+  console.log('detailPost >> ', detailPost);
   if (!detailPost) {
     return (
       <Loading>
@@ -88,9 +89,9 @@ function BoardDetailPage({ match }) {
         <Container>
           <Link to="/board">뒤로가기</Link>
           <BoardHeader>
-            <PostTitle>{detailPost.data.title}</PostTitle>
+            <PostTitle>{detailPost.title}</PostTitle>
             {user.authStatus.isAuth &&
-              detailPost.data.writerId === user.authStatus._id && (
+              detailPost.writer._id === user.authStatus._id && (
                 <UpdateButton onClick={onClickPostUpdate}>
                   수정하기
                 </UpdateButton>
@@ -98,9 +99,9 @@ function BoardDetailPage({ match }) {
           </BoardHeader>
           <BoardInfo>
             <Profile style={{ fontSize: '15px' }}>
-              {detailPost.data.imagePath ? (
+              {detailPost.writer.imagePath ? (
                 <img
-                  src={`${Static.URI}${user.authStatus.imagePath}`}
+                  src={`${Static.URI}${detailPost.writer.imagePath}`}
                   alt="user_profile"
                   style={{
                     width: '30px',
@@ -111,7 +112,7 @@ function BoardDetailPage({ match }) {
                 />
               ) : (
                 <Gravatar
-                  email={detailPost.data.email}
+                  email={detailPost.writer.email}
                   size={250}
                   default="wavatar"
                   style={{
@@ -122,17 +123,17 @@ function BoardDetailPage({ match }) {
                   }}
                 />
               )}
-              <b>{detailPost.data.nickname}</b>
+              <b>{detailPost.nickname}</b>
             </Profile>
             &nbsp;·&nbsp;
-            {timeFormat(detailPost.data.createdAt)}
+            {timeFormat(detailPost.createdAt)}
             &nbsp;·&nbsp;
-            {detailPost.data.updatedAt
-              ? timeFormat(detailPost.data.updatedAt)
+            {detailPost.updatedAt
+              ? timeFormat(detailPost.updatedAt)
               : '수정 안함'}
           </BoardInfo>
           <BoardContent>
-            <p>{HtmlReactParser(detailPost.data.description)}</p>
+            <p>{HtmlReactParser(detailPost.description)}</p>
           </BoardContent>
 
           <Comment reRender={reRender} commentItems={comments} />
