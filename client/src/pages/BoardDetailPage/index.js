@@ -67,8 +67,8 @@ function BoardDetailPage({ match }) {
 
   //확인, 취소 모달
   const onClickPostUpdate = () => {
-    setTitle(detailPost.data.title);
-    setDescription(detailPost.data.description);
+    setTitle(detailPost.title);
+    setDescription(detailPost.description);
     setUpadteMode(true);
   };
 
