@@ -123,7 +123,7 @@ function BoardDetailPage({ match }) {
                   }}
                 />
               )}
-              <b>{detailPost.writer.name}</b>
+              <b>{detailPost.writer.nickname}</b>
             </Profile>
             &nbsp;·&nbsp;
             {timeFormat(detailPost.createdAt)}
