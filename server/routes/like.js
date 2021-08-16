@@ -52,15 +52,35 @@ router.post('/addLike', (req, res) => {
     payload = { commentId };
   }
 
-  console.log('payload >> ', payload);
+  console.log('addLike payload >> ', payload);
 
-  Dislike.find(payload).exec((err, doc) => {
+  const like = new Like(payload);
+
+  like.save((err, docLike) => {
     if (err) return res.status(400).json({ success: false, err });
-    res.status(200).json({
-      success: true,
-      doc,
-    }); //res.status
-  }); //Dislike.find
-}); //router.post
+
+    Dislike.findByIdAndRemove(payload).exec((err, docDislike) => {
+      if (err) return res.status(400).json({ success: false, err });
+      res.status(200).json({ success: true });
+    });
+  });
+});
+
+router.post('/removeLike', (req, res) => {
+  let payload = {};
+
+  if (req.body.postId) {
+    payload = { postId };
+  } else {
+    payload = { commentId };
+  }
+
+  console.log('removeLike payload >> ', payload);
+
+  Like.findByIdAndRemove(payload).exec((err, docDislike) => {
+    if (err) return res.status(400).json({ success: false, err });
+    res.status(200).json({ success: true });
+  });
+});
 
 module.exports = router;

@@ -7,15 +7,15 @@ const LikeAndDislike = ({ post, userId, postId, commentId }) => {
   const [likeActive, setLikeActive] = useState(false);
   const [dislikeActive, setDislikeActive] = useState(false);
 
+  let payload = {};
+
+  if (post) {
+    payload = { userId, postId };
+  } else {
+    payload = { userId, commentId };
+  }
+
   useEffect(() => {
-    let payload = {};
-
-    if (post) {
-      payload = { userId, postId };
-    } else {
-      payload = { userId, commentId };
-    }
-
     axios.post('/api/like/getLike', payload).then(({ data }) => {
       if (data.success) {
         //Succeed, doc(like)
@@ -53,8 +53,24 @@ const LikeAndDislike = ({ post, userId, postId, commentId }) => {
     if (!likeActive) {
       axios.post('/api/like/addLike', payload).then(({ data }) => {
         if (data.success) {
+          setLike(like + 1);
+          setLikeActive(true);
+
+          if (dislikeActive) {
+            setDislikeActive(false);
+            setDislike(dislike - 1);
+          }
         } else {
           alert('좋아요를 추가하지 못했습니다.');
+        }
+      });
+    } else {
+      axios.post('/api/like/removeLike', payload).then(({ data }) => {
+        if (data.success) {
+          setLike(like - 1);
+          setLikeActive(false);
+        } else {
+          alert('좋아요를 내리지 못했습니다.');
         }
       });
     }
