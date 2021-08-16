@@ -22,6 +22,7 @@ import BoardWritePage from '../BoardWritePage';
 import Static from '../../setupStatic';
 import Comment from '../../components/Comment';
 import PulseLoader from 'react-spinners/PulseLoader';
+import LikeAndDislike from '../../components/LikeAndDislike';
 
 function BoardDetailPage({ match }) {
   const user = useSelector((state) => state.user);
@@ -135,7 +136,7 @@ function BoardDetailPage({ match }) {
           <BoardContent>
             <p>{HtmlReactParser(detailPost.description)}</p>
           </BoardContent>
-
+          <LikeAndDislike post userId={user.authStatus._id} postId={postId} />
           <Comment reRender={reRender} commentItems={comments} />
         </Container>
       );

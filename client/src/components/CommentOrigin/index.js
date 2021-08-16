@@ -18,6 +18,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import UserProfileImg from '../UserProfileImg';
 import { changeTime2 } from '../../utils/Time';
 import DefaultProfile from '../DefaultProfileImg';
+import LikeAndDislike from '../LikeAndDislike';
 
 const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
   const user = useSelector((state) => state.user);
@@ -90,6 +91,10 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
           </div>
           <div>{commentOriginItems.content}</div>
           <div>
+            <LikeAndDislike
+              userId={user.authStatus._id}
+              commentId={commentOriginItems}
+            />
             <NestedButton onClick={onClickShowOriginComment}>답글</NestedButton>
           </div>
 

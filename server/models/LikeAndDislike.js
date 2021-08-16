@@ -33,7 +33,7 @@ const dislikeSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-const Like = mongoose.model('Board', likeSchema);
-const Dislike = mongoose.model('Board', dislikeSchema);
+const Like = mongoose.model('Like', likeSchema);
+const Dislike = mongoose.model('Dislike', dislikeSchema);
 
 module.exports = { Like, Dislike };

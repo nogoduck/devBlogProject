@@ -27,6 +27,7 @@ const boardRouter = require('./routes/board');
 const todoRouter = require('./routes/todo');
 const videoRouter = require('./routes/video');
 const commentRouter = require('./routes/comment');
+const likeRouter = require('./routes/like');
 
 const testRouter = require('./routes/zTest');
 
@@ -63,6 +64,8 @@ app.use('/api/board', boardRouter);
 app.use('/api/todo', todoRouter);
 app.use('/api/video', videoRouter);
 app.use('/api/comment', commentRouter);
+app.use('/api/like', likeRouter);
+
 app.use('/api/test', testRouter);
 
 app.get('/', (req, res) => {
