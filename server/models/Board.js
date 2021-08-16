@@ -8,6 +8,8 @@ const BoardSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
+      views:Number
+      ,
     title: {
       type: String,
       trim: true,
