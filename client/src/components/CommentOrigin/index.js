@@ -93,7 +93,7 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
           <div>
             <LikeAndDislike
               userId={user.authStatus._id}
-              commentId={commentOriginItems}
+              commentId={commentOriginItems._id}
             />
             <NestedButton onClick={onClickShowOriginComment}>답글</NestedButton>
           </div>

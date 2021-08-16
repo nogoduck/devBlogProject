@@ -136,7 +136,11 @@ function BoardDetailPage({ match }) {
           <BoardContent>
             <p>{HtmlReactParser(detailPost.description)}</p>
           </BoardContent>
-          <LikeAndDislike post userId={user.authStatus._id} postId={postId} />
+          <LikeAndDislike
+            board={true}
+            userId={user.authStatus._id}
+            postId={postId}
+          />
           <Comment reRender={reRender} commentItems={comments} />
         </Container>
       );
