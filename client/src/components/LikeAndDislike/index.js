@@ -92,9 +92,9 @@ const LikeAndDislike = ({ board, userId, postId, commentId }) => {
       axios.post('/api/like/addDislike', payload).then(({ data }) => {
         if (data.success) {
           setDislike(dislike + 1);
-          setLikeActive(true);
+          setDislikeActive(true);
 
-          if (dislikeActive) {
+          if (likeActive) {
             setLikeActive(false);
             setLike(like - 1);
           }
