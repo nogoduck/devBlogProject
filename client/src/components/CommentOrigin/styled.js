@@ -47,6 +47,7 @@ export const NestedButton = styled.button`
 
   &:hover {
     cursor: pointer;
+    color: #348dff;
   }
 `;
 

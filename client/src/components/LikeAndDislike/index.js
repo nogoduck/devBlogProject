@@ -8,12 +8,28 @@ import {
 } from 'react-icons/ai';
 
 import { Container, LikeButton, DislikeButton } from './styled';
+import SignInModal from '../SignInModal';
+import { useSelector } from 'react-redux';
 
 const LikeAndDislike = ({ board, userId, postId, commentId, style }) => {
+  const user = useSelector((state) => state.user);
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const [likeActive, setLikeActive] = useState(false);
   const [dislikeActive, setDislikeActive] = useState(false);
+
+  const [showSigninModal, setShowSigninModal] = useState(false);
+
+  const onCloseSigninModal = () => {
+    setShowSigninModal(false);
+  };
+
+  const isLogin = () => {
+    if (!user.authStatus.isAuth) {
+      setShowSigninModal(true);
+      return true;
+    }
+  };
 
   let payload = {};
 
@@ -23,16 +39,6 @@ const LikeAndDislike = ({ board, userId, postId, commentId, style }) => {
     payload = { userId, commentId };
   }
 
-  console.log(
-    '0 : ',
-    postId,
-    '\n1 : ',
-    userId,
-    '\n2 : ',
-    postId,
-    '\n3 : ',
-    commentId
-  );
   useEffect(() => {
     console.log('payload >> ', payload);
     axios.post('/api/like/getLike', payload).then(({ data }) => {
@@ -69,6 +75,8 @@ const LikeAndDislike = ({ board, userId, postId, commentId, style }) => {
   }, []);
 
   const onClickLike = () => {
+    return isLogin() && null;
+
     if (!likeActive) {
       axios.post('/api/like/addLike', payload).then(({ data }) => {
         if (data.success) {
@@ -96,6 +104,8 @@ const LikeAndDislike = ({ board, userId, postId, commentId, style }) => {
   };
 
   const onClickDislike = () => {
+    return isLogin() && null;
+
     if (!dislikeActive) {
       axios.post('/api/like/addDislike', payload).then(({ data }) => {
         if (data.success) {
@@ -161,6 +171,7 @@ const LikeAndDislike = ({ board, userId, postId, commentId, style }) => {
         )}
         {dislike > 0 && dislike}
       </DislikeButton>
+      <SignInModal show={showSigninModal} close={onCloseSigninModal} />
     </Container>
   );
 };

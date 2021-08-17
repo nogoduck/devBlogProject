@@ -6,6 +6,7 @@ export const Container = styled.div`
   align-items: center;
   font-weight: 800;
   color: #717171;
+  font-size: 13px;
 `;
 export const LikeButton = styled.div`
   display: flex;
@@ -13,6 +14,9 @@ export const LikeButton = styled.div`
   align-items: center;
   cursor: pointer;
   padding: 0 12px 0 0px;
+  &:hover {
+    color: #348dff;
+  }
 `;
 export const DislikeButton = styled.div`
   padding: 0 8px 0 0;
@@ -20,4 +24,7 @@ export const DislikeButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:hover {
+    color: #348dff;
+  }
 `;
