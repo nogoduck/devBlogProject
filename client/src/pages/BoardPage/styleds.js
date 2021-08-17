@@ -12,6 +12,22 @@ export const Container = styled.table`
   }
 `;
 
+export const BoardPath = styled.div`
+  font-size: 15px;
+
+  & .board_path {
+    color: #888888;
+  }
+
+  & .board_path:hover {
+    color: #000;
+  }
+
+  &. active {
+    color: #000;
+  }
+`;
+
 export const Table = styled.table`
   /* border: 1px solid black; */
   border-collapse: collapse;

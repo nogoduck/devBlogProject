@@ -4,12 +4,14 @@ const { getDate } = require('./_utils');
 
 const BoardSchema = new mongoose.Schema(
   {
+    category: {
+      type: String,
+    },
     writer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-      views:Number
-      ,
+    views: Number,
     title: {
       type: String,
       trim: true,

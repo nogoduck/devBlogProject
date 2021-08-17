@@ -20,6 +20,8 @@ import BoardDetailPage from '../pages/BoardDetailPage';
 import SettingPage from '../pages/SettingPage';
 
 import Auth from '../hoc/auth';
+import OptimizationPage from '../pages/BoardPage/Section/OptimizationPage';
+import HotPage from '../pages/BoardPage/Section/HotPage';
 
 // Auth 매개변수:
 // (1, 2, 3) :
@@ -56,9 +58,11 @@ function LandingPage({ history }) {
                 path="/board/write"
                 component={Auth(BoardWritePage, true)}
               />
+              <Route true path="/board/hot" component={Auth(HotPage, true)} />
+
               <Route
-                path="/board/:postId"
-                component={Auth(BoardDetailPage, null)}
+                path="/board/optimization"
+                component={Auth(OptimizationPage, null)}
               />
               <Route path="/board" component={Auth(BoardPage, null)} />
               <Route path="/card" component={Auth(CardPage, null)} />
