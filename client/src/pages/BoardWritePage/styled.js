@@ -11,6 +11,10 @@ export const Container = styled.div`
   & a:hover {
     color: #0984e3;
   }
+
+  & .del_btn:hover {
+    color: red;
+  }
 `;
 
 export const BoardHeader = styled.div`
@@ -84,100 +88,32 @@ export const InputDescription = styled.div`
   border-radius: 3px;
 `;
 
-export const SubmitButton = styled.button`
-  font-weight: 800;
-  width: 84px;
-  height: 32px;
-  border-radius: 3px;
-  background: linear-gradient(135deg, #ffdd59 0%, #ffa801 100%);
-  border: 1px solid #ffa801;
-  /* transition: 0.3s; */
-  &:hover {
-    background: #ffdd59;
-    cursor: pointer;
-  }
-  &:active {
-    background: #ffa801;
-    box-shadow: 0px 0px 5px 1px #ffa801;
-  }
-`;
-
-export const Box = styled.div`
-  display: flex;
-  align-items: center;
-  border: 1px solid #7f8fa6;
-  width: 100%;
-  padding: 3px;
-  border-radius: 3px;
-`;
-
-export const BoxFile = styled.div`
-  margin: 0 8px;
-  font-size: 14px;
-`;
-
-export const UpdateButton = styled.button`
-  font-weight: 800;
-  width: 84px;
-  margin: 4px;
-  height: 32px;
-  border-radius: 3px;
-  background: linear-gradient(135deg, #ffdd59 0%, #ffa801 100%);
-  border: 1px solid #ffa801;
-  /* transition: 0.3s; */
-  &:hover {
-    background: #ffdd59;
-    cursor: pointer;
-  }
-  &:active {
-    background: #ffa801;
-    box-shadow: 0px 0px 5px 1px #ffa801;
-  }
-`;
-
-export const DeleteButton = styled.button`
-  font-weight: 800;
-  margin: 4px;
-  width: 84px;
-  height: 32px;
-  border-radius: 3px;
-  background: #ff7675;
-  border: 1px solid #7f8fa6;
-  color: #fff;
-  transition: 0.3s;
-  align-self: flex-end;
-  &:hover {
-    background: #d63031;
-    cursor: pointer;
-  }
-  &:active {
-    background: #ff7675;
-    box-shadow: 0px 0px 3px 1px #ea8685 inset;
-    color: #fff;
-  }
-`;
-
-export const AlertSubmitButton = styled.button`
-  font-weight: 800;
-  width: 80px;
-  height: 30px;
-  border-radius: 3px;
-  background: #cce6ff;
-  border: 1px solid #c3cfe0;
-  transition: 0.1s;
-
-  /* bottom: 0; */
+export const SubmitButton = styled.a`
+  position: absolute;
+  right: 0;
+  top: 0;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 5px 1px #73b7fa inset;
-  }
-  &:active {
-    background: #73b7fa;
-    color: #fff;
   }
 `;
 
-export const UpdateButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+export const UpdateButton = styled.a`
+  position: absolute;
+  white-space: nowrap;
+  right: 0;
+  top: 0;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const DeleteButton = styled.a`
+  top: 32px;
+  right: -30px;
+  white-space: nowrap;
+  position: absolute;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

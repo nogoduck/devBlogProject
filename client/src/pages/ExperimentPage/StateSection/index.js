@@ -5,9 +5,12 @@ const StateSection = () => {
   return (
     <>
       <h3>연결 상태</h3>
-      <div>Static.URI : {Static.URI}</div>
+      <div>
+        Static.URI :
+        <span style={{ color: 'green' }}>{Static.URI && ' Succeed ✔'}</span>
+      </div>
       <div>env : {process.env.NODE_ENV}</div>
-      <div>base : {process.env.BASE_URL}</div>
+      <br />
     </>
   );
 };

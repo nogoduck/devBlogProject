@@ -89,14 +89,12 @@ function BoardDetailPage({ match }) {
       return (
         <Container>
           <Link to="/board">뒤로가기</Link>
+          {user.authStatus.isAuth &&
+            detailPost.writer._id === user.authStatus._id && (
+              <UpdateButton onClick={onClickPostUpdate}>수정하기</UpdateButton>
+            )}
           <BoardHeader>
             <PostTitle>{detailPost.title}</PostTitle>
-            {user.authStatus.isAuth &&
-              detailPost.writer._id === user.authStatus._id && (
-                <UpdateButton onClick={onClickPostUpdate}>
-                  수정하기
-                </UpdateButton>
-              )}
           </BoardHeader>
           <BoardInfo>
             <Profile style={{ fontSize: '15px' }}>

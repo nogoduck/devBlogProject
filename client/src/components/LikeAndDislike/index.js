@@ -75,8 +75,9 @@ const LikeAndDislike = ({ board, userId, postId, commentId, style }) => {
   }, []);
 
   const onClickLike = () => {
-    return isLogin() && null;
-
+    if (isLogin()) {
+      return null;
+    }
     if (!likeActive) {
       axios.post('/api/like/addLike', payload).then(({ data }) => {
         if (data.success) {
@@ -104,7 +105,9 @@ const LikeAndDislike = ({ board, userId, postId, commentId, style }) => {
   };
 
   const onClickDislike = () => {
-    return isLogin() && null;
+    if (isLogin()) {
+      return null;
+    }
 
     if (!dislikeActive) {
       axios.post('/api/like/addDislike', payload).then(({ data }) => {

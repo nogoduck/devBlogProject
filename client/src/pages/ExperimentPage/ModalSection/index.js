@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import ModalParents from "./ModalParents";
-import ModalChildren from "./ModalChildren";
-import ModalRef from "./ModalRef";
+import ModalParents from './ModalParents';
+import ModalChildren from './ModalChildren';
+import ModalRef from './ModalRef';
 
 function ModalSection() {
   const [showModalParents, setShowModalParents] = useState(false);
@@ -35,7 +35,7 @@ function ModalSection() {
   };
 
   const onClickModalRef = () => {
-    console.log("showModal: ", showModalRef);
+    console.log('showModal: ', showModalRef);
     setShowModalRef((prev) => !prev);
   };
 
@@ -46,19 +46,13 @@ function ModalSection() {
   return (
     <>
       <h3>모달</h3>
-      <h4>
-        Parent와 Children은 코드상 부모와 자식관계를 나타낸다
-        <br />
-        하지만 내가 사용한 의도는 변수명에 불과하다.
-      </h4>
 
-      {/* ParentsModal 과 ChildrenModal은 서로 부모, 자식 관계가 아님  */}
-      <button onClick={onClickParentsModal}>ParentsModal</button>
-      <button onClick={onClickChildrenModal}>ChildrenModal</button>
+      <button onClick={onClickParentsModal}>LeftModal</button>
+      <button onClick={onClickChildrenModal}>RightModal</button>
       <ModalParents
         show={showModalParents}
         close={onCloseParentsModal}
-        style={{ position: "absolute", left: "0", top: "30%" }}
+        style={{ position: 'absolute', left: '0', top: '30%' }}
       >
         <br />
         <button onClick={onClickToggleChildrenModal}>
@@ -68,7 +62,7 @@ function ModalSection() {
       <ModalChildren
         show={showModalChildren}
         close={onCloseChildrenModal}
-        style={{ position: "absolute", right: "0", top: "30%" }}
+        style={{ position: 'absolute', right: '0', top: '30%' }}
       >
         <br />
         <button onClick={onClickToggleParentsModal}>Toggle ParentsModal</button>
@@ -79,7 +73,6 @@ function ModalSection() {
         setShowModal={setShowModalRef}
       ></ModalRef> */}
       <ModalRef show={showModalRef} close={onCloseModalRef}></ModalRef>
-      <button onClick={onClickModalRef}>RefModal</button>
     </>
   );
 }

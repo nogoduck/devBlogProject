@@ -101,6 +101,16 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
   return (
     <Container>
       <Link to="/board">뒤로가기</Link>
+      {postId ? (
+        <UpdateButton onClick={onSubmitUpdatePost}>수정완료</UpdateButton>
+      ) : (
+        <SubmitButton onClick={onSubmitCreatePost}>등록</SubmitButton>
+      )}
+      {postId && (
+        <DeleteButton className="del_btn" onClick={onClickDeleteConfirmModal}>
+          삭제
+        </DeleteButton>
+      )}
       <AlertModal
         show={showSuccessCreatePostModal}
         close={onSubmitCreatePostModal}
@@ -123,19 +133,6 @@ function BoardWritePage({ history, postId, changeTitle, changeDescription }) {
           option="warning"
           confirm={onSubmitDeletePost}
         ></AlertModal>
-
-        <UpdateButtonContainer>
-          {postId ? (
-            <UpdateButton onClick={onSubmitUpdatePost}>수정완료</UpdateButton>
-          ) : (
-            <SubmitButton onClick={onSubmitCreatePost}>등록</SubmitButton>
-          )}
-          {postId && (
-            <DeleteButton onClick={onClickDeleteConfirmModal}>
-              삭제
-            </DeleteButton>
-          )}
-        </UpdateButtonContainer>
       </BoardHeader>
       <Label For="title">제목</Label>
       <InputTitle

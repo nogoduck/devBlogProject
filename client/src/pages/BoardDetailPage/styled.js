@@ -4,11 +4,13 @@ export const Container = styled.table`
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-right: 24px;
   user-select: text;
 
   & a {
     color: #000;
+    flex: none;
+    white-space: nowrap;
+    width: 60px;
   }
   & a:hover {
     color: #0984e3;
@@ -46,24 +48,12 @@ export const Loading = styled.div`
   height: 100%;
 `;
 
-export const UpdateButton = styled.button`
+export const UpdateButton = styled.a`
   position: absolute;
-  top: -16px;
   right: 0;
-  font-weight: 800;
-  margin: 15px 0 40px 0;
-  width: 84px;
-  height: 32px;
-  border-radius: 3px;
-  background: linear-gradient(135deg, #ffdd59 0%, #ffa801 100%);
-  border: 1px solid #ffa801;
+  top: 0;
   &:hover {
-    background: #ffdd59;
     cursor: pointer;
-  }
-  &:active {
-    background: #ffa801;
-    box-shadow: 0px 0px 5px 1px #ffa801;
   }
 `;
 

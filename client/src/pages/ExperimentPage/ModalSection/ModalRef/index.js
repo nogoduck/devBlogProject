@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState, useCallback } from "react";
-import { Modal } from "./styled";
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { Modal } from './styled';
 
 function ModalRef({ children, style, shows, close }) {
   const refValue = useRef();
@@ -26,7 +26,7 @@ function ModalRef({ children, style, shows, close }) {
   const keyPress = useCallback(
     (e) => {
       // console.log("키 눌림");
-      if (e.key === "Escape" && show === true) {
+      if (e.key === 'Escape' && show === true) {
         setShow(false);
       }
     },
@@ -34,18 +34,18 @@ function ModalRef({ children, style, shows, close }) {
   );
 
   useEffect(() => {
-    window.addEventListener("click", onCloseModal);
-    window.addEventListener("keydown", keyPress);
+    window.addEventListener('click', onCloseModal);
+    window.addEventListener('keydown', keyPress);
     return () => {
-      window.removeEventListener("click", onCloseModal);
-      window.removeEventListener("keydown", keyPress);
+      window.removeEventListener('click', onCloseModal);
+      window.removeEventListener('keydown', keyPress);
     };
   }, [onCloseModal, keyPress]);
   // console.log("show > ", show);
 
   return (
     <>
-      <button onClick={() => setShow((prev) => !prev)}>show</button>
+      <button onClick={() => setShow((prev) => !prev)}>RefModal</button>
       {show && (
         <Modal style={style} ref={refValue} onClick={stopPropagation}>
           <button onClick={() => setShow((prev) => !prev)}>&times;</button>
