@@ -90,10 +90,14 @@ const CommentOrigin = ({ match, reRender, commentOriginItems }) => {
             <UserTime>{changeTime2(commentOriginItems.createdAt)}</UserTime>
           </div>
           <div>{commentOriginItems.content}</div>
-          <div>
+          <div style={{ display: 'flex' }}>
             <LikeAndDislike
               userId={user.authStatus._id}
               commentId={commentOriginItems._id}
+              style={{
+                fontSize: '16px',
+                margin: '0 4px 0 0',
+              }}
             />
             <NestedButton onClick={onClickShowOriginComment}>답글</NestedButton>
           </div>

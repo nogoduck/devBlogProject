@@ -132,15 +132,18 @@ function BoardDetailPage({ match }) {
             {detailPost.updatedAt
               ? timeFormat(detailPost.updatedAt)
               : '수정 안함'}
+            &nbsp;&nbsp;&nbsp;
+            <LikeAndDislike
+              board={true}
+              userId={user.authStatus._id}
+              postId={postId}
+              style={{ fontSize: '24px', margin: '0 4px 0 0' }}
+            />
           </BoardInfo>
           <BoardContent>
             <p>{HtmlReactParser(detailPost.description)}</p>
           </BoardContent>
-          <LikeAndDislike
-            board={true}
-            userId={user.authStatus._id}
-            postId={postId}
-          />
+
           <Comment reRender={reRender} commentItems={comments} />
         </Container>
       );

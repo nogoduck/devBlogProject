@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {
+  AiOutlineLike,
+  AiOutlineDislike,
+  AiFillLike,
+  AiFillDislike,
+} from 'react-icons/ai';
 
-const LikeAndDislike = ({ board, userId, postId, commentId }) => {
+import { Container, LikeButton, DislikeButton } from './styled';
+
+const LikeAndDislike = ({ board, userId, postId, commentId, style }) => {
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const [likeActive, setLikeActive] = useState(false);
@@ -115,16 +123,45 @@ const LikeAndDislike = ({ board, userId, postId, commentId }) => {
   };
 
   return (
-    <>
-      <div>
-        <button onClick={onClickLike}>Like</button>
-        <button onClick={onClickDislike}>Dislike</button>
-      </div>
-      <br />
-      {like} / {dislike} <br />
-      {likeActive ? '좋아요O' : '좋아요X'} <br />
-      {dislikeActive ? '싫어요O' : '싫어요X'}
-    </>
+    <Container>
+      <LikeButton>
+        {likeActive ? (
+          <AiFillLike
+            onClick={onClickLike}
+            style={{
+              ...style,
+              color: '#348dff',
+            }}
+          />
+        ) : (
+          <AiOutlineLike onClick={onClickLike} style={style} />
+        )}
+        {like > 0 && like}
+      </LikeButton>
+      <DislikeButton>
+        {dislikeActive ? (
+          <AiFillDislike
+            onClick={onClickDislike}
+            style={{
+              ...style,
+              color: '#348dff',
+              padding: '6px 0 0 0',
+              transform: 'rotateY(180deg)',
+            }}
+          />
+        ) : (
+          <AiOutlineDislike
+            onClick={onClickDislike}
+            style={{
+              ...style,
+              padding: '6px 0 0 0',
+              transform: 'rotateY(180deg)',
+            }}
+          />
+        )}
+        {dislike > 0 && dislike}
+      </DislikeButton>
+    </Container>
   );
 };
 
