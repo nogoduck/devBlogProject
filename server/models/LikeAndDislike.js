@@ -25,6 +25,10 @@ const dislikeSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
+    postId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Board',
+    },
     commentId: {
       type: Schema.Types.ObjectId,
       ref: 'Comment',

@@ -52,7 +52,7 @@ router.post('/addLike', (req, res) => {
   console.log('addlike payload default >> ', payload);
   console.log('payload  default body>> ', req.body);
 
-  if (req.body.postId) {
+  if (postId) {
     payload = { userId, postId };
   } else {
     payload = { userId, commentId };
@@ -77,7 +77,7 @@ router.post('/removeLike', (req, res) => {
 
   let payload = {};
 
-  if (req.body.postId) {
+  if (postId) {
     payload = { userId, postId };
   } else {
     payload = { userId, commentId };
@@ -96,7 +96,7 @@ router.post('/addDislike', (req, res) => {
 
   let payload = {};
 
-  if (req.body.postId) {
+  if (postId) {
     payload = { userId, postId };
   } else {
     payload = { userId, commentId };
@@ -109,7 +109,7 @@ router.post('/addDislike', (req, res) => {
   dislike.save((err, docDislike) => {
     if (err) return res.status(400).json({ success: false, err });
 
-    Dislike.findOneAndDelete(payload).exec((err, docLike) => {
+    Like.findOneAndDelete(payload).exec((err, docLike) => {
       if (err) return res.status(400).json({ success: false, err });
       res.status(200).json({ success: true });
     });
@@ -121,7 +121,7 @@ router.post('/removeDislike', (req, res) => {
 
   let payload = {};
 
-  if (req.body.postId) {
+  if (postId) {
     payload = { userId, postId };
   } else {
     payload = { userId, commentId };
