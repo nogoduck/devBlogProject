@@ -97,7 +97,7 @@ function SignUpModal({ history, children, show, close }) {
           style={{
             padding: '30px',
             width: '300px',
-            height: '550px',
+            height: '620px',
           }}
         >
           <div style={{ fontSize: '24px' }}>회원가입</div>
