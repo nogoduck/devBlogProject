@@ -14,7 +14,12 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-import { changeTime, pagiNation, pagiTotalCalc2 } from '../../utils/Time';
+import {
+  changeTime,
+  changeTime2,
+  pagiNation,
+  pagiTotalCalc2,
+} from '../../utils/Time';
 import PulseLoader from 'react-spinners/PulseLoader';
 // import { postMacro } from '../../utils/Macro';
 
@@ -123,7 +128,7 @@ function BoardPage({ history }) {
                         <BoardTitle>{post.title}</BoardTitle>
                       </Link>
                     </td>
-                    <td>{changeTime(post.createdAt)}</td>
+                    <td>{changeTime2(post.createdAt)}</td>
                   </tr>
                 );
               })}
