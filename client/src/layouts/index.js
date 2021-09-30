@@ -54,7 +54,7 @@ function LandingPage({ history }) {
               />
               <Route path="/about" component={Auth(AboutPage, false)} />
               <Route
-                true
+                exact
                 path="/board/write"
                 component={Auth(BoardWritePage, true)}
               />
@@ -63,6 +63,10 @@ function LandingPage({ history }) {
               <Route
                 path="/board/optimization"
                 component={Auth(OptimizationPage, null)}
+              />
+              <Route
+                path="/board/:postId"
+                component={Auth(BoardDetailPage, null)}
               />
               <Route path="/board" component={Auth(BoardPage, null)} />
               <Route path="/card" component={Auth(CardPage, null)} />

@@ -99,19 +99,19 @@ function BoardPage({ history }) {
       <Container>
         {/*<button onClick={onClickMacro}>게시글 자동 생성</button>*/}
         <Title>게시판</Title>
-        <BoardPath>
-          <Link className="board_path" to="/board">
-            전체글
-          </Link>
-          &nbsp;/&nbsp;
-          <Link className="board_path" to="/board/hot">
-            인기글
-          </Link>
-          &nbsp;/&nbsp;
-          <Link className="board_path" to="/board/optimization">
-            최적화
-          </Link>
-        </BoardPath>
+        {/*<BoardPath>*/}
+        {/*  <Link className="board_path" to="/board">*/}
+        {/*    전체글*/}
+        {/*  </Link>*/}
+        {/*  &nbsp;/&nbsp;*/}
+        {/*  <Link className="board_path" to="/board/hot">*/}
+        {/*    인기글*/}
+        {/*  </Link>*/}
+        {/*  &nbsp;/&nbsp;*/}
+        {/*  <Link className="board_path" to="/board/optimization">*/}
+        {/*    최적화*/}
+        {/*  </Link>*/}
+        {/*</BoardPath>*/}
         <Table>
           <tbody>
             {posts &&
