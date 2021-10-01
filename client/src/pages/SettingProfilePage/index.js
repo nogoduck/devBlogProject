@@ -94,7 +94,6 @@ function SettingProfilePage({ history }) {
       return true;
     }
 
-    //공백, 검사와 중복되어 사용하지 못하고 있음
     //특수문자 검사
     const regExp = /^[가-힣a-zA-Z]+$/;
     // console.log('reg > ', regExp.test(userNickname));

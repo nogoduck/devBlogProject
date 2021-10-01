@@ -1,14 +1,14 @@
-import axios from "axios";
-import { withRouter } from "react-router-dom";
-import React, { useState } from "react";
-import { Container, Table1, Table2, Image } from "./styled";
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Container, Table1, Table2, Image } from './styled';
 
 function FileSection({ history }) {
   const resetPage = () => {
-    history.push("/menu/experiment");
+    history.push('/experiment');
   };
-  const [blobURL, setBlobURL] = useState("");
-  const [fileURL, setFileURL] = useState("");
+  const [blobURL, setBlobURL] = useState('');
+  const [fileURL, setFileURL] = useState('');
   const [outputURL1, setOutputURL1] = useState(true);
   const [outputURL2, setOutputURL2] = useState(true);
   const [outputURL3, setOutputURL3] = useState(false);
@@ -18,35 +18,35 @@ function FileSection({ history }) {
     const formData = new FormData();
 
     let blob = new Blob([file], {
-      type: "image/png",
+      type: 'image/png',
     });
 
-    console.log("[Input] new Blob >> ", blob);
+    console.log('[Input] new Blob >> ', blob);
 
     const blobURL = window.URL.createObjectURL(blob);
     setBlobURL(window.URL.createObjectURL(blob));
     const fileURL = window.URL.createObjectURL(file);
-    console.log("convert blob >> ", blobURL);
-    console.log("convert file >> ", fileURL);
+    console.log('convert blob >> ', blobURL);
+    console.log('convert file >> ', fileURL);
 
-    formData.append("file", blob);
-    formData.append("userName", "angryduck23");
+    formData.append('file', blob);
+    formData.append('userName', 'angryduck23');
     const config = {
       header: {
-        "Content-Type": "multipart/form-data",
+        'Content-Type': 'multipart/form-data',
       },
     };
 
-    console.log("formData >> ", formData);
+    console.log('formData >> ', formData);
 
     axios
-      .post("/api/test/save", formData, config)
+      .post('/api/test/save', formData, config)
       .then(({ data }) => {
-        console.log("save file success...");
-        console.log("data >> ", data);
+        console.log('save file success...');
+        console.log('data >> ', data);
       })
       .catch((err) => {
-        console.log("save file failed...");
+        console.log('save file failed...');
       });
   }
 
@@ -60,22 +60,22 @@ function FileSection({ history }) {
 
   const getBlobFile = () => {
     axios
-      .post("/api/test/sendfile")
+      .post('/api/test/sendfile')
       .then(({ data }) => {
-        console.log("data >> ", data);
+        console.log('data >> ', data);
         setOutputURL3(data);
 
         const fd = new FormData();
 
-        fd.append("img", data);
-        console.log("fd >>", fd);
+        fd.append('img', data);
+        console.log('fd >>', fd);
         const reader = new FileReader();
         // let Uint8Arrayblob = new Blob(new Uint8Array(data));
         let blob = new Blob(data);
         let file = reader.readAsArrayBuffer(blob);
         // console.log("data Unit8Array blob >> ", Uint8Arrayblob);
-        console.log("data blob >> ", blob);
-        console.log("blob to file >> ", file);
+        console.log('data blob >> ', blob);
+        console.log('blob to file >> ', file);
 
         // console.log(window.URL.createObjectURL(data));
         // setOutputURL2(window.URL.createObjectURL(data));
@@ -85,24 +85,24 @@ function FileSection({ history }) {
         // setOutputURL1(reader.readAsDataURL(data));
       })
       .catch((err) => {
-        console.log("err >> ", err);
+        console.log('err >> ', err);
       });
   };
 
-  console.log("outputURL1 >> ", outputURL1);
-  console.log("outputURL2 >> ", outputURL2);
+  console.log('outputURL1 >> ', outputURL1);
+  console.log('outputURL2 >> ', outputURL2);
   // console.log("outputURL3 >> ", outputURL3);
 
   return (
     <Container>
       <Table1>
         <button onClick={resetPage}>Page Reset</button>
-        <button onClick={getBlobFile}>파일 가져오기</button>
+        {/*<button onClick={getBlobFile}>파일 가져오기</button>*/}
         <h3>File 처리</h3>
-        <h4>파일 입력 후 blob 변환</h4>
+        <h4>이미지 미리보기</h4>
         <input type="file" onChange={inputFile} />
-        <h4>blob 데이터 입력 후 출력</h4>
-        <input type="file" onChange={outputFile} />
+        {/*<h4>blob 데이터 입력 후 출력</h4>*/}
+        {/*<input type="file" onChange={outputFile} />*/}
       </Table1>
       <Table2>
         <Image>

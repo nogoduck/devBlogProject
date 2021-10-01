@@ -101,7 +101,7 @@ router.post('/reset/image', (req, res) => {
   }); //User.findByIdAndUpdate
 });
 
-//unused
+//unused(사용안함)
 router.post('/unused/update/image', upload.single('image'), (req, res) => {
   const { _id, currentPath } = req.body;
   const {
