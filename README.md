@@ -1,4 +1,8 @@
 ## 개인 블로그
+<a href="https://adklog.com/">adkLog</a>
+
+### 개발 인원
+- 개인 프로젝트
 
 ### 주요 기능
 - **회원가입**
@@ -19,7 +23,8 @@
 	2. 프로필 사진 변경(이미지 자르기 가능), 제거
 	3. 비밀번호 변경
 	4. 회원탈퇴
-### 개발 환경
+
+### 사용 언어 및 기술
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/>
 <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=Express&logoColor=white"/>
 <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white"/>
@@ -30,3 +35,5 @@
 - Netlify(클라이언트)
 - Heroku(서버)
 - AmazonS3(이미지 업로드)
+
+### 개발 후기
