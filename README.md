@@ -1,10 +1,10 @@
-## 개인 블로그
+# 개인 블로그
 <a href="https://adklog.com/">adkLog</a>
 
-### 개발 인원
+## 개발 인원
 - 개인 프로젝트
 
-### 주요 기능
+## 주요 기능
 - **회원가입**
 	1. 중복된 이메일인지 조회
 	2. 비밀번호 유효성 검사
@@ -24,13 +24,13 @@
 	3. 비밀번호 변경
 	4. 회원탈퇴
 
-### 사용 언어 및 기술
+## 사용 언어 및 기술
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/>
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>
 <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=Express&logoColor=white"/>
 <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white"/>
 
-### 배포 환경
+## 배포 환경
 <img src="https://img.shields.io/badge/Netlify-00C7B7?style=flat-square&logo=Netlify&logoColor=white"/> <img src="https://img.shields.io/badge/Heroku-430098?style=flat-square&logo=Heroku&logoColor=white"/>
 <img src="https://img.shields.io/badge/AmazonS3-569A31?style=flat-square&logo=AmazonS3&logoColor=white"/>
 - Netlify(클라이언트)
