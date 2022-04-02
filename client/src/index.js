@@ -10,11 +10,14 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 
 dotenv.config();
+axios.defaults.withCredentials = true;
+// axios.defaults.baseURL = 'https://devlog-ad.herokuapp.com/';
+axios.defaults.baseURL = 'http://localhost:5050';
 
-axios.defaults.baseURL =
-  process.env.NODE_ENV === 'production'
-    ? process.env.REACT_APP_SERVER_URI
-    : 'http://localhost:5050';
+// axios.defaults.baseURL =
+//   process.env.NODE_ENV === 'production'
+//     ? process.env.REACT_APP_SERVER_URI
+//     : 'http://localhost:5050';
 
 const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,

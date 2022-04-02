@@ -26,6 +26,8 @@ AWS.config.update({
   region: 'ap-northeast-2',
 });
 
+console.log('process.env >> ', process.env.S3_ACCESS_KEY_ID);
+
 const storageS3 = multerS3({
   s3: new AWS.S3(),
   bucket: 'devlog-s3',
@@ -201,7 +203,11 @@ router.post('/signin', (req, res) => {
 
         res
           .cookie('user_auth', user.token, {
-            sameSite: 'lax',
+            // sameSite: 'lax',
+            // httpOnly: true,
+
+            sameSite: 'none',
+            secure: true,
           })
           .status(200)
           .json({
