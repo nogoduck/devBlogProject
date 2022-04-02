@@ -28,7 +28,7 @@ AWS.config.update({
 
 const storageS3 = multerS3({
   s3: new AWS.S3(),
-  bucket: 'adtable1',
+  bucket: 'devlog-s3',
   key(req, file, cb) {
     cb(
       null,
