@@ -206,6 +206,9 @@ router.post('/signin', (req, res) => {
             // sameSite: 'lax',
             // httpOnly: true,
 
+            // sameSite가 none일땐 반드시 secure 를 true로 주어야함
+            // secure: true 이면 https 프로토콜에서만 전송가능
+            // 참고: https://ifuwanna.tistory.com/223
             sameSite: 'none',
             secure: true,
           })
