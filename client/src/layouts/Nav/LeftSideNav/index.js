@@ -164,24 +164,24 @@ function SideNav({ history, match }) {
               )}
             </li>
           </Link>
-          <Link to="/experiment">
-            <li
-              className="menu_item"
-              id={activePath === 'experiment' && 'active'}
-            >
-              <MenuIcon>
-                <AiTwotoneExperiment />
-              </MenuIcon>
-              <MenuTitle
-                className={isDesktopAndTablet && !useExtends && 'hidden'}
-              >
-                실험실
-              </MenuTitle>
-              {isDesktopAndTablet && !useExtends && (
-                <HoverItem className="menu_hover">실험실</HoverItem>
-              )}
-            </li>
-          </Link>
+          {/*<Link to="/experiment">*/}
+          {/*  <li*/}
+          {/*    className="menu_item"*/}
+          {/*    id={activePath === 'experiment' && 'active'}*/}
+          {/*  >*/}
+          {/*    <MenuIcon>*/}
+          {/*      <AiTwotoneExperiment />*/}
+          {/*    </MenuIcon>*/}
+          {/*    <MenuTitle*/}
+          {/*      className={isDesktopAndTablet && !useExtends && 'hidden'}*/}
+          {/*    >*/}
+          {/*      실험실*/}
+          {/*    </MenuTitle>*/}
+          {/*    {isDesktopAndTablet && !useExtends && (*/}
+          {/*      <HoverItem className="menu_hover">실험실</HoverItem>*/}
+          {/*    )}*/}
+          {/*  </li>*/}
+          {/*</Link>*/}
 
           {/*<Link to="/card">*/}
           {/*  <li*/}
